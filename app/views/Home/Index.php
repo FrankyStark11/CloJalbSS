@@ -12,7 +12,8 @@
 <body>
 	<div class="Header" align="center">
 		<ul class="NavBar">
-			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Accueil</a></li>
+			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
+			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Accueil">Connexion</a></li>
 		</ul>	
 	</div>
 

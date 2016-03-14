@@ -169,54 +169,6 @@ div.NavMenuDiv{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-@media only screen and (max-width: 600px) {
-	div.BoxPicture{
-		height: 250px;
-		width: 100%;
-	}
-
-	img.PictureBoard{
-		height: 280px;
-		width: 100%;
-
-		border-radius: 15px;
-		box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
-
-	div.BoxContent{
-		height: 100px;
-		width:100%;
-
-		padding-top: 50px;
-
-		background-color: #C4C4C9;
-		background-image: url(../images/MetalPattern.png);
-	}
-}
-@media only screen and (min-width: 601px) {
-	div.BoxPicture{
-		height: 250px;
-		width: 600px;
-	}
-
-	img.PictureBoard{
-		height: 280px;
-		width: 500px;
-
-		border-radius: 15px;
-		box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
-
-	div.BoxContent{
-		height: 100px;
-		width: 600px;
-
-		padding-top: 50px;
-
-		background-color: #C4C4C9;
-		background-image: url(../images/MetalPattern.png);
-	}
-}
 div.Header{
 
 	position: fixed;
@@ -257,12 +209,14 @@ ul.NavBar {
     list-style-type: none;
     margin: 0;
     padding: 0;
-
-    float: left;
+}
+ul.NavBar li:last-child{
+	float: right;
 }
 
 li.NavBar {
     display: inline;
+    float: left;
 }
 
 li a.NavBar {
