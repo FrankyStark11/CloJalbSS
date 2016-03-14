@@ -1,7 +1,6 @@
 body{
-	background-image: url(../images/background.jpg);
+	background-image: url(../images/BG/background.jpg);
     background-size: auto;
-	height: 100%;
 	background-attachment: fixed;
 
 	font-family: "Caviar";
@@ -18,68 +17,137 @@ div.Main{
 	padding-top:5px;
 	padding-bottom: 40px;
 }
-@media only screen and (min-width: 601px) {
-	div.BoxAddOrder{
-		display: block;
+div.SearchBoxPiece{
+	background-image: url(../images/BG/MetalPattern.png);
 
-		width: 600px;
-		height: 500px;
+	position: relative;
 
-		border-radius: 5px;
-
-		margin-top: 50px;
-		margin-bottom: 50px;
-
-		padding-top: 5px;
-		padding-bottom: 5px;
-
-		background-color: #d7d7d7;
-
-		box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
-}
-@media only screen and (max-width: 600px) {
-	div.BoxAddOrder{
-		display: block;
-
-		width: 100%;
-		height: 500px;
-
-		border-radius: 5px;
-
-		margin-top: 50px;
-		margin-bottom: 50px;
-
-		padding-top: 5px;
-		padding-bottom: 5px;
-
-		background-color: #d7d7d7;
-
-		box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
-}
-
-div.BoxLogin{
 	display: block;
 
-	width: 600px;
-	height: 500px;
+	width: 80%;
+		min-width: 300px;
+	height: auto;
 
 	border-radius: 5px;
 
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 20px;
 
-	padding-top: 50px;
-	padding-bottom: 5px;
+	padding: 25px;
 
 	background-color: #d7d7d7;
 
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-	vertical-align: center;
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
 	box-sizing: border-box;
+}
+div.SearchBoxPiece td{
+
+	color: white;
+	width: 100px;
+}
+
+button.BtnRecherche{
+	margin-top: 10px;
+	width: 100px;
+	height: 50px;
+
+	border-width: 0px;
+	border-radius: 3px;
+
+	transition: 0.5s;
+
+	cursor: pointer;
+}
+
+button.BtnRecherche:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+div.InfoPiece{
+	background-image: url(../images/BG/MetalPattern.png);
+
+	display: block;
+
+	width: 94%;
+		min-width: 600px;
+	height: auto;
+
+	border-radius: 5px;
+
+	margin-top: 20px;
+
+	padding: 25px;
+
+	background-color: #d7d7d7;
+
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+	box-sizing: border-box;
+
+	cursor: pointer;
+}
+div.InfoPiece:hover{
+	border-width: 1px;
+	border-color: red;
+	border-style: solid;
+}
+
+div.DescPlus{
+	display: none;
+	width: 80%;
+	height: auto;
+
+	border-width: 0px;
+	border-color: black;
+	border-style: inset;
+	border-radius: 3px;
+
+	position: relative;
+	left: 100px;
+	top: 20px;
+
+	margin-bottom: 15px;
+
+	padding: 15px;
+
+	box-sizing: border-box;
+
+	background-color: gray;
+}
+
+div.DescPlus td{
+	width: 150px;
+
+	text-align: left;
+	color: white;
+
+}
+
+.ChampsRecherche{
+	width: 180px;
+	height: 30px;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	padding: 3px;
+}
+
+table.InfoPiece td {
+
+	width: 180px;
+	text-align: center;
+
+	cursor: pointer;
+}
+
+table.InfoPiece tr {
+	transition: 0.5s;
+	color: white;
+
+	border-radius: 6px;
+	border-width: 1px;
+
+	cursor: pointer;
 }
 
 div.NavMenuDiv{
@@ -157,8 +225,6 @@ div.Header{
 
 	width: 100%;
 	height: 60px;
-
-	overflow: scroll;
 
 	padding-top: 20px;
 
