@@ -3,7 +3,7 @@
 class App
 {
 	protected $controller = 'Home'; //controleur par defaut
-	protected $method = 'Accueil';
+	protected $method = 'Login';
 	protected $params = [];
 
 	public function __construct()
