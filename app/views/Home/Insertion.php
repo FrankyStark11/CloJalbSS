@@ -75,9 +75,16 @@
 						<select name="txtHauteur" >
 							<option disabled selected > Choix</option>
 							<option>NA</option>
+							<option>3ft</option>
 							<option>4ft</option>
+							<option>5ft</option>
 							<option>6ft</option>
+							<option>7ft</option>
 							<option>8ft</option>
+							<option>9ft</option>
+							<option>10ft</option>
+							<option>12ft</option>
+							<option>14ft</option>
 						</select>
 					</td>
 				</tr>
@@ -89,9 +96,23 @@
 						<select name="txtLongeur" >
 							<option disabled selected > Choix</option>
 							<option>NA</option>
-							<option>10ft 0po</option>
-							<option>21ft 0po</option>
-							<option>24ft 0po</option>
+							<option>6ft 6po</option>
+							<option>7ft 6po</option>
+							<option>8ft 6po</option>
+							<option>9ft 6po</option>
+							<option>10ft 3po</option>
+							<option>10ft 6po</option>
+							<option>4ft</option>
+							<option>5ft</option>
+							<option>6ft</option>
+							<option>7ft</option>
+							<option>8ft</option>
+							<option>9ft</option>
+							<option>10ft</option>
+							<option>12ft</option>
+							<option>17ft</option>
+							<option>21ft</option>
+							<option>24ft</option>
 						</select>
 					</td>
 				</tr>
@@ -106,6 +127,19 @@
 							<option>#9</option>
 							<option>#6</option>
 							<option>1 11/16</option>
+							<option>1 7/8</option>
+							<option>2 3/8</option>
+							<option>3 1/2</option>
+							<option>4 1/2</option>
+							<option>6 5/8</option>
+							<option>1 5/16</option>
+							<option>1/4</option>
+							<option>3/8</option>
+							<option>1/2</option>
+							<option>5/16</option>
+							<option>6po</option>
+							<option>8po</option>
+							<option>12po</option>
 						</select>
 					</td>
 				</tr>

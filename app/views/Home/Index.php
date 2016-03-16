@@ -115,9 +115,22 @@
 				<td>
 					<select class="ChampsRecherche">
 						<option selected> Choix </option>
+						<option>#9</option>
+						<option>#6</option>
+						<option>1 11/16</option>
+						<option>1 7/8</option>
 						<option>2 3/8</option>
-						<option>2 7/8</option>
 						<option>3 1/2</option>
+						<option>4 1/2</option>
+						<option>6 5/8</option>
+						<option>1 5/16</option>
+						<option>1/4</option>
+						<option>3/8</option>
+						<option>1/2</option>
+						<option>5/16</option>
+						<option>6po</option>
+						<option>8po</option>
+						<option>12po</option>
 					</select>
 				</td>
 				<td>
