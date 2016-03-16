@@ -15,5 +15,13 @@ session_start();
 		public function Login(){
 			parent::view('Home/Login');
 		}
+
+		public function Reception(){
+			parent::view('Home/Reception');
+		}
+
+		public function InventaireInsertion(){
+			parent::view('Home/Insertion');
+		}
 	}
 ?>

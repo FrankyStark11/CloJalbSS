@@ -38,10 +38,10 @@ function AddInvElement(itemArray){
 	var IdDiv = makeid();
 
 	var div_InvPlus001 = document.createElement('div');
-   div_InvPlus001.id = IdDiv;
-   div_InvPlus001.className = "InfoPiece";
-   div_InvPlus001.align = "left";
-   div_InvPlus001.onclick = function(){
+	   div_InvPlus001.id = IdDiv;
+	   div_InvPlus001.className = "InfoPiece";
+	   div_InvPlus001.align = "left";
+	   div_InvPlus001.onclick = function(){
       HideDivDesc(IdDiv)
    };
 
@@ -53,11 +53,6 @@ function AddInvElement(itemArray){
          var td_0 = document.createElement('td');
             td_0.appendChild( document.createTextNode("No : " + NoItem) );
          tr_0.appendChild( td_0 );
-
-
-         var td_1 = document.createElement('td');
-            td_1.appendChild( document.createTextNode("Desc : " + DescItem ) );
-         tr_0.appendChild( td_1 );
 
 
          var td_2 = document.createElement('td');
@@ -157,7 +152,18 @@ function AddInvElement(itemArray){
                td_15.appendChild( document.createTextNode(CategorieItem) );
             tr_5.appendChild( td_15 );
 
-         table_1.appendChild( tr_5 );
+        table_1.appendChild( tr_5 ); 
+       	var tr_6 = document.createElement('tr');   
+
+            var td_16 = document.createElement('td');
+            td_16.appendChild( document.createTextNode("Description :" ) );
+         tr_6.appendChild( td_16 );
+
+         var td_17 = document.createElement('td');
+            td_17.appendChild( document.createTextNode( DescItem ) );
+         tr_6.appendChild( td_17 );
+
+       table_1.appendChild( tr_6 );  
 
       div_DescPlus001.appendChild( table_1 );
 

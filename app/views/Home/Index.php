@@ -22,7 +22,8 @@
 	<div class="Header" align="center">
 		<ul class="NavBar">
 			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil">Insertion</a></li>
+			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
+			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
 			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
 		</ul>	
 	</div>
@@ -39,10 +40,39 @@
 					<input class="ChampsRecherche" type="text" placeholder="No de piece"></input>
 				</td>
 				<td>
-					Nom Piece
+					Catégorie
 				</td>
 				<td>
-					<input class="ChampsRecherche" type="text" placeholder="Nom de piece"></input>
+					<select class="ChampsRecherche">
+						<option selected> Choix </option>
+						<optgroup label="oz">
+							<option>1,2oz</option>
+						</optgroup>
+						<optgroup label="Grad">
+							<option>.100</option>
+							<option>.120</option>
+							<option>.125</option>
+							<option>.134</option>
+							<option>.154</option>
+							<option>.203</option>
+							<option>.216</option>
+							<option>.280</option>
+						</optgroup>
+						<optgroup label="%">
+							<option>0,24</option>
+							<option>12</option>
+							<option>12.5</option>
+							<option>15.5</option>
+						</optgroup>
+						<optgroup label="Degré">
+							<option>45°</option>
+							<option>90°</option>
+						</optgroup>
+						<optgroup label="Grillage">
+							<option>Aucun Grillage</option>
+							<option>Grillage 2X#9</option>
+						</optgroup>
+					</select>
 				</td>
 			</tr>
 		</table>
@@ -54,13 +84,20 @@
 				<td>
 					<select class="ChampsRecherche">
 						<option>Choix</option>
-						<option>Brun</option>
-						<option>Noir</option>
-						<option>Blanc</option>
+						<optgroup label="Résidentiel">
+								<option>Noir</option>
+								<option>Blanc</option>
+								<option>Brun</option>
+								<option>Taupe</option>
+								<option>Vert</option>
+							</optgroup>
+							<optgroup label="Commercial">
+							<option>Galvanisé</option>
+							</optgroup>
 					</select>
 				</td>
 				<td>
-					Dimention
+					Hauteur
 				</td>
 				<td>
 					<select class="ChampsRecherche">

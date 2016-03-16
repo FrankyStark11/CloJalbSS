@@ -86,6 +86,70 @@ button.BtnRecherche{
 button.BtnRecherche:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
+
+table.InsertionTable td{
+	width: 300px;
+}
+
+table.InsertionTable input{
+	width: 250px;
+	height: 30px;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	margin-top: 10px;
+	margin-right: 10px;
+
+	padding: 3px;
+
+	transition: .1s;
+}
+
+table.InsertionTable input:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+table.InsertionTable select{
+	width: 250px;
+	height: 30px;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	margin-top: 10px;
+	margin-right: 10px;
+
+	padding: 3px;
+
+	transition: .1s;
+}
+
+table.InsertionTable select:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+table.InsertionTable textarea{
+	width: 250px;
+	height: 100px;
+
+	resize: none;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	margin-top: 10px;
+	margin-right: 10px;
+
+	padding: 3px;
+
+	transition: .1s;
+}
+
+table.InsertionTable textarea:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
 div.InfoPiece{
 	background-image: url(../images/BG/MetalPattern.png);
 
