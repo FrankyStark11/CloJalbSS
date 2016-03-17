@@ -24,6 +24,7 @@
 			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
+			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Modifier">Modifier</a></li>
 			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
 		</ul>	
 	</div>
@@ -37,7 +38,7 @@
 					No Piece
 				</td>
 				<td>
-					<input class="ChampsRecherche" type="text" placeholder="No de piece"></input>
+					<input class="ChampsRecherche" onkeyup="showHint(this.value)" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
 				</td>
 				<td>
 					Catégorie
@@ -102,9 +103,16 @@
 				<td>
 					<select class="ChampsRecherche">
 						<option selected> Choix </option>
-						<option>4"</option>
-						<option>5"</option>
-						<option>6"</option>
+						<option>3ft</option>
+						<option>4ft</option>
+						<option>5ft</option>
+						<option>6ft</option>
+						<option>7ft</option>
+						<option>8ft</option>
+						<option>9ft</option>
+						<option>10ft</option>
+						<option>12ft</option>
+						<option>14ft</option>
 					</select>
 				</td>
 			</tr>
@@ -115,22 +123,30 @@
 				<td>
 					<select class="ChampsRecherche">
 						<option selected> Choix </option>
-						<option>#9</option>
-						<option>#6</option>
-						<option>1 11/16</option>
-						<option>1 7/8</option>
-						<option>2 3/8</option>
-						<option>3 1/2</option>
-						<option>4 1/2</option>
-						<option>6 5/8</option>
-						<option>1 5/16</option>
-						<option>1/4</option>
-						<option>3/8</option>
-						<option>1/2</option>
-						<option>5/16</option>
-						<option>6po</option>
-						<option>8po</option>
-						<option>12po</option>
+						<optgroup label="Numéro">
+								<option>#9</option>
+								<option>#6</option>
+							</optgroup>	
+							<optgroup label=" Pouce fraction">
+								<option>1 11/16</option>
+								<option>1 7/8</option>
+								<option>2 3/8</option>
+								<option>3 1/2</option>
+								<option>4 1/2</option>
+								<option>6 5/8</option>
+								<option>1 5/16</option>
+							</optgroup>
+							<optgroup label="Moins d'un pouce">	
+								<option>1/4</option>
+								<option>3/8</option>
+								<option>1/2</option>
+								<option>5/16</option>
+							</optgroup>
+							<optgroup label="Pouce plein">
+								<option>6po</option>
+								<option>8po</option>
+								<option>12po</option>
+							</optgroup>
 					</select>
 				</td>
 				<td>
@@ -139,14 +155,31 @@
 				<td>
 					<select class="ChampsRecherche">
 						<option selected> Choix </option>
-						<option>10'3"</option>
-						<option>21'0"</option>
-						<option>24'0"</option>
+						<optgroup label="Pied/pouce">
+								<option>6ft 6po</option>
+								<option>7ft 6po</option>
+								<option>8ft 6po</option>
+								<option>9ft 6po</option>
+								<option>10ft 3po</option>
+								<option>10ft 6po</option>
+							</optgroup>
+							<optgroup label="Pied">
+								<option>4ft</option>
+								<option>5ft</option>
+								<option>6ft</option>
+								<option>7ft</option>
+								<option>8ft</option>
+								<option>9ft</option>
+								<option>10ft</option>
+								<option>12ft</option>
+								<option>17ft</option>
+								<option>21ft</option>
+								<option>24ft</option>
+							</optgroup>
 					</select>
 				</td>
 			</tr>
 		</table>
-		<button class="BtnRecherche" value="Rechercher"> Rechercher </input>
 	</div>
 	<div id="Main" class="Main" align="center">
 	<?php

@@ -12,8 +12,20 @@ session_start();
 			parent::view('Home/Index');
 		}
 
+		public function GetInvParamStr(){
+
+			$Model = new modHome();
+			$Str = $_POST["dataStr"];
+			$result = $Model->GetInvParamStr($Str);
+			echo json_encode($result);
+		}
+
 		public function Login(){
 			parent::view('Home/Login');
+		}
+
+		public function Modifier(){
+			parent::view('Home/Modifier');
 		}
 
 		public function Reception(){

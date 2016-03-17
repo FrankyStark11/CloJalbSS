@@ -17,20 +17,33 @@
 	</div>
 	<div id="Main" class="Main" align="center">
 		<div class="BoxLogin" align="center">
-			<form method="post" action="#">
-				<img class="Login" src="../../images/icon/user.png">
-				<table class="LoginAdmin">
+			<div  class="AddReceptionItem">
+				<table class="TabRepceptionHead">
 					<tr>
-						<td><input class="Log" type="text" name="User" placeholder=" Nom d'utilisateur "></td>
-					</tr>
-					<tr>
-						<td><input class="Log" type="password" name="MDP" placeholder=" Mot de passe "></td>
-					</tr>
-					<tr>
-						<td><button class="Connexion" type="submit" value="Connexion" >Connexion</button></td>
+						<td>
+							<input id="IdItemReception" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
+						</td>
+						<td>
+						<input id="DescriptionItemReception"  class="ChampsReceptionAdd" disabled value="Description du produit"></input>
+						</td>
+						<td>
+							<input id="QteItemReception" type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
+						</td>
+						<td>
+							<button class="BtnAjouter" onclick="AddReceptionElement()"> </button>
+						</td>
 					</tr>
 				</table>
-			</form>	
+			</div>
+			<div id="LstBoxReceptionTemp" class="LstReceptionItems">
+			<table id="TabItems" class="TabRepception">
+				<th>Numéro du produit</th>
+				<th>Description</th>
+				<th>Quantité</th>
+				<th>Action</th>
+			</table>
+			</div>
+			<button class="BtnAjoutReception" value="Rechercher"> Recevoir les items </input>
 		</div>
 	</div>
 </body>

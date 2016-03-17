@@ -12,28 +12,104 @@ $(document).ready(function(){
 
         $("#SearchBox").slideToggle("slow", function() {
         if ($(this).is(':visible')) {
-             $("#Main").css("top", "360px");                
+             //$("#Main").css("top", "300px");                
         } else {
-             $("#Main").css("top", "120");                
+             //$("#Main").css("top", "120");                
         }
         }); 
     });
 });
 
+function RemoveElement(idRetirer){
+  var element = document.getElementById(idRetirer);
+  //var DivPrinc = document.getElementById("LstBoxReceptionTemp");
+  //DivPrinc.removeChild(ele);
+  element.parentNode.removeChild(element);
+}
+
+function Modification(id){
+  alert(id);
+}
+
+function showHint(str) {
+
+        $.post("/index.php/Home/GetInvParamStr",
+          {dataStr: str},
+        function(data){
+          var Arr = JSON.parse(data);
+          //vide toutes les valeurs child du main
+          var myNode = document.getElementById("Main");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
+          //ajoute les valeurs triées
+          for(var i=0;i<Arr.length;i++){
+            AddInvElement(Arr[i]);
+          }
+          
+        });
+    }
+
+function AddReceptionElement(){
+
+  var NoItem = document.getElementById("IdItemReception").value;
+  var DescItem = document.getElementById("DescriptionItemReception").value;
+  var QteItem = document.getElementById("QteItemReception").value; 
+  var IDElement = makeid();
+
+  var table_0 = document.getElementById("TabItems");
+//var table_0 = document.createElement('table');
+//   table_0.className = "TabRepceptionEle";
+//   table_0.id = IDElement;
+
+   var tr_0 = document.createElement('tr');
+
+      var td_0 = document.createElement('td');
+         td_0.appendChild( document.createTextNode(NoItem) );
+      tr_0.appendChild( td_0 );
+
+
+      var td_1 = document.createElement('td');
+         td_1.appendChild( document.createTextNode(DescItem) );
+      tr_0.appendChild( td_1 );
+
+
+      var td_2 = document.createElement('td');
+         td_2.appendChild( document.createTextNode(QteItem) );
+      tr_0.appendChild( td_2 );
+
+
+      var td_3 = document.createElement('td');
+
+         var button_0 = document.createElement('button');
+            button_0.className = "BtnRetirer";
+            button_0.addEventListener('click', function(){ RemoveElement(IDElement);}, false);
+         td_3.appendChild( button_0 );
+
+      tr_0.appendChild( td_3 );
+
+   table_0.appendChild( tr_0 );
+
+//document.getElementById("LstBoxReceptionTemp").appendChild(table_0);
+
+}
+
 function AddInvElement(itemArray){
-	var item = JSON.parse(itemArray);
+  if (typeof itemArray !== 'object'){
+	 itemArray = JSON.parse(itemArray);
+  }
 	//definir les valeurs de litem ajouté
-	var NoItem = item.InvNoId;
-	var DescItem = item.InvDesc;
-	var QteItem = item.InvQte;
-	var PrixCostItem = item.InvPrixCoutant;
-	var PrixClientItem = item.InvPrixClient;
-	var PrixContItem = item.InvPrixContracteur;
-	var CouleurItem = item.InvCouleur;
-	var HaureurItem = item.InvHauteur;
-	var LongeurItem = item.InvLongeur;
-	var GrosseurItem = item.InvGrosseur;
-	var CategorieItem = item.InvCategorie;
+	var NoItem = itemArray.InvNoId;
+	var DescItem = itemArray.InvDesc;
+	var QteItem = itemArray.InvQte;
+	var PrixCostItem = itemArray.InvPrixCoutant;
+	var PrixClientItem = itemArray.InvPrixClient;
+	var PrixContItem = itemArray.InvPrixContracteur;
+	var CouleurItem = itemArray.InvCouleur;
+	var HaureurItem = itemArray.InvHauteur;
+	var LongeurItem = itemArray.InvLongeur;
+	var GrosseurItem = itemArray.InvGrosseur;
+	var CategorieItem = itemArray.InvCategorie;
 
 	var IdDiv = makeid();
 
@@ -41,8 +117,6 @@ function AddInvElement(itemArray){
 	   div_InvPlus001.id = IdDiv;
 	   div_InvPlus001.className = "InfoPiece";
 	   div_InvPlus001.align = "left";
-	   div_InvPlus001.onclick = function(){
-      HideDivDesc(IdDiv)
    };
 
    var table_0 = document.createElement('table');
@@ -73,6 +147,17 @@ function AddInvElement(itemArray){
          var td_5 = document.createElement('td');
             td_5.appendChild( document.createTextNode(" Prix Cont : " + PrixContItem ) );
          tr_0.appendChild( td_5 );
+
+         var td_6 = document.createElement('td');
+            var btnEdit1 = document.createElement('button');
+                btnEdit1.className = "BtnEdit";
+                btnEdit1.addEventListener('click', function(){ Modification(IdDiv) }, false);
+            td_6.appendChild( btnEdit1 );
+            var btnEdit2 = document.createElement('button');
+                btnEdit2.className = "BtnEdit";
+                btnEdit2.addEventListener('click', function(){ HideDivDesc(IdDiv) }, false);
+            td_6.appendChild( btnEdit2 );
+         tr_0.appendChild( td_6 );
 
       table_0.appendChild( tr_0 );
 

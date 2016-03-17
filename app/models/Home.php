@@ -16,6 +16,24 @@
 			return $result;
 		}
 
+		function GetInvParamStr($No){
+
+			//$StrSearch = "%".$No."%";
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Inventaire WHERE InvNoId LIKE '%' || :NoId || '%' ");
+			$sql->bindValue(":NoId", $No);
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function InsertionItem(){
 			$db = $this->connectDB();
 

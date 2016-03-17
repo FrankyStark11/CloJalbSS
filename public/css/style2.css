@@ -29,7 +29,7 @@ div.SearchBoxPiece{
 	z-index: 997;
 
 	width: 100%;
-	height: 250px;
+	height: 190px;
 
 	border-radius: 5px;
 
@@ -40,6 +40,141 @@ div.SearchBoxPiece{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
 	box-sizing: border-box;
+}
+div.AddReceptionItem{
+
+	width: 80%;
+	height: 100px;
+
+	padding-top: 25px;
+
+	box-sizing: border-box;
+
+	margin-bottom: 50px;
+}
+table.TabRepceptionHead{
+	margin-top: 5px;
+}
+table.TabRepceptionHead td{
+	width:250px;
+	text-align: center;
+}
+table.TabRepception{
+	margin-top: 5px;
+}
+table.TabRepception td{
+	width:250px;
+	text-align: center;
+}
+table.TabRepception th{
+	width:250px;
+	text-align: center;
+}
+table.TabRepception tr:hover{
+	background-color: #e6e6e6;
+}
+
+div.LstReceptionItems{
+	border-width: 2px;
+	border-style: solid;
+	border-color: black;
+	border-radius: 3px;
+
+	overflow: scroll;
+	overflow-x: hidden;
+
+	width: 70%;
+	height: 400px;
+
+	padding-top: 25px;
+	padding-bottom: 25px;
+
+	box-sizing: border-box;
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.ChampsReceptionAdd{
+	width: 200px;
+	height: 30px;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	padding: 3px;
+
+	transition: .1s;
+}
+
+button.BtnAjoutReception{
+	margin-top: 25px;
+	width: 200px;
+	height: 50px;
+
+	font-size: 15px;
+
+	border-width: 0px;
+	border-radius: 3px;
+
+	transition: 0.5s;
+
+	cursor: pointer;
+}
+button.BtnAjoutReception:hover{
+	background-color: #00e600;
+}
+
+.ChampsReceptionAdd:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+}
+
+button.BtnAjouter{
+	background-image: url(../images/icon/Add-icon.png);
+	background-size: 30px 30px;
+	border-width: 0px;
+	border-radius: 30px;
+
+	outline: none;
+
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+button.BtnAjouter:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	background-image: url(../images/icon/Add-icon-cl.png);
+}
+
+button.BtnEdit{
+	background-image: url(../images/icon/edit-icon.png);
+	background-size: 30px 30px;
+	border-width: 0px;
+	border-radius: 30px;
+
+	outline: none;
+
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+button.BtnEdit:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+button.BtnRetirer{
+	background-image: url(../images/icon/sub-icon.png);
+	background-size: 30px 30px;
+	border-width: 0px;
+	border-radius: 30px;
+
+	outline: none;
+
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+button.BtnRetirer:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	background-image: url(../images/icon/sub-icon-cl.png);
 }
 
 #OptionAvance{
@@ -168,16 +303,14 @@ div.InfoPiece{
 
 	background-color: #d7d7d7;
 
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	transition: .2s;
 
 	box-sizing: border-box;
 
 	cursor: pointer;
 }
 div.InfoPiece:hover{
-	border-width: 1px;
-	border-color: red;
-	border-style: solid;
+	box-shadow: 10px 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 div.DescPlus{
@@ -375,10 +508,6 @@ h2{
 	font-size: 30px;
 }
 
-table.loginAdmin{
-
-}
-
 img.Login{
 	width: 200px;
 	height: 200px;
@@ -393,33 +522,39 @@ img.Login{
 
 input.Log{
 
-	width: 250px;
-	height: 40px;
+	width: 300px;
+	height: 50px;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	padding: 3px;
+
+	transition: .1s;
 
 	margin-top: 10px;
 
 	border-radius: 2px;
 	border-width: 0px;
 
-	font-family: "Caviar";
 	font-size: 20px;
-
-	background-color: black;
-	color: white;
 
 	text-align: center;
 
 	outline-width: 0px;
 }
 
+input.Log:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
 button.Connexion{
-	width: 250px;
-	height: 40px;
+	width: 300px;
+	height: 50px;
 
 	border-radius: 2px;
 	border-width: 0px;
 
-	font-family: "Caviar";
 	font-size: 20px;
 
 	background-color: green;
@@ -434,8 +569,9 @@ button.Connexion{
 
 button.Connexion:hover{
 
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.6);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
+
 @media(min-width: 601px) , (orientation: portrait) {
 table.InfoClient{
 	width: 500px;
