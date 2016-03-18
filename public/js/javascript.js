@@ -28,8 +28,8 @@ function RemoveElement(idRetirer){
 }
 
 function Modification(id){
-  $.post("/index.php/Home/GetInvParamStr",
-          {dataStr: id},
+  $.post("/index.php/Home/GetElementInvParamStr",
+          {dataID: id},
         function(data){
           var Arr = JSON.parse(data);
           //Remplie les champs pour la modification
