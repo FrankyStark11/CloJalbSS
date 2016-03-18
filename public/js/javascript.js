@@ -37,10 +37,17 @@ function Modification(id){
           });
 }
 
-function showHint(str) {
+function showHint(){
+
+        var DataID = document.getElementById("SearchBoxNoPiece").value;
+        var DataCouleur = document.getElementById("SearchBoxCouleur").value;
+        var DataGrosseur = document.getElementById("SearchBoxGrosseur").value;
+        var DataHauteur = document.getElementById("SearchBoxHauteur").value;
+        var DataLongeur = document.getElementById("SearchBoxLongeur").value;
+        var DataCategorie = document.getElementById("SearchBoxCategorie").value;
 
         $.post("/index.php/Home/GetInvParamStr",
-          {dataStr: str},
+          {dataID: DataID,dataCouleur: DataCouleur,dataGrosseur: DataGrosseur,dataHauteur: DataHauteur,dataLongeur: DataLongeur,dataCategorie: DataCategorie},
         function(data){
           var Arr = JSON.parse(data);
           //vide toutes les valeurs child du main
@@ -52,9 +59,49 @@ function showHint(str) {
           for(var i=0;i<Arr.length;i++){
             AddInvElement(Arr[i]);
           }
-          
         });
-    }
+}
+
+function showDescription(str){
+
+        $.post("/index.php/Home/GetInvParamStr",
+          {dataStr: str},
+        function(data){
+          var Arr = JSON.parse(data);
+          var TxtIdInfo = document.getElementById("IdItemReception");
+          var TxtDescriptionInfo = document.getElementById("DescriptionItemReception");
+          var TxtQteInfo = document.getElementById("QteItemReception");
+          var BtnAjouterInfo = document.getElementById("BtnAjouterReception");
+
+          //vide toutes les valeurs child du main
+          if(Arr.length == 1){
+            if(Arr[0]["InvNoId"] == TxtIdInfo.value){
+              TxtDescriptionInfo.value = Arr[0]["InvDesc"];
+              TxtQteInfo.disabled = false;
+              BtnAjouterInfo.disabled = false;
+            }
+            else{
+              if(TxtIdInfo.value == ""){
+                TxtDescriptionInfo.value = "Description du produit";
+              }else{
+                TxtDescriptionInfo.value = "Élément non trouvé";
+              }
+              
+              TxtQteInfo.disabled = true;
+              BtnAjouterInfo.disabled = true;
+            }
+          }
+          else{
+            if(TxtIdInfo.value == ""){
+                TxtDescriptionInfo.value = "Description du produit";
+              }else{
+                TxtDescriptionInfo.value = "Élément non trouvé";
+              }
+            TxtQteInfo.disabled = true;
+            BtnAjouterInfo.disabled = true;
+          }
+        });
+}
 
 function AddReceptionElement(){
 

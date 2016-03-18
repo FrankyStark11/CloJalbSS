@@ -21,7 +21,7 @@
 				<table class="TabRepceptionHead">
 					<tr>
 						<td>
-							<input id="IdItemReception" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
+							<input id="IdItemReception" onkeyup="showDescription(this.value)" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
 						</td>
 						<td>
 						<input id="DescriptionItemReception"  class="ChampsReceptionAdd" disabled value="Description du produit"></input>
@@ -30,7 +30,7 @@
 							<input id="QteItemReception" type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
 						</td>
 						<td>
-							<button class="BtnAjouter" onclick="AddReceptionElement()"> </button>
+							<button id="BtnAjouterReception" class="BtnAjouter" onclick="AddReceptionElement()"> </button>
 						</td>
 					</tr>
 				</table>

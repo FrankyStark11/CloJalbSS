@@ -18,7 +18,7 @@
 
 </head>
 
-<body onload="showHint('')">
+<body onload="showHint()">
 	<div class="Header" align="center">
 		<ul class="NavBar">
 			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
@@ -37,14 +37,14 @@
 					No Piece
 				</td>
 				<td>
-					<input class="ChampsRecherche" onkeyup="showHint(this.value)" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
+					<input class="ChampsRecherche" onkeyup="showHint()" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
 				</td>
 				<td>
 					Catégorie
 				</td>
 				<td>
-					<select class="ChampsRecherche">
-						<option selected> Choix </option>
+					<select onchange="showHint()" id="SearchBoxCategorie" class="ChampsRecherche">
+						<option selected value=""> Choix </option>
 						<optgroup label="oz">
 							<option>1,2oz</option>
 						</optgroup>
@@ -82,8 +82,8 @@
 					Couleur
 				</td>
 				<td>
-					<select class="ChampsRecherche">
-						<option>Choix</option>
+					<select onchange="showHint()" id="SearchBoxCouleur" class="ChampsRecherche">
+						<option value="">Choix</option>
 						<optgroup label="Résidentiel">
 								<option>Noir</option>
 								<option>Blanc</option>
@@ -100,8 +100,8 @@
 					Hauteur
 				</td>
 				<td>
-					<select class="ChampsRecherche">
-						<option selected> Choix </option>
+					<select onchange="showHint()" id="SearchBoxHauteur" class="ChampsRecherche">
+						<option value="" selected> Choix </option>
 						<option>3ft</option>
 						<option>4ft</option>
 						<option>5ft</option>
@@ -120,8 +120,8 @@
 					Grosseur
 				</td>
 				<td>
-					<select class="ChampsRecherche">
-						<option selected> Choix </option>
+					<select onchange="showHint()" id="SearchBoxGrosseur" class="ChampsRecherche">
+						<option value="" selected> Choix </option>
 						<optgroup label="Numéro">
 								<option>#9</option>
 								<option>#6</option>
@@ -152,8 +152,8 @@
 					Longeur
 				</td>
 				<td>
-					<select class="ChampsRecherche">
-						<option selected> Choix </option>
+					<select onchange="showHint()" id="SearchBoxLongeur" class="ChampsRecherche">
+						<option value="" selected> Choix </option>
 						<optgroup label="Pied/pouce">
 								<option>6ft 6po</option>
 								<option>7ft 6po</option>

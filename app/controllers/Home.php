@@ -15,8 +15,16 @@ session_start();
 		public function GetInvParamStr(){
 
 			$Model = new modHome();
-			$Str = $_POST["dataStr"];
-			$result = $Model->GetInvParamStr($Str);
+
+			$dataID = $_POST["dataID"];
+			$dataCouleur = $_POST["dataCouleur"];
+			$dataGrosseur = $_POST["dataGrosseur"];
+			$dataHauteur = $_POST["dataHauteur"];
+			$dataLongeur = $_POST["dataLongeur"];
+			$dataCategorie = $_POST["dataCategorie"];
+
+			$result = $Model->GetInvParamStr($dataID,$dataCouleur,$dataGrosseur,$dataHauteur,$dataLongeur,$dataCategorie);
+			
 			echo json_encode($result);
 		}
 

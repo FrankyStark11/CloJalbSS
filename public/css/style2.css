@@ -31,7 +31,7 @@ div.SearchBoxPiece{
 	width: 100%;
 	height: 190px;
 
-	border-radius: 5px;
+	border-bottom-radius: 5px;
 
 	padding: 25px;
 
@@ -221,15 +221,23 @@ button.BtnRetirer:hover{
 
 	z-index: 998;
 
-	padding-top: 15px;
+	padding-top: 17px;
 	color: white;
 
 	cursor: pointer;
 
+	font-size: 15px;
+
 	border-width: 1px;
 	border-color: black;
 	border-style: solid;
+
+	box-sizing: border-box;
 }
+#OptionAvance:hover{
+	font-size: 16px;
+}
+
 div.SearchBoxPiece td{
 
 	color: white;
@@ -580,7 +588,7 @@ button.Connexion{
 
 	cursor: pointer;
 
-	transition: all 0.5s ease;
+	transition: all 0.1s ease;
 }
 
 button.Connexion:hover{

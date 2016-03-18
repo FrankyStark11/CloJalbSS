@@ -16,14 +16,19 @@
 			return $result;
 		}
 
-		function GetInvParamStr($No){
-
-			//$StrSearch = "%".$No."%";
+		function GetInvParamStr($DataId = "",$DataCouleur = "",$DataGrosseur = "",$DataHauteur = "",$DataLongeur = "",$DataCategorie = ""){
 
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT * FROM Inventaire WHERE InvNoId LIKE '%' || :NoId || '%' ");
-			$sql->bindValue(":NoId", $No);
+			$sql = $db->prepare("SELECT * FROM Inventaire WHERE InvNoId LIKE '%' || :NoId || '%' AND InvCouleur LIKE '%' || :Cl || '%' AND InvGrosseur LIKE '%' || :Grosseur || '%' AND InvHauteur LIKE '%' || :Hauteur || '%' AND InvLongeur LIKE '%' || :Longeur || '%' AND InvCategorie LIKE '%' || :Categorie || '%' ");
+
+			$sql->bindValue(":NoId", $DataId);
+			$sql->bindValue(":Cl", $DataCouleur);
+			$sql->bindValue(":Grosseur", $DataGrosseur);
+			$sql->bindValue(":Hauteur", $DataHauteur);
+			$sql->bindValue(":Longeur", $DataLongeur);
+			$sql->bindValue(":Categorie", $DataCategorie);
+
 			$sql->execute();
 
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
