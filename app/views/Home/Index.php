@@ -18,13 +18,12 @@
 
 </head>
 
-<body>
+<body onload="showHint('')">
 	<div class="Header" align="center">
 		<ul class="NavBar">
 			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Modifier">Modifier</a></li>
 			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
 		</ul>	
 	</div>
@@ -182,17 +181,6 @@
 		</table>
 	</div>
 	<div id="Main" class="Main" align="center">
-	<?php
-
-		$Inv = $_SESSION["LstInventaire"];
-
-		
-		for ($i = 0; $i < count($Inv); $i++) {	
-
-			$ID = json_encode($Inv[$i]);
-			echo "<script> AddInvElement('".$ID."'); </script>";
-		}
-	 ?>
 	</div>
 </body>
 

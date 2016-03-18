@@ -10,6 +10,12 @@ session_start();
 			$Model->InsertionItem();
 			parent::view('Home/Insertion');
 		}
+		public function Modification(){
+
+			$Model = new modHome();
+			$Model->ModificationItem();
+			parent::view('Home/Index');
+		}
 	}
 	
 ?>

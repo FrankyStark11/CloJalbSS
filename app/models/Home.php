@@ -69,5 +69,40 @@
 			$sql = null;
 		}
 
+		function ModificationItem(){
+			$db = $this->connectDB();
+
+			$DataNoId = $_GET["txtNoId"];
+			$DataDesc = $_GET["txtDesc"];
+			$DataCouleur = $_GET["txtCouleur"];
+			$DataPrixCoutant = $_GET["txtPrixCoutant"];
+			$DataPrixClient = $_GET["txtPrixClient"];
+			$DataPrixContracteur = $_GET["txtPrixContracteur"];
+			$DataQte = intval($_GET["txtQte"]);
+			$DataHauteur = $_GET["txtHauteur"];
+			$DataLongeur = $_GET["txtLongeur"];
+			$DataGrosseur = $_GET["txtGrosseur"];
+			$DataCategorie = $_GET["txtCategorie"];
+
+			$sql = $db->prepare("UPDATE Inventaire SET InvDesc = :Description, InvCouleur = :Couleur, InvPrixCoutant = :PrixCoutant, InvPrixClient = :PrixClient, InvPrixContracteur = :PrixContracteur, InvQte = :Qte, InvHauteur = :Hauteur, InvLongeur = :Longeur, InvGrosseur = :Grosseur, InvCategorie = :Categorie WHERE InvNoId = :NoId ");
+
+			$sql->bindValue(":NoId", $DataNoId);
+			$sql->bindValue(":Description", $DataDesc);
+			$sql->bindValue(":Couleur", $DataCouleur);
+			$sql->bindValue(":PrixCoutant", $DataPrixCoutant);
+			$sql->bindValue(":PrixClient", $DataPrixClient);
+			$sql->bindValue(":PrixContracteur", $DataPrixContracteur);
+			$sql->bindValue(":Qte", $DataQte);
+			$sql->bindValue(":Hauteur", $DataHauteur);
+			$sql->bindValue(":Longeur", $DataLongeur);
+			$sql->bindValue(":Grosseur", $DataGrosseur);
+			$sql->bindValue(":Categorie", $DataCategorie);
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
 	}
 ?>

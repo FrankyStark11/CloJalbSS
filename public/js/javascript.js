@@ -28,7 +28,13 @@ function RemoveElement(idRetirer){
 }
 
 function Modification(id){
-  alert(id);
+  $.post("/index.php/Home/GetInvParamStr",
+          {dataStr: id},
+        function(data){
+          var Arr = JSON.parse(data);
+          //Remplie les champs pour la modification
+          window.location.href = "/index.php/Home/Modifier?JSONParam="+data;
+          });
 }
 
 function showHint(str) {
@@ -58,11 +64,8 @@ function AddReceptionElement(){
   var IDElement = makeid();
 
   var table_0 = document.getElementById("TabItems");
-//var table_0 = document.createElement('table');
-//   table_0.className = "TabRepceptionEle";
-//   table_0.id = IDElement;
-
    var tr_0 = document.createElement('tr');
+       tr_0.id = IDElement;
 
       var td_0 = document.createElement('td');
          td_0.appendChild( document.createTextNode(NoItem) );
@@ -89,9 +92,6 @@ function AddReceptionElement(){
       tr_0.appendChild( td_3 );
 
    table_0.appendChild( tr_0 );
-
-//document.getElementById("LstBoxReceptionTemp").appendChild(table_0);
-
 }
 
 function AddInvElement(itemArray){
@@ -111,13 +111,15 @@ function AddInvElement(itemArray){
 	var GrosseurItem = itemArray.InvGrosseur;
 	var CategorieItem = itemArray.InvCategorie;
 
+  var AdminMode = 1;
+
 	var IdDiv = makeid();
 
 	var div_InvPlus001 = document.createElement('div');
 	   div_InvPlus001.id = IdDiv;
 	   div_InvPlus001.className = "InfoPiece";
 	   div_InvPlus001.align = "left";
-   };
+
 
    var table_0 = document.createElement('table');
       table_0.className = "InfoPiece";
@@ -148,13 +150,17 @@ function AddInvElement(itemArray){
             td_5.appendChild( document.createTextNode(" Prix Cont : " + PrixContItem ) );
          tr_0.appendChild( td_5 );
 
+         //affiche le boutton de modification seulement si le mode administrateur est activé
+        if(AdminMode == 1){
          var td_6 = document.createElement('td');
             var btnEdit1 = document.createElement('button');
                 btnEdit1.className = "BtnEdit";
-                btnEdit1.addEventListener('click', function(){ Modification(IdDiv) }, false);
+                btnEdit1.addEventListener('click', function(){ Modification(NoItem) }, false);
             td_6.appendChild( btnEdit1 );
+          }
+
             var btnEdit2 = document.createElement('button');
-                btnEdit2.className = "BtnEdit";
+                btnEdit2.className = "BtnDetail";
                 btnEdit2.addEventListener('click', function(){ HideDivDesc(IdDiv) }, false);
             td_6.appendChild( btnEdit2 );
          tr_0.appendChild( td_6 );
@@ -254,7 +260,7 @@ function AddInvElement(itemArray){
 
    div_InvPlus001.appendChild( div_DescPlus001 );
 
-document.getElementById("Main").appendChild( div_InvPlus001 );
+  document.getElementById("Main").appendChild( div_InvPlus001 );
 }
 
 function makeid()

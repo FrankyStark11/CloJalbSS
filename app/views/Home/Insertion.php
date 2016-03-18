@@ -28,7 +28,8 @@
 		</ul>	
 	</div>
 	<div id="Main" class="Main" align="center">
-		<form method="get" action="/index.php/Admin/Insertion" >
+	<h1>Nouvelle pièce</h1>
+		<form method="get" action="/index.php/Admin/Insertion">
 			<table class="InsertionTable">
 				<tr>
 					<td>

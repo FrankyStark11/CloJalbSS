@@ -1,10 +1,5 @@
 <?php
-//session_start();
-	//si une fausse accès à la page, on le kick
-	//if($_SESSION["NomUser"] != "Administrateur"){
-		//header("Refresh:0; ../Tools/AccesRefuse");
-	//}
-	//$Inv = $data['LstInventaire'];
+	$Data = json_decode($_GET["JSONParam"]);
 ?>
 <html>
 <head>
@@ -24,19 +19,19 @@
 			<li class="NavBar"><a class="Navbar" href="/index.php/Home/Accueil">Inventaire</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
 			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
-			<li class="NavBar"><a class="Selected" href="/index.php/Home/Modifier">Modifier</a></li>
 			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
 		</ul>	
 	</div>
 	<div id="Main" class="Main" align="center">
-		<form method="get" action="/index.php/Admin/Insertion" >
+		<h1>Modification des données</h1>
+		<form method="get" action="/index.php/Admin/Modification" >
 			<table class="InsertionTable">
 				<tr>
 					<td>
 						No Piece
 					</td>
 					<td>
-						<input name="txtNoId" type="text" placeholder="No de piece"></input>
+						<input name="txtNoId" id="txtNoId" value=<?php echo $Data[0]->InvNoId; ?> type="text" placeholder="No de piece"></input>
 					</td>
 				</tr>
 				<tr>
@@ -44,7 +39,8 @@
 						Description
 					</td>
 					<td>
-						<textarea name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea> 
+						<textarea name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"><?php echo $Data[0]->InvDesc; ?>
+						</textarea> 
 						<small>Caractère interdit <br> { " , ' , _ }</small>
 					</td>
 				</tr>
@@ -53,17 +49,19 @@
 						Couleur
 					</td>
 					<td>
-						<select name="txtCouleur" value="NA">
-							<option disabled selected >Choix</option>
+						<select name="txtCouleur">
+							<optgroup label="Choix actuel">
+								<option value=<?php echo $Data[0]->InvCouleur; ?>><?php echo $Data[0]->InvCouleur; ?></option>
+							</optgroup>
 							<optgroup label="Résidentiel">
-								<option>Noir</option>
-								<option>Blanc</option>
-								<option>Brun</option>
-								<option>Taupe</option>
-								<option>Vert</option>
+								<option value="Noir">Noir</option>
+								<option value="Blanc">Blanc</option>
+								<option value="Brun">Brun</option>
+								<option value="Taupe">Taupe</option>
+								<option value="Vert">Vert</option>
 							</optgroup>
 							<optgroup label="Commercial">
-							<option>Galvanisé</option>
+							<option value="Galvanisé">Galvanisé</option>
 							</optgroup>
 						</select>
 					</td>
@@ -73,9 +71,12 @@
 						Hauteur
 					</td>
 					<td>
-						<select name="txtHauteur" value="NA">
-							<option disabled selected > Choix</option>
-							<option>NA</option>
+						<select name="txtHauteur" >
+						<optgroup label="Choix actuel">
+							<option value=<?php echo $Data[0]->InvHauteur; ?>><?php echo $Data[0]->InvHauteur; ?></option>
+						</optgroup>
+						<optgroup label="Hauteur">
+							<option>N/A</option>
 							<option>3ft</option>
 							<option>4ft</option>
 							<option>5ft</option>
@@ -86,6 +87,7 @@
 							<option>10ft</option>
 							<option>12ft</option>
 							<option>14ft</option>
+						</optgroup>
 						</select>
 					</td>
 				</tr>
@@ -94,9 +96,11 @@
 						Longeur
 					</td>
 					<td>
-						<select name="txtLongeur" value="NA">
-							<option disabled selected > Choix</option>
-							<option>NA</option>
+						<select name="txtLongeur">
+							<optgroup label="Choix actuel">
+								<option value=<?php echo $Data[0]->InvLongeur; ?>><?php echo $Data[0]->InvLongeur; ?></option>
+							</optgroup>
+							<option>N/A</option>
 							<optgroup label="Pied/pouce">
 								<option>6ft 6po</option>
 								<option>7ft 6po</option>
@@ -126,9 +130,11 @@
 						Grosseur
 					</td>
 					<td>
-						<select name="txtGrosseur" value="NA">
-							<option disabled selected > Choix</option>
-							<option>NA</option>
+						<select name="txtGrosseur">
+							<optgroup label="Choix actuel">
+								<option><?php echo $Data[0]->InvGrosseur; ?></option>
+							</optgroup>
+							<option>N/A</option>
 							<optgroup label="Numéro">
 								<option>#9</option>
 								<option>#6</option>
@@ -161,8 +167,10 @@
 						Categorie
 					</td>
 					<td>
-						<select name="txtCategorie" value="NA">
-							<option disabled selected> Choix </option>
+						<select name="txtCategorie">
+						<optgroup label="Choix actuel">
+							<option value=<?php echo $Data[0]->InvCategorie; ?>><?php echo $Data[0]->InvCategorie; ?></option>
+						</optgroup>
 							<option > N/A </option>
 						<optgroup label="oz">
 							<option>1,2oz</option>
@@ -199,7 +207,7 @@
 						Quantitée
 					</td>
 					<td>
-						<input name="txtQte" type="number" placeholder="Quantitée"></input>
+						<input name="txtQte" type="number" placeholder="Quantitée" value=<?php echo $Data[0]->InvQte; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -207,7 +215,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
+						<input name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -215,7 +223,7 @@
 						Prix client
 					</td>
 					<td>
-						<input name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client"></input>
+						<input name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client" value=<?php echo $Data[0]->InvPrixClient; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -223,7 +231,7 @@
 						Prix Contracteur
 					</td>
 					<td>
-						<input name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur"></input>
+						<input name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur" value=<?php echo $Data[0]->InvPrixContracteur; ?>></input>
 					</td>
 				</tr>
 			</table>
