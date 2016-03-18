@@ -55,17 +55,22 @@ function showHint(){
           while (myNode.firstChild) {
             myNode.removeChild(myNode.firstChild);
           }
-          //ajoute les valeurs triées
-          for(var i=0;i<Arr.length;i++){
-            AddInvElement(Arr[i]);
+
+          if(Arr.length >= 1){
+            //ajoute les valeurs triées
+            for(var i=0;i<Arr.length;i++){
+              AddInvElement(Arr[i]);
+            }
+          }else if(Arr.length == 0){
+            document.getElementById("Main").appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
           }
         });
 }
 
 function showDescription(str){
 
-        $.post("/index.php/Home/GetInvParamStr",
-          {dataStr: str},
+        $.post("/index.php/Home/GetElementInvParamStr",
+          {dataID: str},
         function(data){
           var Arr = JSON.parse(data);
           var TxtIdInfo = document.getElementById("IdItemReception");
@@ -75,7 +80,7 @@ function showDescription(str){
 
           //vide toutes les valeurs child du main
           if(Arr.length == 1){
-            if(Arr[0]["InvNoId"] == TxtIdInfo.value){
+            if(Arr[0]["InvNoId"] == TxtIdInfo.value.toUpperCase()){
               TxtDescriptionInfo.value = Arr[0]["InvDesc"];
               TxtQteInfo.disabled = false;
               BtnAjouterInfo.disabled = false;

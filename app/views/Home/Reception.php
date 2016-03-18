@@ -27,10 +27,10 @@
 						<input id="DescriptionItemReception"  class="ChampsReceptionAdd" disabled value="Description du produit"></input>
 						</td>
 						<td>
-							<input id="QteItemReception" type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
+							<input id="QteItemReception" disabled type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
 						</td>
 						<td>
-							<button id="BtnAjouterReception" class="BtnAjouter" onclick="AddReceptionElement()"> </button>
+							<button id="BtnAjouterReception" disabled class="BtnAjouter" onclick="AddReceptionElement()"> </button>
 						</td>
 					</tr>
 				</table>
