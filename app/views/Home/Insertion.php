@@ -2,9 +2,8 @@
 //session_start();
 	//si une fausse accès à la page, on le kick
 	//if($_SESSION["NomUser"] != "Administrateur"){
-		//header("Refresh:0; ../Tools/AccesRefuse");
+		//header("Refresh:0; ../Home/Login");
 	//}
-	//$Inv = $data['LstInventaire'];
 ?>
 <html>
 <head>
@@ -29,14 +28,14 @@
 	</div>
 	<div id="Main" class="Main" align="center">
 	<h1>Nouvelle pièce</h1>
-		<form method="get" action="/index.php/Admin/Insertion">
+		<form id="FormInsertion" method="get" onsubmit="return validateFormInsertion()" action="/index.php/Admin/Insertion">
 			<table class="InsertionTable">
 				<tr>
 					<td>
 						No Piece
 					</td>
 					<td>
-						<input name="txtNoId" type="text" placeholder="No de piece"></input>
+						<input id="TxtInsertionPieceId" name="txtNoId" type="text" placeholder="No de piece"></input>
 					</td>
 				</tr>
 				<tr>
@@ -44,7 +43,7 @@
 						Description
 					</td>
 					<td>
-						<textarea name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea> 
+						<textarea id="TxtInsertionDescription" name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea> 
 						<small>Caractère interdit <br> { " , ' , _ }</small>
 					</td>
 				</tr>
@@ -53,7 +52,7 @@
 						Couleur
 					</td>
 					<td>
-						<select name="txtCouleur" value="NA">
+						<select id="SelectInsertionCouleur" name="txtCouleur" value="NA">
 							<option disabled selected >Choix</option>
 							<optgroup label="Résidentiel">
 								<option>Noir</option>
@@ -73,7 +72,7 @@
 						Hauteur
 					</td>
 					<td>
-						<select name="txtHauteur" value="NA">
+						<select id="SelectInsertionHauteur" name="txtHauteur" value="NA">
 							<option disabled selected > Choix</option>
 							<option>NA</option>
 							<option>3ft</option>
@@ -94,7 +93,7 @@
 						Longeur
 					</td>
 					<td>
-						<select name="txtLongeur" value="NA">
+						<select id="SelectInsertionLongeur" name="txtLongeur" value="NA">
 							<option disabled selected > Choix</option>
 							<option>NA</option>
 							<optgroup label="Pied/pouce">
@@ -126,7 +125,7 @@
 						Grosseur
 					</td>
 					<td>
-						<select name="txtGrosseur" value="NA">
+						<select id="SelectInsertionGrosseur" name="txtGrosseur" value="NA">
 							<option disabled selected > Choix</option>
 							<option>NA</option>
 							<optgroup label="Numéro">
@@ -161,7 +160,7 @@
 						Categorie
 					</td>
 					<td>
-						<select name="txtCategorie" value="NA">
+						<select id="SelectInsertionCategorie" name="txtCategorie" value="NA">
 							<option disabled selected> Choix </option>
 							<option > N/A </option>
 						<optgroup label="oz">
@@ -199,7 +198,7 @@
 						Quantitée
 					</td>
 					<td>
-						<input name="txtQte" type="number" placeholder="Quantitée"></input>
+						<input id="TxtInsertionQuantite" name="txtQte" type="number" placeholder="Quantitée"></input>
 					</td>
 				</tr>
 				<tr>
@@ -207,7 +206,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
+						<input id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
 					</td>
 				</tr>
 				<tr>
@@ -215,7 +214,7 @@
 						Prix client
 					</td>
 					<td>
-						<input name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client"></input>
+						<input id="TxtInsertionPrixClient" name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client"></input>
 					</td>
 				</tr>
 				<tr>
@@ -223,7 +222,7 @@
 						Prix Contracteur
 					</td>
 					<td>
-						<input name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur"></input>
+						<input id="TxtInsertionPrixContracteur" name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur"></input>
 					</td>
 				</tr>
 			</table>

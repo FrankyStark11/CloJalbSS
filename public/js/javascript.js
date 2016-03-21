@@ -7,6 +7,7 @@ function HideDivDesc(idDiv){
     $(DivSec).slideToggle("slow");
 }
 
+//Permet dafficher et de cacher les option de recherche
 $(document).ready(function(){
     $("#OptionAvance").click(function(){
 
@@ -20,6 +21,229 @@ $(document).ready(function(){
     });
 });
 
+//Valide le formulaire de modification des items 
+//pour eviter lenvoie de donnée vide ou erroné
+function validateFormModification() {
+
+  var FormValide = true;
+
+  var NoId = document.getElementById("txtNoId");
+  var Description = document.getElementById("txtDesc");
+  var Couleur = document.getElementById("SelectModifCouleur");
+  var Hauteur = document.getElementById("SelectModifHauteur");
+  var Longeur = document.getElementById("SelectModificationLongeur");
+  var Grosseur = document.getElementById("SelectModifGrosseur");
+  var Categorie = document.getElementById("SelectModifCategorie");
+  var Quantite = document.getElementById("TxtModifQuantite");
+  var PrixCoutant = document.getElementById("TxtModifPrixCoutant");
+  var PrixClient = document.getElementById("TxtModifPrixClient");
+  var PrixContracteur = document.getElementById("TxtModifPrixContracteur");
+
+  //verification du champs Nom_champs
+  if(NoId.value == ""){
+    $("#txtNoId").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtNoId").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Description.value == ""){
+    $("#txtDesc").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtDesc").css("border", "0px solid black");
+  }
+
+  //verification du champs Couleur
+  if(Couleur.value == "Choix"){
+    $("#SelectModifCouleur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectModifCouleur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Hauteur.value == "Choix"){
+    $("#SelectModifHauteur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectModifHauteur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Longeur.value == "Choix"){
+    $("#SelectModificationLongeur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectModificationLongeur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Grosseur.value == "Choix"){
+    $("#SelectModifGrosseur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectModifGrosseur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Categorie.value == "Choix"){
+    $("#SelectModifCategorie").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectModifCategorie").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Quantite.value == ""){
+    $("#TxtModifQuantite").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtModifQuantite").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(PrixCoutant.value == ""){
+    $("#TxtModifPrixCoutant").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtModifPrixCoutant").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(PrixClient.value == ""){
+    $("#TxtModifPrixClient").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtModifPrixClient").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(PrixContracteur.value == ""){
+    $("#TxtModifPrixContracteur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtModifPrixContracteur").css("border", "0px solid black");
+  }
+
+  //Si aucun des champs contient une erreur le formulaire est envoyé
+  return FormValide;
+}
+
+
+//Function pour la verification du formulaire
+//d'insertion de nouveau élément dans le systeme
+function validateFormInsertion() {
+
+  var FormValide = true;
+
+  var NoId = document.getElementById("TxtInsertionPieceId");
+  var Description = document.getElementById("TxtInsertionDescription");
+  var Couleur = document.getElementById("SelectInsertionCouleur");
+  var Hauteur = document.getElementById("SelectInsertionHauteur");
+  var Longeur = document.getElementById("SelectInsertionLongeur");
+  var Grosseur = document.getElementById("SelectInsertionGrosseur");
+  var Categorie = document.getElementById("SelectInsertionCategorie");
+  var Quantite = document.getElementById("TxtInsertionQuantite");
+  var PrixCoutant = document.getElementById("TxtInsertionPrixCoutant");
+  var PrixClient = document.getElementById("TxtInsertionPrixClient");
+  var PrixContracteur = document.getElementById("TxtInsertionPrixContracteur");
+
+  //verification du champs Numero ID
+  if(NoId.value == ""){
+    $("#TxtInsertionPieceId").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionPieceId").css("border", "0px solid black");
+  }
+
+  //verification du champs Description
+  if(Description.value == ""){
+    $("#TxtInsertionDescription").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionDescription").css("border", "0px solid black");
+  }
+
+  //verification du champs Couleur
+  if(Couleur.value == "Choix"){
+    $("#SelectInsertionCouleur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectInsertionCouleur").css("border", "0px solid black");
+  }
+
+  //verification du champs Hauteur
+  if(Hauteur.value == "Choix"){
+    $("#SelectInsertionHauteur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectInsertionHauteur").css("border", "0px solid black");
+  }
+
+  //verification du champs Longeur
+  if(Longeur.value == "Choix"){
+    $("#SelectInsertionLongeur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectInsertionLongeur").css("border", "0px solid black");
+  }
+
+  //verification du champs Grosseur
+  if(Grosseur.value == "Choix"){
+    $("#SelectInsertionGrosseur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectInsertionGrosseur").css("border", "0px solid black");
+  }
+
+  //verification du champs Categorie
+  if(Categorie.value == "Choix"){
+    $("#SelectInsertionCategorie").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#SelectInsertionCategorie").css("border", "0px solid black");
+  }
+
+  //verification du champs Quantité
+  if(Quantite.value == ""){
+    $("#TxtInsertionQuantite").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionQuantite").css("border", "0px solid black");
+  }
+
+  //verification du champs Prix coutant
+  if(PrixCoutant.value == ""){
+    $("#TxtInsertionPrixCoutant").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionPrixCoutant").css("border", "0px solid black");
+  }
+
+  //verification du champs Prix client
+  if(PrixClient.value == ""){
+    $("#TxtInsertionPrixClient").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionPrixClient").css("border", "0px solid black");
+  }
+
+  //verification du champs Prix contracteur
+  if(PrixContracteur.value == ""){
+    $("#TxtInsertionPrixContracteur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#TxtInsertionPrixContracteur").css("border", "0px solid black");
+  }
+
+  //Si aucun des champs contient une erreur le formulaire est envoyé
+  return FormValide;
+}
+
+//Dans la page de reception
+//permet de retirer une valeur mal entré dans le PO temporaire
 function RemoveElement(idRetirer){
   var element = document.getElementById(idRetirer);
   //var DivPrinc = document.getElementById("LstBoxReceptionTemp");
@@ -27,6 +251,8 @@ function RemoveElement(idRetirer){
   element.parentNode.removeChild(element);
 }
 
+//Ouver la page de modification sur le clic du boutton edit
+//envoie en param GET le json de lelement a modifier
 function Modification(id){
   $.post("/index.php/Home/GetElementInvParamStr",
           {dataID: id},
@@ -37,6 +263,9 @@ function Modification(id){
           });
 }
 
+//Selon les params demandé dans la booite de recherche
+//execute une requete AJAX pour trouver les elements correspondants
+//Affiche les element restant dans la page inventaire
 function showHint(){
 
         var DataID = document.getElementById("SearchBoxNoPiece").value;
@@ -67,6 +296,9 @@ function showHint(){
         });
 }
 
+//sur la page de reception
+//affiche dans lespace description linformation concernant litem 
+//selectionné
 function showDescription(str){
 
         $.post("/index.php/Home/GetElementInvParamStr",
@@ -108,6 +340,8 @@ function showDescription(str){
         });
 }
 
+//lorsque les informations sont entré pour une reception 
+//Cette methode l'envoie dans la zone de PO temporaire
 function AddReceptionElement(){
 
   var NoItem = document.getElementById("IdItemReception").value;
@@ -146,6 +380,8 @@ function AddReceptionElement(){
    table_0.appendChild( tr_0 );
 }
 
+//cette methode permet dafficher un element recus en param
+//a laide de DOM 
 function AddInvElement(itemArray){
   if (typeof itemArray !== 'object'){
 	 itemArray = JSON.parse(itemArray);
@@ -225,6 +461,7 @@ function AddInvElement(itemArray){
    var div_DescPlus001 = document.createElement('div');
       div_DescPlus001.className = "DescPlus";
       div_DescPlus001.id = "Desc" + IdDiv;
+      div_DescPlus001.align = "left";
 
       var table_1 = document.createElement('table');
 
@@ -315,8 +552,8 @@ function AddInvElement(itemArray){
   document.getElementById("Main").appendChild( div_InvPlus001 );
 }
 
-function makeid()
-{
+//methode permetant de retourner un ID Unique pour la navigation par ID
+function makeid(){
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -326,3 +563,38 @@ function makeid()
     return text;
 }
 
+function FuncExcel(){
+  //declaration du array qui sera rempli des elements
+  var ArrayElementPO = [];
+  var ArrayFinal = [];
+
+  var table = document.getElementById('TabItems');
+  var rowLength = table.rows.length;
+
+  for(var i=1; i<rowLength; i+=1){
+    var row = table.rows[i];
+    var cellLength = row.cells.length;
+
+    var ArrayEle = [];
+    for(var y=0; y<cellLength-1; y+=1){
+      var cell = row.cells[y];
+      ArrayEle.push(cell.innerHTML );
+    }
+    ArrayElementPO.push(ArrayEle);
+  }
+
+  for(var a in ArrayElementPO) {
+
+    var item = ArrayElementPO[a];
+
+    ArrayFinal.push({ 
+        "ID" : item[0],
+        "Description"  : item[1],
+        "Qte"       : item[2] 
+    });
+  }
+
+  var data = JSON.stringify(ArrayFinal);
+  window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
+  
+}

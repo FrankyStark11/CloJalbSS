@@ -43,7 +43,7 @@
 				<th>Action</th>
 			</table>
 			</div>
-			<button class="BtnAjoutReception" value="Rechercher"> Recevoir les items </input>
+			<button class="BtnAjoutReception" onclick="FuncExcel()" id="BtnEnvoyer" value="Rechercher"> Recevoir les items </input>
 		</div>
 	</div>
 </body>

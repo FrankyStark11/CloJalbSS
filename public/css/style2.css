@@ -269,6 +269,18 @@ table.InsertionTable input{
 	width: 250px;
 	height: 30px;
 
+	outline: none;
+
+	border-radius: 2px;
+	border-width: 0px;
+
+	margin-top: 10px;
+	margin-right: 10px;
+
+	padding: 3px;
+
+	transition: .1s;
+
 	border-radius: 2px;
 	border-width: 0px;
 
@@ -287,16 +299,8 @@ table.InsertionTable input:hover{
 table.InsertionTable select{
 	width: 250px;
 	height: 30px;
-
-	border-radius: 2px;
-	border-width: 0px;
-
-	margin-top: 10px;
-	margin-right: 10px;
-
-	padding: 3px;
-
-	transition: .1s;
+	outline: none;
+	border:0px solid black;
 }
 
 table.InsertionTable select:hover{
@@ -306,6 +310,8 @@ table.InsertionTable select:hover{
 table.InsertionTable textarea{
 	width: 250px;
 	height: 100px;
+
+	outline: none;
 
 	resize: none;
 
@@ -336,7 +342,7 @@ div.InfoPiece{
 
 	border-radius: 5px;
 
-	margin-top: 20px;
+	margin-top: 10px;
 
 	padding: 25px;
 
@@ -345,8 +351,6 @@ div.InfoPiece{
 	transition: .2s;
 
 	box-sizing: border-box;
-
-	cursor: pointer;
 }
 div.InfoPiece:hover{
 	box-shadow: 10px 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
@@ -407,7 +411,7 @@ table.InfoPiece td {
 	width: 180px;
 	text-align: center;
 
-	cursor: pointer;
+	cursor: default;
 }
 
 table.InfoPiece tr {
@@ -417,7 +421,7 @@ table.InfoPiece tr {
 	border-radius: 6px;
 	border-width: 1px;
 
-	cursor: pointer;
+	cursor: default;
 }
 
 div.NavMenuDiv{

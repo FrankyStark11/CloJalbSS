@@ -24,7 +24,7 @@
 	</div>
 	<div id="Main" class="Main" align="center">
 		<h1>Modification des données</h1>
-		<form method="get" action="/index.php/Admin/Modification" >
+		<form method="get" onsubmit="return validateFormModification()" action="/index.php/Admin/Modification" >
 			<table class="InsertionTable">
 				<tr>
 					<td>
@@ -39,7 +39,7 @@
 						Description
 					</td>
 					<td>
-						<textarea name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"><?php echo $Data[0]->InvDesc; ?>
+						<textarea name="txtDesc" id="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"><?php echo $Data[0]->InvDesc; ?>
 						</textarea> 
 						<small>Caractère interdit <br> { " , ' , _ }</small>
 					</td>
@@ -49,7 +49,7 @@
 						Couleur
 					</td>
 					<td>
-						<select name="txtCouleur">
+						<select id="SelectModifCouleur" name="txtCouleur">
 							<optgroup label="Choix actuel">
 								<option value=<?php echo $Data[0]->InvCouleur; ?>><?php echo $Data[0]->InvCouleur; ?></option>
 							</optgroup>
@@ -71,7 +71,7 @@
 						Hauteur
 					</td>
 					<td>
-						<select name="txtHauteur" >
+						<select id="SelectModifHauteur" name="txtHauteur" >
 						<optgroup label="Choix actuel">
 							<option value=<?php echo $Data[0]->InvHauteur; ?>><?php echo $Data[0]->InvHauteur; ?></option>
 						</optgroup>
@@ -96,7 +96,7 @@
 						Longeur
 					</td>
 					<td>
-						<select name="txtLongeur">
+						<select id="SelectModificationLongeur" name="txtLongeur">
 							<optgroup label="Choix actuel">
 								<option value=<?php echo $Data[0]->InvLongeur; ?>><?php echo $Data[0]->InvLongeur; ?></option>
 							</optgroup>
@@ -130,7 +130,7 @@
 						Grosseur
 					</td>
 					<td>
-						<select name="txtGrosseur">
+						<select id="SelectModifGrosseur" name="txtGrosseur">
 							<optgroup label="Choix actuel">
 								<option><?php echo $Data[0]->InvGrosseur; ?></option>
 							</optgroup>
@@ -167,7 +167,7 @@
 						Categorie
 					</td>
 					<td>
-						<select name="txtCategorie">
+						<select id="SelectModifCategorie" name="txtCategorie">
 						<optgroup label="Choix actuel">
 							<option value=<?php echo $Data[0]->InvCategorie; ?>><?php echo $Data[0]->InvCategorie; ?></option>
 						</optgroup>
@@ -207,7 +207,7 @@
 						Quantitée
 					</td>
 					<td>
-						<input name="txtQte" type="number" placeholder="Quantitée" value=<?php echo $Data[0]->InvQte; ?>></input>
+						<input id="TxtModifQuantite" name="txtQte" type="number" placeholder="Quantitée" value=<?php echo $Data[0]->InvQte; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -215,7 +215,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
+						<input name="txtPrixCoutant" id="TxtModifPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -223,7 +223,7 @@
 						Prix client
 					</td>
 					<td>
-						<input name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client" value=<?php echo $Data[0]->InvPrixClient; ?>></input>
+						<input id="TxtModifPrixClient" name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client" value=<?php echo $Data[0]->InvPrixClient; ?>></input>
 					</td>
 				</tr>
 				<tr>
@@ -231,7 +231,7 @@
 						Prix Contracteur
 					</td>
 					<td>
-						<input name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur" value=<?php echo $Data[0]->InvPrixContracteur; ?>></input>
+						<input id="TxtModifPrixContracteur" name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur" value=<?php echo $Data[0]->InvPrixContracteur; ?>></input>
 					</td>
 				</tr>
 			</table>
