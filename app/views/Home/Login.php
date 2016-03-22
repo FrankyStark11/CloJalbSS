@@ -13,16 +13,11 @@
 
 <body>
 	<div class="Header" align="center">
-		<ul class="NavBar">
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil">Inventaire</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
-			<li class="NavBar" ><a class="Selected" href="/index.php/Home/Login">Connexion</a></li>
-		</ul>	
+		Veuillez vous connecter pour consulter l'inventaire	
 	</div>
 	<div id="Main" class="Main" align="center">
 		<div class="BoxLogin" align="center">
-			<form method="post" action="#">
+			<form method="post" action="/index.php/Admin/Login">
 				<img class="Login" src="../../images/icon/user.png">
 				<table class="LoginAdmin">
 					<tr>

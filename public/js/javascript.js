@@ -340,44 +340,58 @@ function showDescription(str){
         });
 }
 
+//verifie si l'envoie est possible en verifiant la cooerence des champs
+function AjoutItemPossible(){
+
+  var ChampsId = document.getElementById("IdItemReception");
+  var ChampsQte = document.getElementById("QteItemReception");
+
+  var test1 = (ChampsId.value != "");
+  var test2 = (ChampsQte.value != "" && parseInt(ChampsQte.value) >= 0);
+
+  return ( test1 && test2 );
+}
+
 //lorsque les informations sont entré pour une reception 
 //Cette methode l'envoie dans la zone de PO temporaire
 function AddReceptionElement(){
 
-  var NoItem = document.getElementById("IdItemReception").value;
+  var NoItem = (document.getElementById("IdItemReception").value).toUpperCase();
   var DescItem = document.getElementById("DescriptionItemReception").value;
   var QteItem = document.getElementById("QteItemReception").value; 
   var IDElement = makeid();
 
-  var table_0 = document.getElementById("TabItems");
-   var tr_0 = document.createElement('tr');
-       tr_0.id = IDElement;
+  if(AjoutItemPossible()){
+    var table_0 = document.getElementById("TabItems");
+     var tr_0 = document.createElement('tr');
+         tr_0.id = IDElement;
 
-      var td_0 = document.createElement('td');
-         td_0.appendChild( document.createTextNode(NoItem) );
-      tr_0.appendChild( td_0 );
-
-
-      var td_1 = document.createElement('td');
-         td_1.appendChild( document.createTextNode(DescItem) );
-      tr_0.appendChild( td_1 );
+        var td_0 = document.createElement('td');
+           td_0.appendChild( document.createTextNode(NoItem) );
+        tr_0.appendChild( td_0 );
 
 
-      var td_2 = document.createElement('td');
-         td_2.appendChild( document.createTextNode(QteItem) );
-      tr_0.appendChild( td_2 );
+        var td_1 = document.createElement('td');
+           td_1.appendChild( document.createTextNode(DescItem) );
+        tr_0.appendChild( td_1 );
 
 
-      var td_3 = document.createElement('td');
+        var td_2 = document.createElement('td');
+           td_2.appendChild( document.createTextNode(QteItem) );
+        tr_0.appendChild( td_2 );
 
-         var button_0 = document.createElement('button');
-            button_0.className = "BtnRetirer";
-            button_0.addEventListener('click', function(){ RemoveElement(IDElement);}, false);
-         td_3.appendChild( button_0 );
 
-      tr_0.appendChild( td_3 );
+        var td_3 = document.createElement('td');
 
-   table_0.appendChild( tr_0 );
+           var button_0 = document.createElement('button');
+              button_0.className = "BtnRetirer";
+              button_0.addEventListener('click', function(){ RemoveElement(IDElement);}, false);
+           td_3.appendChild( button_0 );
+
+        tr_0.appendChild( td_3 );
+
+     table_0.appendChild( tr_0 );
+  }
 }
 
 //cette methode permet dafficher un element recus en param
@@ -563,18 +577,24 @@ function makeid(){
     return text;
 }
 
+//Sur lajout dans le systeme dune reception officiel
+//genere un array des items et lenvoie sous forme de JSON
+//Au controller qui lui genere son excel et UPDATES les données
 function FuncExcel(){
   //declaration du array qui sera rempli des elements
   var ArrayElementPO = [];
   var ArrayFinal = [];
 
+  //récuperation du tableau des items
   var table = document.getElementById('TabItems');
   var rowLength = table.rows.length;
 
+  //sur tous les ROWS 
   for(var i=1; i<rowLength; i+=1){
     var row = table.rows[i];
     var cellLength = row.cells.length;
 
+    //traverse tous les TD pour generer un array
     var ArrayEle = [];
     for(var y=0; y<cellLength-1; y+=1){
       var cell = row.cells[y];
@@ -583,6 +603,7 @@ function FuncExcel(){
     ArrayElementPO.push(ArrayEle);
   }
 
+  //Conversion des arrays en object
   for(var a in ArrayElementPO) {
 
     var item = ArrayElementPO[a];
@@ -594,6 +615,7 @@ function FuncExcel(){
     });
   }
 
+  //transformation de la commande en JSON et l'envoie
   var data = JSON.stringify(ArrayFinal);
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
   

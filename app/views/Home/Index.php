@@ -1,7 +1,7 @@
 <?php
 //session_start();
 	//si une fausse accès à la page, on le kick
-	//if($_SESSION["NomUser"] != "Administrateur"){
+	//if($_SESSION["UtilisateurType"] != 1){
 		//header("Refresh:0; ../Tools/AccesRefuse");
 	//}
 	//$Inv = $data['LstInventaire'];
@@ -21,10 +21,20 @@
 <body onload="showHint()">
 	<div class="Header" align="center">
 		<ul class="NavBar">
-			<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
-			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
+		<?php
+
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/Accueil">Inventaire</a></li>';}
+
+			if(isset($_SESSION["TypeCompte"]) && $_SESSION["TypeCompte"] == 1){
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Configuration</a></li>';
+			}
+
+
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession">Déconnexion</a></li>';}
+				else{ echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>';}
+			 ?>
 		</ul>	
 	</div>
 

@@ -1,6 +1,5 @@
 
 <?php
-session_start();
 	include_once("../app/models/Home.php");
 	class Home extends Controller
 	{
@@ -30,17 +29,6 @@ session_start();
 			if(is_null($_POST["dataHauteur"])){ $dataHauteur = ""; }else{ $dataHauteur = $_POST["dataHauteur"];}
 			if(is_null($_POST["dataLongeur"])){ $dataLongeur = ""; }else{ $dataLongeur = $_POST["dataLongeur"];}
 			if(is_null($_POST["dataCategorie"])){ $dataCategorie = ""; }else{ $dataCategorie = $_POST["dataCategorie"];}
-
-			/*$dataCouleur = $_POST["dataCouleur"];
-				if(is_null($dataCouleur)){ $dataCouleur = ""; }
-			$dataGrosseur = $_POST["dataGrosseur"];
-				if(is_null($dataGrosseur)){ $dataGrosseur = ""; }
-			$dataHauteur = $_POST["dataHauteur"];
-				if(is_null($dataHauteur)){ $dataHauteur = ""; }
-			$dataLongeur = $_POST["dataLongeur"];
-				if(is_null($dataLongeur)){ $dataLongeur = ""; }
-			$dataCategorie = $_POST["dataCategorie"];
-				if(is_null($dataCategorie)){ $dataCategorie = ""; }*/
 
 			$result = $Model->GetInvParamStr($dataID,$dataCouleur,$dataGrosseur,$dataHauteur,$dataLongeur,$dataCategorie);
 

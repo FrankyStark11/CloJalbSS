@@ -16,6 +16,22 @@
 			return $result;
 		}
 
+		function Connextion($Username,$Mdp){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT UtilisateurType,UtilisateurNom FROM Utilisateur WHERE UtilisateurUsername = :Username AND UtilisateurMdp = :Mdp");
+			$sql->bindValue(":Username",$Username);
+			$sql->bindValue(":Mdp",$Mdp);
+
+			$sql->execute();
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function GetElementInvParamStr($No){
 			$db = $this->connectDB();
 			$sql = $db->prepare("SELECT * FROM Inventaire WHERE InvNoId LIKE '%' || :NoId || '%' ");
@@ -78,6 +94,20 @@
 			$sql->bindValue(":Longeur", $DataLongeur);
 			$sql->bindValue(":Grosseur", $DataGrosseur);
 			$sql->bindValue(":Categorie", $DataCategorie);
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		function ReceptionItem($ID,$Qte){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Inventaire SET InvQte = InvQte + :Qte WHERE InvNoId = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+			$sql->bindValue(":Qte", $Qte);
 
 			$sql->execute();
 

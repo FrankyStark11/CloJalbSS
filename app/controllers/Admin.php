@@ -1,5 +1,4 @@
 <?php
-session_start();
 	include_once("../app/models/Home.php");
 
 	class Admin extends Controller
@@ -10,6 +9,24 @@ session_start();
 			$Model->InsertionItem();
 			parent::view('Home/Insertion');
 		}
+
+		public function TerminerSession(){
+			session_unset();
+			parent::view("Home/Login");
+		}
+
+		public function Login(){
+			$Model = new modHome();
+			$U = $_POST["User"];
+			$M = $_POST["MDP"];
+
+			$utilisateur = $Model->Connextion($U,$M);
+
+			$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
+			$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
+			parent::view('Home/Index');
+		}
+
 		public function Modification(){
 
 			$Model = new modHome();
@@ -18,10 +35,14 @@ session_start();
 		}
 
 		public function ReceptionUpdate(){
+			//prepare le model
 			$model = new modHome();
+			//recois le JSON en param
 			$JSONString = $_GET["JSONParam"];
+			//transforme le JSON en array pour le traitement
 			$JSONParam = json_decode($JSONString);
 
+			//fonction pour generer un ID unique
 			function generateRandomString($length = 10) {
 			    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 			    $charactersLength = strlen($characters);
@@ -32,9 +53,8 @@ session_start();
 			    return $randomString;
 			}
 
+			//genere le numero de PO
 			$POGenere = generateRandomString(15);
-
-			//echo $JSONParam[0]->ID;
 
 			//creation du fichier excel
 			require_once 'ExcelPHP/PHPExcel.php';
@@ -108,6 +128,10 @@ session_start();
 			$objWriter->save('ConfirmationPO/'.$NameStr);
 
 			//update dans le model
+			foreach ($JSONParam as $value) {
+			    $model->ReceptionItem($value->ID,$value->Qte);
+			}
+			
 
 			parent::view('Home/Reception');
 		}
