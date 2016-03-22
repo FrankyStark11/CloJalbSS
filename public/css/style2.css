@@ -18,6 +18,12 @@ div.Main{
 	padding-top:5px;
 	padding-bottom: 40px;
 }
+
+img.ConfigImage{
+	width: 30px;
+	height: 30px;
+}
+
 div.SearchBoxPiece{
 	background-image: url(../images/BG/MetalPattern.png);
 
@@ -228,7 +234,7 @@ button.BtnRetirer:hover{
 
 	font-size: 15px;
 
-	border-width: 1px;
+	border-width: 0px;
 	border-color: black;
 	border-style: solid;
 
@@ -330,11 +336,42 @@ table.InsertionTable textarea:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
+div.ConfigBox{
+	width: 90%;
+	height: auto;
+		min-height: 200px;
+		max-height: 600px;
+
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+
+	margin-top: 10px;
+	margin-bottom: 5px;
+
+	padding: 25px;
+
+	overflow: auto;
+
+}
+
+table.LogData td{
+	width: 150px;
+	text-align: center;
+	padding: 25px;
+}
+
+table.LogData tr:hover{
+	background-color: #e6e6e6;
+	cursor: default;
+}
+
 div.InfoPiece{
-	background-image: url(../images/BG/MetalPattern.png);
+	
+	
 
 	display: block;
 	position: relative;
+
 
 	width: 94%;
 		min-width: 600px;
@@ -376,14 +413,14 @@ div.DescPlus{
 
 	box-sizing: border-box;
 
-	background-color: gray;
+	background-color: #e6e6e6;
 }
 
 div.DescPlus td{
 	width: 150px;
 
 	text-align: left;
-	color: white;
+	color: black;
 
 }
 
@@ -416,7 +453,7 @@ table.InfoPiece td {
 
 table.InfoPiece tr {
 	transition: 0.5s;
-	color: white;
+	color: black;
 
 	border-radius: 6px;
 	border-width: 1px;

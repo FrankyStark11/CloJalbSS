@@ -11,6 +11,14 @@
 			parent::view('Home/Index');
 		}
 
+		public function Configuration(){
+
+			$Model = new modHome();
+			$result = $Model->GetLog();
+			$_SESSION["LstLog"] = $result;
+			parent::view('Home/Config');
+		}
+
 		public function GetElementInvParamStr(){
 			$Model = new modHome();
 			$Str = $_POST["dataID"];

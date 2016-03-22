@@ -11,16 +11,17 @@
 		<ul class="NavBar">
 			<?php
 		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="Navbar" href="/index.php/Home/Accueil">Inventaire</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil">Inventaire</a></li>';}
 
 			if(isset($_SESSION["TypeCompte"]) && $_SESSION["TypeCompte"] == 1){
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>';
 				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/Reception">Réception</a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Configuration</a></li>';
+				echo '<li class="NavBar"><a class="NavBar"  href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession">Déconnexion</a></li>';}
-				else{ echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>';}
+
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
+				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
 			 ?>
 		</ul>	
 	</div>

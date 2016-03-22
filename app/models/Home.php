@@ -16,6 +16,32 @@
 			return $result;
 		}
 
+		//retourne l'intégralité de l'inventaire pour lafficher
+		function GetLog(){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Log");
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function InscriptionLog($Action = "Sans action"){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("INSERT INTO Log (LogAction,LogUtilisateur) VALUES (:Action,:Utilisateur)");
+			$sql->bindValue(":Action",$Action);
+			$sql->bindValue(":Utilisateur",$_SESSION["NomUtilisateur"]);
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
 		function Connextion($Username,$Mdp){
 			$db = $this->connectDB();
 
@@ -97,6 +123,9 @@
 
 			$sql->execute();
 
+			$ActionString = "Ajout dans le systeme de  " . $DataQte . " " . $DataNoId . ".";
+			$this->InscriptionLog($ActionString);
+
 			$db = null;
 			$sql = null;
 		}
@@ -110,6 +139,9 @@
 			$sql->bindValue(":Qte", $Qte);
 
 			$sql->execute();
+
+			$ActionString = "Reception dans le systeme de " . $Qte . " " . $ID . ".";
+			$this->InscriptionLog($ActionString);
 
 			$db = null;
 			$sql = null;
