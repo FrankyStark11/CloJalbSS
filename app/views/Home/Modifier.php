@@ -16,10 +16,21 @@
 <body>
 	<div class="Header" align="center">
 		<ul class="NavBar">
-			<li class="NavBar"><a class="Navbar" href="/index.php/Home/Accueil">Inventaire</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>
-			<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>
-			<li class="NavBar" ><a class="NavBar" href="/index.php/Home/Login">Connexion</a></li>
+			<?php
+		
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
+
+			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
+			}
+
+
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
+				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
+			 ?>
 		</ul>	
 	</div>
 	<div id="Main" class="Main" align="center">
@@ -216,22 +227,6 @@
 					</td>
 					<td>
 						<input name="txtPrixCoutant" id="TxtModifPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Prix client
-					</td>
-					<td>
-						<input id="TxtModifPrixClient" name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client" value=<?php echo $Data[0]->InvPrixClient; ?>></input>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Prix Contracteur
-					</td>
-					<td>
-						<input id="TxtModifPrixContracteur" name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur" value=<?php echo $Data[0]->InvPrixContracteur; ?>></input>
 					</td>
 				</tr>
 			</table>

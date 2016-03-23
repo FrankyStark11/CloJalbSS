@@ -22,16 +22,17 @@
 		<ul class="NavBar">
 			<?php
 		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil">Inventaire</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
 
-			if(isset($_SESSION["TypeCompte"]) && $_SESSION["TypeCompte"] == 1){
-				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/InventaireInsertion">Insertion</a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>';
+			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
+				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
 
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
 			 ?>
 		</ul>	
@@ -208,7 +209,7 @@
 						Quantitée
 					</td>
 					<td>
-						<input id="TxtInsertionQuantite" name="txtQte" type="number" placeholder="Quantitée"></input>
+						<input id="TxtInsertionQuantite" name="txtQte" pattern="[0-9]*" type="number" placeholder="Quantitée"></input>
 					</td>
 				</tr>
 				<tr>
@@ -216,23 +217,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Prix client
-					</td>
-					<td>
-						<input id="TxtInsertionPrixClient" name="txtPrixClient" pattern="[0-9]*" type="number" placeholder="Prix client"></input>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Prix Contracteur
-					</td>
-					<td>
-						<input id="TxtInsertionPrixContracteur" name="txtPrixContracteur" pattern="[0-9]*" type="number" placeholder="Prix contracteur"></input>
+						<input id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[-+]?[0-9]*\.?[0-9]*" type="text" placeholder="Prix cost"></input>
 					</td>
 				</tr>
 			</table>

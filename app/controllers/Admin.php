@@ -11,8 +11,60 @@
 		}
 
 		public function TerminerSession(){
+			$Model = new modHome();
+			//ajoute l'action au log
+			$ActionString = "Déconnexion du système!";
+			$Model->InscriptionLog($ActionString);
 			session_unset();
 			parent::view("Home/Login");
+		}
+
+		public function ModifConf(){
+			$Model = new modHome();
+
+			$Param = $_POST["TxtParam"];
+			$Valeur = $_POST["TxtPourcent"];
+
+			$Model->ModifierConfig($Param,$Valeur);
+
+			//Ajout au log
+			$ActionString = "Configuration ".$Param." à été modifié pour " . $Valeur;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Config');
+		}
+
+		public function ModifMdp(){
+			$Model = new modHome();
+
+			$Param = $_POST["TxtUser"];
+			$Valeur = $_POST["TxtMdp"];
+
+			$Model->ModifierMdpUtilisateur($Param,$Valeur);
+
+			//Ajout au log
+			$ActionString = "Le mot de passe de ".$Param." à été modifié.";
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Config');
+		}
+
+		public function InsertionUtilisateur(){
+			$Model = new modHome();
+
+			$Nom = $_POST["TxtNomAjoutUtilisateur"];
+			$User = $_POST["txtUsernameAjoutUtilisateur"];
+			$Mdp = $_POST["txtmdpAjoutUtilisateur"];
+			$Type = intval($_POST["SelectTypeAjoutUtilisateur"]);
+
+			$Model->InsertionUtilisateur($Nom,$User,$Mdp,$Type);
+
+			//Ajout au log
+			$ActionString = "Création de l'utilisateur de type ".$Type.", " . $Nom . " sous le Username ". $User;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Config');
+
 		}
 
 		public function Login(){
@@ -22,9 +74,26 @@
 
 			$utilisateur = $Model->Connextion($U,$M);
 
-			$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
-			$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
-			parent::view('Home/Index');
+			print_r($utilisateur);
+
+			if($utilisateur["UtilisateurType"] == 1 || $utilisateur["UtilisateurType"] == 2 || $utilisateur["UtilisateurType"] == 0){
+
+				$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
+				$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
+
+				//ajoute l'action au log
+				$ActionString = "Connexion au système!";
+				$Model->InscriptionLog($ActionString);
+
+				parent::view('Home/Index');
+			}
+			else
+			{
+				echo "pas connecter";
+				//parent::view("Home/Login");
+			}
+			
+
 		}
 
 		public function Modification(){

@@ -23,6 +23,61 @@ $(document).ready(function(){
 
 //Valide le formulaire de modification des items 
 //pour eviter lenvoie de donnée vide ou erroné
+function validateFormAjoutUtilisateur() {
+
+  var FormValide = true;
+
+  var Nom = document.getElementById("txtNomAjoutUtilisateur");
+  var User = document.getElementById("txtUsernameAjoutUtilisateur");
+  var Mdp1 = document.getElementById("txtmdpAjoutUtilisateur");
+  var Mdp2 = document.getElementById("txtmdpCCAjoutUtilisateur");
+
+  //verification du champs Nom_champs
+  if(Nom.value == ""){
+    $("#txtNomAjoutUtilisateur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtNomAjoutUtilisateur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(User.value == ""){
+    $("#txtUsernameAjoutUtilisateur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtUsernameAjoutUtilisateur").css("border", "0px solid black");
+  }
+
+  //verification du champs Couleur
+  if(Mdp1.value == ""){
+    $("#txtmdpAjoutUtilisateur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtmdpAjoutUtilisateur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Mdp2.value == ""){
+    $("#txtmdpCCAjoutUtilisateur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+    $("#txtmdpCCAjoutUtilisateur").css("border", "0px solid black");
+  }
+
+  //verification du champs Nom_champs
+  if(Mdp1.value != Mdp2.value){
+    $("#txtmdpCCAjoutUtilisateur").css("border", "2px solid red");
+    $("#txtmdpAjoutUtilisateur").css("border", "2px solid red");
+    FormValide = false;
+  }else{
+  }
+
+  //Si aucun des champs contient une erreur le formulaire est envoyé
+  return FormValide;
+}
+
+//Valide le formulaire de modification des items 
+//pour eviter lenvoie de donnée vide ou erroné
 function validateFormModification() {
 
   var FormValide = true;

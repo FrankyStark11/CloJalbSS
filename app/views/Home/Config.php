@@ -22,35 +22,123 @@
 		<ul class="NavBar">
 			<?php
 		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil">Inventaire</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
 
-			if(isset($_SESSION["TypeCompte"]) && $_SESSION["TypeCompte"] == 1){
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion">Insertion</a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception">Réception</a></li>';
-				echo '<li class="NavBar"><a class="Selected"  href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
+			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
 
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
 			 ?>
 		</ul>	
 	</div>
 	<div id="Main" class="Main" align="center">
 		<div class="ConfigBox">
-			<h2>LOG</h2>
-
+			<h2>Gestion compte</h2>
 			<table class="LogData">
 				<tr>
-					<th> DATE </th>
-					<th> ACTION </th>
-					<th> UTILISATEUR </th>
+					<th> Nom d'utilisateur </th>
+					<th> Nom  </th>
+					<th> Type </th>
+					<?php 
+						if($_SESSION["TypeCompte"] == 0){
+				    	echo '<th> Mot de passe </th>';
+						}
+						
+					?>
 				</tr>
 
 				<?php 
-				foreach ($_SESSION["LstLog"] as $value) {
+				foreach ($_SESSION["LstUtilisateur"] as $value) {
+					
 				    echo "<tr>";
-				    echo "<td>". $value["LogDate"] ."</td><td>". $value["LogAction"] ."</td><td>". $value["LogUtilisateur"] ."</td>";
+				    echo "<td>". $value["UtilisateurUsername"] ."</td><td>". $value["UtilisateurNom"] ."</td><td>". $value["UtilisateurType"] ."</td>";
+
+				    if($_SESSION["TypeCompte"] == 0){
+				    	echo "<form method='post' action='/index.php/Admin/ModifMdp'>";
+				    		echo "<input type='hidden' name='TxtUser' value='".$value["UtilisateurUsername"]."'>";
+				    		echo '<td><input type="text" name="TxtMdp" placeholder="Nouveau" align="center"></input><button type="submit" >Changer</button></td>';
+				    	echo "</form>";
+					}
+
+				    echo "</tr>";
+				}
+				?>
+
+			</table>
+		</div>
+		<div class="ConfigBox">
+			<h2>Ajouter un utilisateur</h2>
+			<form onsubmit="return validateFormAjoutUtilisateur()" method="post" action="/index.php/Admin/InsertionUtilisateur">
+				<table class="InsertionTable">
+					<tr>
+						<td>Nom</td>
+						<td>
+							<input type="text" id="txtNomAjoutUtilisateur" name="TxtNomAjoutUtilisateur" placeholder="Nom"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>Username</td>
+						<td>
+							<input type="text" id="txtUsernameAjoutUtilisateur" name="txtUsernameAjoutUtilisateur" placeholder="Username"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>Mot de passe</td>
+						<td>
+							<input type="password" id="txtmdpAjoutUtilisateur" name="txtmdpAjoutUtilisateur" placeholder="Mot de passe"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>Confirmation mot de passe</td>
+						<td>
+							<input type="password" id="txtmdpCCAjoutUtilisateur" name="txtmdpCCAjoutUtilisateur" placeholder="mot de passe "></input>
+						</td>
+					</tr>
+					<tr>
+						<td>Type</td>
+						<td>
+							<select name="SelectTypeAjoutUtilisateur">
+								<option disabled >Choix</option>
+								<option value="1">Administrateur</option>
+								<option value="0">Visiteur</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<button class="BtnRecherche" type="submit"> Ajouter </button>	
+			</form>
+		</div> 
+		<div class="ConfigBox">
+			<h2>Item inventaires</h2>
+			<table class="LogData">
+				<tr>
+					<th>
+						Élément
+					</th>
+					<th>
+						Valeur actuel
+					</th>
+					<th>
+						Modification
+					</th>
+				</tr>
+
+				<?php 
+				foreach ($_SESSION["LstConfiguration"] as $value) {
+				    echo "<tr>";
+					    echo "<form method='post' action='/index.php/Admin/ModifConf'>";
+					    echo "<input type='hidden' name='TxtParam' value='".$value["ConfParam"]."'>";
+
+						    echo "<td>". $value["ConfParam"] ."</td><td>". $value["ConfValeur"] ."</td>";
+						    echo '<td><input type="text" name="TxtPourcent" placeholder="Nouveau" align="center"></input><button type="submit" >Modifier</button></td>';
+
+					    echo "</form>";
 				    echo "</tr>";
 				}
 				?>

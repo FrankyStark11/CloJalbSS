@@ -6,7 +6,21 @@
 		function GetInv(){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT * FROM Inventaire");
+			$sql = $db->prepare("SELECT * FROM Inventaire ORDER BY InvNoId ASC;");
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		//retourne tous les utilisateurs Nom et username
+		function GetAllUser(){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT UtilisateurUsername,UtilisateurNom,UtilisateurType FROM Utilisateur ORDER BY UtilisateurNom ASC;");
 			$sql->execute();
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -20,9 +34,38 @@
 		function GetLog(){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT * FROM Log");
+			$sql = $db->prepare("SELECT * FROM Log ORDER BY LogDate DESC;");
 			$sql->execute();
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+		//retourne une valeur de param specifier sinon les retournes tous
+		function GetConfiguration($param = "Default"){
+
+			$db = $this->connectDB();
+
+			//si aucun parametre a été demandé, le systeme les renvoies tous
+			if($param == "Default"){
+
+				$sql = $db->prepare("SELECT ConfParam,ConfValeur FROM Configuration;");
+				$sql->execute();
+				$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			}
+			//sinon revoie seulement la valeur de celui demander
+			else{
+
+				$sql = $db->prepare("SELECT ConfValeur FROM Configuration WHERE ConfParam = :Param;");
+				$sql->bindValue(":Param",$param);
+				$sql->execute();
+				$result = $sql->fetch(PDO::FETCH_ASSOC);
+				$result = $result["ConfValeur"];
+
+			}
 
 			$db = null;
 			$sql = null;
@@ -33,9 +76,26 @@
 		function InscriptionLog($Action = "Sans action"){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("INSERT INTO Log (LogAction,LogUtilisateur) VALUES (:Action,:Utilisateur)");
+			$sql = $db->prepare("INSERT INTO Log (LogAction,LogUtilisateur,LogDate) VALUES (:Action,:Utilisateur,DATETIME('now','localtime'))");
 			$sql->bindValue(":Action",$Action);
 			$sql->bindValue(":Utilisateur",$_SESSION["NomUtilisateur"]);
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		//ajout dun nouvelle utilisateur dans le systeme selon les params
+		function InsertionUtilisateur($Nom,$Username,$Mdp,$Type){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("INSERT INTO Utilisateur (UtilisateurNom,UtilisateurUsername,UtilisateurMdp,UtilisateurType) VALUES (:Nom,:User,:Mdp,:Type)");
+
+			$sql->bindValue(":Nom",$Nom);
+			$sql->bindValue(":User",$Username);
+			$sql->bindValue(":Mdp",crypt($Mdp, 'CL'));
+			$sql->bindValue(":Type",$Type);
+
 			$sql->execute();
 
 			$db = null;
@@ -47,7 +107,7 @@
 
 			$sql = $db->prepare("SELECT UtilisateurType,UtilisateurNom FROM Utilisateur WHERE UtilisateurUsername = :Username AND UtilisateurMdp = :Mdp");
 			$sql->bindValue(":Username",$Username);
-			$sql->bindValue(":Mdp",$Mdp);
+			$sql->bindValue(":Mdp",crypt($Mdp, 'CL'));
 
 			$sql->execute();
 			$result = $sql->fetch(PDO::FETCH_ASSOC);
@@ -56,6 +116,7 @@
 			$sql = null;
 
 			return $result;
+			
 		}
 
 		function GetElementInvParamStr($No){
@@ -99,8 +160,13 @@
 			$DataDesc = $_GET["txtDesc"];
 			$DataCouleur = $_GET["txtCouleur"];
 			$DataPrixCoutant = $_GET["txtPrixCoutant"];
-			$DataPrixClient = $_GET["txtPrixClient"];
-			$DataPrixContracteur = $_GET["txtPrixContracteur"];
+
+			$PrixClientCalcule = ((floatval($this->GetConfiguration("Pourcentage Client"))/100)+1) * $DataPrixCoutant;
+			$DataPrixClient = strval($PrixClientCalcule);
+
+			$PrixContracteurCalcule = ((floatval($this->GetConfiguration("Pourcentage Contracteur"))/100)+1) * $DataPrixCoutant;
+			$DataPrixContracteur = strval($PrixContracteurCalcule);
+
 			$DataQte = intval($_GET["txtQte"]);
 			$DataHauteur = $_GET["txtHauteur"];
 			$DataLongeur = $_GET["txtLongeur"];
@@ -123,6 +189,7 @@
 
 			$sql->execute();
 
+			//ajoute l'action au log
 			$ActionString = "Ajout dans le systeme de  " . $DataQte . " " . $DataNoId . ".";
 			$this->InscriptionLog($ActionString);
 
@@ -154,8 +221,11 @@
 			$DataDesc = $_GET["txtDesc"];
 			$DataCouleur = $_GET["txtCouleur"];
 			$DataPrixCoutant = $_GET["txtPrixCoutant"];
-			$DataPrixClient = $_GET["txtPrixClient"];
-			$DataPrixContracteur = $_GET["txtPrixContracteur"];
+			$PrixClientCalcule = ((floatval($this->GetConfiguration("Pourcentage Client"))/100)+1) * $DataPrixCoutant;
+			$DataPrixClient = strval($PrixClientCalcule);
+
+			$PrixContracteurCalcule = ((floatval($this->GetConfiguration("Pourcentage Contracteur"))/100)+1) * $DataPrixCoutant;
+			$DataPrixContracteur = strval($PrixContracteurCalcule);
 			$DataQte = intval($_GET["txtQte"]);
 			$DataHauteur = $_GET["txtHauteur"];
 			$DataLongeur = $_GET["txtLongeur"];
@@ -176,6 +246,36 @@
 			$sql->bindValue(":Grosseur", $DataGrosseur);
 			$sql->bindValue(":Categorie", $DataCategorie);
 
+			$sql->execute();
+
+			//ajoute l'action au log
+			$ActionString = "Modification dans le systeme de  " . $DataNoId . ". La quantité actuel est de ".$DataQte.".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
+		//Modification de configuration selon un param specifié
+		function ModifierConfig($Param,$Valeur){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Configuration SET ConfValeur = :data WHERE ConfParam = :Param");
+			$sql->bindValue(":data",$Valeur);
+			$sql->bindValue(":Param",$Param);
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		//Modification de configuration selon un param specifié
+		function ModifierMdpUtilisateur($ID,$Valeur){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Utilisateur SET UtilisateurMdp = :data WHERE UtilisateurUsername = :Param");
+			$sql->bindValue(":data",crypt($Valeur, 'CL'));
+			$sql->bindValue(":Param",$ID);
 			$sql->execute();
 
 			$db = null;

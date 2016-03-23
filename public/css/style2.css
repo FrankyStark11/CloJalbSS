@@ -286,16 +286,6 @@ table.InsertionTable input{
 	padding: 3px;
 
 	transition: .1s;
-
-	border-radius: 2px;
-	border-width: 0px;
-
-	margin-top: 10px;
-	margin-right: 10px;
-
-	padding: 3px;
-
-	transition: .1s;
 }
 
 table.InsertionTable input:hover{
@@ -307,6 +297,12 @@ table.InsertionTable select{
 	height: 30px;
 	outline: none;
 	border:0px solid black;
+
+	margin-top: 10px;
+	margin-right: 10px;
+
+
+	padding: 3px;
 }
 
 table.InsertionTable select:hover{
@@ -354,10 +350,63 @@ div.ConfigBox{
 
 }
 
+div.LogBox{
+	width: 90%;
+		min-width: 480px;
+	height: 90%;
+		min-height: 200px;
+		max-height: 600px;
+
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+	box-sizing: border-box;
+
+	margin-top: 10px;
+	margin-bottom: 5px;
+
+	padding: 25px;
+
+	overflow: auto;
+
+}
+
 table.LogData td{
 	width: 150px;
 	text-align: center;
 	padding: 25px;
+}
+
+table.LogData input{
+	width: 130px;
+	height: 25px;
+	font-family: "Courier New";
+
+	border-width: 0px;
+	outline: none;
+	text-align: center;
+	transition: .2s;
+}
+table.LogData input:hover{
+	border-width: 2px;
+	border-color: green;
+	border-radius: 2px;
+}
+table.LogData input:focus{
+	border-width: 2px;
+	border-color: green;
+	border-radius: 2px;
+}
+table.LogData button{
+	width: 130px;
+	height: 25px;
+	font-family: "Courier New";
+
+	border-width: 0px;
+	outline: none;
+	text-align: center;
+	transition: .2s;
+}
+table.LogData button:hover{
+	box-shadow: 10px 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 table.LogData tr:hover{
@@ -528,7 +577,7 @@ li a.NavBar {
     border-bottom-width: 3px;
     border-color: gray;
 
-    padding-bottom: 3px;
+    padding: 3px;
 
     margin-left: 10px;
     margin-right: 10px;
@@ -557,7 +606,7 @@ li a.selected {
     border-bottom-width: 3px;
     border-color: red;
 
-    padding-bottom: 3px;
+    padding: 3px;
 
     margin-left: 10px;
     margin-right: 10px;

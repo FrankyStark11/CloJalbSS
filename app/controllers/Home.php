@@ -6,17 +6,31 @@
 		public function Accueil(){
 
 			$Model = new modHome();
+			
 			$result = $Model->GetInv();
+
 			$_SESSION["LstInventaire"] = $result;
+
 			parent::view('Home/Index');
 		}
 
 		public function Configuration(){
+			$Model = new modHome();
 
+			$Usager = $Model->GetAllUser();
+			$Configuration = $Model->GetConfiguration();
+
+			$_SESSION["LstUtilisateur"] = $Usager;
+			$_SESSION["LstConfiguration"] = $Configuration;
+
+			parent::view('Home/Config');
+		}
+
+		public function Log(){
 			$Model = new modHome();
 			$result = $Model->GetLog();
 			$_SESSION["LstLog"] = $result;
-			parent::view('Home/Config');
+			parent::view('Home/Log');
 		}
 
 		public function GetElementInvParamStr(){
