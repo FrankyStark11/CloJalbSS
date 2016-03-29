@@ -26,11 +26,33 @@
 			parent::view('Home/Config');
 		}
 
+		public function MenuSoumission(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu2');
+		}
+
+		public function SR(){
+			//offre le choix du type de soumision
+			parent::view('Home/SoummisionResidentiel');
+		}
+
+		public function SC(){
+			//offre le choix du type de soumision
+			parent::view('Home/SoummisionCommercial');
+		}
+
 		public function Log(){
 			$Model = new modHome();
 			$result = $Model->GetLog();
 			$_SESSION["LstLog"] = $result;
 			parent::view('Home/Log');
+		}
+
+		public function LogElement(){
+			$Model = new modHome();
+			$Str = $_POST["dataID"];
+			$result = $Model->GetLogElement($Str);
+			echo json_encode($result);
 		}
 
 		public function GetElementInvParamStr(){
@@ -63,6 +85,10 @@
 
 		public function Modifier(){
 			parent::view('Home/Modifier');
+		}
+
+		public function LogUnique(){
+			parent::view('Home/LogUnique');
 		}
 
 		public function Reception(){

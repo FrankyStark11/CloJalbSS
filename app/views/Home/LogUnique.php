@@ -1,8 +1,10 @@
 <?php
 //si une fausse accès à la page, on le kick
 	if($_SESSION["TypeCompte"] == "" || $_SESSION["TypeCompte"] == 2){
-		header("Refresh:0; ../Home/Login");
+		//header("Refresh:0; ../Home/Login");
 	}
+
+	$Element = json_decode($_GET["JSONParam"]);
 ?>
 <html>
 <head>
@@ -21,6 +23,14 @@
 		<ul class="NavBar">
 			<?php
 		
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
+
+			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
+				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
+			}
+
+
 			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 			 ?>
 		</ul>	
@@ -37,9 +47,9 @@
 				</tr>
 
 				<?php 
-				foreach ($_SESSION["LstLog"] as $value) {
+				foreach ($Element as $value) {
 				    echo "<tr>";
-				    echo "<td>". $value["LogDate"] ."</td><td>". $value["LogAction"] ."</td><td>". $value["LogUtilisateur"] ."</td>";
+				    echo "<td>". $value->LogDate ."</td><td>". $value->LogAction ."</td><td>". $value->LogUtilisateur ."</td>";
 				    echo "</tr>";
 				}
 				?>

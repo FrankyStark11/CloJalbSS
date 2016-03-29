@@ -5,6 +5,8 @@ body{
 	background-attachment: fixed;
 
 	font-family: "Courier New";
+
+	overflow-x: hidden;	
 	}
 
 div.Main{
@@ -174,6 +176,28 @@ button.BtnEdit:hover{
 	opacity: 1;
 }
 
+button.BtnLog{
+	background-image: url(../images/icon/Log1-icon.png);
+	background-size: 30px 30px;
+	border-width: 0px;
+	border-radius: 30px;
+
+	opacity: 0.5;
+	transition: 0.2s;
+
+	margin-left: 5px;
+	margin-right: 5px;
+	outline: none;
+
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+button.BtnLog:hover{
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	opacity: 1;
+}
 
 button.BtnDetail{
 	background-image: url(../images/icon/option-icon.png);
@@ -550,6 +574,30 @@ div.Header{
 
 }
 
+div.FeetBar{
+
+	
+	border-width: 0px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 2px;
+
+	background-color: #f2f2f2;
+
+	padding-top: 5px;
+	padding-right: 7px;
+	padding-left: 3px;
+
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+
+	box-sizing: border-box;
+
+}
+
 ul.NavBar {
     list-style-type: none;
     margin: 0;
@@ -626,12 +674,15 @@ img.Login{
 	width: 200px;
 	height: 200px;
 
-	border-radius: 100px;
-	border-width: 2px;
+
+
+	border-radius: 0px;
+	border-width: 0px;
 	border-style: solid;
 	border-color: black;
 
 	margin-top: 20px;
+	margin-bottom: 30px;
 }
 
 input.Log{
@@ -642,24 +693,43 @@ input.Log{
 	border-radius: 2px;
 	border-width: 0px;
 
+	background-image: url(../images/icon/lock-icon.png);
+	background-size: 30px 30px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+
 	padding: 3px;
 
 	transition: .1s;
-
-	margin-top: 10px;
 
 	border-radius: 2px;
 	border-width: 0px;
 
 	font-size: 20px;
 
-	text-align: center;
+	text-align: right;
 
 	outline-width: 0px;
 }
 
 input.Log:hover{
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	border-width: 1px;
+	border-style: solid;
+	border-color: blue;
+}
+
+input.LogLock{
+	background-image: url(../images/icon/lock-icon.png);
+	background-size: 30px 30px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+}
+
+input.LogUser{
+	background-image: url(../images/icon/user.png);
+	background-size: 30px 30px;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
 }
 
 button.Connexion{
@@ -684,6 +754,40 @@ button.Connexion{
 button.Connexion:hover{
 
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+div.BoxMenu{
+	width: 250px;
+	height: 250px;
+
+	margin: 20px;
+
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+img.BoxMenu{
+	width: 250px;
+	height: 250px;
+
+	border-radius: 200px;
+	cursor: pointer;
+	transition: .3s;
+	opacity: 0.7;
+}
+
+img.BoxMenu:hover{
+
+	opacity: 1;
+}
+
+img.reverse{
+	-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
 }
 
 /*8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888*/

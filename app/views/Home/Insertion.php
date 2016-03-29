@@ -1,9 +1,8 @@
 <?php
-//session_start();
-	//si une fausse accès à la page, on le kick
-	//if($_SESSION["NomUser"] != "Administrateur"){
-		//header("Refresh:0; ../Home/Login");
-	//}
+//si une fausse accès à la page, on le kick
+	if($_SESSION["TypeCompte"] == "" || $_SESSION["TypeCompte"] == 2){
+		header("Refresh:0; ../Home/Login");
+	}
 ?>
 <html>
 <head>
@@ -27,13 +26,10 @@
 			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
 				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
 
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 			 ?>
 		</ul>	
 	</div>
@@ -55,7 +51,7 @@
 					</td>
 					<td>
 						<textarea id="TxtInsertionDescription" name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea> 
-						<small>Caractère interdit <br> { " , ' , _ }</small>
+						<small>Caractère interdit <br> { " , ' , _ , # }</small>
 					</td>
 				</tr>
 				<tr>
@@ -85,7 +81,7 @@
 					<td>
 						<select id="SelectInsertionHauteur" name="txtHauteur" value="NA">
 							<option disabled selected > Choix</option>
-							<option>NA</option>
+							<option>N/A</option>
 							<option>3ft</option>
 							<option>4ft</option>
 							<option>5ft</option>
@@ -106,7 +102,7 @@
 					<td>
 						<select id="SelectInsertionLongeur" name="txtLongeur" value="NA">
 							<option disabled selected > Choix</option>
-							<option>NA</option>
+							<option>N/A</option>
 							<optgroup label="Pied/pouce">
 								<option>6ft 6po</option>
 								<option>7ft 6po</option>
@@ -138,10 +134,10 @@
 					<td>
 						<select id="SelectInsertionGrosseur" name="txtGrosseur" value="NA">
 							<option disabled selected > Choix</option>
-							<option>NA</option>
+							<option>N/A</option>
 							<optgroup label="Numéro">
-								<option>#9</option>
-								<option>#6</option>
+								<option>no9</option>
+								<option>no6</option>
 							</optgroup>	
 							<optgroup label=" Pouce fraction">
 								<option>1 11/16</option>
@@ -199,7 +195,7 @@
 						</optgroup>
 						<optgroup label="Grillage">
 							<option>Aucun Grillage</option>
-							<option>Grillage 2X#9</option>
+							<option>Grillage 2Xno9</option>
 						</optgroup>
 						</select>
 					</td>
@@ -224,6 +220,7 @@
 		<button class="BtnRecherche" value="Rechercher"> Ajouter </input>
 		</form>
 	</div>
+	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
 </body>
 
 </html>

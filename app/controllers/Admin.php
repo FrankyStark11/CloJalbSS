@@ -10,6 +10,10 @@
 			parent::view('Home/Insertion');
 		}
 
+		public function RetourMenu(){
+			parent::view("Home/Menu1");
+		}
+
 		public function TerminerSession(){
 			$Model = new modHome();
 			//ajoute l'action au log
@@ -17,6 +21,7 @@
 			$Model->InscriptionLog($ActionString);
 			session_unset();
 			parent::view("Home/Login");
+			header("Refresh:0; ../Home/Login");
 		}
 
 		public function ModifConf(){
@@ -74,26 +79,14 @@
 
 			$utilisateur = $Model->Connextion($U,$M);
 
-			print_r($utilisateur);
+			$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
+			$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
 
-			if($utilisateur["UtilisateurType"] == 1 || $utilisateur["UtilisateurType"] == 2 || $utilisateur["UtilisateurType"] == 0){
+			//ajoute l'action au log
+			$ActionString = "Connexion au système!";
+			$Model->InscriptionLog($ActionString);
 
-				$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
-				$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
-
-				//ajoute l'action au log
-				$ActionString = "Connexion au système!";
-				$Model->InscriptionLog($ActionString);
-
-				parent::view('Home/Index');
-			}
-			else
-			{
-				echo "pas connecter";
-				//parent::view("Home/Login");
-			}
-			
-
+			if(isset($_SESSION["NomUtilisateur"])){parent::view('Home/Menu1');}else{parent::view('Home/Login');}
 		}
 
 		public function Modification(){

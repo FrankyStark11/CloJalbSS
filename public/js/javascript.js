@@ -318,10 +318,22 @@ function Modification(id){
           });
 }
 
+//Ouver la page de modification sur le clic du boutton edit
+//envoie en param GET le json de lelement a modifier
+function AfficherLog(id){
+  $.post("/index.php/Home/LogElement",
+          {dataID: id},
+        function(data){
+          var Arr = JSON.parse(data);
+          //Remplie les champs pour la modification
+          window.location.href = "/index.php/Home/LogUnique?JSONParam="+data;
+          });
+}
+
 //Selon les params demandé dans la booite de recherche
 //execute une requete AJAX pour trouver les elements correspondants
 //Affiche les element restant dans la page inventaire
-function showHint(){
+function showHint(TypeAffichage){
 
         var DataID = document.getElementById("SearchBoxNoPiece").value;
         var DataCouleur = document.getElementById("SearchBoxCouleur").value;
@@ -343,7 +355,7 @@ function showHint(){
           if(Arr.length >= 1){
             //ajoute les valeurs triées
             for(var i=0;i<Arr.length;i++){
-              AddInvElement(Arr[i]);
+              AddInvElement(Arr[i],TypeAffichage);
             }
           }else if(Arr.length == 0){
             document.getElementById("Main").appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
@@ -451,7 +463,7 @@ function AddReceptionElement(){
 
 //cette methode permet dafficher un element recus en param
 //a laide de DOM 
-function AddInvElement(itemArray){
+function AddInvElement(itemArray, TypeAffichage){
   if (typeof itemArray !== 'object'){
 	 itemArray = JSON.parse(itemArray);
   }
@@ -468,7 +480,7 @@ function AddInvElement(itemArray){
 	var GrosseurItem = itemArray.InvGrosseur;
 	var CategorieItem = itemArray.InvCategorie;
 
-  var AdminMode = 1;
+  var AdminMode = TypeAffichage;
 
 	var IdDiv = makeid();
 
@@ -494,26 +506,31 @@ function AddInvElement(itemArray){
 
 
          var td_3 = document.createElement('td');
-            td_3.appendChild( document.createTextNode(" Prix Cost : " + PrixCostItem ) );
+            td_3.appendChild( document.createTextNode(" Prix Cost : " + PrixCostItem + "$" ) );
          tr_0.appendChild( td_3 );
 
 
          var td_4 = document.createElement('td');
-            td_4.appendChild( document.createTextNode(" Prix Client : " + PrixClientItem ) );
+            td_4.appendChild( document.createTextNode(" Prix Client : " + PrixClientItem + "$" ) );
          tr_0.appendChild( td_4 );
 
 
          var td_5 = document.createElement('td');
-            td_5.appendChild( document.createTextNode(" Prix Cont : " + PrixContItem ) );
+            td_5.appendChild( document.createTextNode(" Prix Cont : " + PrixContItem + "$" ) );
          tr_0.appendChild( td_5 );
 
-         //affiche le boutton de modification seulement si le mode administrateur est activé
-        if(AdminMode == 1){
          var td_6 = document.createElement('td');
+         //affiche le boutton de modification seulement si le mode administrateur est activé
+        if(AdminMode == 1 || AdminMode == 0){
             var btnEdit1 = document.createElement('button');
                 btnEdit1.className = "BtnEdit";
                 btnEdit1.addEventListener('click', function(){ Modification(NoItem) }, false);
             td_6.appendChild( btnEdit1 );
+
+            var btnEdit3 = document.createElement('button');
+                btnEdit3.className = "BtnLog";
+                btnEdit3.addEventListener('click', function(){ AfficherLog(NoItem) }, false);
+            td_6.appendChild( btnEdit3 );
           }
 
             var btnEdit2 = document.createElement('button');

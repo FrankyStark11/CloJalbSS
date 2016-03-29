@@ -43,6 +43,22 @@
 
 			return $result;
 		}
+
+		//retourne l'intégralité de l'inventaire pour lafficher
+		function GetLogElement($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Log WHERE LogAction LIKE '%' || :ID || '%' ORDER BY LogDate DESC;");
+			$sql->bindValue(":ID",$ID);
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		//retourne une valeur de param specifier sinon les retournes tous
 		function GetConfiguration($param = "Default"){
 

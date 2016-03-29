@@ -1,3 +1,9 @@
+<?php
+//si une fausse accès à la page, on le kick
+	if($_SESSION["TypeCompte"] == ""|| $_SESSION["TypeCompte"] == 2){
+		header("Refresh:0; ../Home/Login");
+	}
+?>
 <html>
 <head>
 	<title>Soumission Clôture Jalbert</title>
@@ -16,13 +22,10 @@
 			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
 				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
 
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar" ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 			 ?>
 		</ul>	
 	</div>
@@ -57,5 +60,6 @@
 			<button class="BtnAjoutReception" onclick="FuncExcel()" id="BtnEnvoyer" value="Rechercher"> Recevoir les items </input>
 		</div>
 	</div>
+	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
 </body>
 </html>

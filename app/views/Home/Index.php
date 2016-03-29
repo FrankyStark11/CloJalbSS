@@ -1,10 +1,8 @@
 <?php
-//session_start();
 	//si une fausse accès à la page, on le kick
-	//if($_SESSION["UtilisateurType"] != 1){
-		//header("Refresh:0; ../Tools/AccesRefuse");
-	//}
-	//$Inv = $data['LstInventaire'];
+	if($_SESSION["TypeCompte"] == ""){
+		header("Refresh:0; ../Home/Login");
+	}
 ?>
 <html>
 <head>
@@ -18,7 +16,7 @@
 
 </head>
 
-<body onload="showHint()">
+<body onload="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)">
 	<div class="Header" align="center">
 		<ul class="NavBar">
 		<?php
@@ -28,13 +26,9 @@
 			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
 				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Log"><img class="ConfigImage" src="/images/icon/Log-icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Configuration"><img class="ConfigImage" src="/images/icon/Gear-icon.png"></a></li>';
 			}
 
-
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/TerminerSession"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-				else{ echo '<li class="NavBar" ><a href="/index.php/Home/Login">Connexion</a></li>';}
+			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
 			 ?>
 		</ul>	
 	</div>
@@ -48,13 +42,13 @@
 					No Piece
 				</td>
 				<td>
-					<input class="ChampsRecherche" onkeyup="showHint()" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
+					<input class="ChampsRecherche" onkeyup="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
 				</td>
 				<td>
 					Catégorie
 				</td>
 				<td>
-					<select onchange="showHint()" id="SearchBoxCategorie" class="ChampsRecherche">
+					<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxCategorie" class="ChampsRecherche">
 						<option selected value=""> Choix </option>
 						<optgroup label="oz">
 							<option>1,2oz</option>
@@ -93,7 +87,7 @@
 					Couleur
 				</td>
 				<td>
-					<select onchange="showHint()" id="SearchBoxCouleur" class="ChampsRecherche">
+					<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxCouleur" class="ChampsRecherche">
 						<option value="">Choix</option>
 						<optgroup label="Résidentiel">
 								<option>Noir</option>
@@ -111,7 +105,7 @@
 					Hauteur
 				</td>
 				<td>
-					<select onchange="showHint()" id="SearchBoxHauteur" class="ChampsRecherche">
+					<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxHauteur" class="ChampsRecherche">
 						<option value="" selected> Choix </option>
 						<option>3ft</option>
 						<option>4ft</option>
@@ -131,7 +125,7 @@
 					Grosseur
 				</td>
 				<td>
-					<select onchange="showHint()" id="SearchBoxGrosseur" class="ChampsRecherche">
+					<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxGrosseur" class="ChampsRecherche">
 						<option value="" selected> Choix </option>
 						<optgroup label="Numéro">
 								<option>#9</option>
@@ -163,7 +157,7 @@
 					Longeur
 				</td>
 				<td>
-					<select onchange="showHint()" id="SearchBoxLongeur" class="ChampsRecherche">
+					<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxLongeur" class="ChampsRecherche">
 						<option value="" selected> Choix </option>
 						<optgroup label="Pied/pouce">
 								<option>6ft 6po</option>
@@ -191,8 +185,10 @@
 			</tr>
 		</table>
 	</div>
+	
 	<div id="Main" class="Main" align="center">
 	</div>
+	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
 </body>
 
 </html>
