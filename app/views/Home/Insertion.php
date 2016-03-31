@@ -42,7 +42,7 @@
 						No Piece
 					</td>
 					<td>
-						<input id="TxtInsertionPieceId" name="txtNoId" type="text" placeholder="No de piece"></input>
+						<input title="Numéro de la pièce" id="TxtInsertionPieceId" name="txtNoId" type="text" placeholder="No de piece"></input>
 					</td>
 				</tr>
 				<tr>
@@ -50,8 +50,8 @@
 						Description
 					</td>
 					<td>
-						<textarea id="TxtInsertionDescription" name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea> 
-						<small>Caractère interdit <br> { " , ' , _ , # }</small>
+						<textarea id="TxtInsertionDescription" title="Caractère interdit 
+   '  _  # " name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea>
 					</td>
 				</tr>
 				<tr>
@@ -59,8 +59,8 @@
 						Couleur
 					</td>
 					<td>
-						<select id="SelectInsertionCouleur" name="txtCouleur" value="NA">
-							<option disabled selected >Choix</option>
+						<select title="Couleur" id="SelectInsertionCouleur" name="txtCouleur" value="N/A">
+							<option disabled selected value="N/A" >Choix</option>
 							<optgroup label="Résidentiel">
 								<option>Noir</option>
 								<option>Blanc</option>
@@ -79,8 +79,8 @@
 						Hauteur
 					</td>
 					<td>
-						<select id="SelectInsertionHauteur" name="txtHauteur" value="NA">
-							<option disabled selected > Choix</option>
+						<select title="Hauteur" id="SelectInsertionHauteur" name="txtHauteur" value="N/A">
+							<option disabled selected value="N/A"> Choix</option>
 							<option>N/A</option>
 							<option>3ft</option>
 							<option>4ft</option>
@@ -100,16 +100,18 @@
 						Longeur
 					</td>
 					<td>
-						<select id="SelectInsertionLongeur" name="txtLongeur" value="NA">
-							<option disabled selected > Choix</option>
+						<select title="Longueur" id="SelectInsertionLongeur" name="txtLongeur" value="N/A">
+							<option disabled selected value="N/A"> Choix</option>
 							<option>N/A</option>
 							<optgroup label="Pied/pouce">
 								<option>6ft 6po</option>
 								<option>7ft 6po</option>
 								<option>8ft 6po</option>
 								<option>9ft 6po</option>
-								<option>10ft 3po</option>
 								<option>10ft 6po</option>
+								<option>11ft 6po</option>
+								<option>12ft 6po</option>
+								<option>14ft 6po</option>
 							</optgroup>
 							<optgroup label="Pied">
 								<option>4ft</option>
@@ -132,8 +134,8 @@
 						Grosseur
 					</td>
 					<td>
-						<select id="SelectInsertionGrosseur" name="txtGrosseur" value="NA">
-							<option disabled selected > Choix</option>
+						<select title="Grosseur" id="SelectInsertionGrosseur" name="txtGrosseur" value="N/A">
+							<option disabled selected value="N/A"> Choix</option>
 							<option>N/A</option>
 							<optgroup label="Numéro">
 								<option>no9</option>
@@ -143,6 +145,7 @@
 								<option>1 11/16</option>
 								<option>1 7/8</option>
 								<option>2 3/8</option>
+								<option>2 7/8</option>
 								<option>3 1/2</option>
 								<option>4 1/2</option>
 								<option>6 5/8</option>
@@ -167,8 +170,8 @@
 						Categorie
 					</td>
 					<td>
-						<select id="SelectInsertionCategorie" name="txtCategorie" value="NA">
-							<option disabled selected> Choix </option>
+						<select title="Catégorie" id="SelectInsertionCategorie" name="txtCategorie" value="N/A">
+							<option disabled selected value="N/A"> Choix </option>
 							<option > N/A </option>
 						<optgroup label="oz">
 							<option>1,2oz</option>
@@ -178,9 +181,11 @@
 							<option>.120</option>
 							<option>.125</option>
 							<option>.134</option>
+							<option>.145</option>
 							<option>.154</option>
 							<option>.203</option>
 							<option>.216</option>
+							<option>.237</option>
 							<option>.280</option>
 						</optgroup>
 						<optgroup label="%">
@@ -205,7 +210,7 @@
 						Quantitée
 					</td>
 					<td>
-						<input id="TxtInsertionQuantite" name="txtQte" pattern="[0-9]*" type="number" placeholder="Quantitée"></input>
+						<input title="Quantité en stock" id="TxtInsertionQuantite" name="txtQte" pattern="[0-9]*" type="number" placeholder="Quantitée"></input>
 					</td>
 				</tr>
 				<tr>
@@ -213,11 +218,11 @@
 						Prix coutant
 					</td>
 					<td>
-						<input id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[-+]?[0-9]*\.?[0-9]*" type="text" placeholder="Prix cost"></input>
+						<input title="Prix coutant" id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[-+]?[0-9]*\.?[0-9]*" type="text" placeholder="Prix cost"></input>
 					</td>
 				</tr>
 			</table>
-		<button class="BtnRecherche" value="Rechercher"> Ajouter </input>
+		<button class="BtnRecherche" title="Ajouter la pièce" value="Rechercher"> Ajouter </input>
 		</form>
 	</div>
 	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>

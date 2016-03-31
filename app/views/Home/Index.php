@@ -6,14 +6,12 @@
 ?>
 <html>
 <head>
-
 	<title>Inventaire Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
-	
-
 </head>
 
 <body onload="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)">
@@ -58,9 +56,11 @@
 							<option>.120</option>
 							<option>.125</option>
 							<option>.134</option>
+							<option>.145</option>
 							<option>.154</option>
 							<option>.203</option>
 							<option>.216</option>
+							<option>.237</option>
 							<option>.280</option>
 						</optgroup>
 						<optgroup label="%">
@@ -135,6 +135,7 @@
 								<option>1 11/16</option>
 								<option>1 7/8</option>
 								<option>2 3/8</option>
+								<option>2 7/8</option>
 								<option>3 1/2</option>
 								<option>4 1/2</option>
 								<option>6 5/8</option>
@@ -164,8 +165,10 @@
 								<option>7ft 6po</option>
 								<option>8ft 6po</option>
 								<option>9ft 6po</option>
-								<option>10ft 3po</option>
 								<option>10ft 6po</option>
+								<option>11ft 6po</option>
+								<option>12ft 6po</option>
+								<option>14ft 6po</option>
 							</optgroup>
 							<optgroup label="Pied">
 								<option>4ft</option>

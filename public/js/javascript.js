@@ -301,8 +301,6 @@ function validateFormInsertion() {
 //permet de retirer une valeur mal entré dans le PO temporaire
 function RemoveElement(idRetirer){
   var element = document.getElementById(idRetirer);
-  //var DivPrinc = document.getElementById("LstBoxReceptionTemp");
-  //DivPrinc.removeChild(ele);
   element.parentNode.removeChild(element);
 }
 
@@ -692,3 +690,297 @@ function FuncExcel(){
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
   
 }
+
+function RetirerRowSection(id){
+  var element = document.getElementById(id);
+  element.parentNode.removeChild(element);
+}
+
+function AjouterSectionRow(){
+  var ID = makeid();
+  var Longeur = document.getElementById("TxtLongueurSectionSR").value;
+  var Hauteur = document.getElementById("TxtHauteurSectionSR").value;
+  var Type = document.getElementById("TxtTypeSectionSR").value;
+
+  var MainTab = document.getElementById("TabSections");
+
+  var tr_0 = document.createElement('tr');
+      tr_0.id = ID;
+
+   var td_0 = document.createElement('td');
+      td_0.appendChild( document.createTextNode(Longeur + "ft") );
+   tr_0.appendChild( td_0 );
+
+
+   var td_1 = document.createElement('td');
+      td_1.appendChild( document.createTextNode(Type) );
+   tr_0.appendChild( td_1 );
+
+
+   var td_2 = document.createElement('td');
+      td_2.appendChild( document.createTextNode(Hauteur+"ft") );
+   tr_0.appendChild( td_2 );
+
+
+   var td_3 = document.createElement('td');
+      td_3.appendChild( document.createTextNode(" prix ") );
+   tr_0.appendChild( td_3 );
+
+
+   var td_4 = document.createElement('td');
+
+      var button_0 = document.createElement('button');
+         button_0.appendChild( document.createTextNode("Retirer") );
+         button_0.addEventListener('click', function(){ RetirerRowSection(ID);}, false);
+      td_4.appendChild( button_0 );
+
+   tr_0.appendChild( td_4 );
+
+MainTab.appendChild( tr_0 );
+
+AjouterPieceRow();
+AjouterPieceRow();
+}
+
+function AjouterPieceRow(){
+
+  var ID = makeid();
+  var MainTab = document.getElementById("TabPieces");
+
+  var tr_0 = document.createElement('tr');
+      tr_0.id = ID;
+
+   var td_0 = document.createElement('td');
+      td_0.appendChild( document.createTextNode(ID) );
+   tr_0.appendChild( td_0 );
+
+
+   var td_1 = document.createElement('td');
+      td_1.appendChild( document.createTextNode(" qte ") );
+   tr_0.appendChild( td_1 );
+
+
+   var td_2 = document.createElement('td');
+      td_2.appendChild( document.createTextNode(" qte ") );
+   tr_0.appendChild( td_2 );
+
+
+   var td_3 = document.createElement('td');
+      td_3.appendChild( document.createTextNode(" Description ") );
+   tr_0.appendChild( td_3 );
+
+
+   var td_4 = document.createElement('td');
+      td_4.appendChild( document.createTextNode(" Prix ") );
+   tr_0.appendChild( td_4 );
+
+MainTab.appendChild( tr_0 );
+}
+
+/* © 2009 ROBO Design
+ * http://www.robodesign.ro
+ */
+
+// Keep everything in anonymous function, called on window load.
+if(window.addEventListener) {
+window.addEventListener('load', function () {
+  var canvas, context, canvaso, contexto;
+
+  // The active tool instance.
+  var tool;
+  var tool_default = 'line';
+
+  function init () {
+
+    // Find the canvas element.
+    canvaso = document.getElementById('imageView');
+    if (!canvaso) {
+      return;
+    }
+
+    if (!canvaso.getContext) {
+      return;
+    }
+
+    // Get the 2D canvas context.
+    contexto = canvaso.getContext('2d');
+    if (!contexto) {
+      return;
+    }
+
+    // Add the temporary canvas.
+    var container = canvaso.parentNode;
+    canvas = document.createElement('canvas');
+    if (!canvas) {
+      return;
+    }
+
+    canvas.id     = 'imageTemp';
+    canvas.width  = canvaso.width;
+    canvas.height = canvaso.height;
+    container.appendChild(canvas);
+
+    context = canvas.getContext('2d');
+
+    // Get the tool select input.
+    var tool_select = document.getElementById('dtool');
+    if (!tool_select) {
+      //alert('Error: failed to get the dtool element!');
+      return;
+    }
+    tool_select.addEventListener('change', ev_tool_change, false);
+
+    // Activate the default tool.
+    if (tools[tool_default]) {
+      tool = new tools[tool_default]();
+      tool_select.value = tool_default;
+    }
+
+    // Attach the mousedown, mousemove and mouseup event listeners.
+    canvas.addEventListener('mousedown', ev_canvas, false);
+    canvas.addEventListener('mousemove', ev_canvas, false);
+    canvas.addEventListener('mouseup',   ev_canvas, false);
+  }
+
+  // The general-purpose event handler. This function just determines the mouse 
+  // position relative to the canvas element.
+  function ev_canvas (ev) {
+    if (ev.layerX || ev.layerX == 0) { // Firefox
+      ev._x = ev.pageX;
+      ev._y = ev.pageY;
+    }
+
+    // Call the event handler of the tool.
+    var func = tool[ev.type];
+    if (func) {
+      func(ev);
+    }
+  }
+
+  // The event handler for any changes made to the tool selector.
+  function ev_tool_change (ev) {
+    if (tools[this.value]) {
+      tool = new tools[this.value]();
+    }
+  }
+
+  // This function draws the #imageTemp canvas on top of #imageView, after which 
+  // #imageTemp is cleared. This function is called each time when the user 
+  // completes a drawing operation.
+  function img_update () {
+    contexto.drawImage(canvas, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
+  // This object holds the implementation of each drawing tool.
+  var tools = {};
+
+  // The drawing pencil.
+  tools.pencil = function () {
+    var tool = this;
+    this.started = false;
+
+    // This is called when you start holding down the mouse button.
+    // This starts the pencil drawing.
+    this.mousedown = function (ev) {
+        context.beginPath();
+        context.moveTo(ev._x, ev._y);
+        tool.started = true;
+    };
+
+    // This function is called every time you move the mouse. Obviously, it only 
+    // draws if the tool.started state is set to true (when you are holding down 
+    // the mouse button).
+    this.mousemove = function (ev) {
+      if (tool.started) {
+        context.lineTo(ev._x, ev._y);
+        context.stroke();
+      }
+    };
+
+    // This is called when you release the mouse button.
+    this.mouseup = function (ev) {
+      if (tool.started) {
+        tool.mousemove(ev);
+        tool.started = false;
+        img_update();
+      }
+    };
+  };
+
+  // The rectangle tool.
+  tools.rect = function () {
+    var tool = this;
+    this.started = false;
+
+    this.mousedown = function (ev) {
+      tool.started = true;
+      tool.x0 = ev._x;
+      tool.y0 = ev._y;
+    };
+
+    this.mousemove = function (ev) {
+      if (!tool.started) {
+        return;
+      }
+
+      var x = Math.min(ev._x,  tool.x0),
+          y = Math.min(ev._y,  tool.y0),
+          w = Math.abs(ev._x - tool.x0),
+          h = Math.abs(ev._y - tool.y0);
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (!w || !h) {
+        return;
+      }
+
+      context.strokeRect(x, y, w, h);
+    };
+
+    this.mouseup = function (ev) {
+      if (tool.started) {
+        tool.mousemove(ev);
+        tool.started = false;
+        img_update();
+      }
+    };
+  };
+
+  // The line tool.
+  tools.line = function () {
+    var tool = this;
+    this.started = false;
+
+    this.mousedown = function (ev) {
+      tool.started = true;
+      tool.x0 = ev._x;
+      tool.y0 = ev._y;
+    };
+
+    this.mousemove = function (ev) {
+      if (!tool.started) {
+        return;
+      }
+
+      context.clearRect(0, 0, canvas.width, canvas.height);
+
+      context.beginPath();
+      context.moveTo(tool.x0, tool.y0);
+      context.lineTo(ev._x,   ev._y);
+      context.stroke();
+      context.closePath();
+    };
+
+    this.mouseup = function (ev) {
+      if (tool.started) {
+        tool.mousemove(ev);
+        tool.started = false;
+        img_update();
+      }
+    };
+  };
+
+  init();
+
+}, false); }

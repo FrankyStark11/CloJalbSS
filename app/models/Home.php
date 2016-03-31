@@ -172,22 +172,22 @@
 		function InsertionItem(){
 			$db = $this->connectDB();
 
-			$DataNoId = $_GET["txtNoId"];
+			$DataNoId =  strtoupper($_GET["txtNoId"]);
 			$DataDesc = $_GET["txtDesc"];
 			$DataCouleur = $_GET["txtCouleur"];
-			$DataPrixCoutant = $_GET["txtPrixCoutant"];
 
+			if (isset($_GET["txtPrixCoutant"])){ $DataPrixCoutant = $_GET["txtPrixCoutant"]; }else{ $DataPrixCoutant = "0"; }
 			$PrixClientCalcule = ((floatval($this->GetConfiguration("Pourcentage Client"))/100)+1) * $DataPrixCoutant;
 			$DataPrixClient = strval($PrixClientCalcule);
 
 			$PrixContracteurCalcule = ((floatval($this->GetConfiguration("Pourcentage Contracteur"))/100)+1) * $DataPrixCoutant;
 			$DataPrixContracteur = strval($PrixContracteurCalcule);
 
-			$DataQte = intval($_GET["txtQte"]);
-			$DataHauteur = $_GET["txtHauteur"];
-			$DataLongeur = $_GET["txtLongeur"];
-			$DataGrosseur = $_GET["txtGrosseur"];
-			$DataCategorie = $_GET["txtCategorie"];
+			if (isset($_GET["txtQte"])){ $DataQte = $_GET["txtQte"]; }else{ $DataQte = "0"; }
+			if (isset($_GET["txtLongeur"])){ $DataLongeur = $_GET["txtLongeur"]; }else{ $DataLongeur = "N/A"; }
+			if (isset($_GET["txtHauteur"])){ $DataHauteur = $_GET["txtHauteur"]; }else{ $DataHauteur = "N/A"; }
+			if (isset($_GET["txtGrosseur"])){ $DataGrosseur = $_GET["txtGrosseur"]; }else{ $DataGrosseur = "N/A"; }
+			if (isset($_GET["txtCategorie"])){ $DataCategorie = $_GET["txtCategorie"]; }else{ $DataCategorie = "N/A"; }
 
 			$sql = $db->prepare("INSERT INTO Inventaire (InvNoId,InvDesc,InvCouleur,InvPrixCoutant,InvPrixClient,InvPrixContracteur,InvQte,InvHauteur,InvLongeur,InvGrosseur,InvCategorie) VALUES (:NoId,:Description,:Couleur,:PrixCoutant,:PrixClient,:PrixContracteur,:Qte,:Hauteur,:Longeur,:Grosseur,:Categorie)");
 
@@ -206,7 +206,7 @@
 			$sql->execute();
 
 			//ajoute l'action au log
-			$ActionString = "Ajout dans le systeme de  " . $DataQte . " " . $DataNoId . ".";
+			$ActionString = "Ajout de " . $DataNoId . " dans l'inventaire avec une quantitée de " . $DataQte.".";
 			$this->InscriptionLog($ActionString);
 
 			$db = null;
@@ -223,7 +223,7 @@
 
 			$sql->execute();
 
-			$ActionString = "Reception dans le systeme de " . $Qte . " " . $ID . ".";
+			$ActionString = "Reception de " . $Qte . " " . $ID . ".";
 			$this->InscriptionLog($ActionString);
 
 			$db = null;
@@ -233,7 +233,7 @@
 		function ModificationItem(){
 			$db = $this->connectDB();
 
-			$DataNoId = $_GET["txtNoId"];
+			$DataNoId = strtoupper($_GET["txtNoId"]);
 			$DataDesc = $_GET["txtDesc"];
 			$DataCouleur = $_GET["txtCouleur"];
 			$DataPrixCoutant = $_GET["txtPrixCoutant"];
@@ -248,7 +248,7 @@
 			$DataGrosseur = $_GET["txtGrosseur"];
 			$DataCategorie = $_GET["txtCategorie"];
 
-			$sql = $db->prepare("UPDATE Inventaire SET InvDesc = :Description, InvCouleur = :Couleur, InvPrixCoutant = :PrixCoutant, InvPrixClient = :PrixClient, InvPrixContracteur = :PrixContracteur, InvQte = :Qte, InvHauteur = :Hauteur, InvLongeur = :Longeur, InvGrosseur = :Grosseur, InvCategorie = :Categorie WHERE InvNoId = :NoId ");
+			$sql = $db->prepare("UPDATE Inventaire SET InvNoId = :NoId, InvDesc = :Description, InvCouleur = :Couleur, InvPrixCoutant = :PrixCoutant, InvPrixClient = :PrixClient, InvPrixContracteur = :PrixContracteur, InvQte = :Qte, InvHauteur = :Hauteur, InvLongeur = :Longeur, InvGrosseur = :Grosseur, InvCategorie = :Categorie WHERE InvNoId = :NoId ");
 
 			$sql->bindValue(":NoId", $DataNoId);
 			$sql->bindValue(":Description", $DataDesc);
@@ -265,7 +265,7 @@
 			$sql->execute();
 
 			//ajoute l'action au log
-			$ActionString = "Modification dans le systeme de  " . $DataNoId . ". La quantité actuel est de ".$DataQte.".";
+			$ActionString = "Modification de  " . $DataNoId . ". La quantité actuel est de ".$DataQte.".";
 			$this->InscriptionLog($ActionString);
 
 			$db = null;

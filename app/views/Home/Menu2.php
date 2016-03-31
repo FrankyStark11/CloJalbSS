@@ -22,8 +22,8 @@
 	<div id="Main" class="Main" align="center">
 	<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
 	<h2>Quelle type de soumission ?</h2>
-		<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soummission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a></div>
-		<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soummission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a></div>
+		<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a></div>
+		<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a></div>
 		<div class="BoxMenu"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a></div>
 	</div>
 </body>

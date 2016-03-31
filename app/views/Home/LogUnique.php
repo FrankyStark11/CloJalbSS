@@ -36,7 +36,6 @@
 		</ul>	
 	</div>
 	<div id="Main" class="Main" align="center">
-		<div class="LogBox">
 			<h2>LOG</h2>
 
 			<table class="LogData">
@@ -55,7 +54,6 @@
 				?>
 
 			</table>
-		</div> 
 	</div>
 	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
 </body>

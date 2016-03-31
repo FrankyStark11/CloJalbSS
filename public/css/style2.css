@@ -8,6 +8,9 @@ body{
 
 	overflow-x: hidden;	
 	}
+input{
+	font-family: "Courier New";
+}
 
 div.Main{
 
@@ -291,15 +294,19 @@ button.BtnRecherche:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
-table.InsertionTable td{
-	width: 300px;
-}
+table.InsertionTable{ width: 600px; }
+table.InsertionTable td{width: 300px;}
+
+table.InsertionTable tr td:first-child{text-align: left;}
+table.InsertionTable tr td:last-child{text-align: right;}
 
 table.InsertionTable input{
-	width: 250px;
+	width: 220px;
 	height: 30px;
 
 	outline: none;
+
+	text-align: center;
 
 	border-radius: 2px;
 	border-width: 0px;
@@ -309,32 +316,32 @@ table.InsertionTable input{
 
 	padding: 3px;
 
-	transition: .1s;
+	transition: .3s;
 }
 
-table.InsertionTable input:hover{
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-}
+table.InsertionTable input:hover{width: 250px;}
+table.InsertionTable input:focus{width: 260px;}
 
 table.InsertionTable select{
-	width: 250px;
+	width: 220px;
 	height: 30px;
 	outline: none;
 	border:0px solid black;
 
+	text-align: center;
+
 	margin-top: 10px;
 	margin-right: 10px;
 
-
+	transition: .3s;
 	padding: 3px;
 }
 
-table.InsertionTable select:hover{
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-}
+table.InsertionTable select:hover{width: 250px;}
+table.InsertionTable select:focus{width: 260px;}
 
 table.InsertionTable textarea{
-	width: 250px;
+	width: 220px;
 	height: 100px;
 
 	outline: none;
@@ -344,23 +351,47 @@ table.InsertionTable textarea{
 	border-radius: 2px;
 	border-width: 0px;
 
+	text-align: center;
+
 	margin-top: 10px;
 	margin-right: 10px;
 
 	padding: 3px;
 
-	transition: .1s;
+	transition: .3s;
+}
+table.InsertionTable textarea:hover{width: 250px;}
+table.InsertionTable textarea:focus{width: 260px;}
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
 }
 
-table.InsertionTable textarea:hover{
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 50%;
+    margin-left: -60px;
 }
 
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
 div.ConfigBox{
 	width: 90%;
 	height: auto;
 		min-height: 200px;
-		max-height: 600px;
 
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 	box-sizing: border-box;
@@ -392,12 +423,18 @@ div.LogBox{
 	overflow: auto;
 
 }
-
+table.LogData {
+	width: 750px;
+}
 table.LogData td{
-	width: 150px;
+	width: 250px;
 	text-align: center;
 	padding: 25px;
 }
+
+table.LogData th{background-color: black; color: white; height: 50px;}
+table.LogData tr{background-color: white;}
+table.LogData tr:nth-child(even) {background-color: #f2f2f2;}
 
 table.LogData input{
 	width: 130px;
@@ -439,12 +476,8 @@ table.LogData tr:hover{
 }
 
 div.InfoPiece{
-	
-	
-
 	display: block;
 	position: relative;
-
 
 	width: 94%;
 		min-width: 600px;
@@ -458,7 +491,7 @@ div.InfoPiece{
 
 	background-color: #d7d7d7;
 
-	transition: .2s;
+	transition: .5s;
 
 	box-sizing: border-box;
 }
@@ -515,13 +548,25 @@ div.DescPlus td{
 .ChampsRecherche:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
-
+table.InfoPiece {
+	width: 100%;
+}
 table.InfoPiece td {
 
-	width: 180px;
+	width: 13%;
 	text-align: center;
 
 	cursor: default;
+}
+
+table.InfoPiece tr td:first-child {
+
+	font-weight: bold;
+}
+
+table.InfoPiece tr td:last-child {
+
+	width: 100px;
 }
 
 table.InfoPiece tr {
@@ -710,12 +755,15 @@ input.Log{
 	text-align: right;
 
 	outline-width: 0px;
+
+	cursor: pointer;
 }
 
 input.Log:hover{
-	border-width: 1px;
-	border-style: solid;
-	border-color: blue;
+	background-position: 15px 10px;
+}
+input.Log:focus{
+	background-position: 20px 10px;
 }
 
 input.LogLock{
@@ -744,7 +792,7 @@ button.Connexion{
 	background-color: green;
 	color: white;
 
-	margin-top: 10px;
+	margin-top: 25px;
 
 	cursor: pointer;
 
@@ -789,5 +837,156 @@ img.reverse{
         filter: FlipH;
         -ms-filter: "FlipH";
 }
+
+table.TabFeet{
+	margin-top: 20px;
+	width: 600px;
+}
+table.TabFeet button{
+	width: 300px;
+	height: 40px;
+	color: white;
+
+	cursor: pointer;
+
+	border-width: 0px;
+	transition: .2s;
+}
+table.TabFeet button:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.3);
+}
+table.TabFeet button.Confirmer{
+	background-color: green;
+}
+table.TabFeet button.Annuler{
+	background-color: red;
+}
+
+table.TabSoumission{
+	width: 600px;
+
+}
+table.TabSoumission tr td:first-child{
+	text-align: left;
+}
+table.TabSoumission tr td:last-child{
+	text-align: right;
+}
+
+table.TabInfoSection{
+	width: 600px;
+	background-color: white;
+}
+
+table.TabSoumission input{
+	width: 200px;
+	height: 30px;
+
+	border-width: 0px;
+	outline: none;
+
+	text-align: center;
+
+	transition: .2s;
+}
+table.TabSoumission select{
+	width: 200px;
+	height: 30px;
+
+	border-width: 0px;
+	outline: none;
+
+	text-align: center;
+
+	transition: .2s;
+}
+table.TabSoumission input:hover{
+	width: 220px;
+}
+table.TabSoumission input:focus{
+	width: 250px;
+}
+table.TabSoumission select:hover{
+	width: 220px;
+}
+table.TabSoumission select:focus{
+	width: 250px;
+}
+table.TabSoumission button{
+	width: 150px;
+	height: 30px;
+
+	border-width: 0px;
+
+	transition: .2s;
+}
+table.TabSoumission button:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+table.TabSoumission td{
+	width: 250px;
+	height: 40px;
+
+	margin-right: 20px;
+}
+
+table.TabInfoSection td{
+	width: 200px;
+	text-align: center;
+	font-family: "Courier New";
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+
+	padding: 15px;
+}
+
+table.TabInfoSection tr:nth-child(even) {background-color: #f2f2f2}
+
+table.TabInfoSection tr{
+	transition: .2s;
+}
+table.TabInfoSection tr:hover{
+	background-color: #e6e6e6;
+}
+
+table.TabInfoSection th{
+	background-color: #e6e6e6;
+}
+
+table.TabInfoSection button{
+	width: 100px;
+	height: 30px;
+
+	background-color: #b30000;
+	color: white;
+
+	border-width: 0px;
+
+	transition: .2s;
+	cursor: pointer;
+}
+table.TabInfoSection button:hover{
+	background-color: red;
+}
+
+div.divSections{
+	border-width: 1px;
+	border-style: solid;
+	border-color: black;
+
+	width: 600px;
+	height: auto;
+		max-height: 500px;
+
+	overflow: auto;
+
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+#container { width: 600px; cursor: pointer;  }
+#imageView {  border: 1px solid #000; }
+#imageTemp { border: 1px solid #000;}
 
 /*8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888*/
