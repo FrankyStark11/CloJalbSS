@@ -738,43 +738,189 @@ function AjouterSectionRow(){
 
 MainTab.appendChild( tr_0 );
 
-AjouterPieceRow();
-AjouterPieceRow();
 }
 
-function AjouterPieceRow(){
+//cette methode est appelé pour modifier la quantité d'une piece X recus en param
+function UpdatePieceRow(nom,NouvelleQte){
+  tab = document.getElementById("TabPieces");
+  var piecePresente = false;
+  //prend tous les TD du tableau de piece et cherche la bonne piece
+  tdElements = tab.getElementsByTagName('td');
+  for(i = 0; i < tdElements.length; i++){
+    if(tdElements[i].innerHTML == nom){
+      tdElements[i+1].innerHTML = NouvelleQte;
+
+      //compare les 2 quantitées
+      if(parseInt(tdElements[i+1].innerHTML) > parseInt(tdElements[i+2].innerHTML)){ 
+        document.getElementById(nom+"td").style.color = "red";
+      }else{
+        document.getElementById(nom+"td").style.color = "black";
+      }
+
+      //si la piece est a zero on retire la ligne au complet
+      if (NouvelleQte == "0" || NouvelleQte == "" || isNaN(NouvelleQte)) {
+        //trouve lelement par son ID qui est le meme que le numero de la piece qui est unique
+        var element = document.getElementById(nom);
+        element.parentNode.removeChild(element);
+      }
+      break;
+    }
+  }
+}
+
+function AjouterPieceRow(nom,qte){
 
   var ID = makeid();
+  var Description;
+  var Prix;
+  var QteInv;
+
+  //va chercher la description, le prix et la quantité de la piece par AJAX
+  $.post("/index.php/Home/GetItemDesc",
+          {dataID: nom},
+        function(data){
+          var Arr = JSON.parse(data);
+          Description = Arr["InvDesc"];
+          Prix = Arr["InvPrixContracteur"];
+          QteInv = Arr["InvQte"];
+        
+
   var MainTab = document.getElementById("TabPieces");
 
   var tr_0 = document.createElement('tr');
-      tr_0.id = ID;
+      tr_0.id = nom;
 
    var td_0 = document.createElement('td');
-      td_0.appendChild( document.createTextNode(ID) );
+      td_0.appendChild( document.createTextNode(nom) );
+      td_0.id = nom+"td";
    tr_0.appendChild( td_0 );
 
 
    var td_1 = document.createElement('td');
-      td_1.appendChild( document.createTextNode(" qte ") );
+      td_1.appendChild( document.createTextNode(qte) );
    tr_0.appendChild( td_1 );
 
 
    var td_2 = document.createElement('td');
-      td_2.appendChild( document.createTextNode(" qte ") );
+      td_2.appendChild( document.createTextNode(QteInv) );
    tr_0.appendChild( td_2 );
 
 
    var td_3 = document.createElement('td');
-      td_3.appendChild( document.createTextNode(" Description ") );
+      td_3.appendChild( document.createTextNode(Description) );
    tr_0.appendChild( td_3 );
 
 
    var td_4 = document.createElement('td');
-      td_4.appendChild( document.createTextNode(" Prix ") );
+      td_4.appendChild( document.createTextNode(Prix + "$") );
    tr_0.appendChild( td_4 );
 
-MainTab.appendChild( tr_0 );
+  MainTab.appendChild( tr_0 );
+
+  //compare les 2 quantitées
+  if(parseInt(qte) > parseInt(QteInv)){td_0.style.color = "red";}else{td_0.style.color = "black";}
+  });
+}
+
+function PiecePresente(Nom){
+tab = document.getElementById("TabPieces");
+  var piecePresente = false;
+  trElements = tab.getElementsByTagName('td');
+  for(i = 0; i < trElements.length; i++){
+    if(trElements[i].innerHTML == Nom){
+      piecePresente = true;
+    }
+  }
+  return piecePresente;
+}
+
+function AjoutPOTP(Hauteur){
+  var CL = "NO";
+  var noPiece = "POTP-0" + Hauteur + "238-" + CL;
+  var qtePiece = document.getElementById("QtePotp"+Hauteur+"ft").value;
+  
+  if(!PiecePresente(noPiece) && qtePiece != ""){AjouterPieceRow(noPiece,qtePiece);}
+  else{UpdatePieceRow(noPiece,qtePiece);}
+
+}
+
+function AjoutKit(Hauteur){
+
+  var CL = "NO";
+
+  //enregistre la valeur des 3 champs de kit
+  var kit1 = parseInt(document.getElementById("QteKit4ft").value);
+  var Kit2 = parseInt(document.getElementById("QteKit5ft").value);
+  var Kit3 = parseInt(document.getElementById("QteKit6ft").value);
+
+  var qtePiece = parseInt(document.getElementById("QteKit"+Hauteur+"ft").value);
+  if(isNaN(qtePiece)){qtePiece = 0;}
+  var EMTR;
+
+  var BRTR = "BRTR-00238-" + CL;
+  var BOEC = "BOEC-00516-GA";
+  var BRTE = "BRTE-00238-" + CL;
+  var BATE = "BATE-0" + Hauteur + "058-"+ CL;
+
+  var QteBRTR = 0;
+  var QteBOEC = 0;
+  var QteBRTE = 0;
+  var QteBATE = 0;
+
+  //ajuste les quantitées selon la hauteur
+
+  //pour un 4 pied
+  if(!isNaN(kit1)){
+
+    QteBRTR += 1*kit1;
+    QteBOEC += 4*kit1;
+    QteBRTE += 3*kit1;
+    if(Hauteur == "4") {QteBATE += 1*kit1;}
+
+  }
+
+  //pour un 5 pied
+  if(!isNaN(Kit2)){
+
+    QteBRTR += 1*Kit2;
+    QteBOEC += 6*Kit2;
+    QteBRTE += 4*Kit2;
+   if(Hauteur == "5") { QteBATE += 1*Kit2;}
+  }
+
+  //pour un 6 pied
+  if(!isNaN(Kit3)){
+
+    QteBRTR += 1*Kit3;
+    QteBOEC += 8*Kit3;
+    QteBRTE += 5*Kit3;
+    if(Hauteur == "6") {QteBATE += 1*Kit3;}
+
+  }
+
+  //insert ou modifie les pieces 
+  if( (kit1 > 0 || !isNaN(kit1)) || (kit2 > 0 || !isNaN(kit2)) || (kit3 > 0 || !isNaN(kit3)) ){
+
+    if(!PiecePresente(BRTR) &&  QteBRTR > 0 ){AjouterPieceRow(BRTR,QteBRTR);}
+        else{
+            UpdatePieceRow(BRTR,QteBRTR);
+        }
+
+    if(!PiecePresente(BOEC) && QteBOEC > 0 ){AjouterPieceRow(BOEC,QteBOEC);}
+      else{
+        UpdatePieceRow(BOEC,QteBOEC);
+      }
+
+    if(!PiecePresente(BRTE) && QteBRTE > 0 ){AjouterPieceRow(BRTE,QteBRTE);}
+      else{
+        UpdatePieceRow(BRTE,QteBRTE);
+      }
+
+    //Ajout, update ou retire  
+    if(!PiecePresente(BATE) && QteBATE > 0 ){AjouterPieceRow(BATE,QteBATE);}
+      else{UpdatePieceRow(BATE,QteBATE);}
+    }
+
 }
 
 /* © 2009 ROBO Design

@@ -62,6 +62,13 @@
 			echo json_encode($result);
 		}
 
+		public function GetItemDesc(){
+			$Model = new modHome();
+			$Str = $_POST["dataID"];
+			$result = $Model->GetItemDesc($Str);
+			echo json_encode($result);
+		}
+
 		public function GetInvParamStr(){
 
 			$Model = new modHome();

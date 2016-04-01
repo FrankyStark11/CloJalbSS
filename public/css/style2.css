@@ -862,6 +862,35 @@ table.TabFeet button.Annuler{
 	background-color: red;
 }
 
+table.TabSoumissionPOTP{
+	width: 600px;
+}
+
+table.TabSoumissionPOTP td{
+	width: 150px;
+	text-align: center;
+}
+
+table.TabSoumissionPOTP tr th:first-child{
+	text-align: left;
+}
+
+table.TabSoumissionPOTP input{
+	width: 140px;
+	height: 30px;
+
+	border-width: 0px;
+	text-align: center;
+
+	outline: none;
+	transition: .2s;
+}
+
+table.TabSoumissionPOTP input:hover{
+	width: 150px;
+	height: 30px;
+}
+
 table.TabSoumission{
 	width: 600px;
 
@@ -887,7 +916,7 @@ table.TabSoumission input{
 
 	text-align: center;
 
-	transition: .2s;
+	transition: .3s;
 }
 table.TabSoumission select{
 	width: 200px;
@@ -953,6 +982,11 @@ table.TabInfoSection tr:hover{
 
 table.TabInfoSection th{
 	background-color: #e6e6e6;
+	height: 50px;
+
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
 table.TabInfoSection button{

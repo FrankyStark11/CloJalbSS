@@ -74,6 +74,9 @@
 							</optgroup>
 							<optgroup label="Commercial">
 							<option value="Galvanisé">Galvanisé</option>
+							<option value="Aluminium">Aluminium</option>
+							<option value="Nylon" >Nylon</option>
+							<option value="Acier" >Acier</option>
 							</optgroup>
 						</select>
 					</td>
@@ -123,6 +126,9 @@
 								<option>12ft 6po</option>
 								<option>14ft 6po</option>
 							</optgroup>
+							<optgroup label="Pouce">
+								<option>6po</option>
+							</optgroup>
 							<optgroup label="Pied">
 								<option>4ft</option>
 								<option>5ft</option>
@@ -166,6 +172,7 @@
 							<optgroup label="Moins d'un pouce">	
 								<option>1/4</option>
 								<option>3/8</option>
+								<option>3/4</option>
 								<option>1/2</option>
 								<option>5/16</option>
 							</optgroup>

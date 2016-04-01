@@ -169,6 +169,21 @@
 			return $result;
 		}
 
+		function GetItemDesc($dataId){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT InvDesc,InvQte,InvPrixContracteur FROM Inventaire WHERE InvNoId = :ID");
+			$sql->bindValue(":ID",$dataId);
+
+			$sql->execute();
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function InsertionItem(){
 			$db = $this->connectDB();
 

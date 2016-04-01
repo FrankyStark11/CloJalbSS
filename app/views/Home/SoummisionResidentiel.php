@@ -166,30 +166,31 @@
 
 		<br>
 		<h3>Spécification</h3>
-		<table class="TabSoumission">
+
+		<table class="TabSoumissionPOTP">
 			<tr>
-				<td>
-					Longueur total
-				</td>
-				<td>
-					<input type="number" min="0" pattern="[0-9]*" title="Longueur total du projet" name="TxtLongeurProjetSR" id="TxtLongeurProjetSR" placeholder="Longueur"></input>
-				</td>
+				<th>POTP</th>
+				<th>4ft</th>
+				<th>5ft</th>
+				<th>6ft</th>
 			</tr>
 			<tr>
-				<td>
-					Nombre de poteau principaux
-				</td>
-				<td>
-					<input type="number" min="0" pattern="[0-9]*" title="Nombre de poteau principal" name="TxtNbPoteauPrincipalSR" id="TxtNbPoteauPrincipalSR" placeholder="Poteau"></input>
-				</td>
+				<td>QTE</td>
+				<td><input type="number" id="QtePotp4ft" min="0" pattern="[0-9]*" onkeyup="AjoutPOTP(4)" onchange="AjoutPOTP(4)" placeholder="QTE"></input></td>
+				<td><input type="number" id="QtePotp5ft" min="0" pattern="[0-9]*" onkeyup="AjoutPOTP(5)" onchange="AjoutPOTP(5)" placeholder="QTE"></input></td>
+				<td><input type="number" id="QtePotp6ft" min="0" pattern="[0-9]*" onkeyup="AjoutPOTP(6)" onchange="AjoutPOTP(6)" placeholder="QTE"></input></td>
 			</tr>
 			<tr>
-				<td>
-					Nombre de Kit principal
-				</td>
-				<td>
-					<input type="number" min="0" pattern="[0-9]*" title="Nombre de kit de départ" name="TxtNbKitSR" id="TxtNbKitSR" placeholder="Kit"></input>
-				</td>
+				<th>KITS</th>
+				<th>4ft</th>
+				<th>5ft</th>
+				<th>6ft</th>
+			</tr>
+			<tr>
+				<td>QTE</td>
+				<td><input type="number" id="QteKit4ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(4)" onchange="AjoutKit(4)" placeholder="QTE"></input></td>
+				<td><input type="number" id="QteKit5ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(5)" onchange="AjoutKit(5)" placeholder="QTE"></input></td>
+				<td><input type="number" id="QteKit6ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(6)" onchange="AjoutKit(6)" placeholder="QTE"></input></td>
 			</tr>
 		</table>
 
