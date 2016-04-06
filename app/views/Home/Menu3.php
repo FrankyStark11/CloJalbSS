@@ -21,8 +21,9 @@
 <body>
 	<div id="Main" class="Main" align="center">
 	<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
-		<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
-		<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
+		<div class="BoxMenu"><a href="/index.php/Home/Accueil"><img title="Consulter l'inventaire" class="BoxMenu" src="../../images/icon/inventaire-icon.png"></a><h2>CONSULTER</h2></div>
+		<div class="BoxMenu"><a href="/index.php/Home/InventaireInsertion"><img title="Ajouter une nouvelle pièce" class="BoxMenu" src="../../images/icon/add_icon.png"></a><h2>NOUVELLE</h2></div>
+		<div class="BoxMenu"><a href="/index.php/Home/Reception"><img title="Recevoir des pièces" class="BoxMenu" src="../../images/icon/reception-icon.png"></a><h2>RECEVOIR</h2></div>
 		<div class="BoxMenu"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>MENU</h2></div>
 	</div>
 </body>

@@ -18,22 +18,7 @@
 </head>
 
 <body>
-	<div class="Header" align="center">
-		<ul class="NavBar">
-			<?php
-		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
-
-			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-			}
-
-
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-			 ?>
-		</ul>	
-	</div>
+	<a class="NavBar" href="/index.php/Home/Accueil"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
 	<div id="Main" class="Main" align="center">
 		<h1>Modification des données</h1>
 		<form method="get" onsubmit="return validateFormModification()" action="/index.php/Admin/Modification" >
@@ -77,6 +62,9 @@
 							<option value="Aluminium">Aluminium</option>
 							<option value="Nylon" >Nylon</option>
 							<option value="Acier" >Acier</option>
+							</optgroup>
+							<optgroup label="Autre">
+							<option value="Beton">Beton</option>
 							</optgroup>
 						</select>
 					</td>
@@ -239,7 +227,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input name="txtPrixCoutant" id="TxtModifPrixCoutant" pattern="[0-9]*" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
+						<input name="txtPrixCoutant" id="TxtModifPrixCoutant" pattern="[0-9]*"  step="any" type="number" placeholder="Prix cost" value=<?php echo $Data[0]->InvPrixCoutant; ?>></input>
 					</td>
 				</tr>
 			</table>

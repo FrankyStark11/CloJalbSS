@@ -17,22 +17,7 @@
 </head>
 
 <body>
-	<div class="Header" align="center">
-		<ul class="NavBar">
-			<?php
-		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
-
-			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
-				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-			}
-
-
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-			 ?>
-		</ul>	
-	</div>
+	<a class="NavBar" href="/index.php/Home/MenuInventaire"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
 	<div id="Main" class="Main" align="center">
 	<h1>Nouvelle pièce</h1>
 		<form id="FormInsertion" method="get" onsubmit="return validateFormInsertion()" action="/index.php/Admin/Insertion">
@@ -73,6 +58,9 @@
 							<option>Aluminium</option>
 							<option>Nylon</option>
 							<option>Acier</option>
+							</optgroup>
+							<optgroup label="Autre">
+							<option>Beton</option>
 							</optgroup>
 						</select>
 					</td>
@@ -225,7 +213,7 @@
 						Prix coutant
 					</td>
 					<td>
-						<input title="Prix coutant" id="TxtInsertionPrixCoutant" name="txtPrixCoutant" pattern="[-+]?[0-9]*\.?[0-9]*" type="text" placeholder="Prix cost"></input>
+						<input title="Prix coutant" id="TxtInsertionPrixCoutant" name="txtPrixCoutant" step="any" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
 					</td>
 				</tr>
 			</table>

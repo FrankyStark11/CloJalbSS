@@ -13,36 +13,38 @@
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>
 <body>
-	<div class="Header" align="center">
-		<ul class="NavBar">
-			<?php
-		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/Accueil"><img class="ConfigImage" src="/images/icon/inventaire-icon.png"></a></li>';}
-
-			if(isset($_SESSION["TypeCompte"]) && ($_SESSION["TypeCompte"] == 1 || $_SESSION["TypeCompte"] == 0)){
-				echo '<li class="NavBar"><a class="NavBar" href="/index.php/Home/InventaireInsertion"><img class="ConfigImage" src="/images/icon/add_icon.png"></a></li>';
-				echo '<li class="NavBar"><a class="Selected" href="/index.php/Home/Reception"><img class="ConfigImage" src="/images/icon/reception-icon.png"></a></li>';
-			}
-
-
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-			 ?>
-		</ul>	
-	</div>
+	<a class="NavBar" href="/index.php/Home/MenuInventaire"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
 	<div id="Main" class="Main" align="center">
 		<div class="BoxLogin" align="center">
 			<div  class="AddReceptionItem">
 				<table class="TabRepceptionHead">
 					<tr>
 						<td>
-							<input id="IdItemReception" onkeyup="showDescription(this.value)" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
+							Identification de la piece
 						</td>
 						<td>
-						<input id="DescriptionItemReception"  class="ChampsReceptionAdd" disabled value="Description du produit"></input>
+							<input id="IdItemReception" onkeyup="showDescription(this.value)" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Description de la piece
+						</td>
+						<td>
+						<label id="DescriptionItemReception"  value="Description du produit">Aucun élément</label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Quantité
 						</td>
 						<td>
 							<input id="QteItemReception" disabled type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
 						</td>
+					</tr>
+				</table>
+				<table class="TabRepceptionHead">
+					<tr>
 						<td>
 							<button id="BtnAjouterReception" disabled class="BtnAjouter" onclick="AddReceptionElement()"> </button>
 						</td>

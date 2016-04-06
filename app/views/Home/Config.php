@@ -17,13 +17,8 @@
 </head>
 
 <body>
-	<div class="Header" align="center">
-		<ul class="NavBar">
-			<?php
-				if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-			 ?>
-		</ul>	
-	</div>
+	<a class="NavBar" href="/index.php/Admin/RetourMenu"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
+	
 	<div id="Main" class="Main" align="center">
 		<div class="ConfigBox">
 			<h2>Gestion compte</h2>
@@ -35,6 +30,7 @@
 					<?php 
 						if($_SESSION["TypeCompte"] == 0){
 				    	echo '<th> Mot de passe </th>';
+				    	echo '<th> Action </th>';
 						}
 						
 					?>
@@ -50,6 +46,10 @@
 				    	echo "<form method='post' action='/index.php/Admin/ModifMdp'>";
 				    		echo "<input type='hidden' name='TxtUser' value='".$value["UtilisateurUsername"]."'>";
 				    		echo '<td><input type="text" name="TxtMdp" placeholder="Nouveau" align="center"></input><button type="submit" >Changer</button></td>';
+				    	echo "</form>";
+				    	echo "<form method='post' action='/index.php/Admin/ModifMdp'>";
+				    		echo "<input type='hidden' name='TxtUser' value='".$value["UtilisateurUsername"]."'>";
+				    		echo '<td><button type="submit" >Modifier</button><button type="submit" style="background-color:red;color:white;" >Supprimer</button></td>';
 				    	echo "</form>";
 					}
 
@@ -93,7 +93,7 @@
 							<select name="SelectTypeAjoutUtilisateur">
 								<option disabled >Choix</option>
 								<option value="1">Administrateur</option>
-								<option value="0">Visiteur</option>
+								<option value="2">Visiteur</option>
 							</select>
 						</td>
 					</tr>

@@ -31,6 +31,11 @@
 			parent::view('Home/Menu2');
 		}
 
+		public function MenuInventaire(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu3');
+		}
+
 		public function SR(){
 			//offre le choix du type de soumision
 			parent::view('Home/SoummisionResidentiel');

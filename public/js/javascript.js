@@ -7,6 +7,13 @@ function HideDivDesc(idDiv){
     $(DivSec).slideToggle("slow");
 }
 
+function HideDivSR(idDiv){
+
+  var DivSec = "#" + idDiv;
+
+    $(DivSec).slideToggle("slow");
+}
+
 //Permet dafficher et de cacher les option de recherche
 $(document).ready(function(){
     $("#OptionAvance").click(function(){
@@ -378,15 +385,15 @@ function showDescription(str){
           //vide toutes les valeurs child du main
           if(Arr.length == 1){
             if(Arr[0]["InvNoId"] == TxtIdInfo.value.toUpperCase()){
-              TxtDescriptionInfo.value = Arr[0]["InvDesc"];
+              TxtDescriptionInfo.replaceChild(document.createTextNode(Arr[0]["InvDesc"]),TxtDescriptionInfo.childNodes[0]) ;
               TxtQteInfo.disabled = false;
               BtnAjouterInfo.disabled = false;
             }
             else{
               if(TxtIdInfo.value == ""){
-                TxtDescriptionInfo.value = "Description du produit";
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
               }else{
-                TxtDescriptionInfo.value = "Élément non trouvé";
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
               }
               
               TxtQteInfo.disabled = true;
@@ -395,9 +402,9 @@ function showDescription(str){
           }
           else{
             if(TxtIdInfo.value == ""){
-                TxtDescriptionInfo.value = "Description du produit";
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
               }else{
-                TxtDescriptionInfo.value = "Élément non trouvé";
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
               }
             TxtQteInfo.disabled = true;
             BtnAjouterInfo.disabled = true;
@@ -422,7 +429,7 @@ function AjoutItemPossible(){
 function AddReceptionElement(){
 
   var NoItem = (document.getElementById("IdItemReception").value).toUpperCase();
-  var DescItem = document.getElementById("DescriptionItemReception").value;
+  var DescItem = document.getElementById("DescriptionItemReception").textContent;
   var QteItem = document.getElementById("QteItemReception").value; 
   var IDElement = makeid();
 
@@ -494,45 +501,40 @@ function AddInvElement(itemArray, TypeAffichage){
       var tr_0 = document.createElement('tr');
 
          var td_0 = document.createElement('td');
-            td_0.appendChild( document.createTextNode("No : " + NoItem) );
+            td_0.appendChild( document.createTextNode( NoItem) );
          tr_0.appendChild( td_0 );
 
+         var td_3 = document.createElement('td');
+            td_3.appendChild( document.createTextNode(DescItem ));
+         tr_0.appendChild( td_3 );
 
          var td_2 = document.createElement('td');
             td_2.appendChild( document.createTextNode("Qte : " + QteItem) );
          tr_0.appendChild( td_2 );
 
-
-         var td_3 = document.createElement('td');
-            td_3.appendChild( document.createTextNode(" Prix Cost : " + PrixCostItem + "$" ) );
-         tr_0.appendChild( td_3 );
-
-
          var td_4 = document.createElement('td');
-            td_4.appendChild( document.createTextNode(" Prix Client : " + PrixClientItem + "$" ) );
+            td_4.appendChild( document.createTextNode(" Prix Client : " + (parseFloat(PrixClientItem).toFixed(2)).toString() + "$" ) );
          tr_0.appendChild( td_4 );
-
-
-         var td_5 = document.createElement('td');
-            td_5.appendChild( document.createTextNode(" Prix Cont : " + PrixContItem + "$" ) );
-         tr_0.appendChild( td_5 );
 
          var td_6 = document.createElement('td');
          //affiche le boutton de modification seulement si le mode administrateur est activé
         if(AdminMode == 1 || AdminMode == 0){
             var btnEdit1 = document.createElement('button');
                 btnEdit1.className = "BtnEdit";
+                btnEdit1.title = "Modifier la pièce";
                 btnEdit1.addEventListener('click', function(){ Modification(NoItem) }, false);
             td_6.appendChild( btnEdit1 );
 
             var btnEdit3 = document.createElement('button');
                 btnEdit3.className = "BtnLog";
+                btnEdit3.title = "Log de cette pièce";
                 btnEdit3.addEventListener('click', function(){ AfficherLog(NoItem) }, false);
             td_6.appendChild( btnEdit3 );
           }
 
             var btnEdit2 = document.createElement('button');
                 btnEdit2.className = "BtnDetail";
+                btnEdit2.title = "Afficher/Masquer les détails";
                 btnEdit2.addEventListener('click', function(){ HideDivDesc(IdDiv) }, false);
             td_6.appendChild( btnEdit2 );
          tr_0.appendChild( td_6 );
@@ -620,14 +622,26 @@ function AddInvElement(itemArray, TypeAffichage){
        	var tr_6 = document.createElement('tr');   
 
             var td_16 = document.createElement('td');
-            td_16.appendChild( document.createTextNode("Description :" ) );
+            td_16.appendChild( document.createTextNode("Prix cost : ")) ;
          tr_6.appendChild( td_16 );
 
          var td_17 = document.createElement('td');
-            td_17.appendChild( document.createTextNode( DescItem ) );
+            td_17.appendChild( document.createTextNode( (parseFloat(PrixCostItem).toFixed(2)).toString() + "$" ) );
          tr_6.appendChild( td_17 );
 
-       table_1.appendChild( tr_6 );  
+       table_1.appendChild( tr_6 ); 
+
+       var tr_7 = document.createElement('tr');   
+
+            var td_18 = document.createElement('td');
+            td_18.appendChild( document.createTextNode("Prix cont : ")) ;
+         tr_7.appendChild( td_18 );
+
+         var td_19 = document.createElement('td');
+            td_19.appendChild( document.createTextNode( (parseFloat(PrixContItem).toFixed(2)).toString() + "$" ) );
+         tr_7.appendChild( td_19 );
+
+       table_1.appendChild( tr_7 );
 
       div_DescPlus001.appendChild( table_1 );
 
@@ -688,84 +702,90 @@ function FuncExcel(){
   //transformation de la commande en JSON et l'envoie
   var data = JSON.stringify(ArrayFinal);
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
-  
 }
 
 function RetirerRowSection(id){
-  var element = document.getElementById(id);
-  element.parentNode.removeChild(element);
+
+  var ArrayPrincipal = GetArrayHiddenSection();
+  for(i=0;i<ArrayPrincipal.length;i++){
+      if( ArrayPrincipal[i][3] == id ){
+       RetirerSectionCloture(parseInt(ArrayPrincipal[i][2]),parseInt(ArrayPrincipal[i][0]));
+       break; }
+    }
+
+  for(i=0;i<ArrayPrincipal.length;i++){
+      if( ArrayPrincipal[i][3] == id ){
+       ArrayPrincipal.splice(i, 1);
+       break; }
+    }
+
+    SetArrayHiddenSection(ArrayPrincipal);
+    AfficherTab();
+}
+
+function SetArrayHidden(arrayElement){
+  var ele = document.getElementById("HiddenArrayPiece");
+  ele.value = JSON.stringify(arrayElement);
+}
+
+function GetArrayHidden(){
+  var ele = document.getElementById("HiddenArrayPiece");
+  return JSON.parse(ele.value);
+}
+
+function SetArrayHiddenSection(arrayElement){
+  var ele = document.getElementById("HiddenArraySection");
+  ele.value = JSON.stringify(arrayElement);
+}
+
+function GetArrayHiddenSection(){
+  var ele = document.getElementById("HiddenArraySection");
+  return JSON.parse(ele.value);
+}
+
+function AjouterBeton(qte){
+  var noTBET = "TBET-00000-BB";
+  if(!PiecePresente(noTBET)){AjouterPieceRow(noTBET,qte);}
+    else{UpdatePieceRow(noTBET,qte);}
 }
 
 function AjouterSectionRow(){
   var ID = makeid();
-  var Longeur = document.getElementById("TxtLongueurSectionSR").value;
+  var Longueur = document.getElementById("TxtLongueurSectionSR").value;
   var Hauteur = document.getElementById("TxtHauteurSectionSR").value;
   var Type = document.getElementById("TxtTypeSectionSR").value;
 
-  var MainTab = document.getElementById("TabSections");
+  //ajoute la section
+  var ArrayPrincipal = GetArrayHiddenSection();
+  arraytemp = [Longueur,Type,Hauteur,ID];
+  ArrayPrincipal.push(arraytemp);
+  SetArrayHiddenSection(ArrayPrincipal);
 
-  var tr_0 = document.createElement('tr');
-      tr_0.id = ID;
-
-   var td_0 = document.createElement('td');
-      td_0.appendChild( document.createTextNode(Longeur + "ft") );
-   tr_0.appendChild( td_0 );
-
-
-   var td_1 = document.createElement('td');
-      td_1.appendChild( document.createTextNode(Type) );
-   tr_0.appendChild( td_1 );
-
-
-   var td_2 = document.createElement('td');
-      td_2.appendChild( document.createTextNode(Hauteur+"ft") );
-   tr_0.appendChild( td_2 );
-
-
-   var td_3 = document.createElement('td');
-      td_3.appendChild( document.createTextNode(" prix ") );
-   tr_0.appendChild( td_3 );
-
-
-   var td_4 = document.createElement('td');
-
-      var button_0 = document.createElement('button');
-         button_0.appendChild( document.createTextNode("Retirer") );
-         button_0.addEventListener('click', function(){ RetirerRowSection(ID);}, false);
-      td_4.appendChild( button_0 );
-
-   tr_0.appendChild( td_4 );
-
-MainTab.appendChild( tr_0 );
-
+  if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur)}
 }
 
 //cette methode est appelé pour modifier la quantité d'une piece X recus en param
 function UpdatePieceRow(nom,NouvelleQte){
+
+  var ArrayPrincipal = GetArrayHidden();
   tab = document.getElementById("TabPieces");
   var piecePresente = false;
-  //prend tous les TD du tableau de piece et cherche la bonne piece
-  tdElements = tab.getElementsByTagName('td');
-  for(i = 0; i < tdElements.length; i++){
-    if(tdElements[i].innerHTML == nom){
-      tdElements[i+1].innerHTML = NouvelleQte;
 
-      //compare les 2 quantitées
-      if(parseInt(tdElements[i+1].innerHTML) > parseInt(tdElements[i+2].innerHTML)){ 
-        document.getElementById(nom+"td").style.color = "red";
-      }else{
-        document.getElementById(nom+"td").style.color = "black";
-      }
-
-      //si la piece est a zero on retire la ligne au complet
-      if (NouvelleQte == "0" || NouvelleQte == "" || isNaN(NouvelleQte)) {
-        //trouve lelement par son ID qui est le meme que le numero de la piece qui est unique
-        var element = document.getElementById(nom);
-        element.parentNode.removeChild(element);
-      }
-      break;
+  //si la piece est a zero on retire la ligne au complet
+  if (parseInt(NouvelleQte) < 1 || NouvelleQte == "" || isNaN(NouvelleQte)) {
+    for(i=0;i<ArrayPrincipal.length;i++){
+      if( ArrayPrincipal[i][0] == nom ){ ArrayPrincipal.splice(i, 1); break; }
     }
+    SetArrayHidden(ArrayPrincipal);
   }
+  else{
+    for(i=0;i<ArrayPrincipal.length;i++){
+      if( ArrayPrincipal[i][0] == nom ){ ArrayPrincipal[i][1] = NouvelleQte; break; }
+    }
+    SetArrayHidden(ArrayPrincipal);
+  }
+
+  AfficherTab();
 }
 
 function AjouterPieceRow(nom,qte){
@@ -775,86 +795,559 @@ function AjouterPieceRow(nom,qte){
   var Prix;
   var QteInv;
 
+  document.getElementById("QtePotp4ft").disabled = true;
+  document.getElementById("QtePotp5ft").disabled = true;
+  document.getElementById("QtePotp6ft").disabled = true;
+  document.getElementById("QteKit4ft").disabled = true;
+  document.getElementById("QteKit5ft").disabled = true;
+  document.getElementById("QteKit6ft").disabled = true;
+  
   //va chercher la description, le prix et la quantité de la piece par AJAX
   $.post("/index.php/Home/GetItemDesc",
           {dataID: nom},
         function(data){
+
           var Arr = JSON.parse(data);
           Description = Arr["InvDesc"];
           Prix = Arr["InvPrixContracteur"];
           QteInv = Arr["InvQte"];
-        
 
-  var MainTab = document.getElementById("TabPieces");
+          var ArrayPrincipal = GetArrayHidden();
+          arraytemp = [nom,qte,QteInv,Description,Prix];
+          ArrayPrincipal.push(arraytemp);
 
-  var tr_0 = document.createElement('tr');
-      tr_0.id = nom;
+          SetArrayHidden(ArrayPrincipal);
+          AfficherTab();
 
-   var td_0 = document.createElement('td');
-      td_0.appendChild( document.createTextNode(nom) );
-      td_0.id = nom+"td";
-   tr_0.appendChild( td_0 );
+          document.getElementById("QtePotp4ft").disabled = false;
+          document.getElementById("QtePotp5ft").disabled = false;
+          document.getElementById("QtePotp6ft").disabled = false;
+          document.getElementById("QteKit4ft").disabled = false;
+          document.getElementById("QteKit5ft").disabled = false;
+          document.getElementById("QteKit6ft").disabled = false;
 
-
-   var td_1 = document.createElement('td');
-      td_1.appendChild( document.createTextNode(qte) );
-   tr_0.appendChild( td_1 );
-
-
-   var td_2 = document.createElement('td');
-      td_2.appendChild( document.createTextNode(QteInv) );
-   tr_0.appendChild( td_2 );
-
-
-   var td_3 = document.createElement('td');
-      td_3.appendChild( document.createTextNode(Description) );
-   tr_0.appendChild( td_3 );
-
-
-   var td_4 = document.createElement('td');
-      td_4.appendChild( document.createTextNode(Prix + "$") );
-   tr_0.appendChild( td_4 );
-
-  MainTab.appendChild( tr_0 );
-
-  //compare les 2 quantitées
-  if(parseInt(qte) > parseInt(QteInv)){td_0.style.color = "red";}else{td_0.style.color = "black";}
-  });
+          });
 }
 
 function PiecePresente(Nom){
-tab = document.getElementById("TabPieces");
+  var ArrayPrincipal = GetArrayHidden();
   var piecePresente = false;
-  trElements = tab.getElementsByTagName('td');
-  for(i = 0; i < trElements.length; i++){
-    if(trElements[i].innerHTML == Nom){
-      piecePresente = true;
-    }
+
+  for(i=0;i<ArrayPrincipal.length;i++){
+    if( ArrayPrincipal[i][0] == Nom ){ piecePresente = true; break; }
   }
   return piecePresente;
 }
 
+function GetPieceQte(Nom){
+  var ArrayPrincipal = GetArrayHidden();
+
+  for(i=0;i<ArrayPrincipal.length;i++){
+    if( ArrayPrincipal[i][0] == Nom ){ return parseInt(ArrayPrincipal[i][1]); }
+  }
+}
+
+function CalculPrix(){
+
+  var champsTotalMaterial = document.getElementById("TotalMaterielPrix");
+  var champsTotalTemps = document.getElementById("TotalTempsPrix");
+  var champsSousTotal = document.getElementById("SousTotal");
+  var champsTPS = document.getElementById("TPS");
+  var champsTVQ = document.getElementById("TVQ");
+  var champsGrandTotal = document.getElementById("GrandTotal");
+
+  var additionMaterial = 0.00;
+  var additionTemps = 0.00;
+  var soustotal = 0.00;
+  var TPS = 0.00;
+  var TVQ = 0.00;
+  var GrandTotal = 0.00;
+
+  ArrayPieces = GetArrayHidden();
+  //ArraySection = GetArrayHidden();
+  for(i=0;i<ArrayPieces.length;i++){
+    additionMaterial += parseFloat(ArrayPieces[i][4]) * parseFloat(ArrayPieces[i][1]);
+  }
+
+  TotalMaterielPrix.replaceChild(document.createTextNode((additionMaterial.toFixed(2)).toString() + "$"),TotalMaterielPrix.childNodes[0]);
+  champsTotalTemps.replaceChild(document.createTextNode((additionTemps.toFixed(2)).toString()+ "$"),champsTotalTemps.childNodes[0]);
+
+  soustotal = additionTemps + additionMaterial;
+  champsSousTotal.replaceChild(document.createTextNode((soustotal.toFixed(2)).toString()+ "$"),champsSousTotal.childNodes[0]);
+
+  TPS = soustotal * 0.05;
+  TVQ = soustotal * 0.0975;
+
+  champsTPS.replaceChild(document.createTextNode((TPS.toFixed(2)).toString()+ "$"),champsTPS.childNodes[0]);
+  champsTVQ.replaceChild(document.createTextNode((TVQ.toFixed(2)).toString()+ "$"),champsTVQ.childNodes[0]);
+
+  GrandTotal = soustotal + TPS + TVQ ;
+  champsGrandTotal.replaceChild(document.createTextNode((GrandTotal.toFixed(2)).toString()+ "$"),champsGrandTotal.childNodes[0]);
+}
+
+function AfficherTab(){
+
+  //vider le tableau actuel avant de le refaire
+  var table = document.getElementById("TabPieces");
+  while(table.rows.length > 1) {
+    table.deleteRow(1);
+  }
+
+  //vider le tableau actuel avant de le refaire
+  var table2 = document.getElementById("TabSections");
+  while(table2.rows.length > 1) {
+    table2.deleteRow(1);
+  }
+
+  //Ajout des pieces
+  var ArrayPrincipal = GetArrayHidden();
+  ArrayPrincipal.sort(function(a,b){ return a[0].toString() > b[0].toString(); });
+
+  //ajout des pieces
+  for(i=0;i<ArrayPrincipal.length;i++){
+
+    var nom = ArrayPrincipal[i][0];
+    var qte = ArrayPrincipal[i][1];
+    var Description = ArrayPrincipal[i][3];
+    var Prix = ArrayPrincipal[i][4];
+    var QteInv = ArrayPrincipal[i][2];
+
+    var MainTab = document.getElementById("TabPieces");
+
+    var tr_0 = document.createElement('tr');
+        tr_0.id = nom;
+
+     var td_0 = document.createElement('td');
+        td_0.appendChild( document.createTextNode(nom) );
+        td_0.id = nom+"td";
+     tr_0.appendChild( td_0 );
+
+
+     var td_1 = document.createElement('td');
+        td_1.appendChild( document.createTextNode(qte) );
+     tr_0.appendChild( td_1 );
+
+
+     var td_2 = document.createElement('td');
+        td_2.appendChild( document.createTextNode(QteInv) );
+     tr_0.appendChild( td_2 );
+
+
+     var td_3 = document.createElement('td');
+        td_3.appendChild( document.createTextNode(Description) );
+     tr_0.appendChild( td_3 );
+
+
+     var td_4 = document.createElement('td');
+        td_4.appendChild( document.createTextNode(((parseFloat(Prix) * parseFloat(qte)).toFixed(2)).toString() + "$") );
+     tr_0.appendChild( td_4 );
+
+    MainTab.appendChild( tr_0 );
+
+    //compare les 2 quantitées
+    if(parseInt(qte) > parseInt(QteInv)){td_0.style.color = "red";}else{td_0.style.color = "black";}
+  }
+
+  //Ajout des sections
+  var ArrayPrincipal = GetArrayHiddenSection();
+  for(i=0;i<ArrayPrincipal.length;i++){
+
+    var Longueur = ArrayPrincipal[i][0];
+    var Type = ArrayPrincipal[i][1];
+    var Hauteur = ArrayPrincipal[i][2];
+    var ID = ArrayPrincipal[i][3];
+
+    var MainTab = document.getElementById("TabSections");
+
+    var tr_0 = document.createElement('tr');
+        tr_0.id = ID;
+
+     var td_0 = document.createElement('td');
+        td_0.appendChild( document.createTextNode(Longueur + "ft") );
+     tr_0.appendChild( td_0 );
+
+
+     var td_1 = document.createElement('td');
+        td_1.appendChild( document.createTextNode(Type) );
+     tr_0.appendChild( td_1 );
+
+
+     var td_2 = document.createElement('td');
+        td_2.appendChild( document.createTextNode(Hauteur+"ft") );
+     tr_0.appendChild( td_2 );
+
+
+     var td_3 = document.createElement('td');
+        td_3.appendChild( document.createTextNode(" prix ") );
+     tr_0.appendChild( td_3 );
+
+
+     var td_4 = document.createElement('td');
+
+        var button_0 = document.createElement('button');
+          button_0.value = ID;
+           button_0.appendChild( document.createTextNode("Retirer") );
+           button_0.addEventListener('click', function(){ RetirerRowSection(this.value);}, false);
+        td_4.appendChild( button_0 );
+
+     tr_0.appendChild( td_4 );
+
+    MainTab.appendChild( tr_0 );
+  }
+
+  CalculPrix();
+}
+
+function RetirerSectionCloture(Hauteur,Longueur){
+
+  var CL = document.getElementById("SelectCouleurSR").value;
+  var lattes = document.getElementById("checkLatteSR").checked;
+  var arrayPrincipal = GetArrayHiddenSection();
+
+  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
+
+  var noPOTI = "POTI-05178-" + CL;
+  if(Hauteur == "6"){ noPOTI = "POTP-06238-" + CL; }
+
+  var noCAPI = "CAPI-00178-" + CL;
+  if(Hauteur == "6"){ noCAPI = "CAPI-00238-" + CL; }
+
+  var noFILB = "FILB-00009-" + CL;
+  var noLIEN = "LIEN-00612-" + CL;
+  var noTRAV = "TRAV-15810-" + CL;
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
+
+  var qteMAIL = 0;
+
+  var qtePOTI = 0;
+
+  var qteCAPI = 0;
+
+  var qteFILB = 0;
+  var qteLIEN = 0;
+  var qteTRAV = 0;
+
+  var qteLATT = 0;
+
+  //calcul des pieces globals
+  qteFILB += parseInt(Longueur);
+  qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+
+  //calcul du nombre de poteau inter
+  qtePOTI += parseInt(Math.floor( Longueur/7.5 ));
+  qteCAPI = parseInt(qtePOTI);
+
+  //calcul du nombre de lien par section selon hauteur
+  qteMAIL += parseInt(Longueur);
+  qteLATT += parseInt(Math.ceil( Longueur/10 ));
+
+  if(Hauteur == "4"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 3));
+  }
+
+  if(Hauteur == "5"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 4));
+  }
+
+  if(Hauteur == "6"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 5));
+  }
+
+  if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
+  else{
+    qteMAIL = GetPieceQte(noMAIL) - qteMAIL;
+    UpdatePieceRow(noMAIL,qteMAIL);
+  }
+
+  if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI);}
+  else{
+    qtePOTI = GetPieceQte(noPOTI) - qtePOTI ;
+    UpdatePieceRow(noPOTI,qtePOTI);
+  }
+
+  if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI);}
+  else{
+    qteCAPI =  GetPieceQte(noCAPI) - qteCAPI;
+    UpdatePieceRow(noCAPI,qteCAPI);
+  }
+
+  if(lattes){
+    if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
+    else{
+      qteLATT = GetPieceQte(noLATT) - qteLATT ;
+      UpdatePieceRow(noLATT,qteLATT);
+    }
+  }
+
+  if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
+  else{
+    qteFILB = GetPieceQte(noFILB) - qteFILB ;
+    UpdatePieceRow(noFILB,qteFILB);
+  }
+
+  if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
+  else{
+    qteLIEN =GetPieceQte(noLIEN) - qteLIEN ; 
+    UpdatePieceRow(noLIEN,qteLIEN);
+  }
+
+  if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
+  else{
+    qteTRAV =  GetPieceQte(noTRAV) - qteTRAV; 
+    UpdatePieceRow(noTRAV,qteTRAV);
+  }
+}
+
+function AjoutSectionCloture(Hauteur,Longueur){
+
+  var CL = document.getElementById("SelectCouleurSR").value;
+  var lattes = document.getElementById("checkLatteSR").checked;
+  var arrayPrincipal = GetArrayHiddenSection();
+
+  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
+
+  var noPOTI = "POTI-05178-" + CL;
+  if(Hauteur == "6"){ noPOTI = "POTP-06238-" + CL; }
+
+  var noCAPI = "CAPI-00178-" + CL;
+  if(Hauteur == "6"){ noCAPI = "CAPI-00238-" + CL; }
+
+  var noFILB = "FILB-00009-" + CL;
+  var noLIEN = "LIEN-00612-" + CL;
+  var noTRAV = "TRAV-15810-" + CL;
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
+
+  var qteMAIL = 0;
+
+  var qtePOTI = 0;
+
+  var qteCAPI = 0;
+
+  var qteFILB = 0;
+  var qteLIEN = 0;
+  var qteTRAV = 0;
+
+  var qteLATT = 0;
+
+  //calcul des pieces globals
+  qteFILB += parseInt(Longueur);
+  qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+
+  //calcul du nombre de poteau inter
+  qtePOTI += parseInt(Math.floor( Longueur/7.5 ));
+  qteCAPI = parseInt(qtePOTI);
+
+  //calcul du nombre de lien par section selon hauteur
+  qteMAIL += parseInt(Longueur);
+  qteLATT += parseInt(Math.ceil( Longueur/10 ));
+
+  if(Hauteur == "4"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 3));
+  }
+
+  if(Hauteur == "5"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 4));
+  }
+
+  if(Hauteur == "6"){
+    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 5));
+  }
+
+  if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
+  else{
+    qteMAIL = qteMAIL + GetPieceQte(noMAIL);
+    UpdatePieceRow(noMAIL,qteMAIL);
+  }
+
+  if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI);}
+  else{
+    qtePOTI = qtePOTI + GetPieceQte(noPOTI);
+    UpdatePieceRow(noPOTI,qtePOTI);
+  }
+
+  if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI);}
+  else{
+    qteCAPI = qteCAPI + GetPieceQte(noCAPI);
+    UpdatePieceRow(noCAPI,qteCAPI);
+  }
+
+  if(lattes){
+    if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
+    else{
+      qteLATT = qteLATT + GetPieceQte(noLATT);
+      UpdatePieceRow(noLATT,qteLATT);
+    }
+  }
+
+  if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
+  else{
+    qteFILB = qteFILB + GetPieceQte(noFILB);
+    UpdatePieceRow(noFILB,qteFILB);
+  }
+
+  if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
+  else{
+    qteLIEN = qteLIEN + GetPieceQte(noLIEN); 
+    UpdatePieceRow(noLIEN,qteLIEN);
+  }
+
+  if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
+  else{
+    qteTRAV = qteTRAV + GetPieceQte(noTRAV); 
+    UpdatePieceRow(noTRAV,qteTRAV);
+  }
+}
+
+function AjoutSectionPorte(Hauteur,Longueur,typePorte){
+
+  var CL = document.getElementById("SelectCouleurSR").value;
+  var lattes = document.getElementById("checkLatteSR").checked;
+  var arrayPrincipal = GetArrayHiddenSection();
+
+  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
+  var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL;
+  var noBATE = "BATE-0" + Hauteur + "058-" + CL;
+
+  var noBRBA = "BRBA-00114-" + CL;
+  var noLIEN = "LIEN-00612-" + CL;
+  var noTRAV = "TRAV-15810-" + CL;
+  var noKITS = "KITS-00238-" + CL;
+  var noKITD = "KITD-00238-" + CL;
+
+  var qteMAIL4 = 0;
+  var qteMAIL5 = 0;
+  var qteMAIL6 = 0;
+
+  var qteMAIL4 = 0;
+  var qteMAIL5 = 0;
+  var qteMAIL6 = 0;
+
+  var qteMAIL4 = 0;
+  var qteMAIL5 = 0;
+  var qteMAIL6 = 0;
+
+  var qteMAIL4 = 0;
+  var qteMAIL5 = 0;
+  var qteMAIL6 = 0;
+
+
+  for(i=0;i<arrayPrincipal.length;i++){
+
+  //calcul des pieces globals
+      Longueur = arrayPrincipal[i][0];
+      qteFILB += parseInt(Longueur);
+      qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+
+  //calcul du nombre de poteau inter
+      if(arrayPrincipal[i][2] == "4" || arrayPrincipal[i][2] == "5"){
+        qtePOTI4 += parseInt(Math.floor( Longueur/7.5 ));
+        qteCAPI4 = parseInt(qtePOTI4);
+      }
+
+      if(arrayPrincipal[i][2] == "6"){
+        qtePOTI6 += parseInt(Math.floor( Longueur/7.5 ));
+        qteCAPI6 = parseInt(qtePOTI6);
+      }
+
+  //calcul du nombre de lien par section selon hauteur
+      if(arrayPrincipal[i][2] == "4"){
+        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI4 * 3));
+        qteMAIL4 += parseInt(Longueur);
+        qteLATT4 += parseInt(Math.ceil( Longueur/10 ));
+      }
+
+      if(arrayPrincipal[i][2] == "5"){
+        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI4 * 4));
+        qteMAIL5 += parseInt(Longueur);
+        qteLATT5 += parseInt(Math.ceil( Longueur/10 ));
+      }
+
+      if(arrayPrincipal[i][2] == "6"){
+        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI6 * 5));
+        qteMAIL6 += parseInt(Longueur);
+        qteLATT6 += parseInt(Math.ceil( Longueur/10 ));
+      }
+
+    }
+
+    if(Hauteur == "4"){
+      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL4);}
+    else{UpdatePieceRow(noMAIL,qteMAIL4);}
+      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI4);}
+    else{UpdatePieceRow(noPOTI,qtePOTI4);}
+      if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI4);}
+    else{UpdatePieceRow(noCAPI,qteCAPI4);}
+      if(lattes){
+        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT4);}
+        else{UpdatePieceRow(noLATT,qteLATT4);}
+      }
+    }
+
+    if(Hauteur == "5"){
+      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL5);}
+    else{UpdatePieceRow(noMAIL,qteMAIL5);}
+      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI4);}
+    else{UpdatePieceRow(noPOTI,qtePOTI4);}
+      if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI4);}
+    else{UpdatePieceRow(noCAPI,qteCAPI4);}
+      if(lattes){
+        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT5);}
+        else{UpdatePieceRow(noLATT,qteLATT5);}
+      }
+    }
+
+    if(Hauteur == "6"){
+      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL6);}
+    else{UpdatePieceRow(noMAIL,qteMAIL6);}
+      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI6);}
+    else{UpdatePieceRow(noPOTI,qtePOTI6);}
+    if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI6);}
+    else{UpdatePieceRow(noCAPI,qteCAPI6);}
+      if(lattes){
+        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT6);}
+        else{UpdatePieceRow(noLATT,qteLATT6);}
+      }
+    }
+
+    if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
+    else{UpdatePieceRow(noFILB,qteFILB);}
+
+    if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
+    else{UpdatePieceRow(noLIEN,qteLIEN);}
+
+    if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
+    else{UpdatePieceRow(noTRAV,qteTRAV);}
+}
+
 function AjoutPOTP(Hauteur){
-  var CL = "NO";
+  var CL = document.getElementById("SelectCouleurSR").value;
   var noPiece = "POTP-0" + Hauteur + "238-" + CL;
+  var Capuchon = "CAPP-00238-" + CL;
+
   var qtePiece = document.getElementById("QtePotp"+Hauteur+"ft").value;
+  var qteCAPP = 0;
+
+  if(document.getElementById("QtePotp4ft").value != "") { qteCAPP += parseInt(document.getElementById("QtePotp4ft").value);}
+  if(document.getElementById("QtePotp5ft").value != "") { qteCAPP += parseInt(document.getElementById("QtePotp5ft").value);}
+  if(document.getElementById("QtePotp6ft").value != "") { qteCAPP += parseInt(document.getElementById("QtePotp6ft").value);}
   
   if(!PiecePresente(noPiece) && qtePiece != ""){AjouterPieceRow(noPiece,qtePiece);}
   else{UpdatePieceRow(noPiece,qtePiece);}
 
+  if(!PiecePresente(Capuchon)){AjouterPieceRow(Capuchon,qteCAPP);}
+  else{UpdatePieceRow(Capuchon,qteCAPP);}
 }
 
 function AjoutKit(Hauteur){
 
-  var CL = "NO";
+  var CL = document.getElementById("SelectCouleurSR").value;
 
   //enregistre la valeur des 3 champs de kit
   var kit1 = parseInt(document.getElementById("QteKit4ft").value);
   var Kit2 = parseInt(document.getElementById("QteKit5ft").value);
   var Kit3 = parseInt(document.getElementById("QteKit6ft").value);
 
-  var qtePiece = parseInt(document.getElementById("QteKit"+Hauteur+"ft").value);
-  if(isNaN(qtePiece)){qtePiece = 0;}
   var EMTR;
 
   var BRTR = "BRTR-00238-" + CL;
@@ -875,7 +1368,7 @@ function AjoutKit(Hauteur){
     QteBRTR += 1*kit1;
     QteBOEC += 4*kit1;
     QteBRTE += 3*kit1;
-    if(Hauteur == "4") {QteBATE += 1*kit1;}
+    if(Hauteur == "4") {QteBATE = 1*kit1;}
 
   }
 
@@ -885,7 +1378,7 @@ function AjoutKit(Hauteur){
     QteBRTR += 1*Kit2;
     QteBOEC += 6*Kit2;
     QteBRTE += 4*Kit2;
-   if(Hauteur == "5") { QteBATE += 1*Kit2;}
+   if(Hauteur == "5") { QteBATE = 1*Kit2;}
   }
 
   //pour un 6 pied
@@ -894,33 +1387,44 @@ function AjoutKit(Hauteur){
     QteBRTR += 1*Kit3;
     QteBOEC += 8*Kit3;
     QteBRTE += 5*Kit3;
-    if(Hauteur == "6") {QteBATE += 1*Kit3;}
+    if(Hauteur == "6") {QteBATE = 1*Kit3;}
 
   }
 
-  //insert ou modifie les pieces 
-  if( (kit1 > 0 || !isNaN(kit1)) || (kit2 > 0 || !isNaN(kit2)) || (kit3 > 0 || !isNaN(kit3)) ){
 
-    if(!PiecePresente(BRTR) &&  QteBRTR > 0 ){AjouterPieceRow(BRTR,QteBRTR);}
-        else{
-            UpdatePieceRow(BRTR,QteBRTR);
-        }
-
-    if(!PiecePresente(BOEC) && QteBOEC > 0 ){AjouterPieceRow(BOEC,QteBOEC);}
+  if(!PiecePresente(BRTR) &&  QteBRTR > 0 ){AjouterPieceRow(BRTR,QteBRTR);}
       else{
-        UpdatePieceRow(BOEC,QteBOEC);
+        UpdatePieceRow(BRTR,QteBRTR);
       }
 
-    if(!PiecePresente(BRTE) && QteBRTE > 0 ){AjouterPieceRow(BRTE,QteBRTE);}
-      else{
-        UpdatePieceRow(BRTE,QteBRTE);
-      }
-
-    //Ajout, update ou retire  
-    if(!PiecePresente(BATE) && QteBATE > 0 ){AjouterPieceRow(BATE,QteBATE);}
-      else{UpdatePieceRow(BATE,QteBATE);}
+  if(!PiecePresente(BOEC) && QteBOEC > 0 ){AjouterPieceRow(BOEC,QteBOEC);}
+    else{
+      UpdatePieceRow(BOEC,QteBOEC);
     }
 
+  if(!PiecePresente(BRTE) && QteBRTE > 0 ){AjouterPieceRow(BRTE,QteBRTE);}
+    else{
+      UpdatePieceRow(BRTE,QteBRTE);
+    }
+
+  if(!PiecePresente(BATE) && QteBATE > 0 ){AjouterPieceRow(BATE,QteBATE);}
+    else{UpdatePieceRow(BATE,QteBATE);}
+}
+
+function OnColorChange(){
+  document.getElementById("QteKit4ft").value = "";
+  document.getElementById("QteKit5ft").value = "";
+  document.getElementById("QteKit6ft").value = "";
+  document.getElementById("QtePotp4ft").value = "";
+  document.getElementById("QtePotp5ft").value = "";
+  document.getElementById("QtePotp6ft").value = "";
+
+  var table = document.getElementById("TabPieces");
+  while(table.rows.length > 1) {
+    table.deleteRow(1);
+  }
+  var ar = [];
+  SetArrayHidden(ar);
 }
 
 /* © 2009 ROBO Design

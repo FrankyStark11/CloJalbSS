@@ -7,7 +7,13 @@ body{
 	font-family: "Courier New";
 
 	overflow-x: hidden;	
-	}
+}
+h3{
+	cursor: pointer;
+}
+h3:hover{
+	color: gray;
+}
 input{
 	font-family: "Courier New";
 }
@@ -15,7 +21,6 @@ input{
 div.Main{
 
 	position: absolute;
-	top: 120px;
 
 	width: 100%;
 	height: auto;
@@ -27,6 +32,21 @@ div.Main{
 img.ConfigImage{
 	width: 30px;
 	height: 30px;
+
+	z-index: 999;
+
+	border-radius: 100%;
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+	position: fixed;
+	right: 10px;
+	top: 10px;
+}
+
+div.optAvance{
+	background-color: red;
+	width: 50px;
+	height: 20px;
 }
 
 div.SearchBoxPiece{
@@ -35,16 +55,19 @@ div.SearchBoxPiece{
 	display: none;
 
 	position: fixed;
-	top: 110px;
-	left: 0px;
+	top: 0px;
+	left: 50%;
 	z-index: 997;
 
-	width: 100%;
-	height: 190px;
+	margin-left: -310px;
+	margin-top: -10px;
 
-	border-bottom-radius: 5px;
+	width: 620px;
+	height: 220px;
 
-	padding: 25px;
+	padding-top: 20px;
+
+	border-radius: 5px;
 
 	background-color: #d7d7d7;
 
@@ -55,21 +78,27 @@ div.SearchBoxPiece{
 div.AddReceptionItem{
 
 	width: 80%;
+		min-width: 520px;
+		max-width: 850px;
 	height: 100px;
 
 	padding-top: 25px;
 
 	box-sizing: border-box;
 
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 table.TabRepceptionHead{
 	margin-top: 5px;
+	width: 80%;
 }
 table.TabRepceptionHead td{
-	width:250px;
+	width:370px;
+	height: 30px;
 	text-align: center;
+	margin-top: 10px;
 }
+
 table.TabRepception{
 	margin-top: 5px;
 }
@@ -95,10 +124,13 @@ div.LstReceptionItems{
 	overflow-x: hidden;
 
 	width: 70%;
+		min-width: 550px;
 	height: 400px;
 
 	padding-top: 25px;
 	padding-bottom: 25px;
+
+	margin-top: 30px;
 
 	box-sizing: border-box;
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
@@ -114,6 +146,15 @@ div.LstReceptionItems{
 	padding: 3px;
 
 	transition: .1s;
+	text-align: center;
+}
+
+.ChampsReceptionAdd:hover{
+	width: 210px;
+}
+
+.ChampsReceptionAdd:focus{
+	width: 230px;
 }
 
 button.BtnAjoutReception{
@@ -134,9 +175,7 @@ button.BtnAjoutReception:hover{
 	background-color: #00e600;
 }
 
-.ChampsReceptionAdd:hover{
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-}
+
 
 button.BtnAjouter{
 	background-image: url(../images/icon/Add-icon.png);
@@ -242,20 +281,25 @@ button.BtnRetirer:hover{
 }
 
 #OptionAvance{
-	width: 100%;
+	width: 150px;
 	height: 50px;
 
 	background-image: url(../images/BG/MetalPattern.png);
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
 	position: fixed;
-	top: 60px;
-	left: 0px;
+	left: 5px;
+	top: 50px;
+
+	margin-left: -60px;
+	margin-top: -5px;
 
 	z-index: 998;
 
 	padding-top: 17px;
+	padding-right: 10px;
 	color: white;
+	text-align: right;
 
 	cursor: pointer;
 
@@ -264,11 +308,24 @@ button.BtnRetirer:hover{
 	border-width: 0px;
 	border-color: black;
 	border-style: solid;
+	border-radius: 3px;
 
 	box-sizing: border-box;
+
+	transition: .3s;
 }
 #OptionAvance:hover{
-	font-size: 16px;
+	width: 160px;
+	margin-left: -5px;
+}
+
+table.RechercheBox{
+	width: 580px;
+	height: 180px;
+}
+table.RechercheBox td{
+	width: 145px;
+	height: 60px;
 }
 
 div.SearchBoxPiece td{
@@ -479,15 +536,17 @@ div.InfoPiece{
 	display: block;
 	position: relative;
 
-	width: 94%;
+	width: 88%;
 		min-width: 600px;
 	height: auto;
+		min-height: 60px;
 
 	border-radius: 5px;
 
 	margin-top: 10px;
 
-	padding: 25px;
+	padding-top: 15px;
+	padding-bottom: 15px;
 
 	background-color: #d7d7d7;
 
@@ -553,7 +612,7 @@ table.InfoPiece {
 }
 table.InfoPiece td {
 
-	width: 13%;
+	width: 20%;
 	text-align: center;
 
 	cursor: default;
@@ -566,7 +625,7 @@ table.InfoPiece tr td:first-child {
 
 table.InfoPiece tr td:last-child {
 
-	width: 100px;
+	float: right;
 }
 
 table.InfoPiece tr {
@@ -806,7 +865,7 @@ button.Connexion:hover{
 
 div.BoxMenu{
 	width: 250px;
-	height: 250px;
+	height: 350px;
 
 	margin: 20px;
 
@@ -893,6 +952,7 @@ table.TabSoumissionPOTP input:hover{
 
 table.TabSoumission{
 	width: 600px;
+	cursor: pointer;
 
 }
 table.TabSoumission tr td:first-child{
@@ -958,6 +1018,7 @@ table.TabSoumission td{
 	height: 40px;
 
 	margin-right: 20px;
+	cursor: pointer;
 }
 
 table.TabInfoSection td{
@@ -967,6 +1028,7 @@ table.TabInfoSection td{
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
+	cursor: default;
 
 	padding: 15px;
 }
@@ -987,6 +1049,8 @@ table.TabInfoSection th{
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
+
+	cursor: default;
 }
 
 table.TabInfoSection button{
@@ -1022,5 +1086,11 @@ div.divSections{
 #container { width: 600px; cursor: pointer;  }
 #imageView {  border: 1px solid #000; }
 #imageTemp { border: 1px solid #000;}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
 
 /*8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888*/

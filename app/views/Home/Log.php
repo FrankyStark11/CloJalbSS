@@ -17,14 +17,7 @@
 </head>
 
 <body>
-	<div class="Header" align="center">
-		<ul class="NavBar">
-			<?php
-		
-			if(isset($_SESSION["NomUtilisateur"]) ){echo '<li ><a class="NavBar" href="/index.php/Admin/RetourMenu"><img class="ConfigImage" src="/images/icon/exit-icon.png"></a></li>';}
-			 ?>
-		</ul>	
-	</div>
+	<a class="NavBar" href="/index.php/Admin/RetourMenu"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
 	<div id="Main" class="Main" align="center">
 			<h2 style="width: 750px;text-align: center;">LOG</h2>
 
