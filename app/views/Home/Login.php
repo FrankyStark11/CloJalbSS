@@ -4,7 +4,7 @@
 
 	<title>Soumission Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
@@ -13,11 +13,22 @@
 </head>
 
 <body>
-	<div id="Main" class="Main" align="center">
-		<div class="BoxLogin" align="center">
+
+<div class="row">
+
+<div class="col-12 col-l-12 col-m-12" align="center">
+	<div class="header"> <h2>INTRANET CLOTURE JALBERT</h2></div>
+</div>
+
+<div class="col-4 col-m-12 middle" align="center">
+	<img class="Login" src="../../images/icon/Logo2.png">
+</div>
+
+<div class="col-8 col-m-12 middle" align="center">
+
 			<form method="post" action="/index.php/Admin/Login">
-				<img class="Login" src="../../images/icon/Logo2.png">
-				<table class="LoginAdmin">
+				
+				<table class="LoginAdmin" style="margin-top: 25px;width: 100%;max-width: 800px;">
 					<tr>
 						<td><input class="Log LogUser" type="text" name="User" placeholder=" Nom d'utilisateur "></td>
 					</tr>
@@ -31,8 +42,10 @@
 					</tr>
 				</table>
 			</form>	
-		</div>
-	</div>
+</div>
+
+
+</div>
 </body>
 
 </html>

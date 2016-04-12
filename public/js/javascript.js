@@ -16,14 +16,10 @@ function HideDivSR(idDiv){
 
 //Permet dafficher et de cacher les option de recherche
 $(document).ready(function(){
-    $("#OptionAvance").click(function(){
+    $("#optPlus").click(function(){
 
         $("#SearchBox").slideToggle("slow", function() {
-        if ($(this).is(':visible')) {
-             //$("#Main").css("top", "300px");                
-        } else {
-             //$("#Main").css("top", "120");                
-        }
+        
         }); 
     });
 });
@@ -512,10 +508,6 @@ function AddInvElement(itemArray, TypeAffichage){
             td_2.appendChild( document.createTextNode("Qte : " + QteItem) );
          tr_0.appendChild( td_2 );
 
-         var td_4 = document.createElement('td');
-            td_4.appendChild( document.createTextNode(" Prix Client : " + (parseFloat(PrixClientItem).toFixed(2)).toString() + "$" ) );
-         tr_0.appendChild( td_4 );
-
          var td_6 = document.createElement('td');
          //affiche le boutton de modification seulement si le mode administrateur est activé
         if(AdminMode == 1 || AdminMode == 0){
@@ -643,6 +635,18 @@ function AddInvElement(itemArray, TypeAffichage){
 
        table_1.appendChild( tr_7 );
 
+       var tr_8 = document.createElement('tr');   
+
+            var td_20 = document.createElement('td');
+            td_20.appendChild( document.createTextNode("Prix client : ")) ;
+         tr_8.appendChild( td_20 );
+
+         var td_21 = document.createElement('td');
+            td_21.appendChild( document.createTextNode( (parseFloat(PrixClientItem).toFixed(2)).toString() + "$" ) );
+         tr_8.appendChild( td_21 );
+
+       table_1.appendChild( tr_8 );
+
       div_DescPlus001.appendChild( table_1 );
 
    div_InvPlus001.appendChild( div_DescPlus001 );
@@ -704,14 +708,30 @@ function FuncExcel(){
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
 }
 
+function AfficherChampsSection(type){
+  if(type == "simple" || type == "double"){
+    $("#LongeurCloture").slideUp(10);
+    $("#LongeurPorte").slideDown(10); 
+  }else{
+    $("#LongeurPorte").slideUp(10);
+    $("#LongeurCloture").slideDown(10); 
+  }
+}
+
 function RetirerRowSection(id){
 
   var ArrayPrincipal = GetArrayHiddenSection();
   for(i=0;i<ArrayPrincipal.length;i++){
-      if( ArrayPrincipal[i][3] == id ){
-       RetirerSectionCloture(parseInt(ArrayPrincipal[i][2]),parseInt(ArrayPrincipal[i][0]));
+      if( ArrayPrincipal[i][3] == id && ArrayPrincipal[i][1] == "Cloture" ){
+          RetirerSectionCloture(parseInt(ArrayPrincipal[i][2]),parseInt(ArrayPrincipal[i][0]),ArrayPrincipal[i][4]);
        break; }
     }
+
+   for(i=0;i<ArrayPrincipal.length;i++){
+      if( ArrayPrincipal[i][3] == id && ( ArrayPrincipal[i][1] == "simple" || ArrayPrincipal[i][1] == "double" ) ){
+          RetirerSectionPorte(parseInt(ArrayPrincipal[i][2]),parseInt(ArrayPrincipal[i][0]),ArrayPrincipal[i][1],ArrayPrincipal[i][4]);
+       break; }
+    } 
 
   for(i=0;i<ArrayPrincipal.length;i++){
       if( ArrayPrincipal[i][3] == id ){
@@ -754,14 +774,18 @@ function AjouterSectionRow(){
   var Longueur = document.getElementById("TxtLongueurSectionSR").value;
   var Hauteur = document.getElementById("TxtHauteurSectionSR").value;
   var Type = document.getElementById("TxtTypeSectionSR").value;
+  var lattes = "";
+  if( document.getElementById("checkLatteSR").value == "true"){lattes = "oui" }else{lattes = "non"};
+  if(Type == "simple" || Type == "double"){ Longueur = document.getElementById("SelectDimentionporteSR").value}
 
   //ajoute la section
   var ArrayPrincipal = GetArrayHiddenSection();
-  arraytemp = [Longueur,Type,Hauteur,ID];
+  arraytemp = [Longueur,Type,Hauteur,ID,lattes];
   ArrayPrincipal.push(arraytemp);
   SetArrayHiddenSection(ArrayPrincipal);
 
-  if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur)}
+  if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
+  if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
 }
 
 //cette methode est appelé pour modifier la quantité d'une piece X recus en param
@@ -795,38 +819,41 @@ function AjouterPieceRow(nom,qte){
   var Prix;
   var QteInv;
 
-  document.getElementById("QtePotp4ft").disabled = true;
-  document.getElementById("QtePotp5ft").disabled = true;
-  document.getElementById("QtePotp6ft").disabled = true;
-  document.getElementById("QteKit4ft").disabled = true;
-  document.getElementById("QteKit5ft").disabled = true;
-  document.getElementById("QteKit6ft").disabled = true;
-  
-  //va chercher la description, le prix et la quantité de la piece par AJAX
-  $.post("/index.php/Home/GetItemDesc",
-          {dataID: nom},
-        function(data){
+  if(parseInt(qte) > 0){
 
-          var Arr = JSON.parse(data);
-          Description = Arr["InvDesc"];
-          Prix = Arr["InvPrixContracteur"];
-          QteInv = Arr["InvQte"];
+    document.getElementById("QtePotp4ft").disabled = true;
+    document.getElementById("QtePotp5ft").disabled = true;
+    document.getElementById("QtePotp6ft").disabled = true;
+    document.getElementById("QteKit4ft").disabled = true;
+    document.getElementById("QteKit5ft").disabled = true;
+    document.getElementById("QteKit6ft").disabled = true;
+    
+    //va chercher la description, le prix et la quantité de la piece par AJAX
+    $.post("/index.php/Home/GetItemDesc",
+            {dataID: nom},
+          function(data){
 
-          var ArrayPrincipal = GetArrayHidden();
-          arraytemp = [nom,qte,QteInv,Description,Prix];
-          ArrayPrincipal.push(arraytemp);
+            var Arr = JSON.parse(data);
+            Description = Arr["InvDesc"];
+            Prix = Arr["InvPrixContracteur"];
+            QteInv = Arr["InvQte"];
 
-          SetArrayHidden(ArrayPrincipal);
-          AfficherTab();
+            var ArrayPrincipal = GetArrayHidden();
+            arraytemp = [nom,qte,QteInv,Description,Prix];
+            ArrayPrincipal.push(arraytemp);
 
-          document.getElementById("QtePotp4ft").disabled = false;
-          document.getElementById("QtePotp5ft").disabled = false;
-          document.getElementById("QtePotp6ft").disabled = false;
-          document.getElementById("QteKit4ft").disabled = false;
-          document.getElementById("QteKit5ft").disabled = false;
-          document.getElementById("QteKit6ft").disabled = false;
+            SetArrayHidden(ArrayPrincipal);
+            AfficherTab();
 
-          });
+            document.getElementById("QtePotp4ft").disabled = false;
+            document.getElementById("QtePotp5ft").disabled = false;
+            document.getElementById("QtePotp6ft").disabled = false;
+            document.getElementById("QteKit4ft").disabled = false;
+            document.getElementById("QteKit5ft").disabled = false;
+            document.getElementById("QteKit6ft").disabled = false;
+
+            });
+  }
 }
 
 function PiecePresente(Nom){
@@ -856,6 +883,16 @@ function CalculPrix(){
   var champsTVQ = document.getElementById("TVQ");
   var champsGrandTotal = document.getElementById("GrandTotal");
 
+  var champsInfoPiedL = document.getElementById("PiedLineaire");
+  var ChampsInfoPoteau = document.getElementById("PoteauTotal");
+  var ChampsInfoLatte = document.getElementById("latteTotal");
+
+  var ChampsPrixPiedTemps = document.getElementById("PrixPiedTemps");
+  var ChampsPrixPiedMateriel = document.getElementById("PrixPiedMateriel");
+  var ChampsPrixPoteau = document.getElementById("PrixPoteau");
+  var ChampsPrixLatte = document.getElementById("PrixLatte");
+  var ChampsPrixPoseLatte = document.getElementById("PrixposeLatte");
+
   var additionMaterial = 0.00;
   var additionTemps = 0.00;
   var soustotal = 0.00;
@@ -863,14 +900,53 @@ function CalculPrix(){
   var TVQ = 0.00;
   var GrandTotal = 0.00;
 
-  ArrayPieces = GetArrayHidden();
-  //ArraySection = GetArrayHidden();
+  var piedLineaire = 0.00;
+  var piedLineaireAvecLatte = 0.00;
+
+  /*ArrayPieces = GetArrayHidden();
   for(i=0;i<ArrayPieces.length;i++){
-    additionMaterial += parseFloat(ArrayPieces[i][4]) * parseFloat(ArrayPieces[i][1]);
+    additionMaterial += parseFloat(ArrayPieces[i][4]) * parseFloat(ArrayPieces[i][1]); 
+  }*/
+
+  ArraySection = GetArrayHiddenSection();
+  for(i=0;i<ArraySection.length;i++){
+    /*if(ArraySection[i][1] == "simple" || ArraySection[i][1] == "double" ){
+      piedLineaire += parseFloat((parseInt(ArraySection[i][0]) * 0.083333).toFixed(2));
+      if(ArraySection[i][4] == "oui"){
+        piedLineaireAvecLatte += parseFloat((parseInt(ArraySection[i][0]) * 0.083333).toFixed(2));
+      }
+    }*/
+    if(ArraySection[i][1] == "Cloture"){ 
+      piedLineaire += parseInt(ArraySection[i][0]); 
+      if(ArraySection[i][4] == "oui"){
+        piedLineaireAvecLatte += parseInt(ArraySection[i][0]);
+      }
+    } 
   }
+//calcul des meteriaux
+  champsInfoPiedL.replaceChild(document.createTextNode(piedLineaire.toString() + " ft"),champsInfoPiedL.childNodes[0]);
+  additionMaterial += piedLineaire * parseFloat(ChampsPrixPiedMateriel.value); //prix mailles
+
+  var qtepoteau = 0;
+
+  if(document.getElementById("QtePotp4ft").value != "") { qtepoteau += parseInt(document.getElementById("QtePotp4ft").value);}
+  if(document.getElementById("QtePotp5ft").value != "") { qtepoteau += parseInt(document.getElementById("QtePotp5ft").value);}
+  if(document.getElementById("QtePotp6ft").value != "") { qtepoteau += parseInt(document.getElementById("QtePotp6ft").value);}
+
+  ChampsInfoPoteau.replaceChild(document.createTextNode(qtepoteau.toString() + " poteau(x)"),ChampsInfoPoteau.childNodes[0]);
+  additionMaterial += qtepoteau * parseInt(ChampsPrixPoteau.value); //prix poteaux
+
+
+  additionMaterial += parseInt(Math.ceil((piedLineaireAvecLatte/10))) * parseInt(ChampsPrixLatte.value);//prix lattes
+  ChampsInfoLatte.replaceChild(document.createTextNode((Math.ceil(piedLineaireAvecLatte/10)).toString() + " sac(s)"),ChampsInfoLatte.childNodes[0]);
+
+//calcul du temps
+  additionTemps += piedLineaire * parseInt(ChampsPrixPiedTemps.value);
+  additionTemps += piedLineaireAvecLatte * parseInt(ChampsPrixPoseLatte.value);
 
   TotalMaterielPrix.replaceChild(document.createTextNode((additionMaterial.toFixed(2)).toString() + "$"),TotalMaterielPrix.childNodes[0]);
   champsTotalTemps.replaceChild(document.createTextNode((additionTemps.toFixed(2)).toString()+ "$"),champsTotalTemps.childNodes[0]);
+
 
   soustotal = additionTemps + additionMaterial;
   champsSousTotal.replaceChild(document.createTextNode((soustotal.toFixed(2)).toString()+ "$"),champsSousTotal.childNodes[0]);
@@ -938,10 +1014,6 @@ function AfficherTab(){
      tr_0.appendChild( td_3 );
 
 
-     var td_4 = document.createElement('td');
-        td_4.appendChild( document.createTextNode(((parseFloat(Prix) * parseFloat(qte)).toFixed(2)).toString() + "$") );
-     tr_0.appendChild( td_4 );
-
     MainTab.appendChild( tr_0 );
 
     //compare les 2 quantitées
@@ -956,29 +1028,40 @@ function AfficherTab(){
     var Type = ArrayPrincipal[i][1];
     var Hauteur = ArrayPrincipal[i][2];
     var ID = ArrayPrincipal[i][3];
+    var Lattes = ArrayPrincipal[i][4];
 
     var MainTab = document.getElementById("TabSections");
 
     var tr_0 = document.createElement('tr');
         tr_0.id = ID;
-
-     var td_0 = document.createElement('td');
+    if(Type == "simple" || Type == "double"){
+        var td_0 = document.createElement('td');
+        td_0.appendChild( document.createTextNode(Longueur + "po") );
+        tr_0.appendChild( td_0 );
+    }else{
+        var td_0 = document.createElement('td');
         td_0.appendChild( document.createTextNode(Longueur + "ft") );
-     tr_0.appendChild( td_0 );
+        tr_0.appendChild( td_0 );
+    }
 
+     if(Type == "simple" || Type == "double"){
+       var td_1 = document.createElement('td');
+          td_1.appendChild( document.createTextNode("Barrière " + Type) );
+       tr_0.appendChild( td_1 );
+      }else{
+        var td_1 = document.createElement('td');
+          td_1.appendChild( document.createTextNode( Type) );
+       tr_0.appendChild( td_1 );
+      }
 
-     var td_1 = document.createElement('td');
-        td_1.appendChild( document.createTextNode(Type) );
-     tr_0.appendChild( td_1 );
-
-
-     var td_2 = document.createElement('td');
+      var td_2 = document.createElement('td');
         td_2.appendChild( document.createTextNode(Hauteur+"ft") );
      tr_0.appendChild( td_2 );
 
 
+
      var td_3 = document.createElement('td');
-        td_3.appendChild( document.createTextNode(" prix ") );
+        td_3.appendChild( document.createTextNode(Lattes) );
      tr_0.appendChild( td_3 );
 
 
@@ -998,10 +1081,11 @@ function AfficherTab(){
   CalculPrix();
 }
 
-function RetirerSectionCloture(Hauteur,Longueur){
+function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 
   var CL = document.getElementById("SelectCouleurSR").value;
-  var lattes = document.getElementById("checkLatteSR").checked;
+  var lattes = false;
+  if(AvecLattes == "oui"){lattes = true;}else{lattes = false;}
   var arrayPrincipal = GetArrayHiddenSection();
 
   var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
@@ -1101,7 +1185,7 @@ function RetirerSectionCloture(Hauteur,Longueur){
 function AjoutSectionCloture(Hauteur,Longueur){
 
   var CL = document.getElementById("SelectCouleurSR").value;
-  var lattes = document.getElementById("checkLatteSR").checked;
+  var lattes = document.getElementById("checkLatteSR").value;
   var arrayPrincipal = GetArrayHiddenSection();
 
   var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
@@ -1171,7 +1255,7 @@ function AjoutSectionCloture(Hauteur,Longueur){
     UpdatePieceRow(noCAPI,qteCAPI);
   }
 
-  if(lattes){
+  if(lattes == "true"){
     if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
     else{
       qteLATT = qteLATT + GetPieceQte(noLATT);
@@ -1198,126 +1282,249 @@ function AjoutSectionCloture(Hauteur,Longueur){
   }
 }
 
-function AjoutSectionPorte(Hauteur,Longueur,typePorte){
+function AjoutSectionPorte(Hauteur){
+
+  //definition des variables
 
   var CL = document.getElementById("SelectCouleurSR").value;
-  var lattes = document.getElementById("checkLatteSR").checked;
+  var Longueur = document.getElementById("SelectDimentionporteSR").value;
+  var typePorte = document.getElementById("TxtTypeSectionSR").value;
+  var lattes = document.getElementById("checkLatteSR").value;
   var arrayPrincipal = GetArrayHiddenSection();
 
-  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
-  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
-  var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL;
-  var noBATE = "BATE-0" + Hauteur + "058-" + CL;
+  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL; //rouleau de maille
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL; //Sac de lattes
+  var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL; //Frame de la barriere
+  var noBATE = "BATE-0" + Hauteur + "058-" + CL; //Barre de tension
 
-  var noBRBA = "BRBA-00114-" + CL;
-  var noLIEN = "LIEN-00612-" + CL;
-  var noTRAV = "TRAV-15810-" + CL;
-  var noKITS = "KITS-00238-" + CL;
-  var noKITD = "KITD-00238-" + CL;
+  var noBRBA = "BRBA-00114-" + CL; //Bride de barriere
+  var noLIEN = "LIEN-00612-" + CL; //Lien d'attache de la maille
+  var noTRAV = "TRAV-15810-" + CL; //Traverse mediane pour barriere de 6ft
+  var noKITS = "KITS-00238-" + CL; //Kit pour une barriere simple
+  var noKITD = "KITD-00238-" + CL; //kit pour une barriere double
 
-  var qteMAIL4 = 0;
-  var qteMAIL5 = 0;
-  var qteMAIL6 = 0;
+  var qteMAIL = 0;
+  var qteLATT = 0;
+  var qteBARR = 0;
+  var qteBATE = 0;
+  var qteBRBA = 0;
+  var qteLIEN = 0;
+  var qteTRAV = 0;
+  var qteKITS = 0;
+  var qteKITD = 0;
 
-  var qteMAIL4 = 0;
-  var qteMAIL5 = 0;
-  var qteMAIL6 = 0;
+  //calcul des quantitées
 
-  var qteMAIL4 = 0;
-  var qteMAIL5 = 0;
-  var qteMAIL6 = 0;
+  if(Longueur == "42"){
+    qteMAIL = 3.6; 
 
-  var qteMAIL4 = 0;
-  var qteMAIL5 = 0;
-  var qteMAIL6 = 0;
+  }
 
+  if(Longueur == "48"){
+    qteMAIL = 4; 
+  }
 
-  for(i=0;i<arrayPrincipal.length;i++){
+  if(Longueur == "60"){
+    qteMAIL = 5; 
+  }
 
-  //calcul des pieces globals
-      Longueur = arrayPrincipal[i][0];
-      qteFILB += parseInt(Longueur);
-      qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+  if(Hauteur == "4" || Hauteur == "5"){ qteLIEN = Math.ceil(qteMAIL) * 2;}
+  if(Hauteur == "6"){qteLIEN = qteMAIL * 3;}
 
-  //calcul du nombre de poteau inter
-      if(arrayPrincipal[i][2] == "4" || arrayPrincipal[i][2] == "5"){
-        qtePOTI4 += parseInt(Math.floor( Longueur/7.5 ));
-        qteCAPI4 = parseInt(qtePOTI4);
-      }
+  if(lattes == "true"){ qteLATT = 1; }
 
-      if(arrayPrincipal[i][2] == "6"){
-        qtePOTI6 += parseInt(Math.floor( Longueur/7.5 ));
-        qteCAPI6 = parseInt(qtePOTI6);
-      }
+  if(typePorte == "double"){
+    qteMAIL = qteMAIL * 2;
+    qteBARR = 2;
+    qteKITD = 1;
+  }else{
+    qteBARR = 1;
+    qteKITS = 1;
+  }
 
-  //calcul du nombre de lien par section selon hauteur
-      if(arrayPrincipal[i][2] == "4"){
-        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI4 * 3));
-        qteMAIL4 += parseInt(Longueur);
-        qteLATT4 += parseInt(Math.ceil( Longueur/10 ));
-      }
+  qteBATE = 2 * qteBARR;
 
-      if(arrayPrincipal[i][2] == "5"){
-        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI4 * 4));
-        qteMAIL5 += parseInt(Longueur);
-        qteLATT5 += parseInt(Math.ceil( Longueur/10 ));
-      }
+  if(Hauteur == "4") {qteBRBA = qteBATE * 3;}
+  if(Hauteur == "5") {qteBRBA = qteBATE * 4;}
+  if(Hauteur == "6") {qteBRBA = qteBATE * 5; qteTRAV = qteBARR;}
 
-      if(arrayPrincipal[i][2] == "6"){
-        qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI6 * 5));
-        qteMAIL6 += parseInt(Longueur);
-        qteLATT6 += parseInt(Math.ceil( Longueur/10 ));
-      }
+  //Ajout ou update des pieces
 
+  if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
+    else{
+      qteMAIL = qteMAIL + GetPieceQte(noMAIL);
+      UpdatePieceRow(noMAIL,qteMAIL);
     }
 
-    if(Hauteur == "4"){
-      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL4);}
-    else{UpdatePieceRow(noMAIL,qteMAIL4);}
-      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI4);}
-    else{UpdatePieceRow(noPOTI,qtePOTI4);}
-      if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI4);}
-    else{UpdatePieceRow(noCAPI,qteCAPI4);}
-      if(lattes){
-        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT4);}
-        else{UpdatePieceRow(noLATT,qteLATT4);}
-      }
+  if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
+    else{
+      qteLATT = qteLATT + GetPieceQte(noLATT);
+      UpdatePieceRow(noLATT,qteLATT);
     }
 
-    if(Hauteur == "5"){
-      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL5);}
-    else{UpdatePieceRow(noMAIL,qteMAIL5);}
-      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI4);}
-    else{UpdatePieceRow(noPOTI,qtePOTI4);}
-      if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI4);}
-    else{UpdatePieceRow(noCAPI,qteCAPI4);}
-      if(lattes){
-        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT5);}
-        else{UpdatePieceRow(noLATT,qteLATT5);}
-      }
+  if(!PiecePresente(noBARR)){AjouterPieceRow(noBARR,qteBARR);}
+    else{
+      qteBARR = qteBARR + GetPieceQte(noBARR);
+      UpdatePieceRow(noBARR,qteBARR);
     }
 
-    if(Hauteur == "6"){
-      if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL6);}
-    else{UpdatePieceRow(noMAIL,qteMAIL6);}
-      if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI6);}
-    else{UpdatePieceRow(noPOTI,qtePOTI6);}
-    if(!PiecePresente(noCAPI)){AjouterPieceRow(noCAPI,qteCAPI6);}
-    else{UpdatePieceRow(noCAPI,qteCAPI6);}
-      if(lattes){
-        if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT6);}
-        else{UpdatePieceRow(noLATT,qteLATT6);}
-      }
+  if(!PiecePresente(noBATE)){AjouterPieceRow(noBATE,qteBATE);}
+    else{
+      qteBATE = qteBATE + GetPieceQte(noBATE);
+      UpdatePieceRow(noBATE,qteBATE);
     }
 
-    if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
-    else{UpdatePieceRow(noFILB,qteFILB);}
+  if(!PiecePresente(noBRBA)){AjouterPieceRow(noBRBA,qteBRBA);}
+    else{
+      qteBRBA = qteBRBA + GetPieceQte(noBRBA);
+      UpdatePieceRow(noBRBA,qteBRBA);
+    }
 
-    if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
-    else{UpdatePieceRow(noLIEN,qteLIEN);}
+  if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
+    else{
+      qteLIEN = qteLIEN + GetPieceQte(noLIEN);
+      UpdatePieceRow(noLIEN,qteLIEN);
+    }
 
-    if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
-    else{UpdatePieceRow(noTRAV,qteTRAV);}
+  if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
+    else{
+      qteTRAV = qteTRAV + GetPieceQte(noTRAV);
+      UpdatePieceRow(noTRAV,qteTRAV);
+    }
+
+  if(!PiecePresente(noKITS)){AjouterPieceRow(noKITS,qteKITS);}
+    else{
+      qteKITS = qteKITS + GetPieceQte(noKITS);
+      UpdatePieceRow(noKITS,qteKITS);
+    }
+
+  if(!PiecePresente(noKITD)){AjouterPieceRow(noKITD,qteKITD);}
+    else{
+      qteKITD = qteKITD + GetPieceQte(noKITD);
+      UpdatePieceRow(noKITD,qteKITD);
+    }
+}
+
+function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
+
+  //definition des variables
+
+  var CL = document.getElementById("SelectCouleurSR").value;
+  var lattes = false;
+  if(AvecLattes == "oui"){lattes = true;}else{lattes = false;}
+  var arrayPrincipal = GetArrayHiddenSection();
+
+  var noMAIL = "MAIL-0" + Hauteur + "029-" + CL; //rouleau de maille
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL; //Sac de lattes
+  var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL; //Frame de la barriere
+  var noBATE = "BATE-0" + Hauteur + "058-" + CL; //Barre de tension
+
+  var noBRBA = "BRBA-00114-" + CL; //Bride de barriere
+  var noLIEN = "LIEN-00612-" + CL; //Lien d'attache de la maille
+  var noTRAV = "TRAV-15810-" + CL; //Traverse mediane pour barriere de 6ft
+  var noKITS = "KITS-00238-" + CL; //Kit pour une barriere simple
+  var noKITD = "KITD-00238-" + CL; //kit pour une barriere double
+
+  var qteMAIL = 0;
+  var qteLATT = 0;
+  var qteBARR = 0;
+  var qteBATE = 0;
+  var qteBRBA = 0;
+  var qteLIEN = 0;
+  var qteTRAV = 0;
+  var qteKITS = 0;
+  var qteKITD = 0;
+
+  //calcul des quantitées
+
+  if(Longueur == "42"){
+    qteMAIL = 3.6; 
+
+  }
+
+  if(Longueur == "48"){
+    qteMAIL = 4; 
+  }
+
+  if(Longueur == "60"){
+    qteMAIL = 5; 
+  }
+
+  if(Hauteur == "4" || Hauteur == "5"){ qteLIEN = Math.ceil(qteMAIL) * 2;}
+  if(Hauteur == "6"){qteLIEN = qteMAIL * 3;}
+
+  if(lattes){ qteLATT = 1; }
+
+  if(typePorte == "double"){
+    qteMAIL = qteMAIL * 2;
+    qteBARR = 2;
+    qteKITD = 1;
+  }else{
+    qteBARR = 1;
+    qteKITS = 1;
+  }
+
+  qteBATE = 2 * qteBARR;
+
+  if(Hauteur == "4") {qteBRBA = qteBATE * 3;}
+  if(Hauteur == "5") {qteBRBA = qteBATE * 4;}
+  if(Hauteur == "6") {qteBRBA = qteBATE * 5; qteTRAV = qteBARR;}
+
+  //Ajout ou update des pieces
+
+  if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
+    else{
+      qteMAIL = GetPieceQte(noMAIL) - qteMAIL;
+      UpdatePieceRow(noMAIL,qteMAIL);
+    }
+
+  if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
+    else{
+      qteLATT = GetPieceQte(noLATT) - qteLATT;
+      UpdatePieceRow(noLATT,qteLATT);
+    }
+
+  if(!PiecePresente(noBARR)){AjouterPieceRow(noBARR,qteBARR);}
+    else{
+      qteBARR = GetPieceQte(noBARR) - qteBARR;
+      UpdatePieceRow(noBARR,qteBARR);
+    }
+
+  if(!PiecePresente(noBATE)){AjouterPieceRow(noBATE,qteBATE);}
+    else{
+      qteBATE = GetPieceQte(noBATE) - qteBATE;
+      UpdatePieceRow(noBATE,qteBATE);
+    }
+
+  if(!PiecePresente(noBRBA)){AjouterPieceRow(noBRBA,qteBRBA);}
+    else{
+      qteBRBA = GetPieceQte(noBRBA) - qteBRBA;
+      UpdatePieceRow(noBRBA,qteBRBA);
+    }
+
+  if(!PiecePresente(noLIEN)){AjouterPieceRow(noLIEN,qteLIEN);}
+    else{
+      qteLIEN = GetPieceQte(noLIEN) - qteLIEN;
+      UpdatePieceRow(noLIEN,qteLIEN);
+    }
+
+  if(!PiecePresente(noTRAV)){AjouterPieceRow(noTRAV,qteTRAV);}
+    else{
+      qteTRAV = GetPieceQte(noTRAV) - qteTRAV;
+      UpdatePieceRow(noTRAV,qteTRAV);
+    }
+
+  if(!PiecePresente(noKITS)){AjouterPieceRow(noKITS,qteKITS);}
+    else{
+      qteKITS = GetPieceQte(noKITS) - qteKITS;
+      UpdatePieceRow(noKITS,qteKITS);
+    }
+
+  if(!PiecePresente(noKITD)){AjouterPieceRow(noKITD,qteKITD);}
+    else{
+      qteKITD = GetPieceQte(noKITD) - qteKITD;
+      UpdatePieceRow(noKITD,qteKITD);
+    }
 }
 
 function AjoutPOTP(Hauteur){
@@ -1634,3 +1841,7 @@ window.addEventListener('load', function () {
   init();
 
 }, false); }
+
+
+
+//88888888888888888888888888888888888888888888888888888

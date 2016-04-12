@@ -8,60 +8,76 @@
 <head>
 	<title>Soumission Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.8">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>
 <body>
-	<a class="NavBar" href="/index.php/Home/MenuInventaire"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
-	<div id="Main" class="Main" align="center">
-		<div class="BoxLogin" align="center">
-			<div  class="AddReceptionItem">
+	<a href="/index.php/Home/MenuInventaire">
+		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
+	</a>
+	<div class="row" align="center">
+		<div class="col-4 com-m-12">
+			<div  class="col-12 col-m-12 box " style="height: 450px;">
+				<h3>Pièce</h3>
 				<table class="TabRepceptionHead">
 					<tr>
 						<td>
-							Identification de la piece
+						<label id="DescriptionItemReception"  value="Description du produit">Description de la pièce</label>
 						</td>
+					</tr>
+					<tr>
+						<td>
+							<hr>
+							<hr>
+						</td>
+					</tr>
+					<tr>
 						<td>
 							<input id="IdItemReception" onkeyup="showDescription(this.value)" type="text" class="ChampsReceptionAdd" placeholder="No de l'item"></input>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							Description de la piece
-						</td>
-						<td>
-						<label id="DescriptionItemReception"  value="Description du produit">Aucun élément</label>
+							<input id="QteItemReception" disabled type="number" class="ChampsReceptionAdd" placeholder="Quantité"></input>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							Quantité
-						</td>
-						<td>
-							<input id="QteItemReception" disabled type="number" class="ChampsReceptionAdd" placeholder="qte"></input>
+							<select class="ChampsReceptionAdd">
+								<option selected value="">Fournisseur</option>
+								<option >BelAir</option>
+							</select>
 						</td>
 					</tr>
 				</table>
 				<table class="TabRepceptionHead">
 					<tr>
 						<td>
-							<button id="BtnAjouterReception" disabled class="BtnAjouter" onclick="AddReceptionElement()"> </button>
+							<button id="BtnAjouterReception" disabled class="BtnAjouter" onclick="AddReceptionElement()"> Ajouter </button>
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div id="LstBoxReceptionTemp" class="LstReceptionItems">
-			<table id="TabItems" class="TabRepception">
-				<th>Numéro du produit</th>
-				<th>Description</th>
-				<th>Quantité</th>
-				<th>Action</th>
-			</table>
-			</div>
-			<button class="BtnAjoutReception" onclick="FuncExcel()" id="BtnEnvoyer" value="Rechercher"> Recevoir les items </input>
 		</div>
-	</div>
-	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
+		<div class="col-8 col-m-12">
+			<div id="LstBoxReceptionTemp" style="height: 450px;" class="col-12 col-m-12 box maxheight">
+			<h3>PO en cours</h3>
+				<table id="TabItems" class="TabRepception">
+					<th>Numéro du produit</th>
+					<th>Description</th>
+					<th>Quantité</th>
+					<th>Action</th>
+				</table>
+				
+			</div>
+		</div>	
+		<div class="col-12 col-m-12">
+			<div  class="col-12 col-m-12 box ">
+				<button class="BtnAjoutReception" onclick="FuncExcel()" id="BtnEnvoyer" value="Rechercher"> Recevoir les items </button>
+			</div>
+		</div>
+	</div>		
 </body>
 </html>

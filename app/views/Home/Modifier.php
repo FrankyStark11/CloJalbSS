@@ -10,6 +10,7 @@
 
 	<title>Inventaire Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
@@ -18,11 +19,14 @@
 </head>
 
 <body>
-	<a class="NavBar" href="/index.php/Home/Accueil"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
+	<a href="/index.php/Home/Accueil">
+		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
+	</a>
 	<div id="Main" class="Main" align="center">
+	<div class="box" style="width: 700px;" align="center">
 		<h1>Modification des données</h1>
-		<form method="get" onsubmit="return validateFormModification()" action="/index.php/Admin/Modification" >
-			<table class="InsertionTable">
+		<form method="get" accept-charset="UTF-8" onsubmit="return validateFormModification()" action="/index.php/Admin/Modification" >
+			<table class="InsertionTable" style="width: 600px;">
 				<tr>
 					<td>
 						No Piece
@@ -36,9 +40,8 @@
 						Description
 					</td>
 					<td>
-						<textarea name="txtDesc" title="Caractère interdit 
-   '  _  # " id="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"><?php echo $Data[0]->InvDesc; ?>
-						</textarea>
+						<input type="text" name="txtDesc" value=<?php print_r($Data[0]->InvDesc); ?> title="Caractère interdit 
+   '  _  # " id="txtDesc" placeholder="Description courte de la piece"></input>
 					</td>
 				</tr>
 				<tr>

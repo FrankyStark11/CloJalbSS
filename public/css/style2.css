@@ -1,3 +1,12 @@
+/*
+	orange : #e67300 ;
+	gris BG : #f2f2f2 ;
+	blanc : #ffffff ;
+	gris header table : #d9d9d9 ;
+*/
+* {
+    box-sizing: border-box;
+}
 body{
 	/*background-image: url(../images/BG/background.jpg);*/
 	background-color: #f2f2f2;
@@ -50,31 +59,60 @@ div.optAvance{
 }
 
 div.SearchBoxPiece{
-	background-image: url(../images/BG/MetalPattern.png);
+	opacity: 1;
+	display: block;
 
-	display: none;
-
-	position: fixed;
-	top: 0px;
-	left: 50%;
-	z-index: 997;
-
-	margin-left: -310px;
-	margin-top: -10px;
-
-	width: 620px;
-	height: 220px;
-
+	width: 100%;
+	height: auto;
 	padding-top: 20px;
 
 	border-radius: 5px;
 
-	background-color: #d7d7d7;
-
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-
 	box-sizing: border-box;
 }
+
+#OptionAvance{
+	width: auto;
+	min-width: 60px;
+	height: auto;
+		min-height: 50px;
+
+	background-image: url(../images/BG/MetalPattern.png);
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+
+	position: fixed;
+	left: 5px;
+	top: 110px;
+
+	margin-left: -20px;
+	margin-top: -5px;
+
+	z-index: 998;
+
+	padding-top: 17px;
+	padding-right: 10px;
+	color: white;
+	text-align: right;
+
+	cursor: pointer;
+
+	font-size: 15px;
+
+	border-width: 0px;
+	border-color: black;
+	border-style: solid;
+	border-radius: 3px;
+
+	box-sizing: border-box;
+
+	transition: .3s;
+}
+#OptionAvance:hover{
+	width: auto;
+	min-width: 100px;
+	margin-left: -5px;
+}
+
 div.AddReceptionItem{
 
 	width: 80%;
@@ -90,10 +128,10 @@ div.AddReceptionItem{
 }
 table.TabRepceptionHead{
 	margin-top: 5px;
-	width: 80%;
+	width: 100%;
 }
 table.TabRepceptionHead td{
-	width:370px;
+	width:100%;
 	height: 30px;
 	text-align: center;
 	margin-top: 10px;
@@ -137,24 +175,39 @@ div.LstReceptionItems{
 }
 
 .ChampsReceptionAdd{
-	width: 200px;
-	height: 30px;
+	width: 100%;
+	height: 50px;
 
 	border-radius: 2px;
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-style: solid;
+	border-color: black;
+
+	background-color: transparent;
 
 	padding: 3px;
 
-	transition: .1s;
+	transition: .3s;
+
+	border-radius: 2px;
+
+	font-size: 20px;
+
 	text-align: center;
+	padding-top: 5px;
+
+	outline-width: 0px;
+
+	cursor: pointer;
 }
 
 .ChampsReceptionAdd:hover{
-	width: 210px;
+	border-color: #e67300;
 }
 
 .ChampsReceptionAdd:focus{
-	width: 230px;
+	border-color: #e67300;
 }
 
 button.BtnAjoutReception{
@@ -162,37 +215,45 @@ button.BtnAjoutReception{
 	width: 200px;
 	height: 50px;
 
+	color: white;
+
 	font-size: 15px;
 
 	border-width: 0px;
 	border-radius: 3px;
+
+	background-color: #e67300;
 
 	transition: 0.5s;
 
 	cursor: pointer;
 }
 button.BtnAjoutReception:hover{
-	background-color: #00e600;
+	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
 
 
 button.BtnAjouter{
-	background-image: url(../images/icon/Add-icon.png);
-	background-size: 30px 30px;
+	
 	border-width: 0px;
-	border-radius: 30px;
+	border-radius: 3px;
 
 	outline: none;
+	background-color: #e67300;
+	color: white;
 
-	width: 30px;
-	height: 30px;
+	font-size: 15px;
+
+	margin-top: 25px;
+	width: 200px;
+	height: 50px;
+
 	cursor: pointer;
 }
 
 button.BtnAjouter:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
-	background-image: url(../images/icon/Add-icon-cl.png);
 }
 
 button.BtnEdit{
@@ -280,8 +341,8 @@ button.BtnRetirer:hover{
 	background-image: url(../images/icon/sub-icon-cl.png);
 }
 
-#OptionAvance{
-	width: 150px;
+#RetourMenu{
+	width: 60px;
 	height: 50px;
 
 	background-image: url(../images/BG/MetalPattern.png);
@@ -291,7 +352,7 @@ button.BtnRetirer:hover{
 	left: 5px;
 	top: 50px;
 
-	margin-left: -60px;
+	margin-left: -20px;
 	margin-top: -5px;
 
 	z-index: 998;
@@ -314,30 +375,37 @@ button.BtnRetirer:hover{
 
 	transition: .3s;
 }
-#OptionAvance:hover{
-	width: 160px;
+#RetourMenu:hover{
+	width: 100px;
 	margin-left: -5px;
 }
 
 table.RechercheBox{
-	width: 580px;
-	height: 180px;
+	width: 100%;
+	height: auto;
 }
 table.RechercheBox td{
-	width: 145px;
+	width: 50%;
 	height: 60px;
+}
+table.RechercheBox td:last-child{
+	text-align: right;
 }
 
 div.SearchBoxPiece td{
 
 	color: white;
 	width: 100px;
+	opacity: 1;
 }
 
 button.BtnRecherche{
 	margin-top: 10px;
-	width: 100px;
+	width:100%;
 	height: 50px;
+
+	background-color: #e67300;
+	color: white;
 
 	border-width: 0px;
 	border-radius: 3px;
@@ -351,51 +419,73 @@ button.BtnRecherche:hover{
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
-table.InsertionTable{ width: 600px; }
-table.InsertionTable td{width: 300px;}
+table.InsertionTable{ width: 100%; }
+table.InsertionTable td{width: 50%;}
 
 table.InsertionTable tr td:first-child{text-align: left;}
 table.InsertionTable tr td:last-child{text-align: right;}
 
 table.InsertionTable input{
-	width: 220px;
-	height: 30px;
-
-	outline: none;
-
-	text-align: center;
+	width: 100%;
+	height: 50px;
 
 	border-radius: 2px;
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-style: solid;
+	border-color: black;
 
-	margin-top: 10px;
-	margin-right: 10px;
+	background-color: transparent;
 
 	padding: 3px;
 
 	transition: .3s;
+
+	border-radius: 2px;
+
+	font-size: 20px;
+
+	text-align: right;
+	padding-top: 5px;
+
+	outline-width: 0px;
+
+	cursor: pointer;
 }
 
-table.InsertionTable input:hover{width: 250px;}
-table.InsertionTable input:focus{width: 260px;}
+table.InsertionTable input:hover{border-color: #e67300;}
+table.InsertionTable input:focus{border-color: #e67300;}
 
 table.InsertionTable select{
-	width: 220px;
-	height: 30px;
-	outline: none;
-	border:0px solid black;
+	width: 100%;
+	height: 50px;
 
-	text-align: center;
+	border-radius: 2px;
+	border-width: 0px;
+	border-bottom-width: 3px;
+	border-style: solid;
+	border-color: black;
 
-	margin-top: 10px;
-	margin-right: 10px;
+	background-color: transparent;
+
+	padding: 3px;
 
 	transition: .3s;
-	padding: 3px;
+
+	border-radius: 2px;
+
+	font-size: 20px;
+
+	text-align: right;
+	padding-top: 5px;
+
+	outline-width: 0px;
+
+	cursor: pointer;
 }
 
-table.InsertionTable select:hover{width: 250px;}
-table.InsertionTable select:focus{width: 260px;}
+table.InsertionTable select:hover{border-color: #e67300;}
+table.InsertionTable select:focus{border-color: #e67300;}
 
 table.InsertionTable textarea{
 	width: 220px;
@@ -463,14 +553,6 @@ div.ConfigBox{
 }
 
 div.LogBox{
-	width: 90%;
-		min-width: 480px;
-	height: 90%;
-		min-height: 200px;
-		max-height: 600px;
-
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-	box-sizing: border-box;
 
 	margin-top: 10px;
 	margin-bottom: 5px;
@@ -481,20 +563,21 @@ div.LogBox{
 
 }
 table.LogData {
-	width: 750px;
+	width: 100%;
 }
 table.LogData td{
-	width: 250px;
+	width: 20%;
 	text-align: center;
 	padding: 25px;
 }
 
 table.LogData th{background-color: black; color: white; height: 50px;}
-table.LogData tr{background-color: white;}
+table.LogData tr{background-color: white; transition: .3s;}
 table.LogData tr:nth-child(even) {background-color: #f2f2f2;}
+table.LogData tr:nth-child(odd) {background-color: #e6e6e6;}
 
 table.LogData input{
-	width: 130px;
+	width: 100px;
 	height: 25px;
 	font-family: "Courier New";
 
@@ -514,7 +597,7 @@ table.LogData input:focus{
 	border-radius: 2px;
 }
 table.LogData button{
-	width: 130px;
+	width: 100px;
 	height: 25px;
 	font-family: "Courier New";
 
@@ -528,7 +611,8 @@ table.LogData button:hover{
 }
 
 table.LogData tr:hover{
-	background-color: #e6e6e6;
+	background-color: #e67300;
+	color: white;
 	cursor: default;
 }
 
@@ -536,19 +620,19 @@ div.InfoPiece{
 	display: block;
 	position: relative;
 
-	width: 88%;
+	width: 100%;
 		min-width: 600px;
 	height: auto;
 		min-height: 60px;
 
 	border-radius: 5px;
 
-	margin-top: 10px;
+	margin-bottom: 10px;
 
 	padding-top: 15px;
 	padding-bottom: 15px;
 
-	background-color: #d7d7d7;
+	background-color: #d9d9d9;
 
 	transition: .5s;
 
@@ -590,29 +674,45 @@ div.DescPlus td{
 }
 
 .ChampsRecherche{
-	width: 180px;
-	height: 30px;
+	width: 100%;
+	height: 50px;
 
 	border-radius: 2px;
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-style: solid;
+	border-color: black;
 
-	margin-top: 10px;
-	margin-right: 10px;
+	background-color: transparent;
 
 	padding: 3px;
 
-	transition: .1s;
+	transition: .3s;
+
+	border-radius: 2px;
+
+	font-size: 20px;
+
+	text-align: left;
+	padding-top: 5px;
+
+	outline-width: 0px;
+
+	cursor: pointer;
 }
 
 .ChampsRecherche:hover{
-	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+	border-color: #e67300;
+}
+.ChampsRecherche:focus{
+	border-color: #e67300;
 }
 table.InfoPiece {
 	width: 100%;
 }
 table.InfoPiece td {
 
-	width: 20%;
+	width: 25%;
 	text-align: center;
 
 	cursor: default;
@@ -621,11 +721,6 @@ table.InfoPiece td {
 table.InfoPiece tr td:first-child {
 
 	font-weight: bold;
-}
-
-table.InfoPiece tr td:last-child {
-
-	float: right;
 }
 
 table.InfoPiece tr {
@@ -655,27 +750,6 @@ div.NavMenuDiv{
 	background-color: white;
 
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-div.Header{
-
-	position: fixed;
-	top: 0px;
-	left: 0px;
-
-	width: 100%;
-	height: 60px;
-
-	padding-top: 20px;
-
-	background-color: white;
-
-	z-index: 999;
-
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
-	box-sizing: border-box;
-
 }
 
 div.FeetBar{
@@ -791,27 +865,31 @@ img.Login{
 
 input.Log{
 
-	width: 300px;
+	width: 100%;
 	height: 50px;
 
 	border-radius: 2px;
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-style: solid;
+	border-color: black;
 
 	background-image: url(../images/icon/lock-icon.png);
+	background-color: transparent;
 	background-size: 30px 30px;
     background-position: 10px 10px;
     background-repeat: no-repeat;
 
 	padding: 3px;
 
-	transition: .1s;
+	transition: .3s;
 
 	border-radius: 2px;
-	border-width: 0px;
 
 	font-size: 20px;
 
 	text-align: right;
+	padding-top: 5px;
 
 	outline-width: 0px;
 
@@ -819,10 +897,10 @@ input.Log{
 }
 
 input.Log:hover{
-	background-position: 15px 10px;
+	border-color: #e67300;
 }
 input.Log:focus{
-	background-position: 20px 10px;
+	border-color: #e67300;
 }
 
 input.LogLock{
@@ -840,7 +918,7 @@ input.LogUser{
 }
 
 button.Connexion{
-	width: 300px;
+	width: 100%;
 	height: 50px;
 
 	border-radius: 2px;
@@ -848,19 +926,19 @@ button.Connexion{
 
 	font-size: 20px;
 
-	background-color: green;
+	background-color: #e67300;
 	color: white;
 
 	margin-top: 25px;
 
 	cursor: pointer;
 
-	transition: all 0.1s ease;
+	transition: 0.3s ;
 }
 
 button.Connexion:hover{
 
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
 }
 
 div.BoxMenu{
@@ -897,12 +975,19 @@ img.reverse{
         -ms-filter: "FlipH";
 }
 
+.clOrange{
+	color: #e67300;
+}
+
 table.TabFeet{
 	margin-top: 20px;
-	width: 600px;
+	width: 100%;
+}
+table.TabFeet td{
+	width: 50%;
 }
 table.TabFeet button{
-	width: 300px;
+	width: 100%;
 	height: 40px;
 	color: white;
 
@@ -922,11 +1007,11 @@ table.TabFeet button.Annuler{
 }
 
 table.TabSoumissionPOTP{
-	width: 600px;
+	width: 100%;
 }
 
 table.TabSoumissionPOTP td{
-	width: 150px;
+	width: 25%;
 	text-align: center;
 }
 
@@ -935,23 +1020,31 @@ table.TabSoumissionPOTP tr th:first-child{
 }
 
 table.TabSoumissionPOTP input{
-	width: 140px;
+	width: 100%;
 	height: 30px;
 
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-color: black;
+	border-style: solid;
+
 	text-align: center;
 
+	background-color: transparent;
 	outline: none;
 	transition: .2s;
+	cursor: pointer;
 }
 
 table.TabSoumissionPOTP input:hover{
-	width: 150px;
-	height: 30px;
+	border-color: #e67300;
+}
+table.TabSoumissionPOTP input:focus{
+	border-color: #e67300;
 }
 
 table.TabSoumission{
-	width: 600px;
+	width: 100%;
 	cursor: pointer;
 
 }
@@ -968,44 +1061,63 @@ table.TabInfoSection{
 }
 
 table.TabSoumission input{
-	width: 200px;
+	width: 100%;
 	height: 30px;
 
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-color: black;
+	border-style: solid;
+
+	background-color: transparent;
+
 	outline: none;
 
-	text-align: center;
+	text-align: right;
+
+	cursor: pointer;
 
 	transition: .3s;
 }
 table.TabSoumission select{
-	width: 200px;
+	width: 100%;
 	height: 30px;
 
 	border-width: 0px;
+	border-bottom-width: 3px;
+	border-color: black;
+	border-style: solid;
+
+	background-color: transparent;
+
 	outline: none;
 
-	text-align: center;
+	text-align: right;
+
+	cursor: pointer;
 
 	transition: .2s;
 }
 table.TabSoumission input:hover{
-	width: 220px;
+	border-color: #e67300;
 }
 table.TabSoumission input:focus{
-	width: 250px;
+	border-color: black;
 }
 table.TabSoumission select:hover{
-	width: 220px;
+	border-color: #e67300;
 }
 table.TabSoumission select:focus{
-	width: 250px;
+	border-color: black;
 }
 table.TabSoumission button{
-	width: 150px;
+	width:100%;
 	height: 30px;
 
 	border-width: 0px;
+	border-radius: 5px;
+	background-color: #e67300;
+	color: white;
 
 	transition: .2s;
 }
@@ -1020,35 +1132,39 @@ table.TabSoumission td{
 	margin-right: 20px;
 	cursor: pointer;
 }
-
+table.TabInfoSection{
+	width: 100%;
+}
 table.TabInfoSection td{
-	width: 200px;
+	width: 20%;
 	text-align: center;
 	font-family: "Courier New";
 	border-style: solid;
 	border-color: black;
-	border-width: 1px;
+	border-width: 0px;
 	cursor: default;
 
 	padding: 15px;
 }
 
 table.TabInfoSection tr:nth-child(even) {background-color: #f2f2f2}
+table.TabInfoSection tr:nth-child(odd) {background-color: #e6e6e6}
 
 table.TabInfoSection tr{
-	transition: .2s;
+	transition: .4s;
 }
 table.TabInfoSection tr:hover{
-	background-color: #e6e6e6;
+	background-color:  #e67300;
+	color: white;
 }
 
 table.TabInfoSection th{
-	background-color: #e6e6e6;
+	background-color:#d9d9d9;
 	height: 50px;
 
 	border-style: solid;
 	border-color: black;
-	border-width: 1px;
+	border-width: 0px;
 
 	cursor: default;
 }
@@ -1094,3 +1210,150 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /*8888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888*/
+/*adaptative test*/
+
+.row:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+html {
+    font-family: "Lucida Sans", sans-serif;
+}
+.header {
+    background-color: #262626;
+    color: #ffffff;
+    padding: 15px;
+}
+.menu ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+.menu li {
+    padding: 8px;
+    margin-bottom: 7px;
+    background-color :#33b5e5;
+    color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.menu li:hover {
+    background-color: #0099cc;
+}
+.aside {
+    background-color: #262626;
+    padding: 15px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.footer {
+    background-color: #262626;
+    color: #ffffff;
+    text-align: center;
+    font-size: 12px;
+    padding: 15px;
+}
+.box{
+	border-radius: 3px;
+	background-color: white;
+	border-width: 0px;
+	border-style: solid;
+	margin-top: 20px;
+
+	padding: 20px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+.maxheight{
+	height: auto;
+		min-height: 200px;
+		max-height: 90%;
+	overflow: scroll;
+	overflow-x: hidden;
+}
+/* For mobile phones: */
+[class*="col-"] {
+    width: 100%;
+}
+@media only screen and (min-width: 600px) {
+    /* For tablets: */
+    .col-m-1 {width: 8.33%;}
+    .col-m-2 {width: 16.66%;}
+    .col-m-3 {width: 25%;}
+    .col-m-4 {width: 33.33%;}
+    .col-m-5 {width: 41.66%;}
+    .col-m-6 {width: 50%;}
+    .col-m-7 {width: 58.33%;}
+    .col-m-8 {width: 66.66%;}
+    .col-m-9 {width: 75%;}
+    .col-m-10 {width: 83.33%;}
+    .col-m-11 {width: 91.66%;}
+    .col-m-12 {width: 100%;}
+
+    .middle{
+	height: auto;
+}
+}
+@media only screen and (min-width: 920px)  {
+    /* For desktop: */
+    .col-1 {width: 8.33%;}
+    .col-2 {width: 16.66%;}
+    .col-3 {width: 25%;}
+    .col-4 {width: 33.33%;}
+    .col-5 {width: 41.66%;}
+    .col-6 {width: 50%;}
+    .col-7 {width: 58.33%;}
+    .col-8 {width: 66.66%;}
+    .col-9 {width: 75%;}
+    .col-10 {width: 83.33%;}
+    .col-11 {width: 91.66%;}
+    .col-12 {width: 100%;}
+
+    .middle{
+	height: 70%;
+	padding-top: 10%;
+	}
+}
+@media only screen and (min-width:1600px) {
+    /* For desktop: */
+    .col-l-1 {width: 8.33%;}
+    .col-l-2 {width: 16.66%;}
+    .col-l-3 {width: 25%;}
+    .col-l-4 {width: 33.33%;}
+    .col-l-5 {width: 41.66%;}
+    .col-l-6 {width: 50%;}
+    .col-l-7 {width: 58.33%;}
+    .col-l-8 {width: 66.66%;}
+    .col-l-9 {width: 75%;}
+    .col-l-10 {width: 83.33%;}
+    .col-l-11 {width: 91.66%;}
+    .col-l-12 {width: 100%;}
+
+    .middle{
+	height: 70%;
+	padding-top: 10%;
+}
+}
+
+.overflowAll{
+	overflow: auto;
+}
+
+#sketch {
+	border: 3px solid gray;
+	height: 200px;
+	width: 70%;
+	cursor: crosshair;
+}
+
+#tmp_canvas {
+	position: absolute;
+	left: 0px; right: 0;
+	bottom: 0; top: 0;
+	cursor: crosshair;
+}

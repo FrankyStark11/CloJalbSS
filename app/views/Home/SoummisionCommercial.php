@@ -18,7 +18,9 @@
 </head>
 
 <body>
-	<a class="NavBar" href="/index.php/Home/MenuSoumission"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
+	<a href="/index.php/Home/MenuSoumission">
+		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
+	</a>
 	<div id="Main" class="Main" align="center">
 		Soummission Commercial !!!
 	</div>

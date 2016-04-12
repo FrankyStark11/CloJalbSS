@@ -9,6 +9,7 @@
 
 	<title>Inventaire Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
@@ -17,11 +18,14 @@
 </head>
 
 <body>
-	<a class="NavBar" href="/index.php/Home/MenuInventaire"><img style="float: right; width: 50px;height: 50px;" title="Retour au menu" class="ConfigImage" src="/images/icon/exit-icon.png"></a>
+	<a href="/index.php/Home/MenuInventaire">
+		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
+	</a>
 	<div id="Main" class="Main" align="center">
+	<div class="box" style="width: 700px;" align="center">
 	<h1>Nouvelle pièce</h1>
 		<form id="FormInsertion" method="get" onsubmit="return validateFormInsertion()" action="/index.php/Admin/Insertion">
-			<table class="InsertionTable">
+			<table style="width: 600px;" class="InsertionTable">
 				<tr>
 					<td>
 						No Piece
@@ -35,8 +39,8 @@
 						Description
 					</td>
 					<td>
-						<textarea id="TxtInsertionDescription" title="Caractère interdit 
-   '  _  # " name="txtDesc" rows="5" cols="50" placeholder="Description courte de la piece"></textarea>
+						<input type="text" id="TxtInsertionDescription" title="Caractère interdit 
+   '  _  # " name="txtDesc" placeholder="Description courte de la piece"></input>
 					</td>
 				</tr>
 				<tr>
@@ -217,10 +221,10 @@
 					</td>
 				</tr>
 			</table>
-		<button class="BtnRecherche" title="Ajouter la pièce" value="Rechercher"> Ajouter </input>
+		<button class="BtnRecherche" style="width: 600px;" title="Ajouter la pièce" value="Rechercher"> Ajouter </input>
 		</form>
 	</div>
-	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
+	</div>
 </body>
 
 </html>
