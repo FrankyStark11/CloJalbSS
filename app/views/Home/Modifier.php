@@ -40,7 +40,7 @@
 						Description
 					</td>
 					<td>
-						<input type="text" name="txtDesc" value=<?php print_r($Data[0]->InvDesc); ?> title="Caractère interdit 
+						<input type="text" name="txtDesc" value='<?php print_r($Data[0]->InvDesc); ?>' title="Caractère interdit 
    '  _  # " id="txtDesc" placeholder="Description courte de la piece"></input>
 					</td>
 				</tr>
@@ -104,7 +104,7 @@
 					<td>
 						<select id="SelectModificationLongeur" name="txtLongeur">
 							<optgroup label="Choix actuel">
-								<option value=<?php echo $Data[0]->InvLongeur; ?>><?php echo $Data[0]->InvLongeur; ?></option>
+								<option value='<?php echo $Data[0]->InvLongeur; ?>'><?php echo $Data[0]->InvLongeur; ?></option>
 							</optgroup>
 							<option>N/A</option>
 							<optgroup label="Pied/pouce">
@@ -177,7 +177,7 @@
 				</tr>
 				<tr>
 					<td>
-						Categorie
+						Catégorie
 					</td>
 					<td>
 						<select id="SelectModifCategorie" name="txtCategorie">
@@ -219,7 +219,7 @@
 				</tr>
 				<tr>
 					<td>
-						Quantitée
+						Quantité
 					</td>
 					<td>
 						<input id="TxtModifQuantite" name="txtQte" type="number" placeholder="Quantitée" value=<?php echo $Data[0]->InvQte; ?>></input>
@@ -237,7 +237,6 @@
 		<button class="BtnRecherche" value="Rechercher"> Modifier </input>
 		</form>
 	</div>
-	<div class="FeetBar" align="center"> Connecté en tant que : <?php echo $_SESSION["NomUtilisateur"]; ?></div>
 </body>
 
 </html>

@@ -367,6 +367,60 @@ function showHint(TypeAffichage){
 //sur la page de reception
 //affiche dans lespace description linformation concernant litem 
 //selectionné
+function showDescriptionSP(str){
+
+        $.post("/index.php/Home/GetElementInvParamStr",
+          {dataID: str},
+        function(data){
+          var Arr = JSON.parse(data);
+          var TxtIdInfo = document.getElementById("IdItemReception");
+          var TxtDescriptionInfo = document.getElementById("DescriptionItemReception");
+          var TxtQteInfo = document.getElementById("QteItemReception");
+          var TxtPrixInfo = document.getElementById("PrixItemReception");
+          var BtnAjouterInfo = document.getElementById("BtnAjouterReception");
+
+          //vide toutes les valeurs child du main
+          if(Arr.length == 1){
+            if(Arr[0]["InvNoId"] == TxtIdInfo.value.toUpperCase()){
+              TxtDescriptionInfo.replaceChild(document.createTextNode(Arr[0]["InvDesc"]),TxtDescriptionInfo.childNodes[0]) ;
+              TxtPrixInfo.value = Arr[0]["InvPrixCoutant"];
+              TxtQteInfo.value = 1;
+              TxtQteInfo.disabled = false;
+              TxtPrixInfo.disabled = false;
+              BtnAjouterInfo.disabled = false;
+            }
+            else{
+              if(TxtIdInfo.value == ""){
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
+              }else{
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
+              }
+              
+              TxtQteInfo.disabled = true;
+              TxtPrixInfo.disabled = true;
+              BtnAjouterInfo.disabled = true;
+              TxtPrixInfo.value = "";
+              TxtQteInfo.value = "";
+            }
+          }
+          else{
+            if(TxtIdInfo.value == ""){
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
+              }else{
+                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
+              }
+            TxtQteInfo.disabled = true;
+            TxtPrixInfo.disabled = true;
+            BtnAjouterInfo.disabled = true;
+            TxtPrixInfo.value = "";
+            TxtQteInfo.value = "";
+          }
+        });
+}
+
+//sur la page de reception
+//affiche dans lespace description linformation concernant litem 
+//selectionné
 function showDescription(str){
 
         $.post("/index.php/Home/GetElementInvParamStr",
@@ -448,6 +502,52 @@ function AddReceptionElement(){
            td_2.appendChild( document.createTextNode(QteItem) );
         tr_0.appendChild( td_2 );
 
+
+        var td_3 = document.createElement('td');
+
+           var button_0 = document.createElement('button');
+              button_0.className = "BtnRetirer";
+              button_0.addEventListener('click', function(){ RemoveElement(IDElement);}, false);
+           td_3.appendChild( button_0 );
+
+        tr_0.appendChild( td_3 );
+
+     table_0.appendChild( tr_0 );
+  }
+}
+
+//lorsque les informations sont entré pour une reception 
+//Cette methode l'envoie dans la zone de PO temporaire
+function AddSoumissionElement(){
+
+  var NoItem = (document.getElementById("IdItemReception").value).toUpperCase();
+  var DescItem = document.getElementById("DescriptionItemReception").textContent;
+  var QteItem = document.getElementById("QteItemReception").value; 
+  var PrixItem = document.getElementById("PrixItemReception").value;
+  var IDElement = makeid();
+
+  if(AjoutItemPossible()){
+    var table_0 = document.getElementById("TabItems");
+     var tr_0 = document.createElement('tr');
+         tr_0.id = IDElement;
+
+        var td_0 = document.createElement('td');
+           td_0.appendChild( document.createTextNode(NoItem) );
+        tr_0.appendChild( td_0 );
+
+
+        var td_1 = document.createElement('td');
+           td_1.appendChild( document.createTextNode(DescItem) );
+        tr_0.appendChild( td_1 );
+
+
+        var td_2 = document.createElement('td');
+           td_2.appendChild( document.createTextNode(QteItem) );
+        tr_0.appendChild( td_2 );
+
+        var td_4 = document.createElement('td');
+           td_4.appendChild( document.createTextNode(PrixItem) );
+        tr_0.appendChild( td_4 );
 
         var td_3 = document.createElement('td');
 
@@ -1633,215 +1733,3 @@ function OnColorChange(){
   var ar = [];
   SetArrayHidden(ar);
 }
-
-/* © 2009 ROBO Design
- * http://www.robodesign.ro
- */
-
-// Keep everything in anonymous function, called on window load.
-if(window.addEventListener) {
-window.addEventListener('load', function () {
-  var canvas, context, canvaso, contexto;
-
-  // The active tool instance.
-  var tool;
-  var tool_default = 'line';
-
-  function init () {
-
-    // Find the canvas element.
-    canvaso = document.getElementById('imageView');
-    if (!canvaso) {
-      return;
-    }
-
-    if (!canvaso.getContext) {
-      return;
-    }
-
-    // Get the 2D canvas context.
-    contexto = canvaso.getContext('2d');
-    if (!contexto) {
-      return;
-    }
-
-    // Add the temporary canvas.
-    var container = canvaso.parentNode;
-    canvas = document.createElement('canvas');
-    if (!canvas) {
-      return;
-    }
-
-    canvas.id     = 'imageTemp';
-    canvas.width  = canvaso.width;
-    canvas.height = canvaso.height;
-    container.appendChild(canvas);
-
-    context = canvas.getContext('2d');
-
-    // Get the tool select input.
-    var tool_select = document.getElementById('dtool');
-    if (!tool_select) {
-      //alert('Error: failed to get the dtool element!');
-      return;
-    }
-    tool_select.addEventListener('change', ev_tool_change, false);
-
-    // Activate the default tool.
-    if (tools[tool_default]) {
-      tool = new tools[tool_default]();
-      tool_select.value = tool_default;
-    }
-
-    // Attach the mousedown, mousemove and mouseup event listeners.
-    canvas.addEventListener('mousedown', ev_canvas, false);
-    canvas.addEventListener('mousemove', ev_canvas, false);
-    canvas.addEventListener('mouseup',   ev_canvas, false);
-  }
-
-  // The general-purpose event handler. This function just determines the mouse 
-  // position relative to the canvas element.
-  function ev_canvas (ev) {
-    if (ev.layerX || ev.layerX == 0) { // Firefox
-      ev._x = ev.pageX;
-      ev._y = ev.pageY;
-    }
-
-    // Call the event handler of the tool.
-    var func = tool[ev.type];
-    if (func) {
-      func(ev);
-    }
-  }
-
-  // The event handler for any changes made to the tool selector.
-  function ev_tool_change (ev) {
-    if (tools[this.value]) {
-      tool = new tools[this.value]();
-    }
-  }
-
-  // This function draws the #imageTemp canvas on top of #imageView, after which 
-  // #imageTemp is cleared. This function is called each time when the user 
-  // completes a drawing operation.
-  function img_update () {
-    contexto.drawImage(canvas, 0, 0);
-    context.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  // This object holds the implementation of each drawing tool.
-  var tools = {};
-
-  // The drawing pencil.
-  tools.pencil = function () {
-    var tool = this;
-    this.started = false;
-
-    // This is called when you start holding down the mouse button.
-    // This starts the pencil drawing.
-    this.mousedown = function (ev) {
-        context.beginPath();
-        context.moveTo(ev._x, ev._y);
-        tool.started = true;
-    };
-
-    // This function is called every time you move the mouse. Obviously, it only 
-    // draws if the tool.started state is set to true (when you are holding down 
-    // the mouse button).
-    this.mousemove = function (ev) {
-      if (tool.started) {
-        context.lineTo(ev._x, ev._y);
-        context.stroke();
-      }
-    };
-
-    // This is called when you release the mouse button.
-    this.mouseup = function (ev) {
-      if (tool.started) {
-        tool.mousemove(ev);
-        tool.started = false;
-        img_update();
-      }
-    };
-  };
-
-  // The rectangle tool.
-  tools.rect = function () {
-    var tool = this;
-    this.started = false;
-
-    this.mousedown = function (ev) {
-      tool.started = true;
-      tool.x0 = ev._x;
-      tool.y0 = ev._y;
-    };
-
-    this.mousemove = function (ev) {
-      if (!tool.started) {
-        return;
-      }
-
-      var x = Math.min(ev._x,  tool.x0),
-          y = Math.min(ev._y,  tool.y0),
-          w = Math.abs(ev._x - tool.x0),
-          h = Math.abs(ev._y - tool.y0);
-
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      if (!w || !h) {
-        return;
-      }
-
-      context.strokeRect(x, y, w, h);
-    };
-
-    this.mouseup = function (ev) {
-      if (tool.started) {
-        tool.mousemove(ev);
-        tool.started = false;
-        img_update();
-      }
-    };
-  };
-
-  // The line tool.
-  tools.line = function () {
-    var tool = this;
-    this.started = false;
-
-    this.mousedown = function (ev) {
-      tool.started = true;
-      tool.x0 = ev._x;
-      tool.y0 = ev._y;
-    };
-
-    this.mousemove = function (ev) {
-      if (!tool.started) {
-        return;
-      }
-
-      context.clearRect(0, 0, canvas.width, canvas.height);
-
-      context.beginPath();
-      context.moveTo(tool.x0, tool.y0);
-      context.lineTo(ev._x,   ev._y);
-      context.stroke();
-      context.closePath();
-    };
-
-    this.mouseup = function (ev) {
-      if (tool.started) {
-        tool.mousemove(ev);
-        tool.started = false;
-        img_update();
-      }
-    };
-  };
-
-  init();
-
-}, false); }
-
-
-
-//88888888888888888888888888888888888888888888888888888

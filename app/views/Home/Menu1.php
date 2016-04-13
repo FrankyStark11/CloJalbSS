@@ -21,16 +21,32 @@
 <body>
 
 	<div id="Main" class="Main" align="center">
-	<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
-		<div class="BoxMenu"><a href="/index.php/Home/MenuInventaire"><img title="Inventaire" class="BoxMenu" src="../../images/icon/MenuInventaire-icon.png"></a><h2>INVENTAIRE</h2></div>
+		<div class="row">
+			<div class="col-12 col-m-12">
+				<div class="col-12 col-m-12 box">
+					<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<div class="col-12 col-m-12 box">
+					<div class="BoxMenu"><a href="/index.php/Home/MenuInventaire"><img title="Inventaire" class="BoxMenu" src="../../images/icon/MenuInventaire-icon.png"></a><h2>INVENTAIRE</h2></div>
 
-		<div class="BoxMenu"><a href="/index.php/Home/MenuSoumission"><img title="Soumission" class="BoxMenu" src="../../images/icon/Soumission-icon.png"></a><h2>SOUMISSION</h2></div>
+					<div class="BoxMenu"><a href="/index.php/Home/MenuSoumission"><img title="Soumission" class="BoxMenu" src="../../images/icon/Soumission-icon.png"></a><h2>SOUMISSION</h2></div>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<div class="col-12 col-m-12 box">
+					<div class="BoxMenu"><a href="/index.php/Home/Log"><img title="Log" class="BoxMenu" src="../../images/icon/Backlog-icon.png"></a><h2>LOG</h2></div>
 
-		<div class="BoxMenu"><a href="/index.php/Home/Log"><img title="Log" class="BoxMenu" src="../../images/icon/Backlog-icon.png"></a><h2>LOG</h2></div>
-
-		<div class="BoxMenu"><a href="/index.php/Home/Configuration"><img title="Configuration" class="BoxMenu" src="../../images/icon/settings-icon.png"></a><h2>CONFIGURATION</h2></div>
-
-		<div class="BoxMenu"><a href="/index.php/Admin/TerminerSession"><img title="Déconnexion" class="BoxMenu" src="../../images/icon/logout-icon.png"></a><h2>DÉCONNEXION</h2></div>
+					<div class="BoxMenu"><a href="/index.php/Home/Configuration"><img title="Configuration" class="BoxMenu" src="../../images/icon/settings-icon.png"></a><h2>CONFIGURATION</h2></div>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<div class="col-12 col-m-12 box">
+					<div class="BoxMenu"><a href="/index.php/Admin/TerminerSession"><img title="Déconnexion" class="BoxMenu" src="../../images/icon/logout-icon.png"></a><h2>DÉCONNEXION</h2></div>
+				</div>
+			</div>
+		</div>
 	</div>
 </body>
 

@@ -20,10 +20,29 @@
 
 <body>
 	<div id="Main" class="Main" align="center">
-	<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
-		<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
-		<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
-		<div class="BoxMenu"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>MENU</h2></div>
+		<div class="row">
+			<div class="col-12 col-m-12">
+				<div class="col-12 col-m-12 box ">
+					<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<div class="col-12 col-m-12 box ">
+					<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
+
+					<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
+
+					<div class="BoxMenu"><a href="/index.php/Home/SP"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/pieces-icon.png"></a><h2>PIÈCE</h2></div>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<div class="col-12 col-m-12 box ">
+					<div class="BoxMenu"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>MENU</h2></div>
+				</div>
+			</div>
+			
+			
+		</div>
 	</div>
 </body>
 

@@ -46,6 +46,11 @@
 			parent::view('Home/SoummisionCommercial');
 		}
 
+		public function SP(){
+			//affiche la soumission de pieces
+			parent::view('Home/SoumissionPieces');
+		}
+
 		public function Log(){
 			$Model = new modHome();
 			$result = $Model->GetLog();

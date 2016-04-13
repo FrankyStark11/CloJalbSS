@@ -632,7 +632,7 @@ div.InfoPiece{
 	padding-top: 15px;
 	padding-bottom: 15px;
 
-	background-color: #d9d9d9;
+	background-color: #f2f2f2;
 
 	transition: .5s;
 
@@ -942,8 +942,8 @@ button.Connexion:hover{
 }
 
 div.BoxMenu{
-	width: 250px;
-	height: 350px;
+	width: 200px;
+	height: 300px;
 
 	margin: 20px;
 
@@ -952,8 +952,8 @@ div.BoxMenu{
 }
 
 img.BoxMenu{
-	width: 250px;
-	height: 250px;
+	width: 200px;
+	height: 200px;
 
 	border-radius: 200px;
 	cursor: pointer;
@@ -1225,9 +1225,9 @@ html {
     font-family: "Lucida Sans", sans-serif;
 }
 .header {
-    background-color: #262626;
-    color: #ffffff;
-    padding: 15px;
+    position: fixed;
+    top: 30px;
+    left: 20px;
 }
 .menu ul {
     list-style-type: none;
@@ -1264,9 +1264,9 @@ html {
 	background-color: white;
 	border-width: 0px;
 	border-style: solid;
-	margin-top: 20px;
+	margin-top: 10px;
 
-	padding: 20px;
+	padding: 25px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 .maxheight{
@@ -1342,18 +1342,4 @@ html {
 
 .overflowAll{
 	overflow: auto;
-}
-
-#sketch {
-	border: 3px solid gray;
-	height: 200px;
-	width: 70%;
-	cursor: crosshair;
-}
-
-#tmp_canvas {
-	position: absolute;
-	left: 0px; right: 0;
-	bottom: 0; top: 0;
-	cursor: crosshair;
 }
