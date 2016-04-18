@@ -14,20 +14,20 @@
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>
 
-<body onload="">
+<body onload="AfficherLstPiecesRetrait('<?php echo$_GET["NoDossier"]; ?>');">
 
-	<a href="/index.php/Home/MenuInventaire">
+	<a href="/index.php/Home/MenuSoumission">
 		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
 	</a>
 <div class="row">
 	<div class="col-12 col-m-12">
 		<div class="col-12 col-m-12 box">
-			<h1>JOHN DOE : 20160414-01</h1>
+			<h1><?php echo $_GET["NoDossier"]; ?></h1>
 		</div>
 	</div>
 	<div class="col-6 col-m-12">
 	<h4 class="CLorange">Pièces nécésaire pour le travail</h4><hr>
-		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+		<div id="DataPiece" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
 
 			<div class="col-12 InfoBox" title="Ajout d'une piece non prévue">
 				<table class="InfoPiece">
@@ -39,33 +39,12 @@
 					</tr>
 				</table>
 			</div>
-			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6">
-				<table class="InfoPiece">
-					<tr>
-						<td>POTP-04238-NO</td>
-						<td>Prévu : 120</td>
-						<td><input class="StyleInput" placeholder="Quantité réel"></input></td>
-						<td><button class="BGOrange StyleBtn">Confirmer</button></td>
-					</tr>
-				</table>
-			</div>
-
-			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6">
-				<table class="InfoPiece">
-					<tr>
-						<td>POTP-04238-BR</td>
-						<td>Prévu : 100</td>
-						<td><input class="StyleInput" placeholder="Quantité réel"></input></td>
-						<td><button class="BGOrange StyleBtn">Confirmer</button></td>
-					</tr>
-				</table>
-			</div>
-
 		</div>
 	</div>
 	<div class="col-6 col-m-12">	
 	<h4 class="CLorange">Résumé</h4><hr>
 		<div id="" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+			
 			<div class="col-12 InfoBox"> 
 				<table class="InfoPiece">
 					<tr>
@@ -75,6 +54,7 @@
 					</tr>
 				</table> 
 			</div>
+
 		</div>
 	<hr><button class="BGOrange StyleBtn" style="width: 100%;"> Confirmer </button><hr>
 	</div>

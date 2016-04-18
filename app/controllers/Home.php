@@ -96,6 +96,13 @@
 			echo json_encode($result);
 		}
 
+		public function GetLstPiecesDossier(){
+			$Model = new modHome();
+			if(is_null($_POST["no"])){ $dataID = ""; }else{ $dataID = $_POST["no"];}
+			$result = $Model->GetLstPiecesDossier($dataID);
+			echo json_encode($result);
+		}
+
 		public function GetInvParamStr(){
 
 			$Model = new modHome();

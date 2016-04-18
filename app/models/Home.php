@@ -190,6 +190,22 @@
 			return $result;
 		}
 
+		function GetLstPiecesDossier($No){
+			
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT DossLstMateriaux FROM Dossier WHERE DossNumeroId = :No ");
+			$sql->bindValue(":No", $No);
+			$sql->execute();
+
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function GetDossier($DataId){
 			$db = $this->connectDB();
 

@@ -18,7 +18,7 @@
 </head>
 
 <body>
-	<a href="/index.php/Home/MenuInventaire">
+	<a href="/index.php/Home/MenuSoumission">
 		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
 	</a>
 	<div id="Main" class="Main">

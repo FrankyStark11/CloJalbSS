@@ -780,8 +780,74 @@ function AfficherDetailDossierOuvert(itemArray){
   poteau.replaceChild(document.createTextNode(itemArray.DossPoteau),poteau.childNodes[0]);
   valeur.replaceChild(document.createTextNode( (parseFloat(itemArray.DossValeur).toFixed(2)).toString() + "$"),valeur.childNodes[0]);
 
-  menu1.replaceChild(document.createTextNode(itemArray.DossPrenomClient + " " + itemArray.DossNomClient + " : " + itemArray.DossNumeroId),menu1.childNodes[0]);
-  menu2.replaceChild(document.createTextNode(itemArray.DossPrenomClient + " " + itemArray.DossNomClient + " : " + itemArray.DossNumeroId),menu2.childNodes[0]);
+  menu1.replaceChild(document.createTextNode(itemArray.DossNomClient + ", " + itemArray.DossPrenomClient + " : " + itemArray.DossNumeroId),menu1.childNodes[0]);
+  menu2.replaceChild(document.createTextNode(itemArray.DossNomClient + ", " + itemArray.DossPrenomClient + " : " + itemArray.DossNumeroId),menu2.childNodes[0]);
+
+  document.getElementById("lienRetrait").href = "/index.php/Home/Retrait?NoDossier=" + itemArray.DossNumeroId;
+}
+
+function AfficherLstPiecesRetrait(id){
+
+  $.post("/index.php/Home/GetLstPiecesDossier",
+    {no: id},
+  function(data){
+    itemArray = JSON.parse(JSON.parse(data)["DossLstMateriaux"]);
+    for(i=0;i<itemArray.length;i++){
+      AddPieceRetrait(itemArray[i]);
+    }
+  });
+
+}
+
+function AddPieceRetrait(item){
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+   div_0.title = item[3];
+
+   var table_0 = document.createElement('table');
+      table_0.className = "InfoPiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(item[0]));
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode("Prévu : " + item[1]));
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+
+            var input_0 = document.createElement('input');
+               input_0.placeholder = "Quantité réel";
+               input_0.className = "StyleInput";
+               input_0.value = item[1];
+            td_2.appendChild( input_0 );
+
+         tr_0.appendChild( td_2 );
+
+         var td_3 = document.createElement('td');
+
+          var button_0 = document.createElement('button');
+              button_0.className = "BGOrange StyleBtn";
+              button_0.appendChild( document.createTextNode("Confirmer") );
+          td_3.appendChild( button_0 );
+
+        tr_0.appendChild( td_3 );
+
+      table_0.appendChild( tr_0 );
+
+
+      
+
+   div_0.appendChild( table_0 );
+
+  document.getElementById("DataPiece").appendChild( div_0 );
+
 }
 
 //cette methode permet dafficher un element recus en param

@@ -43,7 +43,7 @@
 	</div>
 	<div class="col-6 col-m-12">	
 	<h4 class="CLorange">Détails</h4><hr>
-		<div id="zone01" class="col-12 col-m-12 overflowAll box" >
+		<div id="zone01" style="display: none;" class="col-12 col-m-12 overflowAll box" >
 			<h4 class="CLOrange"> Information client</h4>
 			<table class="InfoPiece tabLastColumAlignRight">
 				<tr>
@@ -170,7 +170,7 @@
       <p>Pour officiellement fermer le dossier vous devrez confirmer les pieces avec leurs quantités</p>
     </div>
     <footer class="w3-container" style="padding-bottom: 10px;" align="center">
-     <a href="/index.php/Home/Retrait"> <button class="StyleBtn bgGreen">Confirmer les pieces</button></a>
+     <a id="lienRetrait" ><button class="StyleBtn bgGreen">Confirmer les pieces</button></a>
     </footer>
   </div>
 </div>
