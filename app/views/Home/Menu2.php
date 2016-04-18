@@ -19,25 +19,34 @@
 </head>
 
 <body>
-	<div id="Main" class="Main" align="center">
+	<div id="Main" class="Main">
 		<div class="row">
 			<div class="col-12 col-m-12">
 				<div class="col-12 col-m-12 box ">
-					<h1>Bienvenue <?php echo $_SESSION["NomUtilisateur"]; ?> !</h1>
+					<h1>Bonjour <?php echo $_SESSION["NomUtilisateur"]; ?>.</h1>
 				</div>
 			</div>
 			<div class="col-6 col-m-12">
+				<h4 class="CLOrange"> Création feuille de travail</h4><hr>
 				<div class="col-12 col-m-12 box ">
-					<div class="BoxMenu"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
+					<div class="BoxMenu" align="center"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
 
-					<div class="BoxMenu"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
+					<div class="BoxMenu" align="center"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
 
-					<div class="BoxMenu"><a href="/index.php/Home/SP"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/pieces-icon.png"></a><h2>PIÈCE</h2></div>
+					
 				</div>
 			</div>
 			<div class="col-6 col-m-12">
+				<h4 class="CLOrange"> Gestion des feuilles de travaux </h4><hr>
 				<div class="col-12 col-m-12 box ">
-					<div class="BoxMenu"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>MENU</h2></div>
+					<div class="BoxMenu" align="center"><a href="/index.php/Home/JobEnCours"><img title="Consulter les feuilles de travaux en cours" class="BoxMenu" src="../../images/icon/Job-icon.png"></a><h2>EN COURS</h2></div>
+					<div class="BoxMenu" align="center"><a href="/index.php/Home/ToutesJobs"><img title="Consulter toutes les feuilles de travaux" class="BoxMenu" src="../../images/icon/AllJob-icon.png"></a><h2>CONSULTER</h2></div>
+				</div>
+			</div>
+			<div class="col-6 col-m-12">
+				<h4 class="CLOrange"> Menu</h4><hr>
+				<div class="col-12 col-m-12 box ">
+					<div class="BoxMenu" align="center"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>RETOUR</h2></div>
 				</div>
 			</div>
 			

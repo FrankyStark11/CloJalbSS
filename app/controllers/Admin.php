@@ -39,6 +39,35 @@
 			parent::view('Home/Config');
 		}
 
+		public function EnregistrerDossier(){
+			
+			$Model = new modHome();
+
+			$NoDossier = date("Y") . date("m") . date("d");//generer selon la date
+			$NoDossier = $NoDossier . "-" . $Model->GetNbDossierFromDate($NoDossier);
+
+			$prenom =  $_POST["TxtClientPrenomSR"];
+			$nom = $_POST["TxtClientNomSR"];
+			$ville = $_POST["TxtVilleProjetSR"];
+			$type = $_POST["TypeDossier"];
+			$status = "Ouvert";
+			$pied = $_POST["PiedLineaireHidden"];
+			$poteau = $_POST["PoteauTotalHidden"];
+			$valeur = $_POST["ValeurTotal"];
+			$lstpieces = $_POST["LstPieces"];
+			$DateProjet = $_POST["TxtDateProjetSR"];
+
+
+			$Model->InsertionDossier($NoDossier,$prenom,$nom,$ville,$type,$status,$pied,$poteau,$valeur,$lstpieces,$DateProjet);
+
+			//Ajout au log
+			$ActionString = "Le dossier de ".$prenom . " ". $nom . " à été ajouté.";
+			$Model->InscriptionLog($ActionString);
+
+			$_SESSION["NoConfirmation"] = $NoDossier;
+			parent::view('Home/ConfirmationEnregistrementDossier');
+		}
+
 		public function ModifMdp(){
 			$Model = new modHome();
 

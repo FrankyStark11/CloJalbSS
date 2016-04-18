@@ -345,22 +345,22 @@ button.BtnRetirer:hover{
 	width: 60px;
 	height: 50px;
 
-	background-image: url(../images/BG/MetalPattern.png);
+	background-color: #e67300;
 	box-shadow: 0 12px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
 
 	position: fixed;
-	left: 5px;
-	top: 50px;
+	right: -5px;
+	top: 20px;
 
-	margin-left: -20px;
+	margin-left: 20px;
 	margin-top: -5px;
 
 	z-index: 998;
 
 	padding-top: 17px;
-	padding-right: 10px;
+	padding-left: 10px;
 	color: white;
-	text-align: right;
+	text-align: left;
 
 	cursor: pointer;
 
@@ -377,7 +377,7 @@ button.BtnRetirer:hover{
 }
 #RetourMenu:hover{
 	width: 100px;
-	margin-left: -5px;
+	margin-left: 5px;
 }
 
 table.RechercheBox{
@@ -616,6 +616,8 @@ table.LogData tr:hover{
 	cursor: default;
 }
 
+
+
 div.InfoPiece{
 	display: block;
 	position: relative;
@@ -721,6 +723,7 @@ table.InfoPiece td {
 table.InfoPiece tr td:first-child {
 
 	font-weight: bold;
+	text-align: left;
 }
 
 table.InfoPiece tr {
@@ -1147,6 +1150,10 @@ table.TabInfoSection td{
 	padding: 15px;
 }
 
+.tabLastColumAlignRight td:last-child{
+	text-align: right;
+}
+
 table.TabInfoSection tr:nth-child(even) {background-color: #f2f2f2}
 table.TabInfoSection tr:nth-child(odd) {background-color: #e6e6e6}
 
@@ -1167,22 +1174,6 @@ table.TabInfoSection th{
 	border-width: 0px;
 
 	cursor: default;
-}
-
-table.TabInfoSection button{
-	width: 100px;
-	height: 30px;
-
-	background-color: #b30000;
-	color: white;
-
-	border-width: 0px;
-
-	transition: .2s;
-	cursor: pointer;
-}
-table.TabInfoSection button:hover{
-	background-color: red;
 }
 
 div.divSections{
@@ -1259,6 +1250,12 @@ html {
     font-size: 12px;
     padding: 15px;
 }
+.boxMaxHeigth{
+	max-height: 600px;
+	overflow-x:hidden;
+	overflow-y:auto;
+
+}
 .box{
 	border-radius: 3px;
 	background-color: white;
@@ -1269,12 +1266,85 @@ html {
 	padding: 25px;
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+
+.InfoBox{
+	border-radius: 3px;
+	background-color: #f2f2f2;
+	border-width: 0px;
+	border-style: solid;
+	margin-top: 10px;
+
+	cursor: default;
+
+	padding: 25px;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+	transition: .3s;
+}
+.InfoBox:hover{
+	box-shadow: 0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24);
+}
+.InfoBoxSelected{
+	box-shadow: 0 1px 3px rgb(230, 0, 0), 0 1px 2px rgb(230, 0, 0);
+}
+.InfoBoxSelected:hover{
+	box-shadow: 0 2px 4px rgb(230, 0, 0), 0 2px 3px rgb(230, 0, 0);
+}
 .maxheight{
 	height: auto;
 		min-height: 200px;
 		max-height: 90%;
 	overflow: scroll;
 	overflow-x: hidden;
+}
+.BGOrange{
+	background-color: #E67300;
+	color: white;
+}
+.BGRed{
+	background-color: #e60000;
+	color: white;
+}
+.BGGreen{
+	background-color: #2eb82e;
+	color: white;
+}
+.StyleInput{
+	border-width: 0px;
+	border-color: black;
+	border-style: solid;
+	border-bottom-width: 2px;
+
+	font-family: "Courier New";
+
+	outline-color: #e67300;
+
+	background-color: transparent;
+	text-align: right;
+
+	transition: .3s;
+}
+.StyleInput:hover{
+	border-color: #e67300;
+}
+.StyleInput:focus{
+	border-color: #e67300;
+}
+.StyleBtn{
+
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+
+	border-width: 0px;
+	border-radius: 3px;
+
+	outline: none;
+	cursor: pointer;
+
+	transition: .3s;
+}
+.StyleBtn:hover{
+	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
 /* For mobile phones: */
 [class*="col-"] {

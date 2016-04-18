@@ -118,6 +118,50 @@
 			$sql = null;
 		}
 
+		function GetNbDossierFromDate($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Dossier WHERE DossNumeroId LIKE '%' || :ID || '%';");
+			$sql->bindValue(":ID",$ID);
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+			$count = strval(count($result));
+			
+
+			$db = null;
+			$sql = null;
+
+			if($count <= "9"){ $count = "0" . strval($count);}
+
+			return $count;
+		}
+
+		//ajout dun nouvelle utilisateur dans le systeme selon les params
+		function InsertionDossier($NoDossier,$prenom,$nom,$ville,$type,$status,$pied,$poteau,$valeur,$lstpieces,$DateProjet){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("INSERT INTO Dossier (DossNumeroId,DossNomClient,DossPrenomClient,DossVille,DossType,DossStatus,DossPiedLineaire,DossPoteau,DossValeur,DossLstMateriaux,DossDateTravaux) VALUES (:NumeroId,:NomClient,:PrenomClient,:Ville,:Type,:Status,:PiedLineaire,:Poteau,:Valeur,:LstMateriaux,:DateTravaux)");
+
+			$sql->bindValue(":NumeroId",$NoDossier);
+			$sql->bindValue(":NomClient",$nom);
+			$sql->bindValue(":PrenomClient",$prenom);
+			$sql->bindValue(":Ville",$ville);
+			$sql->bindValue(":Type",$type);
+			$sql->bindValue(":Status",$status);
+			$sql->bindValue(":PiedLineaire",$pied);
+			$sql->bindValue(":Poteau",$poteau);
+			$sql->bindValue(":Valeur",$valeur);
+			$sql->bindValue(":LstMateriaux",$lstpieces);
+			$sql->bindValue(":DateTravaux",$DateProjet);
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
 		function Connextion($Username,$Mdp){
 			$db = $this->connectDB();
 
@@ -143,6 +187,37 @@
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
 			$db = null;
 			$sql = null;
+			return $result;
+		}
+
+		function GetDossier($DataId){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Dossier WHERE DossStatus = :Status ORDER BY DossVille ASC");
+
+			$sql->bindValue(":Status", $DataId);
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function GetAllDossier(){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Dossier ORDER BY DossVille ASC");
+
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
 			return $result;
 		}
 

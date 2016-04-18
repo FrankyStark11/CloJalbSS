@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>
 
-<body onload="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)">
+<body onload="">
 
 	<a href="/index.php/Home/MenuInventaire">
 		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
@@ -23,7 +23,7 @@
 	<div class="col-3 col-m-12">
 	<h4 class="CLorange">Recherche</h4><hr>
 		<div class="col-12 col-m-12 box" style="height: 600px;">
-			<div id="SearchBox" class="SearchBoxPiece" align="center">
+			<div id="SearchBox" class="SearchBoxPiece" align="center">	
 				<form onreset="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)">
 					<table class="RechercheBox">
 						<tr>
@@ -177,12 +177,37 @@
 					<button type="reset" class="BGOrange StyleBtn" style="width: 100%;">Reset</button>
 				</form>	
 			</div>
+		</div>	
+	</div>
+	<div class="col-5 col-m-12">
+	<h4 class="CLorange">Sélection</h4><hr>
+		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6"> <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGOrange StyleBtn">Ajuster</button></td></tr></table> </div>
+			<div class="col-12 InfoBox InfoBoxSelected" title="Poteau de 4ft 2 3/8 6 et 6" > <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGRed StyleBtn">Retirer</button></td></tr></table> </div>
+			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6" > <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGOrange StyleBtn">Ajuster</button></td></tr></table> </div>
 		</div>
 	</div>
-	<div class="col-9 col-m-12">
-		<h4 class="CLorange">Inventaire</h4><hr>		
-		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+	<div class="col-4 col-m-12">	
+	<h4 class="CLorange">Modification</h4><hr>
+		<div id="" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+			<div class="col-12 InfoBox"> 
+				<table class="InfoPiece">
+					<tr>
+						<th>
+							No pièces
+						</th>
+						<th>
+							Nouvelle quantité
+						</th>
+					</tr>
+					<tr>
+						<td>POTP-04238-NO</td>
+						<td><input class="StyleInput" style="width: 100%;" type="text" placeholder="120"></input></td>
+					</tr>
+				</table> 
+			</div>
 		</div>
+	<hr><button class="BGOrange StyleBtn" style="width: 100%;"> Confirmer </button><hr>
 	</div>
 </div>
 </body>

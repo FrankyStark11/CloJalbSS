@@ -79,6 +79,23 @@
 			echo json_encode($result);
 		}
 
+		public function GetDossier(){
+
+			$Model = new modHome();
+			if(is_null($_POST["status"])){ $dataID = ""; }else{ $dataID = $_POST["status"];}
+
+			$result = $Model->GetDossier($dataID);
+			echo json_encode($result);
+		}
+
+		public function GetAllDossier(){
+
+			$Model = new modHome();
+
+			$result = $Model->GetAllDossier();
+			echo json_encode($result);
+		}
+
 		public function GetInvParamStr(){
 
 			$Model = new modHome();
@@ -110,6 +127,22 @@
 
 		public function Reception(){
 			parent::view('Home/Reception');
+		}
+
+		public function Ajustement(){
+			parent::view('Home/AjusterInv');
+		}
+
+		public function Retrait(){
+			parent::view('Home/Retrait');
+		}
+
+		public function JobEnCours(){
+			parent::view('Home/JobEnCours');
+		}
+
+		public function ToutesJobs(){
+			parent::view('Home/ToutesJobs');
 		}
 
 		public function InventaireInsertion(){

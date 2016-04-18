@@ -562,6 +562,228 @@ function AddSoumissionElement(){
   }
 }
 
+function AfficherDossierOuvert(){
+
+  var DataID = "Ouvert";
+
+  $.post("/index.php/Home/GetDossier",
+    {status: DataID},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("Main");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddDossierOuvert(Arr[i]);
+      }
+    }else if(Arr.length == 0){
+      document.getElementById("Main").appendChild(document.createTextNode("Aucun Dossier ouvert"));
+    }
+  });
+}
+
+function AfficherDossier(){
+
+  $.post("/index.php/Home/GetAllDossier",
+    {},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("Main");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddDossier(Arr[i]);
+      }
+    }else if(Arr.length == 0){
+      document.getElementById("Main").appendChild(document.createTextNode("Aucun Dossier ouvert"));
+    }
+  });
+}
+
+//ajout de dossier ouvert
+function AddDossier(itemArray){
+
+  if (typeof itemArray !== 'object'){
+   itemArray = JSON.parse(itemArray);
+  }
+  //definir les valeurs de litem ajouté
+  var NoItem = itemArray.DossNumeroId;
+  var Nom = itemArray.DossNomClient;
+  var Prenom = itemArray.DossPrenomClient;
+  var Ville = itemArray.DossVille;
+  var Status = itemArray.DossStatus;
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+
+   var table_0 = document.createElement('table');
+      table_0.className = "InfoPiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(NoItem) );
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode(Prenom + " " + Nom) );
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+            td_2.appendChild( document.createTextNode(Ville) );
+         tr_0.appendChild( td_2 );
+
+         var td_3 = document.createElement('td');
+            td_3.appendChild( document.createTextNode(Status) );
+         tr_0.appendChild( td_3 );
+
+
+         var td_3 = document.createElement('td');
+
+            var button_0 = document.createElement('button');
+               button_0.className = "BGOrange StyleBtn";
+               button_0.appendChild( document.createTextNode("Afficher") );
+               button_0.onclick = function(){
+                  AfficherDetailDossierOuvert(itemArray);
+                  $('#zone01').slideDown('slow');
+               };
+            td_3.appendChild( button_0 );
+
+         tr_0.appendChild( td_3 );
+
+      table_0.appendChild( tr_0 );
+
+   div_0.appendChild( table_0 );
+
+  document.getElementById("Main").appendChild( div_0 );
+}
+
+//ajout de dossier ouvert
+function AddDossierOuvert(itemArray){
+
+  if (typeof itemArray !== 'object'){
+   itemArray = JSON.parse(itemArray);
+  }
+  //definir les valeurs de litem ajouté
+  var NoItem = itemArray.DossNumeroId;
+  var Nom = itemArray.DossNomClient;
+  var Prenom = itemArray.DossPrenomClient;
+  var Ville = itemArray.DossVille;
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+
+   var table_0 = document.createElement('table');
+      table_0.className = "InfoPiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(NoItem) );
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode(Prenom + " " + Nom) );
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+            td_2.appendChild( document.createTextNode(Ville) );
+         tr_0.appendChild( td_2 );
+
+
+         var td_3 = document.createElement('td');
+
+            var button_0 = document.createElement('button');
+               button_0.onclick = function(){
+                  AfficherDetailDossierOuvert(itemArray);
+                  $('#zone01').slideDown('slow');
+               };
+               button_0.className = "BGOrange StyleBtn";
+               button_0.appendChild( document.createTextNode("Afficher") );
+            td_3.appendChild( button_0 );
+
+         tr_0.appendChild( td_3 );
+
+      table_0.appendChild( tr_0 );
+
+   div_0.appendChild( table_0 );
+
+  document.getElementById("Main").appendChild( div_0 );
+}
+
+function AfficherDetailDossierOuvert(itemArray){
+
+  var no = document.getElementById("NoDossierDetail");
+  var prenom = document.getElementById("PrenomDossierDetail");
+  var nom = document.getElementById("NomDossierDetail");
+  var ville = document.getElementById("VilleDossierDetail");
+  var date = document.getElementById("DateDossierDetail");
+  var type = document.getElementById("TypeDossierDetail");
+  var status = document.getElementById("StatusDossierDetail");
+  var pied = document.getElementById("PiedDossierDetail");
+  var poteau = document.getElementById("PoteauDossierDetail");
+  var valeur = document.getElementById("ValeurDossierDetail");
+
+  var materiel = document.getElementById("tb01");
+
+  lstmaterial = JSON.parse(itemArray.DossLstMateriaux);
+
+  while (materiel.firstChild) {
+    materiel.removeChild(materiel.firstChild);
+  }
+
+  for(i=0; i<lstmaterial.length ;i++){
+    var tr_0 = document.createElement('tr');
+
+       var td_0 = document.createElement('td');
+          td_0.appendChild( document.createTextNode(lstmaterial[i][0]));
+       tr_0.appendChild( td_0 );
+
+
+       var td_1 = document.createElement('td');
+          td_1.appendChild( document.createTextNode(lstmaterial[i][1]) );
+       tr_0.appendChild( td_1 );
+
+
+       var td_2 = document.createElement('td');
+          td_2.appendChild( document.createTextNode(lstmaterial[i][3]) );
+       tr_0.appendChild( td_2 );
+
+    materiel.appendChild( tr_0 );
+  }
+
+  var menu1 = document.getElementById("headbox1");
+  var menu2 = document.getElementById("headbox2");
+
+  no.replaceChild(document.createTextNode(itemArray.DossNumeroId),no.childNodes[0]);
+  prenom.replaceChild(document.createTextNode(itemArray.DossPrenomClient),prenom.childNodes[0]);
+  nom.replaceChild(document.createTextNode(itemArray.DossNomClient),nom.childNodes[0]);
+  ville.replaceChild(document.createTextNode(itemArray.DossVille),ville.childNodes[0]);
+  date.replaceChild(document.createTextNode(itemArray.DossDateTravaux),date.childNodes[0]);
+  type.replaceChild(document.createTextNode(itemArray.DossType),type.childNodes[0]);
+  status.replaceChild(document.createTextNode(itemArray.DossStatus),status.childNodes[0]);
+  pied.replaceChild(document.createTextNode(itemArray.DossPiedLineaire + "ft"),pied.childNodes[0]);
+  poteau.replaceChild(document.createTextNode(itemArray.DossPoteau),poteau.childNodes[0]);
+  valeur.replaceChild(document.createTextNode( (parseFloat(itemArray.DossValeur).toFixed(2)).toString() + "$"),valeur.childNodes[0]);
+
+  menu1.replaceChild(document.createTextNode(itemArray.DossPrenomClient + " " + itemArray.DossNomClient + " : " + itemArray.DossNumeroId),menu1.childNodes[0]);
+  menu2.replaceChild(document.createTextNode(itemArray.DossPrenomClient + " " + itemArray.DossNomClient + " : " + itemArray.DossNumeroId),menu2.childNodes[0]);
+}
+
 //cette methode permet dafficher un element recus en param
 //a laide de DOM 
 function AddInvElement(itemArray, TypeAffichage){
@@ -587,7 +809,7 @@ function AddInvElement(itemArray, TypeAffichage){
 
 	var div_InvPlus001 = document.createElement('div');
 	   div_InvPlus001.id = IdDiv;
-	   div_InvPlus001.className = "InfoPiece";
+	   div_InvPlus001.className = "col-12 InfoBox";
 	   div_InvPlus001.align = "left";
 
 
@@ -994,7 +1216,6 @@ function CalculPrix(){
   var ChampsPrixPoseLatte = document.getElementById("PrixposeLatte");
 
   var additionMaterial = 0.00;
-  var additionTemps = 0.00;
   var soustotal = 0.00;
   var TPS = 0.00;
   var TVQ = 0.00;
@@ -1003,19 +1224,13 @@ function CalculPrix(){
   var piedLineaire = 0.00;
   var piedLineaireAvecLatte = 0.00;
 
-  /*ArrayPieces = GetArrayHidden();
+  ArrayPieces = GetArrayHidden();
   for(i=0;i<ArrayPieces.length;i++){
     additionMaterial += parseFloat(ArrayPieces[i][4]) * parseFloat(ArrayPieces[i][1]); 
-  }*/
+  }
 
   ArraySection = GetArrayHiddenSection();
   for(i=0;i<ArraySection.length;i++){
-    /*if(ArraySection[i][1] == "simple" || ArraySection[i][1] == "double" ){
-      piedLineaire += parseFloat((parseInt(ArraySection[i][0]) * 0.083333).toFixed(2));
-      if(ArraySection[i][4] == "oui"){
-        piedLineaireAvecLatte += parseFloat((parseInt(ArraySection[i][0]) * 0.083333).toFixed(2));
-      }
-    }*/
     if(ArraySection[i][1] == "Cloture"){ 
       piedLineaire += parseInt(ArraySection[i][0]); 
       if(ArraySection[i][4] == "oui"){
@@ -1023,9 +1238,10 @@ function CalculPrix(){
       }
     } 
   }
+
 //calcul des meteriaux
   champsInfoPiedL.replaceChild(document.createTextNode(piedLineaire.toString() + " ft"),champsInfoPiedL.childNodes[0]);
-  additionMaterial += piedLineaire * parseFloat(ChampsPrixPiedMateriel.value); //prix mailles
+  document.getElementById("PiedLineaireHidden").value = piedLineaire.toString() ;
 
   var qtepoteau = 0;
 
@@ -1034,21 +1250,11 @@ function CalculPrix(){
   if(document.getElementById("QtePotp6ft").value != "") { qtepoteau += parseInt(document.getElementById("QtePotp6ft").value);}
 
   ChampsInfoPoteau.replaceChild(document.createTextNode(qtepoteau.toString() + " poteau(x)"),ChampsInfoPoteau.childNodes[0]);
-  additionMaterial += qtepoteau * parseInt(ChampsPrixPoteau.value); //prix poteaux
+  document.getElementById("PoteauTotalHidden").value = qtepoteau.toString();
 
-
-  additionMaterial += parseInt(Math.ceil((piedLineaireAvecLatte/10))) * parseInt(ChampsPrixLatte.value);//prix lattes
   ChampsInfoLatte.replaceChild(document.createTextNode((Math.ceil(piedLineaireAvecLatte/10)).toString() + " sac(s)"),ChampsInfoLatte.childNodes[0]);
 
-//calcul du temps
-  additionTemps += piedLineaire * parseInt(ChampsPrixPiedTemps.value);
-  additionTemps += piedLineaireAvecLatte * parseInt(ChampsPrixPoseLatte.value);
-
-  TotalMaterielPrix.replaceChild(document.createTextNode((additionMaterial.toFixed(2)).toString() + "$"),TotalMaterielPrix.childNodes[0]);
-  champsTotalTemps.replaceChild(document.createTextNode((additionTemps.toFixed(2)).toString()+ "$"),champsTotalTemps.childNodes[0]);
-
-
-  soustotal = additionTemps + additionMaterial;
+  soustotal = additionMaterial;
   champsSousTotal.replaceChild(document.createTextNode((soustotal.toFixed(2)).toString()+ "$"),champsSousTotal.childNodes[0]);
 
   TPS = soustotal * 0.05;
@@ -1059,6 +1265,8 @@ function CalculPrix(){
 
   GrandTotal = soustotal + TPS + TVQ ;
   champsGrandTotal.replaceChild(document.createTextNode((GrandTotal.toFixed(2)).toString()+ "$"),champsGrandTotal.childNodes[0]);
+  document.getElementById("GrandTotalHidden").value = (GrandTotal.toFixed(2)).toString();
+
 }
 
 function AfficherTab(){
@@ -1085,7 +1293,7 @@ function AfficherTab(){
     var nom = ArrayPrincipal[i][0];
     var qte = ArrayPrincipal[i][1];
     var Description = ArrayPrincipal[i][3];
-    var Prix = ArrayPrincipal[i][4];
+    var Prix = (parseFloat(ArrayPrincipal[i][4]).toFixed(2)).toString() + "$";
     var QteInv = ArrayPrincipal[i][2];
 
     var MainTab = document.getElementById("TabPieces");
@@ -1098,14 +1306,13 @@ function AfficherTab(){
         td_0.id = nom+"td";
      tr_0.appendChild( td_0 );
 
-
      var td_1 = document.createElement('td');
-        td_1.appendChild( document.createTextNode(qte) );
+        td_1.appendChild( document.createTextNode(qte + "/" + QteInv) );
      tr_0.appendChild( td_1 );
 
 
      var td_2 = document.createElement('td');
-        td_2.appendChild( document.createTextNode(QteInv) );
+        td_2.appendChild( document.createTextNode(Prix) );
      tr_0.appendChild( td_2 );
 
 
@@ -1170,6 +1377,7 @@ function AfficherTab(){
         var button_0 = document.createElement('button');
           button_0.value = ID;
            button_0.appendChild( document.createTextNode("Retirer") );
+           button_0.className = "StyleBtn bgred";
            button_0.addEventListener('click', function(){ RetirerRowSection(this.value);}, false);
         td_4.appendChild( button_0 );
 
