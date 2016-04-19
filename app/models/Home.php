@@ -191,7 +191,7 @@
 		}
 
 		function GetLstPiecesDossier($No){
-			
+
 			$db = $this->connectDB();
 
 			$sql = $db->prepare("SELECT DossLstMateriaux FROM Dossier WHERE DossNumeroId = :No ");
@@ -235,6 +235,91 @@
 			$sql = null;
 
 			return $result;
+		}
+
+		function FermerDossier($NumeroDossier){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Dossier SET DossStatus = :status WHERE DossNumeroId = :NoId");
+
+			$sql->bindValue(":NoId", $NumeroDossier);
+			$sql->bindValue(":status", "Fermé");
+
+			$sql->execute();
+
+			$ActionString = "Fermeture du dossier " . $NumeroDossier . ".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
+		function AnnulerDossierEffacer($NumeroDossier){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("DELETE FROM Dossier WHERE DossNumeroId = :NoId");
+
+			$sql->bindValue(":NoId", $NumeroDossier);
+
+			$sql->execute();
+
+			$ActionString = "Annulation du dossier " . $NumeroDossier . ".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
+		function AnnulerDossier($NumeroDossier){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Dossier SET DossStatus = :status WHERE DossNumeroId = :NoId");
+
+			$sql->bindValue(":NoId", $NumeroDossier);
+			$sql->bindValue(":status", "Annulé");
+
+			$sql->execute();
+
+			$ActionString = "Annulation du dossier " . $NumeroDossier . ".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
+		function RetirerQteInv($ID,$Qte,$NoDossier){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Inventaire SET InvQte = InvQte - :Qte WHERE InvNoId = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+			$sql->bindValue(":Qte", $Qte);
+
+			$sql->execute();
+
+			$ActionString = "Sortie de " . $Qte . " " . $ID . " dans le dossier " . $NoDossier . ".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+
+		}
+
+		function RetraitInv($ID,$Qte){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Inventaire SET InvQte = InvQte - :Qte WHERE InvNoId = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+			$sql->bindValue(":Qte", $Qte);
+
+			$sql->execute();
+
+			$ActionString =  $Qte . " " . $ID . " ont été retiré(s) de l'inventaire.";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
 		}
 
 		function GetInvParamStr($DataId = "",$DataCouleur = "",$DataGrosseur = "",$DataHauteur = "",$DataLongeur = "",$DataCategorie = ""){

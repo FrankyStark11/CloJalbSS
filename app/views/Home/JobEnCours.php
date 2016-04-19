@@ -23,22 +23,13 @@
 <div class="row">
 	<div class="col-12 col-m-12">
 		<div class="col-12 col-m-12 box">
-			<h1>Liste des travaux en cours</h1>
+			<h1>Liste des feuilles de travail en cours</h1>
 		</div>
 	</div>
 	<div class="col-6 col-m-12">
-	<h4 class="CLorange">Liste des feuilles de travaux ouvertes</h4><hr>
+	<h4 class="CLorange">Liste des feuilles de travail ouvertes</h4><hr>
 		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
-			<div class="col-12 InfoBox" >
-				<table class="InfoPiece">
-					<tr>
-						<td>20160414-01</td>
-						<td>JOHN DOE</td>
-						<td>Repentigny</td>
-						<td><button onclick="$('#zone01').slideUp('slow'); $('#zone01').slideDown('slow');" class="BGOrange StyleBtn">Afficher</button></td>
-					</tr>
-				</table>
-			</div>
+			
 		</div>
 	</div>
 	<div class="col-6 col-m-12">	
@@ -189,8 +180,8 @@
       <p> Cette action est irréversible</p>
     </div>
     <footer class="w3-container" style="padding-bottom: 10px;" align="center">
-     <a href="/index.php/Home/Retrait"> <button class="StyleBtn bgred">Annuler et conserver</button></a>
-     <a href="/index.php/Home/Retrait"> <button class="StyleBtn bgred">Annuler et effacer</button></a>
+     <a id="lienAnnuler"> <button class="StyleBtn bgred">Annuler et conserver</button></a>
+     <a id="lienAnnulerEffacer"> <button class="StyleBtn bgred">Annuler et effacer</button></a>
     </footer>
   </div>
 </div>

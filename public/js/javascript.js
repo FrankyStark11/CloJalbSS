@@ -7,6 +7,8 @@ function HideDivDesc(idDiv){
     $(DivSec).slideToggle("slow");
 }
 
+//Faire afficher ou disparaitre la fenetre de description sous un item dans linventaire
+//idDiv est le id de la div recus en param
 function HideDivSR(idDiv){
 
   var DivSec = "#" + idDiv;
@@ -188,7 +190,6 @@ function validateFormModification() {
   //Si aucun des champs contient une erreur le formulaire est envoyé
   return FormValide;
 }
-
 
 //Function pour la verification du formulaire
 //d'insertion de nouveau élément dans le systeme
@@ -562,6 +563,7 @@ function AddSoumissionElement(){
   }
 }
 
+//Par une methode AJAX, affiche les dossiers ouvert dans le systeme
 function AfficherDossierOuvert(){
 
   var DataID = "Ouvert";
@@ -587,6 +589,7 @@ function AfficherDossierOuvert(){
   });
 }
 
+//Par une methode AJAX, affiche tous les dossiers sans exeption
 function AfficherDossier(){
 
   $.post("/index.php/Home/GetAllDossier",
@@ -725,6 +728,8 @@ function AddDossierOuvert(itemArray){
   document.getElementById("Main").appendChild( div_0 );
 }
 
+//lors de la selection d'un dossier, affiche tous les details de celui-ci
+//le itemArray recus en param contient les détails du cas
 function AfficherDetailDossierOuvert(itemArray){
 
   var no = document.getElementById("NoDossierDetail");
@@ -783,9 +788,13 @@ function AfficherDetailDossierOuvert(itemArray){
   menu1.replaceChild(document.createTextNode(itemArray.DossNomClient + ", " + itemArray.DossPrenomClient + " : " + itemArray.DossNumeroId),menu1.childNodes[0]);
   menu2.replaceChild(document.createTextNode(itemArray.DossNomClient + ", " + itemArray.DossPrenomClient + " : " + itemArray.DossNumeroId),menu2.childNodes[0]);
 
-  document.getElementById("lienRetrait").href = "/index.php/Home/Retrait?NoDossier=" + itemArray.DossNumeroId;
+  document.getElementById("lienRetrait").href = "/index.php/Home/Retrait?NoDossier=" + itemArray.DossNumeroId+"&Nom="+itemArray.DossNomClient+"&Prenom="+itemArray.DossPrenomClient ;
+  document.getElementById("lienAnnuler").href = "/index.php/Admin/AnnulerDossierConserver?NoDossier=" + itemArray.DossNumeroId;
+  document.getElementById("lienAnnulerEffacer").href = "/index.php/Admin/AnnulerDossierEffacer?NoDossier=" + itemArray.DossNumeroId;
 }
 
+//Par une methode AJAX, cette methode va chercher la liste des pieces
+//pour un No de dossier X pour permettre de confirmaer la qte
 function AfficherLstPiecesRetrait(id){
 
   $.post("/index.php/Home/GetLstPiecesDossier",
@@ -799,11 +808,129 @@ function AfficherLstPiecesRetrait(id){
 
 }
 
+//Cette function confirme la piece et sa quantité 
+//elle efface dans la premiere partie la piece
+//insert aussi dans le hidden la piece pour quelle puisse etre envoyé par la suite
+function ConfirmerQtePiece(id){
+  var arr = GetArrayHidden();
+
+  var NoPiece = document.getElementById(id + "-piece").value;
+  var Qte = document.getElementById(id + "-qte").value;
+  var QteReel = document.getElementById(id + "-qteReel").value;
+
+  var ele = [NoPiece,QteReel];
+  arr.push(ele);
+
+  SetArrayHidden(arr);
+  AjouterPieceResume(NoPiece,QteReel,Qte);
+
+  var divRetir = document.getElementById(id);
+  divRetir.parentNode.removeChild(divRetir);
+}
+
+//Retourne la piece dans la premiere colonne et la retire du hidden
+function AnnulerConfirmationQtePiece(id){
+
+  var NoPiece = document.getElementById(id + "-piece").value;
+  var Qte = document.getElementById(id + "-qte").value;
+  var QteReel = document.getElementById(id + "-qtereel").value;
+
+  AddPieceRetrait2(NoPiece,Qte,QteReel);
+
+  //retirer l'entrée qui corespond à la piece qui sera modifié
+    var arr = GetArrayHidden();
+
+    for(i=0;i<arr.length;i++){
+        if( arr[i][0] == NoPiece ){
+         arr.splice(i, 1);
+         break; }
+      }
+
+    SetArrayHidden(arr);
+
+    var divRetir = document.getElementById(id);
+    divRetir.parentNode.removeChild(divRetir);
+}
+
+//Ajoute la piece dans la colonne resume avec DOM 
+function AjouterPieceResume(No,qte,qtereel){
+
+  var IdDiv = makeid();
+  var div_0 = document.createElement('div');
+     div_0.className = "col-12 InfoBox";
+     div_0.id = IdDiv;
+
+     var hidden1 = document.createElement('input');
+         hidden1.type = "hidden";
+         hidden1.value = No;
+         hidden1.id = IdDiv + "-piece";
+      div_0.appendChild(hidden1);
+
+     var hidden1 = document.createElement('input');
+         hidden1.type = "hidden";
+         hidden1.value = qtereel.toString();
+         hidden1.id = IdDiv + "-qte";
+      div_0.appendChild(hidden1);
+
+      var hidden1 = document.createElement('input');
+         hidden1.type = "hidden";
+         hidden1.value = qte.toString();
+         hidden1.id = IdDiv + "-qtereel";
+      div_0.appendChild(hidden1);
+
+     var table_0 = document.createElement('table');
+        table_0.className = "InfoPiece";
+
+        var tr_0 = document.createElement('tr');
+
+           var td_0 = document.createElement('td');
+              td_0.appendChild( document.createTextNode(No) );
+           tr_0.appendChild( td_0 );
+
+
+           var td_1 = document.createElement('td');
+              td_1.appendChild( document.createTextNode("Quantité retirée : " + qte.toString()) );
+           tr_0.appendChild( td_1 );
+
+
+           var td_2 = document.createElement('td');
+
+              var button_0 = document.createElement('button');
+                 button_0.className = "BGOrange StyleBtn";
+                 button_0.appendChild( document.createTextNode("Retirer") );
+                  button_0.addEventListener('click', function(){ AnnulerConfirmationQtePiece(IdDiv) }, false);
+              td_2.appendChild( button_0 );
+
+           tr_0.appendChild( td_2 );
+
+        table_0.appendChild( tr_0 );
+
+     div_0.appendChild( table_0 );
+
+  document.getElementById("pieceResume").appendChild( div_0 );
+}
+
+//Ajoute la piece dans la colonne de retrait pour etre confirmé
 function AddPieceRetrait(item){
+
+  var IdDiv = makeid();
 
   var div_0 = document.createElement('div');
    div_0.className = "col-12 InfoBox";
    div_0.title = item[3];
+   div_0.id = IdDiv;
+
+   var hidden1 = document.createElement('input');
+       hidden1.type = "hidden";
+       hidden1.value = item[0];
+       hidden1.id = IdDiv + "-piece";
+    div_0.appendChild(hidden1);
+
+  var hidden2 = document.createElement('input');
+       hidden2.type = "hidden";
+       hidden2.value = item[1];
+       hidden2.id = IdDiv + "-qte";
+    div_0.appendChild(hidden2);
 
    var table_0 = document.createElement('table');
       table_0.className = "InfoPiece";
@@ -825,7 +952,9 @@ function AddPieceRetrait(item){
             var input_0 = document.createElement('input');
                input_0.placeholder = "Quantité réel";
                input_0.className = "StyleInput";
+               input_0.id = IdDiv + "-qteReel";
                input_0.value = item[1];
+
             td_2.appendChild( input_0 );
 
          tr_0.appendChild( td_2 );
@@ -835,6 +964,7 @@ function AddPieceRetrait(item){
           var button_0 = document.createElement('button');
               button_0.className = "BGOrange StyleBtn";
               button_0.appendChild( document.createTextNode("Confirmer") );
+              button_0.addEventListener('click', function(){ ConfirmerQtePiece(IdDiv) }, false);
           td_3.appendChild( button_0 );
 
         tr_0.appendChild( td_3 );
@@ -847,7 +977,75 @@ function AddPieceRetrait(item){
    div_0.appendChild( table_0 );
 
   document.getElementById("DataPiece").appendChild( div_0 );
+}
 
+//Ajoute la piece dans la colonne de retrait pour etre confirmé
+//selon 3 valeurs
+function AddPieceRetrait2(No,qte,qtereel){
+
+  var IdDiv = makeid();
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+   div_0.id = IdDiv;
+
+   var hidden1 = document.createElement('input');
+       hidden1.type = "hidden";
+       hidden1.value = No;
+       hidden1.id = IdDiv + "-piece";
+    div_0.appendChild(hidden1);
+
+  var hidden2 = document.createElement('input');
+       hidden2.type = "hidden";
+       hidden2.value = qte;
+       hidden2.id = IdDiv + "-qte";
+    div_0.appendChild(hidden2);
+
+   var table_0 = document.createElement('table');
+      table_0.className = "InfoPiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(No));
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode("Prévu : " + qte));
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+
+            var input_0 = document.createElement('input');
+               input_0.placeholder = "Quantité réel";
+               input_0.className = "StyleInput";
+               input_0.id = IdDiv + "-qteReel";
+               input_0.value = qtereel;
+
+            td_2.appendChild( input_0 );
+
+         tr_0.appendChild( td_2 );
+
+         var td_3 = document.createElement('td');
+
+          var button_0 = document.createElement('button');
+              button_0.className = "BGOrange StyleBtn";
+              button_0.appendChild( document.createTextNode("Confirmer") );
+              button_0.addEventListener('click', function(){ ConfirmerQtePiece(IdDiv) }, false);
+          td_3.appendChild( button_0 );
+
+        tr_0.appendChild( td_3 );
+
+      table_0.appendChild( tr_0 );
+
+
+      
+
+   div_0.appendChild( table_0 );
+
+  document.getElementById("DataPiece").appendChild( div_0 );
 }
 
 //cette methode permet dafficher un element recus en param
@@ -1096,6 +1294,7 @@ function FuncExcel(){
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
 }
 
+//afficher ou cacher les sections
 function AfficherChampsSection(type){
   if(type == "simple" || type == "double"){
     $("#LongeurCloture").slideUp(10);
@@ -1106,6 +1305,7 @@ function AfficherChampsSection(type){
   }
 }
 
+//Retirer les sections dans la feuille de creation cas
 function RetirerRowSection(id){
 
   var ArrayPrincipal = GetArrayHiddenSection();
@@ -1131,32 +1331,38 @@ function RetirerRowSection(id){
     AfficherTab();
 }
 
+//Write dans le hidden le nouveau tableau en param
 function SetArrayHidden(arrayElement){
   var ele = document.getElementById("HiddenArrayPiece");
   ele.value = JSON.stringify(arrayElement);
 }
 
+//Read dans le hidden le nouveau tableau 
 function GetArrayHidden(){
   var ele = document.getElementById("HiddenArrayPiece");
   return JSON.parse(ele.value);
 }
 
+//Write dans le hidden le nouveau tableau en param
 function SetArrayHiddenSection(arrayElement){
   var ele = document.getElementById("HiddenArraySection");
   ele.value = JSON.stringify(arrayElement);
 }
 
+//Read dans le hidden le nouveau tableau
 function GetArrayHiddenSection(){
   var ele = document.getElementById("HiddenArraySection");
   return JSON.parse(ele.value);
 }
 
+//ajout le beton dans la liste de soummision
 function AjouterBeton(qte){
   var noTBET = "TBET-00000-BB";
   if(!PiecePresente(noTBET)){AjouterPieceRow(noTBET,qte);}
     else{UpdatePieceRow(noTBET,qte);}
 }
 
+//ajoute une section dans la page de creation de cas
 function AjouterSectionRow(){
   var ID = makeid();
   var Longueur = document.getElementById("TxtLongueurSectionSR").value;
@@ -1200,6 +1406,7 @@ function UpdatePieceRow(nom,NouvelleQte){
   AfficherTab();
 }
 
+//Ajoute la piece avec AJAX dans la section de view
 function AjouterPieceRow(nom,qte){
 
   var ID = makeid();
@@ -1244,6 +1451,7 @@ function AjouterPieceRow(nom,qte){
   }
 }
 
+//retourne si true or false la piece existe deja dans le tableau
 function PiecePresente(Nom){
   var ArrayPrincipal = GetArrayHidden();
   var piecePresente = false;
@@ -1254,6 +1462,7 @@ function PiecePresente(Nom){
   return piecePresente;
 }
 
+//recois la qte de la piece recus en param
 function GetPieceQte(Nom){
   var ArrayPrincipal = GetArrayHidden();
 
@@ -1262,6 +1471,7 @@ function GetPieceQte(Nom){
   }
 }
 
+//selon tous les params sur la page, ette function calcul le prix
 function CalculPrix(){
 
   var champsTotalMaterial = document.getElementById("TotalMaterielPrix");
@@ -1305,7 +1515,7 @@ function CalculPrix(){
     } 
   }
 
-//calcul des meteriaux
+  //calcul des meteriaux
   champsInfoPiedL.replaceChild(document.createTextNode(piedLineaire.toString() + " ft"),champsInfoPiedL.childNodes[0]);
   document.getElementById("PiedLineaireHidden").value = piedLineaire.toString() ;
 
@@ -1332,9 +1542,9 @@ function CalculPrix(){
   GrandTotal = soustotal + TPS + TVQ ;
   champsGrandTotal.replaceChild(document.createTextNode((GrandTotal.toFixed(2)).toString()+ "$"),champsGrandTotal.childNodes[0]);
   document.getElementById("GrandTotalHidden").value = (GrandTotal.toFixed(2)).toString();
-
 }
 
+//affiche les tableaux de section et piece lors dune modification
 function AfficherTab(){
 
   //vider le tableau actuel avant de le refaire
@@ -1455,6 +1665,7 @@ function AfficherTab(){
   CalculPrix();
 }
 
+//retire la section de cloture et appel la deduction des pieces
 function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 
   var CL = document.getElementById("SelectCouleurSR").value;
@@ -1556,6 +1767,7 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   }
 }
 
+//ajoute une section de cloture
 function AjoutSectionCloture(Hauteur,Longueur){
 
   var CL = document.getElementById("SelectCouleurSR").value;
@@ -1656,6 +1868,7 @@ function AjoutSectionCloture(Hauteur,Longueur){
   }
 }
 
+//ajoute une porte selon les paramz
 function AjoutSectionPorte(Hauteur){
 
   //definition des variables
@@ -1779,6 +1992,7 @@ function AjoutSectionPorte(Hauteur){
     }
 }
 
+//retirer une porte
 function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
 
   //definition des variables
@@ -1901,6 +2115,7 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
     }
 }
 
+//ajoute les poteaux
 function AjoutPOTP(Hauteur){
   var CL = document.getElementById("SelectCouleurSR").value;
   var noPiece = "POTP-0" + Hauteur + "238-" + CL;
@@ -1920,6 +2135,7 @@ function AjoutPOTP(Hauteur){
   else{UpdatePieceRow(Capuchon,qteCAPP);}
 }
 
+//ajoute les jkit
 function AjoutKit(Hauteur){
 
   var CL = document.getElementById("SelectCouleurSR").value;
@@ -1992,6 +2208,7 @@ function AjoutKit(Hauteur){
     else{UpdatePieceRow(BATE,QteBATE);}
 }
 
+//sur changement de couleur efface les tout 
 function OnColorChange(){
   document.getElementById("QteKit4ft").value = "";
   document.getElementById("QteKit5ft").value = "";

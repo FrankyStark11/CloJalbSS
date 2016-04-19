@@ -22,7 +22,7 @@
 <div class="row">
 	<div class="col-12 col-m-12">
 		<div class="col-12 col-m-12 box">
-			<h1><?php echo $_GET["NoDossier"]; ?></h1>
+			<h1><?php echo ($_GET["NoDossier"] . " : " . $_GET["Nom"] . ", " . $_GET["Prenom"]); ?></h1>
 		</div>
 	</div>
 	<div class="col-6 col-m-12">
@@ -43,20 +43,15 @@
 	</div>
 	<div class="col-6 col-m-12">	
 	<h4 class="CLorange">Résumé</h4><hr>
-		<div id="" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
-			
-			<div class="col-12 InfoBox"> 
-				<table class="InfoPiece">
-					<tr>
-						<td>POTP-04238-BL</td>
-						<td>Quantité retirée : 23</td>
-						<td><button class="BGOrange StyleBtn">Retirer</button></td>
-					</tr>
-				</table> 
-			</div>
-
+		<div id="pieceResume" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
 		</div>
-	<hr><button class="BGOrange StyleBtn" style="width: 100%;"> Confirmer </button><hr>
+	<hr>
+		<form method="post" action="/index.php/Admin/FermetureDossier">
+			<input type="hidden" name="LstPieces" id="HiddenArrayPiece" value="[]"></input>
+			<input type="hidden" name="NoDossier" id="HiddenArrayPiece" value="<?php echo $_GET["NoDossier"]; ?>"></input>
+			<button id="btnFermerDossier" type="submit" class="BGOrange StyleBtn" style="width: 100%;"> Confirmer </button>
+		</form>
+	<hr>
 	</div>
 </div>
 </body>

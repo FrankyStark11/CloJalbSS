@@ -61,11 +61,23 @@
 			$Model->InsertionDossier($NoDossier,$prenom,$nom,$ville,$type,$status,$pied,$poteau,$valeur,$lstpieces,$DateProjet);
 
 			//Ajout au log
-			$ActionString = "Le dossier de ".$prenom . " ". $nom . " à été ajouté.";
+			$ActionString = "Le dossier de ".$prenom . " ". $nom . " à été ajouté. Le numero de dossier est le " . $NoDossier . ".";
 			$Model->InscriptionLog($ActionString);
 
 			$_SESSION["NoConfirmation"] = $NoDossier;
 			parent::view('Home/ConfirmationEnregistrementDossier');
+		}
+
+		public function AnnulerDossierConserver(){
+			$Model = new modHome();
+			$Model->AnnulerDossier($_GET["NoDossier"]);
+			parent::view('Home/ConfirmationAnnulationDossier');
+		}
+
+		public function AnnulerDossierEffacer(){
+			$Model = new modHome();
+			$Model->AnnulerDossierEffacer($_GET["NoDossier"]);
+			parent::view('Home/ConfirmationAnnulationDossier');
 		}
 
 		public function ModifMdp(){
@@ -81,6 +93,19 @@
 			$Model->InscriptionLog($ActionString);
 
 			parent::view('Home/Config');
+		}
+
+		public function FermetureDossier(){
+
+			$Arr = json_decode($_POST["LstPieces"]);
+			$Model = new modHome();
+
+			foreach($Arr as $e){
+				$Model->RetirerQteInv($e[0],$e[1],$_POST["NoDossier"]);
+			}
+
+			$Model->FermerDossier($_POST["NoDossier"]);
+			parent::view('Home/ConfirmationFermetureDossier');
 		}
 
 		public function InsertionUtilisateur(){

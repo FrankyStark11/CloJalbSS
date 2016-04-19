@@ -36,6 +36,46 @@
 			<div class="col-6  col-m-12 " >
 
 				<div class="col-12 col-m-12 box" >
+					<h3 onclick=" HideDivSR('DivSR1')" class="clOrange">Information du projet <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
+					<div id="DivSR1" style="display: block;">
+						<table class="InfoPiece">
+							<tr>
+								<td>
+									Prénom *
+								</td>
+								<td>
+									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientPrenomSR" id="TxtRepNomSR" placeholder="Prénom"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Nom *
+								</td>
+								<td>
+									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientNomSR" id="TxtRepNomSR" placeholder="Nom"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Date *
+								</td>
+								<td>
+									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" placeholder="Date"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									Ville *
+								</td>
+								<td>
+									<input class="StyleInput col-12" type="text" title="Ville" name="TxtVilleProjetSR" id="TxtVilleProjetSR" placeholder="Ville"></input>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+
+				<div class="col-12 col-m-12 box" >
 					<h3 onclick=" HideDivSR('DivSR3')" class="clOrange">Spécification <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
 					<div id="DivSR3" style="display: block;">
 						<table class="InfoPiece">
@@ -136,46 +176,6 @@
 								</td>
 								<td>
 									<input type="button" value="Ajouter" class="StyleBtn bgorange col-12" title="Ajouter la section" onclick="AjouterSectionRow()"></input>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
-
-				<div class="col-12 col-m-12 box" >
-					<h3 onclick=" HideDivSR('DivSR1')" class="clOrange">Information du projet <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
-					<div id="DivSR1" style="display: block;">
-						<table class="InfoPiece">
-							<tr>
-								<td>
-									Prénom
-								</td>
-								<td>
-									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientPrenomSR" id="TxtRepNomSR" placeholder="Prénom"></input>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Nom
-								</td>
-								<td>
-									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientNomSR" id="TxtRepNomSR" placeholder="Nom"></input>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Date
-								</td>
-								<td>
-									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" placeholder="Date"></input>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									Ville
-								</td>
-								<td>
-									<input class="StyleInput col-12" type="text" title="Ville" name="TxtVilleProjetSR" id="TxtVilleProjetSR" placeholder="Ville"></input>
 								</td>
 							</tr>
 						</table>

@@ -24,9 +24,8 @@
 		<div class="col-6 col-m-12">
 			<h4 class="CLOrange">Confirmation</h4><hr>
 			<div class="col-12 col-m-12 box" align="center">
-				<h1 class="CLOrange">Votre numero de dossier</h1><br><hr>
-				<h2><?php echo $_SESSION["NoConfirmation"]; ?></h2>
-				<a href="/index.php/Home/MenuSoumission"><button class="StyleBtn BGOrange">Retour au menu</button></a>
+				<h1 class="CLOrange">Le dossier est maintenant fermé</h1>
+				<a href="/index.php/Home/JobEnCours"><button class="StyleBtn BGOrange">Retourner au dossier ouvert</button></a>
 			</div>
 		</div>
 		<div class="col-3 col-m-12"></div>

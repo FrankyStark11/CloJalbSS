@@ -40,7 +40,7 @@
 
 				<div class="BoxMenu" align="center"><a href="/index.php/Home/Ajustement"><img title="Ajuster les quantités" class="BoxMenu" src="../../images/icon/vente-icon.png"></a><h2>AJUSTER</h2></div>
 
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/Retrait"><img title="Retirer des pièces" class="BoxMenu" src="../../images/icon/retrait-icon.png"></a><h2>RETRAIT</h2></div>
+				<div class="BoxMenu" align="center"><a href="/index.php/Home/MenuInventaire"><img title="Retirer des pièces" class="BoxMenu" src="../../images/icon/retrait-icon.png"></a><h2>RETRAIT</h2></div>
 			</div>
 		</div>
 		<div class="col-6 col-m-12">
