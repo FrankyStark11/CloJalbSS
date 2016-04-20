@@ -15,9 +15,9 @@
 </head>
 
 <body onload="AfficherLstPiecesRetrait('<?php echo$_GET["NoDossier"]; ?>');">
-<div class="row">
+<div class="row Main">
 	<div class="col-12 col-m-12">
-		<div class="col-10 col-m-10 box headBox">
+		<div class="col-10 col-m-10 box headBox bgorange">
 			<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Travaux /EnCours /Fermeture <?php echo ($_GET["NoDossier"] . ":" . $_GET["Nom"] . "," . $_GET["Prenom"]); ?></h1>
 		</div>
 		<div class="col-2 col-m-2 box headBox" align="center">

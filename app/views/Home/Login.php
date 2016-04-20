@@ -14,10 +14,10 @@
 
 <body>
 
-<div class="row">
+<div class="row Main">
 
 <div class="col-12 col-l-12 col-m-12" align="center">
-	<div class="col-12 col-m-12 box">
+	<div class="col-12 col-m-12 box bgorange">
 		<h2>INTRANET CLOTURE JALBERT</h2>
 	</div>
 </div>

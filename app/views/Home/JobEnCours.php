@@ -16,10 +16,10 @@
 </head>
 
 <body onload="AfficherDossierOuvert();">
-<div class="row">
+<div class="row main">
 
 	<div class="col-12 col-m-12">
-		<div class="col-10 col-m-10 box headBox">
+		<div class="col-10 col-m-10 box headBox bgorange">
 			<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Travaux /EnCours</h1>
 		</div>
 		<div class="col-2 col-m-2 box headBox" align="center">
