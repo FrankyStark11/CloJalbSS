@@ -17,6 +17,10 @@ body{
 
 	overflow-x: hidden;	
 }
+h1{
+	font-size: 20px;
+}
+
 h3{
 	cursor: pointer;
 }
@@ -36,6 +40,10 @@ div.Main{
 
 	padding-top:5px;
 	padding-bottom: 40px;
+}
+
+.headBox{
+	height: 120px;
 }
 
 img.ConfigImage{

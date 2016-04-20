@@ -23,9 +23,12 @@
 	
 	<div class="row">
 		<div class="col-12 col-m-12">
-			<div class="col-12 col-m-12 box ">
-				<h1>Bonjour <?php echo $_SESSION["NomUtilisateur"]; ?>.</h1>
+			<div class="col-10 col-m-10 box headBox">
+				<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Inventaire</h1>
 			</div>
+			<div class="col-2 col-m-2 box headBox" align="center">
+					<a href="/index.php/Admin/RetourMenu"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
+				</div>
 		</div>
 		<div class="col-6 col-m-12">
 			<h4 class="CLOrange"> Consultation</h4><hr>
@@ -40,25 +43,10 @@
 
 				<div class="BoxMenu" align="center"><a href="/index.php/Home/Ajustement"><img title="Ajuster les quantités" class="BoxMenu" src="../../images/icon/vente-icon.png"></a><h2>AJUSTER</h2></div>
 
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/MenuInventaire"><img title="Retirer des pièces" class="BoxMenu" src="../../images/icon/retrait-icon.png"></a><h2>RETRAIT</h2></div>
-			</div>
-		</div>
-		<div class="col-6 col-m-12">
-			<h4 class="CLOrange"> Configuration</h4><hr>
-			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/InventaireInsertion"><img title="Ajouter une nouvelle pièce" class="BoxMenu" src="../../images/icon/add_icon.png"></a><h2>NOUVELLE</h2></div>
-				
-			</div>
-			
-		</div>
-		<div class="col-6 col-m-12">
-			<h4 class="CLOrange"> Menu</h4><hr>
-			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>RETOUR</h2></div>
+				<div class="BoxMenu" align="center"><a href="/index.php/Home/RetraitManuel"><img title="Retirer des pièces" class="BoxMenu" src="../../images/icon/RetraitManuel-icon.png"></a><h2>RETRAIT</h2></div>
 			</div>
 		</div>
 	</div>
-		
 	</div>
 </body>
 

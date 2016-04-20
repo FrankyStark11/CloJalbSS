@@ -8,7 +8,7 @@
 <head>
 	<title>Inventaire Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=0.8">
+	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="/css/w3Model.css">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
@@ -16,16 +16,17 @@
 </head>
 
 <body onload="AfficherDossierOuvert();">
-
-	<a href="/index.php/Home/MenuSoumission">
-		<div id="RetourMenu" title="Retour menu" align="center"> <img style="width: 20px;height: 20px;" src="/images/icon/home.png"> </div>
-	</a>
 <div class="row">
+
 	<div class="col-12 col-m-12">
-		<div class="col-12 col-m-12 box">
-			<h1>Liste des feuilles de travail en cours</h1>
+		<div class="col-10 col-m-10 box headBox">
+			<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Travaux /EnCours</h1>
+		</div>
+		<div class="col-2 col-m-2 box headBox" align="center">
+			<a href="/index.php/Home/MenuSoumission"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 		</div>
 	</div>
+
 	<div class="col-6 col-m-12">
 	<h4 class="CLorange">Liste des feuilles de travail ouvertes</h4><hr>
 		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">

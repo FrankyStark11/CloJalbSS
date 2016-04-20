@@ -22,8 +22,11 @@
 	<div id="Main" class="Main">
 		<div class="row">
 			<div class="col-12 col-m-12">
-				<div class="col-12 col-m-12 box ">
-					<h1>Bonjour <?php echo $_SESSION["NomUtilisateur"]; ?>.</h1>
+				<div class="col-10 col-m-10 box headBox">
+					<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Travaux</h1>
+				</div>
+				<div class="col-2 col-m-2 box headBox" align="center">
+					<a href="/index.php/Admin/RetourMenu"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 				</div>
 			</div>
 			<div class="col-6 col-m-12">
@@ -32,7 +35,6 @@
 					<div class="BoxMenu" align="center"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
 
 					<div class="BoxMenu" align="center"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
-
 					
 				</div>
 			</div>
@@ -43,14 +45,6 @@
 					<div class="BoxMenu" align="center"><a href="/index.php/Home/ToutesJobs"><img title="Consulter toutes les feuilles de travaux" class="BoxMenu" src="../../images/icon/AllJob-icon.png"></a><h2>CONSULTER</h2></div>
 				</div>
 			</div>
-			<div class="col-6 col-m-12">
-				<h4 class="CLOrange"> Menu</h4><hr>
-				<div class="col-12 col-m-12 box ">
-					<div class="BoxMenu" align="center"><a href="/index.php/Admin/RetourMenu"><img title="Retour" class="BoxMenu" src="../../images/icon/Quitter-icon.png"></a><h2>RETOUR</h2></div>
-				</div>
-			</div>
-			
-			
 		</div>
 	</div>
 </body>

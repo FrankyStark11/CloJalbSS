@@ -36,6 +36,45 @@
 			parent::view('Home/Menu3');
 		}
 
+		public function MenuConfig(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu4');
+		}
+
+		public function MenuUtilisateur(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu5');
+		}
+
+		public function MenuConfigInventaire(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu6');
+		}
+
+		public function ConfigUtilisateur(){
+			parent::view('Home/ConfigUtilisateurs');
+		}
+
+		public function InsertionUtilisateur(){
+			parent::view('Home/InsertionUtilisateur');
+		}
+
+		public function RetraitManuel(){
+			parent::view('Home/RetraitManuel');
+		}
+
+		public function RetirerUtilisateur(){
+			parent::view('Home/RetirerUtilisateur');
+		}
+
+		public function RetirerPiece(){
+			parent::view('Home/RetirerPiece');
+		}
+
+		public function ConfigGeneral(){
+			parent::view('Home/ConfigGeneral');
+		}
+
 		public function SR(){
 			//offre le choix du type de soumision
 			parent::view('Home/SoummisionResidentiel');
