@@ -30,16 +30,18 @@
 				<a href="/index.php/Home/MenuConfig"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 			</div>
 		</div>
-		<div class="col-6 col-m-12">
+		<div class="col-2 col-m-12"></div>
+		<div class="col-8 col-m-12">
 			<h4 class="CLOrange"> Configuration des utilisateurs</h4><hr>
 			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/InventaireInsertion"><img title="Ajouter un nouvel pièce" class="BoxMenu" src="../../images/icon/add_icon.png"></a><h2>AJOUTER</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/InventaireInsertion"><img title="Ajouter un nouvel pièce" src="../../images/icon/add_icon.png"></a><h2>AJOUTER</h2></div>
 				
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/RetirerPiece"><img title="Retirer une pièce" class="BoxMenu" src="../../images/icon/retrait-icon.png"></a><h2>RETIRER</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/RetirerPiece"><img title="Retirer une pièce" src="../../images/icon/retrait-icon.png"></a><h2>RETIRER</h2></div>
 				
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/Configuration"><img title="Modifier les utilisateurs" class="BoxMenu" src="../../images/icon/ConfigInventaireMenu-icon.png"></a><h2>MODIFIER</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Configuration"><img title="Modifier les utilisateurs" src="../../images/icon/ConfigSysteme-icon.png"></a><h2>MODIFIER</h2></div>
 			</div>
 		</div>
+		<div class="col-2 col-m-12"></div>
 	</div>
 		
 	</div>

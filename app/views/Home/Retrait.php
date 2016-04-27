@@ -25,22 +25,30 @@
 		</div>
 	</div>
 	<div class="col-6 col-m-12">
-	<h4 class="CLorange">Pièces nécésaire pour le travail</h4><hr>
-		<div id="DataPiece" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+	<h4 class="CLorange">Pièces non prévu</h4><hr>
+	<div class="col-12  col-m-12 box">
+		<input onkeyup="" placeholder="RECHERCHE ..." id="ChampsRecherche" class="styleinput" style="border-width: 0px; text-align: left; width: 100%;height: 50px; font-size: 30px;"></input>
+	</div>
+		<div class="col-12 col-m-12 overflowAll box" style="height: 490px;" align="center">
 
 			<div class="col-12 InfoBox" title="Ajout d'une piece non prévue">
-				<table class="InfoPiece">
+				<table class="tabplein datasplit-3">
 					<tr>
-						<td>NON PRÉVU</td>
-						<td><input class="StyleInput" placeholder="No pièce"></td>
+						<td>POTP-04238-NO</td>
 						<td><input class="StyleInput" placeholder="Quantité"></input></td>
-						<td><button class="BGOrange StyleBtn">Confirmer</button></td>
+						<td><button class="BGOrange StyleBtn">Ajouter</button></td>
 					</tr>
 				</table>
 			</div>
 		</div>
 	</div>
-	<div class="col-6 col-m-12">	
+	<div class="col-6 col-m-12">
+	<h4 class="CLorange">Pièces nécésaire pour le travail</h4><hr>
+		<div id="DataPiece" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+
+		</div>
+	</div>
+	<div class="col-12 col-m-12">	
 	<h4 class="CLorange">Résumé</h4><hr>
 		<div id="pieceResume" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
 		</div>

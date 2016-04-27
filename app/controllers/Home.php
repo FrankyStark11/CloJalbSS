@@ -51,6 +51,11 @@
 			parent::view('Home/Menu6');
 		}
 
+		public function MenuCommande(){
+			//offre le choix du type de soumision
+			parent::view('Home/Menu7');
+		}
+
 		public function ConfigUtilisateur(){
 			parent::view('Home/ConfigUtilisateurs');
 		}
@@ -69,6 +74,14 @@
 
 		public function RetirerPiece(){
 			parent::view('Home/RetirerPiece');
+		}
+
+		public function PreparationCommande(){
+			parent::view('Home/PreparationCommande');
+		}
+
+		public function RamassageCommande(){
+			parent::view('Home/RamassageCommande');
 		}
 
 		public function ConfigGeneral(){

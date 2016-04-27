@@ -126,6 +126,20 @@
 
 		}
 
+		public function RetirerUtilisateur(){
+			$Model = new modHome();
+			$ID = $_POST['Utilisateur'];
+			$Nom = $_POST['Nom'];
+
+			$Model->RetirerUtilisateur($ID);
+
+			//Ajout au LOG
+			$ActionString = "Retrait de l'utilisateur " . $Nom ;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Menu5');
+		}
+
 		public function Login(){
 			$Model = new modHome();
 			$U = $_POST["User"];
@@ -133,7 +147,7 @@
 
 			$utilisateur = $Model->Connextion($U,$M);
 
-			$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurNom"];
+			$_SESSION["NomUtilisateur"] = $utilisateur["UtilisateurPrenom"];
 			$_SESSION["TypeCompte"] = $utilisateur["UtilisateurType"];
 
 			//ajoute l'action au log
@@ -148,6 +162,16 @@
 			$Model = new modHome();
 			$Model->ModificationItem();
 			parent::view('Home/Index');
+		}
+
+		public function ResetCompteur(){
+			$Model = new modHome();
+			$Model->ResetComteurVisite();
+			//ajoute l'action au log
+			$ActionString = "Les compteurs de page d'aide sont remit à 0.";
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/ConfigGeneral');
 		}
 
 		public function ReceptionUpdate(){
@@ -204,6 +228,9 @@
 			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B1',date("Y/m/d"));
 			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B2',$POGenere);
 
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D1','CONFIRMATION');
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D2','DE RÉCEPTION');
+
 			//style pour date et #po
 			$objPHPExcel->getActiveSheet()->getStyle('A1:B1')->applyFromArray($styleArrayHead);
 			$objPHPExcel->getActiveSheet()->getStyle('A2:B2')->applyFromArray($styleArrayHead);
@@ -224,7 +251,7 @@
 			//remplir linformation du PO pour tous les elements	
 			for ($i=1; $i <= count($JSONParam) ; $i++)
 			{ 
-				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.($i+4) , $i."->");
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.($i+4) , $i." ->");
 				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.($i+4) , $JSONParam[$i-1]->ID);
 				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.($i+4) , $JSONParam[$i-1]->Description);
 				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.($i+4) , $JSONParam[$i-1]->Qte);
@@ -248,8 +275,113 @@
 			    $model->ReceptionItem($value->ID,$value->Qte);
 			}
 			
+			$_SESSION["No"] = $POGenere;
+			parent::view('Home/ConfirmationReception');
+		}
 
-			parent::view('Home/Reception');
+		public function RetraitUpdate(){
+			//prepare le model
+			$model = new modHome();
+			//recois le JSON en param
+			$JSONString = $_GET["JSONParam"];
+			//transforme le JSON en array pour le traitement
+			$JSONParam = json_decode($JSONString);
+
+			//fonction pour generer un ID unique
+			function generateRandomString($length = 10) {
+			    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			    $charactersLength = strlen($characters);
+			    $randomString = '';
+			    for ($i = 0; $i < $length; $i++) {
+			        $randomString .= $characters[rand(0, $charactersLength - 1)];
+			    }
+			    return $randomString;
+			}
+
+			//genere le numero de PO
+			$POGenere = generateRandomString(15);
+
+			//creation du fichier excel
+			require_once 'ExcelPHP/PHPExcel.php';
+			$objPHPExcel = new PHPExcel();
+
+			$styleArrayHead = array(
+		    	'font'  => array(
+		        'bold'  => false,
+		        'color' => array('rgb' => '000000'),
+		        'size'  => 12,
+		        'name'  => 'Verdana'
+		    ));
+
+		    //propriété du fichier excel
+			$objPHPExcel->getProperties()->setCreator("Clôture Jalbert")
+						->setLastModifiedBy("Auteur")
+						->setTitle("PO reception")
+						->setSubject("PO")
+						->setDescription("Confirmation generer par systeme")
+						->setKeywords("php")
+						->setCategory("Reception");
+
+			//Ajout du titre au fichier excel
+			$TitleStr = 'Confirmation de reception PO';
+			$objPHPExcel->getActiveSheet()->setTitle($TitleStr);
+
+			//mise en place template entete document 
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A1','Date');
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A2','PO');
+
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B1',date("Y/m/d"));
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B2',$POGenere);
+
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D1','CONFIRMATION');
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D2','DE RETRAIT');
+
+			//style pour date et #po
+			$objPHPExcel->getActiveSheet()->getStyle('A1:B1')->applyFromArray($styleArrayHead);
+			$objPHPExcel->getActiveSheet()->getStyle('A2:B2')->applyFromArray($styleArrayHead);
+
+			//applique les couleurs sur lentete
+			$objPHPExcel->getActiveSheet()->getStyle('A3:D4')->getFill()->applyFromArray(array(
+	        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	        'startcolor' => array(
+		    'rgb' => '808080')
+	   	 	));
+
+			//entete de colonne 
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A4',"");
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B4', "# de piece ");
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C4', " Description ");
+			$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D4'," Quantité ");
+
+			//remplir linformation du PO pour tous les elements	
+			for ($i=1; $i <= count($JSONParam) ; $i++)
+			{ 
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('A'.($i+4) , $i." ->");
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('B'.($i+4) , $JSONParam[$i-1]->ID);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('C'.($i+4) , $JSONParam[$i-1]->Description);
+				$objPHPExcel->setActiveSheetIndex(0)->setCellValue('D'.($i+4) , $JSONParam[$i-1]->Qte);
+			}
+
+			//ajustement de largeur de colonne
+			foreach (range(0, 3) as $col)
+			{
+			    $objPHPExcel->getActiveSheet()->getColumnDimensionByColumn($col)->setAutoSize(true);                
+			}
+
+			//Écriture du fichier
+			require_once 'ExcelPHP/PHPExcel/IOFactory.php';
+			$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'Excel5');
+			$NameStr = $POGenere.'.xls';
+			utf8_encode($NameStr);
+			$objWriter->save('ConfirmationRetrait/'.$NameStr);
+
+			//update dans le model
+			foreach ($JSONParam as $value) {
+			    $model->RetraitItem($value->ID,$value->Qte);
+			}
+			
+			$_SESSION["No"] = $POGenere;
+			parent::view('Home/ConfirmationRetrait');
 		}
 	}
 	

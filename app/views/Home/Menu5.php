@@ -30,16 +30,17 @@
 				<a href="/index.php/Home/MenuConfig"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 			</div>
 		</div>
-		<div class="col-6 col-m-12">
+		<div class="col-2 col-m-12"></div>
+		<div class="col-8 col-m-12">
 			<h4 class="CLOrange"> Configuration des utilisateurs</h4><hr>
 			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/InsertionUtilisateur"><img title="Ajouter un nouvel utilisateur" class="BoxMenu" src="../../images/icon/AjoutUtilisateur-icon.png"></a><h2>AJOUTER</h2></div>
-				
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/RetirerUtilisateur"><img title="Retirer un utilisateur" class="BoxMenu" src="../../images/icon/RetirerUtilisateur-icon.png"></a><h2>RETIRER</h2></div>
-				
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/ConfigUtilisateur"><img title="Modifier les utilisateurs" class="BoxMenu" src="../../images/icon/ConfigUtilisateurMenu-icon.png"></a><h2>MODIFIER</h2></div>
+
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/InsertionUtilisateur"><img title="Ajouter un nouvel utilisateur" src="../../images/icon/AjoutUtilisateur-icon.png"></a><h2>AJOUTER</h2></div>
+
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/ConfigUtilisateur"><img title="Modifier les utilisateurs" src="../../images/icon/ConfigUtilisateurMenu-icon.png"></a><h2>MODIFIER</h2></div>
 			</div>
 		</div>
+		<div class="col-2 col-m-12"></div>
 	</div>
 		
 	</div>

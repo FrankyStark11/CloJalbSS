@@ -29,22 +29,20 @@
 					<a href="/index.php/Admin/RetourMenu"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 				</div>
 			</div>
-			<div class="col-6 col-m-12">
-				<h4 class="CLOrange"> Création feuille de travail</h4><hr>
+			<div class="col-2 col-m-12"></div>
+			<div class="col-8 col-m-12">
+				<h4 class="CLOrange"> Feuille de travail</h4><hr>
 				<div class="col-12 col-m-12 box ">
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/SR"><img title="Soumission résidentiel" class="BoxMenu" src="../../images/icon/Residentiel-icon.png"></a><h2>RÉSIDENTIEL</h2></div>
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/SR"><img title="Résidentiel" src="../../images/icon/Residentiel-icon.png"></a><h2>SR</h2></div>
 
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/SC"><img title="Soumission commercial" class="BoxMenu" src="../../images/icon/Commercial-icon.png"></a><h2>COMMERCIAL</h2></div>
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/SC"><img title="Commercial" src="../../images/icon/Commercial-icon.png"></a><h2>SC</h2></div>
 					
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/JobEnCours"><img title="Consulter les feuilles de travaux en cours" src="../../images/icon/Job-icon.png"></a><h2>EN COURS</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/ToutesJobs"><img title="Consulter toutes les feuilles de travaux" src="../../images/icon/AllJob-icon.png"></a><h2>CONSULTER</h2></div>
 				</div>
 			</div>
-			<div class="col-6 col-m-12">
-				<h4 class="CLOrange"> Gestion des feuilles de travaux </h4><hr>
-				<div class="col-12 col-m-12 box ">
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/JobEnCours"><img title="Consulter les feuilles de travaux en cours" class="BoxMenu" src="../../images/icon/Job-icon.png"></a><h2>EN COURS</h2></div>
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/ToutesJobs"><img title="Consulter toutes les feuilles de travaux" class="BoxMenu" src="../../images/icon/AllJob-icon.png"></a><h2>CONSULTER</h2></div>
-				</div>
-			</div>
+			<div class="col-2 col-m-12"></div>
 		</div>
 	</div>
 </body>

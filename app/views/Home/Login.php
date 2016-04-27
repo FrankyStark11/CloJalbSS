@@ -22,17 +22,16 @@
 	</div>
 </div>
 
-<div class="col-4 col-m-12 middle" align="center">
+<div class="col-3 col-m-12 middle" align="center">
 	<div class="col-12 col-m-12 ">
-		<img class="Login" src="../../images/icon/Logo2.png">
 	</div>
 </div>
 
-<div class="col-8 col-m-12 middle" align="center">
+<div class="col-6 col-m-12 middle" align="center">
 	<div class="col-12 col-m-12 box">
 			<form method="post" action="/index.php/Admin/Login">
 				
-				<table class="LoginAdmin" style="margin-top: 25px;width: 100%;max-width: 800px;">
+				<table class="LoginAdmin" style="margin-top: 25px;width: 50%;min-width: 300px; max-width: 400px;">
 					<tr>
 						<td><input class="Log LogUser" type="text" name="User" placeholder=" Nom d'utilisateur "></td>
 					</tr>
@@ -46,6 +45,13 @@
 					</tr>
 				</table>
 			</form>	
+	</div>
+</div>
+
+
+<div class="col-3 col-m-12 middle" align="center">
+	<div class="col-12 col-m-12 ">
+		
 	</div>
 </div>
 

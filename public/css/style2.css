@@ -787,74 +787,6 @@ div.FeetBar{
 
 }
 
-ul.NavBar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-ul.NavBar li:last-child{
-	float: right;
-}
-
-li.NavBar {
-    display: inline;
-    float: left;
-}
-
-li a.NavBar {
-
-	display: inline;
-    width: 100px;
-
-    font-family: "Courier New";
-    font-weight: normal;
-
-    border-style: solid;
-    border-width: 0px;
-    border-bottom-width: 3px;
-    border-color: gray;
-
-    padding: 3px;
-
-    margin-left: 10px;
-    margin-right: 10px;
-    outline-style: none;
-    text-decoration: none;
-
-    color: black;
-
-    font-size: 20px;
-
-    cursor: pointer;
-}
-
-li a:hover {
-    border-style: solid;
-    border-width: 0px;
-    border-bottom-width: 3px;
-    border-color: red;
-    cursor: pointer;
-}
-
-li a.selected {
-    width: 80px;
-    border-style: solid;
-    border-width: 0px;
-    border-bottom-width: 3px;
-    border-color: red;
-
-    padding: 3px;
-
-    margin-left: 10px;
-    margin-right: 10px;
-    outline-style: none;
-    text-decoration: none;
-
-    color: black;
-
-    font-size: 20px;
-}
-
 h2{
 	font-size: 30px;
 }
@@ -966,15 +898,16 @@ img.BoxMenu{
 	width: 200px;
 	height: 200px;
 
-	border-radius: 200px;
 	cursor: pointer;
-	transition: .3s;
-	opacity: 0.7;
+	transition: .4s;
+	opacity: 1;
 }
 
 img.BoxMenu:hover{
 
-	opacity: 1;
+	-ms-transform: rotate(10deg); /* IE 9 */
+    -webkit-transform: rotate(10deg); /* Chrome, Safari, Opera */
+    transform: rotate(10deg);
 }
 
 img.reverse{
@@ -1297,6 +1230,21 @@ html {
 .InfoBoxSelected:hover{
 	box-shadow: 0 2px 4px rgb(230, 0, 0), 0 2px 3px rgb(230, 0, 0);
 }
+
+.boxArticleFeet{
+	border-radius: 10px;
+	padding: 10px;
+	height: 100px;
+}
+.boxArticle{
+	width:200px;
+	float: left;
+	margin: 20px;
+}
+.boxArticle img{
+	height: auto;
+	width: 100%;
+}
 .maxheight{
 	height: auto;
 		min-height: 200px;
@@ -1349,15 +1297,169 @@ html {
 	outline: none;
 	cursor: pointer;
 
+	height: 30px;
+
+	margin-bottom: 5px;
+
 	transition: .3s;
 }
 .StyleBtn:hover{
 	box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 }
+
+.tabPlein{
+	width: 100%;
+	text-align: center;
+}
+
+.DataSplit-1 td{
+	width: 100%;
+}
+.DataSplit-2 td{
+	width: 50%;
+}
+.DataSplit-3 td{
+	width: 33.333%;
+}
+.DataSplit-4 td{
+	width: 25%;
+}
+.DataSplit-5 td{
+	width: 20%;
+}
+.DataSplit-6 td{
+	width: 16.666%;
+}
+
+.DataSplit-1 th{
+	width: 100%;
+}
+.DataSplit-2 th{
+	width: 50%;
+}
+.DataSplit-3 th{
+	width: 33.333%;
+}
+.DataSplit-4 th{
+	width: 25%;
+}
+.DataSplit-5 th{
+	width: 20%;
+}
+.DataSplit-6 th{
+	width: 16.666%;
+}
+
+.Pad{
+	margin-top: 20px;
+
+	width: 100%;
+	height: auto;
+}
+
+.Pad td{
+	width: 33.333%;
+}
+
+.Pad button{
+	width: 100%;
+	height: 50px;
+
+	font-size: 16px;
+	font-weight: bold;
+	font-family: "Courier New";
+
+	opacity: 1;
+}
+.Pad button:hover{
+	opacity: 0.8;
+}
+	.StyleBtnMenuTop{
+
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+
+	border-width: 0px;
+	border-radius: 3px;
+
+	box-sizing: border-box;
+	margin: 15px;
+
+	display: inline-grid;
+
+	outline: none;
+	cursor: pointer;
+
+	word-break: keep-all;
+
+	font-size: 23px;
+	font-family: "Courier New";
+	height: 350px;
+	width: 200px;
+
+	transition: .2s;
+	}
+	.StyleBtnMenuTop:hover{
+		border-bottom-width: 5px;
+		border-top-width: 5px;
+		border-color: black;
+		border-style: solid;
+	}
+
+.StyleBtnMenu{
+
+	padding: 5px;
+	padding-left: 20px;
+	padding-right: 20px;
+
+	margin-bottom: 10px;
+
+	border-width: 0px;
+	border-radius: 3px;
+
+	box-sizing: border-box;
+	margin-left: 5px;
+
+	outline: none;
+	cursor: pointer;
+
+	font-size: 20px;
+	height: 40px;
+	width: 100%;
+
+	transition: .3s;
+}
+.StyleBtnMenu:hover{
+	border-bottom-width: 4px;
+	border-color: black;
+	border-style: solid;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #f1f1f1;
+}
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 0 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
 /* For mobile phones: */
 [class*="col-"] {
     width: 100%;
 }
+
 @media only screen and (min-width: 600px) {
     /* For tablets: */
     .col-m-1 {width: 8.33%;}
@@ -1376,6 +1478,7 @@ html {
     .middle{
 	height: auto;
 }
+
 }
 @media only screen and (min-width: 920px)  {
     /* For desktop: */

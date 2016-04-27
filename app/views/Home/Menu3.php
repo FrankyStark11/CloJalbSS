@@ -30,22 +30,20 @@
 					<a href="/index.php/Admin/RetourMenu"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 				</div>
 		</div>
-		<div class="col-6 col-m-12">
+		<div class="col-2 col-m-12"></div>
+		<div class="col-8 col-m-12">
 			<h4 class="CLOrange"> Consultation</h4><hr>
 			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/Accueil"><img title="Consulter l'inventaire" class="BoxMenu" src="../../images/icon/inventaire-icon.png"></a><h2>CONSULTER</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Accueil"><img title="Consulter l'inventaire" src="../../images/icon/inventaire-icon.png"></a><h2>CONSULTER</h2></div>
+
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Reception"><img title="Recevoir des pièces" src="../../images/icon/reception-icon.png"></a><h2>RECEVOIR</h2></div>
+
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Ajustement"><img title="Ajuster les quantités" src="../../images/icon/vente-icon.png"></a><h2>AJUSTER</h2></div>
+
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/RetraitManuel"><img title="Retirer des pièces" src="../../images/icon/RetraitManuel-icon.png"></a><h2>RETRAIT</h2></div>
 			</div>
 		</div>
-		<div class="col-6 col-m-12">
-			<h4 class="CLOrange"> Gestion de l'inventaire</h4><hr>
-			<div class="col-12 col-m-12 box">
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/Reception"><img title="Recevoir des pièces" class="BoxMenu" src="../../images/icon/reception-icon.png"></a><h2>RECEVOIR</h2></div>
-
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/Ajustement"><img title="Ajuster les quantités" class="BoxMenu" src="../../images/icon/vente-icon.png"></a><h2>AJUSTER</h2></div>
-
-				<div class="BoxMenu" align="center"><a href="/index.php/Home/RetraitManuel"><img title="Retirer des pièces" class="BoxMenu" src="../../images/icon/RetraitManuel-icon.png"></a><h2>RETRAIT</h2></div>
-			</div>
-		</div>
+		<div class="col-2 col-m-12"></div>
 	</div>
 	</div>
 </body>

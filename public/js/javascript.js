@@ -7,6 +7,10 @@ function HideDivDesc(idDiv){
     $(DivSec).slideToggle("slow");
 }
 
+function noenter() {
+  return !(window.event && window.event.keyCode == 13);
+}
+
 //Faire afficher ou disparaitre la fenetre de description sous un item dans linventaire
 //idDiv est le id de la div recus en param
 function HideDivSR(idDiv){
@@ -365,6 +369,68 @@ function showHint(TypeAffichage){
         });
 }
 
+function showReception(){
+
+        var DataID = document.getElementById("SearchBoxNoPiece").value;
+        var DataCouleur = document.getElementById("SearchBoxCouleur").value;
+        var DataGrosseur = document.getElementById("SearchBoxGrosseur").value;
+        var DataHauteur = document.getElementById("SearchBoxHauteur").value;
+        var DataLongeur = document.getElementById("SearchBoxLongeur").value;
+        var DataCategorie = document.getElementById("SearchBoxCategorie").value;
+
+        $.post("/index.php/Home/GetInvParamStr",
+          {dataID: DataID,dataCouleur: DataCouleur,dataGrosseur: DataGrosseur,dataHauteur: DataHauteur,dataLongeur: DataLongeur,dataCategorie: DataCategorie},
+        function(data){
+          var Arr = JSON.parse(data);
+          //vide toutes les valeurs child du main
+          var myNode = document.getElementById("Main");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
+
+          if(Arr.length >= 1){
+            //ajoute les valeurs triées
+            for(var i=0;i<Arr.length;i++){
+              AddPieceReception(Arr[i]["InvNoId"],Arr[i]["InvDesc"]);
+            }
+          }else if(Arr.length == 0){
+            document.getElementById("Main").appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+          }
+
+        });
+}
+
+function showAjustement(){
+
+        var DataID = document.getElementById("SearchBoxNoPiece").value;
+        var DataCouleur = document.getElementById("SearchBoxCouleur").value;
+        var DataGrosseur = document.getElementById("SearchBoxGrosseur").value;
+        var DataHauteur = document.getElementById("SearchBoxHauteur").value;
+        var DataLongeur = document.getElementById("SearchBoxLongeur").value;
+        var DataCategorie = document.getElementById("SearchBoxCategorie").value;
+
+        $.post("/index.php/Home/GetInvParamStr",
+          {dataID: DataID,dataCouleur: DataCouleur,dataGrosseur: DataGrosseur,dataHauteur: DataHauteur,dataLongeur: DataLongeur,dataCategorie: DataCategorie},
+        function(data){
+          var Arr = JSON.parse(data);
+          //vide toutes les valeurs child du main
+          var myNode = document.getElementById("Main");
+          while (myNode.firstChild) {
+            myNode.removeChild(myNode.firstChild);
+          }
+
+          if(Arr.length >= 1){
+            //ajoute les valeurs triées
+            for(var i=0;i<Arr.length;i++){
+              AddPieceAjustement(Arr[i]["InvNoId"],Arr[i]["InvDesc"]);
+            }
+          }else if(Arr.length == 0){
+            document.getElementById("Main").appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+          }
+
+        });
+}
+
 //sur la page de reception
 //affiche dans lespace description linformation concernant litem 
 //selectionné
@@ -427,39 +493,16 @@ function showDescription(str){
         $.post("/index.php/Home/GetElementInvParamStr",
           {dataID: str},
         function(data){
+
           var Arr = JSON.parse(data);
           var TxtIdInfo = document.getElementById("IdItemReception");
           var TxtDescriptionInfo = document.getElementById("DescriptionItemReception");
           var TxtQteInfo = document.getElementById("QteItemReception");
           var BtnAjouterInfo = document.getElementById("BtnAjouterReception");
 
-          //vide toutes les valeurs child du main
-          if(Arr.length == 1){
-            if(Arr[0]["InvNoId"] == TxtIdInfo.value.toUpperCase()){
-              TxtDescriptionInfo.replaceChild(document.createTextNode(Arr[0]["InvDesc"]),TxtDescriptionInfo.childNodes[0]) ;
-              TxtQteInfo.disabled = false;
-              BtnAjouterInfo.disabled = false;
-            }
-            else{
-              if(TxtIdInfo.value == ""){
-                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
-              }else{
-                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
-              }
-              
-              TxtQteInfo.disabled = true;
-              BtnAjouterInfo.disabled = true;
-            }
-          }
-          else{
-            if(TxtIdInfo.value == ""){
-                TxtDescriptionInfo.replaceChild(document.createTextNode("Aucun élément"),TxtDescriptionInfo.childNodes[0]);
-              }else{
-                TxtDescriptionInfo.replaceChild(document.createTextNode("Élément non trouvé"),TxtDescriptionInfo.childNodes[0]);
-              }
-            TxtQteInfo.disabled = true;
-            BtnAjouterInfo.disabled = true;
-          }
+          TxtDescriptionInfo.replaceChild(document.createTextNode(Arr[0]["InvDesc"]),TxtDescriptionInfo.childNodes[0]);
+          TxtIdInfo.value = Arr[0]["InvNoId"];
+          TxtQteInfo.value = "";
         });
 }
 
@@ -1048,6 +1091,128 @@ function AddPieceRetrait2(No,qte,qtereel){
   document.getElementById("DataPiece").appendChild( div_0 );
 }
 
+function AddPieceReception(No,Description){
+
+  var div_0 = document.createElement('div');
+   div_0.className = "infobox";
+
+   var table_0 = document.createElement('table');
+      table_0.className = "infopiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(No));
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode(Description));
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+
+            var button_0 = document.createElement('button');
+               button_0.className = "styleBtn bgorange";
+               button_0.appendChild( document.createTextNode(" Choisir ") );
+               button_0.addEventListener('click', function(){ showDescription(No) }, false);
+            td_2.appendChild( button_0 );
+
+         tr_0.appendChild( td_2 );
+
+      table_0.appendChild( tr_0 );
+
+   div_0.appendChild( table_0 );
+
+document.getElementById('Main').appendChild( div_0 );
+}
+
+function AddPieceAjustement(No,Description){
+
+  var div_0 = document.createElement('div');
+   div_0.className = "infobox";
+
+   var table_0 = document.createElement('table');
+      table_0.className = "infopiece";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(No));
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode(Description));
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+
+            var button_0 = document.createElement('button');
+               button_0.className = "styleBtn bgorange";
+               button_0.appendChild( document.createTextNode(" Choisir ") );
+               button_0.addEventListener('click', function(){ AddModificationAjustement(No,Description) }, false);
+            td_2.appendChild( button_0 );
+
+         tr_0.appendChild( td_2 );
+
+      table_0.appendChild( tr_0 );
+
+   div_0.appendChild( table_0 );
+
+document.getElementById('Main').appendChild( div_0 );
+}
+
+function AddModificationAjustement(no,desc){
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+   div_0.title = desc;
+
+   var table_0 = document.createElement('table');
+      table_0.className = "tabPlein";
+
+      var tr_0 = document.createElement('tr');
+
+         var th_0 = document.createElement('th');
+            th_0.appendChild( document.createTextNode("No pièces") );
+         tr_0.appendChild( th_0 );
+
+
+         var th_1 = document.createElement('th');
+            th_1.appendChild( document.createTextNode("Nouvelle quantité") );
+         tr_0.appendChild( th_1 );
+
+      table_0.appendChild( tr_0 );
+
+
+      var tr_1 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(no) );
+         tr_1.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+
+            var input_0 = document.createElement('input');
+               input_0.style.width = "100%";
+               input_0.type = "text";
+               input_0.placeholder = "quantité";
+               input_0.className = "StyleInput";
+            td_1.appendChild( input_0 );
+
+         tr_1.appendChild( td_1 );
+
+      table_0.appendChild( tr_1 );
+
+   div_0.appendChild( table_0 );
+
+document.getElementById('ModificationAjuster').appendChild( div_0 );
+}
+
 //cette methode permet dafficher un element recus en param
 //a laide de DOM 
 function AddInvElement(itemArray, TypeAffichage){
@@ -1294,6 +1459,49 @@ function FuncExcel(){
   window.location.href = "/index.php/Admin/ReceptionUpdate?JSONParam="+data;
 }
 
+//Sur lajout dans le systeme dune reception officiel
+//genere un array des items et lenvoie sous forme de JSON
+//Au controller qui lui genere son excel et UPDATES les données
+function FuncExcelRetrait(){
+  //declaration du array qui sera rempli des elements
+  var ArrayElementPO = [];
+  var ArrayFinal = [];
+
+  //récuperation du tableau des items
+  var table = document.getElementById('TabItems');
+  var rowLength = table.rows.length;
+
+  //sur tous les ROWS 
+  for(var i=1; i<rowLength; i+=1){
+    var row = table.rows[i];
+    var cellLength = row.cells.length;
+
+    //traverse tous les TD pour generer un array
+    var ArrayEle = [];
+    for(var y=0; y<cellLength-1; y+=1){
+      var cell = row.cells[y];
+      ArrayEle.push(cell.innerHTML );
+    }
+    ArrayElementPO.push(ArrayEle);
+  }
+
+  //Conversion des arrays en object
+  for(var a in ArrayElementPO) {
+
+    var item = ArrayElementPO[a];
+
+    ArrayFinal.push({ 
+        "ID" : item[0],
+        "Description"  : item[1],
+        "Qte"       : item[2] 
+    });
+  }
+
+  //transformation de la commande en JSON et l'envoie
+  var data = JSON.stringify(ArrayFinal);
+  window.location.href = "/index.php/Admin/RetraitUpdate?JSONParam="+data;
+}
+
 //afficher ou cacher les sections
 function AfficherChampsSection(type){
   if(type == "simple" || type == "double"){
@@ -1467,7 +1675,7 @@ function GetPieceQte(Nom){
   var ArrayPrincipal = GetArrayHidden();
 
   for(i=0;i<ArrayPrincipal.length;i++){
-    if( ArrayPrincipal[i][0] == Nom ){ return parseInt(ArrayPrincipal[i][1]); }
+    if( ArrayPrincipal[i][0] == Nom ){ return parseFloat(ArrayPrincipal[i][1]); }
   }
 }
 
@@ -1508,7 +1716,7 @@ function CalculPrix(){
   ArraySection = GetArrayHiddenSection();
   for(i=0;i<ArraySection.length;i++){
     if(ArraySection[i][1] == "Cloture"){ 
-      piedLineaire += parseInt(ArraySection[i][0]); 
+      piedLineaire += parseFloat(ArraySection[i][0]); 
       if(ArraySection[i][4] == "oui"){
         piedLineaireAvecLatte += parseInt(ArraySection[i][0]);
       }
@@ -1684,6 +1892,7 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   var noFILB = "FILB-00009-" + CL;
   var noLIEN = "LIEN-00612-" + CL;
   var noTRAV = "TRAV-15810-" + CL;
+  var noEMTR = "EMTR-11116-" + CL;
   var noLATT = "LATT-0" + Hauteur + "010-" + CL;
 
   var qteMAIL = 0;
@@ -1695,37 +1904,46 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   var qteFILB = 0;
   var qteLIEN = 0;
   var qteTRAV = 0;
+  var qteEMTR = 0;
 
   var qteLATT = 0;
 
   //calcul des pieces globals
-  qteFILB += parseInt(Longueur);
-  qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+  qteFILB += parseFloat(Longueur);
+  qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
 
   //calcul du nombre de poteau inter
-  qtePOTI += parseInt(Math.floor( Longueur/7.5 ));
-  qteCAPI = parseInt(qtePOTI);
+  qtePOTI += parseFloat(Math.round( Longueur/7 ));
+  qteCAPI = parseFloat(qtePOTI);
 
   //calcul du nombre de lien par section selon hauteur
-  qteMAIL += parseInt(Longueur);
-  qteLATT += parseInt(Math.ceil( Longueur/10 ));
+  qteMAIL += parseFloat(Longueur);
+  qteLATT += parseFloat(Math.ceil( Longueur/10 ));
+
+  qteEMTR = 2;
 
   if(Hauteur == "4"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 3));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 3));
   }
 
   if(Hauteur == "5"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 4));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 4));
   }
 
   if(Hauteur == "6"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 5));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 5));
   }
 
   if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
   else{
     qteMAIL = GetPieceQte(noMAIL) - qteMAIL;
     UpdatePieceRow(noMAIL,qteMAIL);
+  }
+
+  if(!PiecePresente(noEMTR)){AjouterPieceRow(noEMTR,qteEMTR);}
+  else{
+    qteEMTR = GetPieceQte(noEMTR) - qteEMTR;
+    UpdatePieceRow(noEMTR,qteEMTR);
   }
 
   if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI);}
@@ -1785,6 +2003,7 @@ function AjoutSectionCloture(Hauteur,Longueur){
   var noFILB = "FILB-00009-" + CL;
   var noLIEN = "LIEN-00612-" + CL;
   var noTRAV = "TRAV-15810-" + CL;
+  var noEMTR = "EMTR-11116-" + CL;
   var noLATT = "LATT-0" + Hauteur + "010-" + CL;
 
   var qteMAIL = 0;
@@ -1796,37 +2015,46 @@ function AjoutSectionCloture(Hauteur,Longueur){
   var qteFILB = 0;
   var qteLIEN = 0;
   var qteTRAV = 0;
+  var qteEMTR = 0;
 
   var qteLATT = 0;
 
   //calcul des pieces globals
-  qteFILB += parseInt(Longueur);
-  qteTRAV += parseInt(Math.ceil( Longueur/10 ));
+  qteFILB += parseFloat(Longueur);
+  qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
 
   //calcul du nombre de poteau inter
-  qtePOTI += parseInt(Math.floor( Longueur/7.5 ));
-  qteCAPI = parseInt(qtePOTI);
+  qtePOTI += parseFloat(Math.round( Longueur/7 ));
+  qteCAPI = parseFloat(qtePOTI);
 
   //calcul du nombre de lien par section selon hauteur
-  qteMAIL += parseInt(Longueur);
-  qteLATT += parseInt(Math.ceil( Longueur/10 ));
+  qteMAIL += parseFloat(Longueur);
+  qteLATT += parseFloat(Math.ceil( Longueur/10 ));
+
+  qteEMTR = 2;
 
   if(Hauteur == "4"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 3));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 3));
   }
 
   if(Hauteur == "5"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 4));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 4));
   }
 
   if(Hauteur == "6"){
-    qteLIEN += parseInt(parseInt(Longueur) + (qtePOTI * 5));
+    qteLIEN += parseFloat(parseFloat(Longueur) + (qtePOTI * 5));
   }
 
   if(!PiecePresente(noMAIL)){AjouterPieceRow(noMAIL,qteMAIL);}
   else{
     qteMAIL = qteMAIL + GetPieceQte(noMAIL);
     UpdatePieceRow(noMAIL,qteMAIL);
+  }
+
+  if(!PiecePresente(noEMTR)){AjouterPieceRow(noEMTR,qteEMTR);}
+  else{
+    qteEMTR = qteEMTR + GetPieceQte(noEMTR);
+    UpdatePieceRow(noEMTR,qteEMTR);
   }
 
   if(!PiecePresente(noPOTI)){AjouterPieceRow(noPOTI,qtePOTI);}
@@ -2223,4 +2451,72 @@ function OnColorChange(){
   }
   var ar = [];
   SetArrayHidden(ar);
+}
+
+//ajout qte reception
+function AddNb(val){
+
+  var TxtQteInfo = document.getElementById("QteItemReception"); 
+
+  if(val == "DEL"){
+    TxtQteInfo.value = TxtQteInfo.value.substring(1);
+  }else if(val == "CLEAR"){
+    TxtQteInfo.value = "";
+  }else{
+    TxtQteInfo.value += val;
+  }
+
+}
+
+//88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+//Page aide
+//88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888
+
+function ShowArticles(){
+
+  var Recherche = document.getElementById("ChampsRecherche").value;
+
+  $.post("/index.php/Aide/GetArticlesFromStr",
+    {Recherche: Recherche},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("ArticlesTous");
+
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddLienArticle(Arr[i]["ID"],Arr[i]["PageSujet"],Arr[i]["PageDesc"]);
+      }
+    }else if(Arr.length == 0){
+      myNode.appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+    }
+  });
+}
+
+function AddLienArticle(ID,Titre,Desc){
+
+  var div_0 = document.createElement('div');
+   div_0.className = "infobox boxArticle";
+
+   var a_0 = document.createElement('a');
+      a_0.href = "/index.php/Aide/ConsulterAide?ID=" + ID;
+
+      var img_0 = document.createElement('img');
+         img_0.src = "../../images/icon/Article-icon.png";
+         img_0.title = Desc;
+      a_0.appendChild( img_0 );
+
+   div_0.appendChild( a_0 );
+
+   var div_1 = document.createElement('div');
+      div_1.className = "bgorange boxArticleFeet";
+      div_1.appendChild( document.createTextNode(Titre) );
+   div_0.appendChild( div_1 );
+
+document.getElementById("ArticlesTous").appendChild( div_0 );
 }

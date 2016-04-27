@@ -28,14 +28,32 @@
 			<a href="/index.php/Home/MenuUtilisateur"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>
 		</div>
 	</div>
-		<div class="col-3 col-m-12"></div>
-		<div class="col-6 col-m-12">
-			<h4 class="CLOrange">Retirer un nouvel utilisateur</h4><hr>
+		<div class="col-1 col-m-12"></div>
+		<div class="col-10 col-m-12">
+			<h4 class="CLOrange">Retirer un utilisateur</h4><hr>
 			<div class="col-12 col-m-12 box">
-				retirer utilisateur
+
+				<div class="infobox boxarticle" align="center">
+					<form method="post" action="/index.php/Admin/RetirerUtilisateur">
+						<input type="hidden" name="Utilisateur" value="10"></input>
+						<input type="hidden" name="Nom" value="Visiteur"></input>
+						<img src="../../images/icon/Admin-icon.png">
+					<h2>Francis</h2>
+					<button class="styleBtn bgred">RETIRER</button>
+					</form>
+				</div>
+				<div class="infobox boxarticle" align="center">
+					<form method="post" action="/index.php/Admin/RetirerUtilisateur">
+						<input type="hidden" name="Utilisateur" value="10"></input>
+						<input type="hidden" name="Nom" value="Visiteur"></input>
+						<img src="../../images/icon/Admin-icon.png">
+					<h2>Admin</h2>
+					<button class="styleBtn bgred">RETIRER</button>
+					</form>
+				</div>
 			</div>
 		</div>
-		<div class="col-3 col-m-12"></div>
+		<div class="col-1 col-m-12"></div>
 	</div>
 	</div>
 </body>

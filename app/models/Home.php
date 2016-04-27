@@ -20,7 +20,7 @@
 		function GetAllUser(){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT UtilisateurUsername,UtilisateurNom,UtilisateurType FROM Utilisateur ORDER BY UtilisateurNom ASC;");
+			$sql = $db->prepare("SELECT ID,UtilisateurUsername,UtilisateurPrenom,UtilisateurNom,UtilisateurType FROM Utilisateur ORDER BY UtilisateurNom ASC;");
 			$sql->execute();
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -118,6 +118,19 @@
 			$sql = null;
 		}
 
+		function RetirerUtilisateur($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("DELETE FROM Utilisateur WHERE ID = :ID");
+
+			$sql->bindValue(":ID",$ID);
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
 		function GetNbDossierFromDate($ID){
 			$db = $this->connectDB();
 
@@ -165,7 +178,7 @@
 		function Connextion($Username,$Mdp){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT UtilisateurType,UtilisateurNom FROM Utilisateur WHERE UtilisateurUsername = :Username AND UtilisateurMdp = :Mdp");
+			$sql = $db->prepare("SELECT UtilisateurType,UtilisateurNom,UtilisateurPrenom FROM Utilisateur WHERE UtilisateurUsername = :Username AND UtilisateurMdp = :Mdp");
 			$sql->bindValue(":Username",$Username);
 			$sql->bindValue(":Mdp",crypt($Mdp, 'CL'));
 
@@ -421,6 +434,23 @@
 			$sql = null;
 		}
 
+		function RetraitItem($ID,$Qte){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Inventaire SET InvQte = InvQte - :Qte WHERE InvNoId = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+			$sql->bindValue(":Qte", $Qte);
+
+			$sql->execute();
+
+			$ActionString = "Retrait de " . $Qte . " " . $ID . ".";
+			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
 		function ModificationItem(){
 			$db = $this->connectDB();
 
@@ -483,6 +513,69 @@
 			$sql = $db->prepare("UPDATE Utilisateur SET UtilisateurMdp = :data WHERE UtilisateurUsername = :Param");
 			$sql->bindValue(":data",crypt($Valeur, 'CL'));
 			$sql->bindValue(":Param",$ID);
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		//fonction de la page aide
+
+		function AjouterConsultation($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE PagesAides SET PageConsultation = PageConsultation + 1 WHERE ID = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		function RecevoirNomPage($ID){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT PageNomPage FROM PagesAides WHERE ID = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+
+			$sql->execute();
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result["PageNomPage"];
+		}
+
+		function GetArticlesFromStr($Data = ""){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM PagesAides WHERE PageSujet LIKE '%' || :Data || '%' OR PageDesc LIKE '%' || :Data || '%'  ORDER BY PageConsultation DESC ");
+
+			$sql->bindValue(":Data", $Data);
+
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function ResetComteurVisite(){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE PagesAides SET PageConsultation = :QTE");
+
+			$sql->bindValue(":QTE", 0);
+
 			$sql->execute();
 
 			$db = null;

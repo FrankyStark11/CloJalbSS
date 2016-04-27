@@ -30,22 +30,25 @@
 					<a href="/index.php/Admin/TerminerSession"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/logout-icon.png"></a>
 				</div>
 			</div>
-			<div class="col-6 col-m-12">
+			<div class="col-2 col-m-12"></div>
+			<div class="col-8 col-m-12">
 				<h4 class="CLOrange"> Application</h4><hr>
 				<div class="col-12 col-m-12 box">
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/MenuInventaire"><img title="Inventaire" class="BoxMenu" src="../../images/icon/MenuInventaire-icon.png"></a><h2>INVENTAIRE</h2></div>
 
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/MenuSoumission"><img title="Feuille de travaux" class="BoxMenu" src="../../images/icon/Soumission-icon.png"></a><h2>TRAVAUX</h2></div>
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuInventaire"><img title="Inventaire" src="../../images/icon/MenuInventaire-icon.png"></a><h2>INV</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuSoumission"><img title="Feuille de travaux" src="../../images/icon/Soumission-icon.png"></a><h2>TRAVAUX</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuCommande"><img title="Préparer une commande" src="../../images/icon/Commande-icon.png"></a><h2>COMMANDE</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Log"><img title="Log" src="../../images/icon/Backlog-icon.png"></a><h2>LOG</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuConfig"><img title="Configuration"  src="../../images/icon/settings-icon.png"></a><h2>CONFIG</h2></div>
+
+					<div class="infobox boxarticle" align="center"><a href="/index.php/Aide/Accueil"><img title="J'ai une question sur le système intranet" src="../../images/icon/aide-icon.png"></a><h2>AIDE</h2></div>
 				</div>
 			</div>
-			<div class="col-6 col-m-12">
-				<h4 class="CLOrange"> Configuration</h4><hr>
-				<div class="col-12 col-m-12 box">
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/Log"><img title="Log" class="BoxMenu" src="../../images/icon/Backlog-icon.png"></a><h2>LOG</h2></div>
-
-					<div class="BoxMenu" align="center"><a href="/index.php/Home/MenuConfig"><img title="Configuration" class="BoxMenu" src="../../images/icon/settings-icon.png"></a><h2>CONFIG</h2></div>
-				</div>
-			</div>
+			<div class="col-2 col-m-12"></div>
 		</div>
 	</div>
 </body>

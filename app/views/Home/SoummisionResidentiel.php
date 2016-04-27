@@ -11,6 +11,7 @@
 	<title>Soumission Clôture Jalbert</title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=0.5" />
+	<link rel="stylesheet" type="text/css" href="/css/w3Model.css">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
@@ -36,7 +37,7 @@
 			<div class="col-6  col-m-12 " >
 
 				<div class="col-12 col-m-12 box" >
-					<h3 onclick=" HideDivSR('DivSR1')" class="clOrange">Information du projet <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
+					<h3 class="clOrange">Information du projet</h3><hr>
 					<div id="DivSR1" style="display: block;">
 						<table class="InfoPiece">
 							<tr>
@@ -44,7 +45,7 @@
 									Prénom *
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientPrenomSR" id="TxtRepNomSR" placeholder="Prénom"></input>
+									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientPrenomSR" id="TxtRepNomSR" onKeyPress="return noenter()" placeholder="Prénom"></input>
 								</td>
 							</tr>
 							<tr>
@@ -52,7 +53,7 @@
 									Nom *
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientNomSR" id="TxtRepNomSR" placeholder="Nom"></input>
+									<input class="StyleInput col-12" type="text" title="Nom du représentant" name="TxtClientNomSR" id="TxtRepNomSR" onKeyPress="return noenter()" placeholder="Nom"></input>
 								</td>
 							</tr>
 							<tr>
@@ -60,7 +61,7 @@
 									Date *
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" placeholder="Date"></input>
+									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" onKeyPress="return noenter()" placeholder="AAAA-MM-JJ"></input>
 								</td>
 							</tr>
 							<tr>
@@ -68,16 +69,22 @@
 									Ville *
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="text" title="Ville" name="TxtVilleProjetSR" id="TxtVilleProjetSR" placeholder="Ville"></input>
+									<input class="StyleInput col-12" onKeyPress="return noenter()" type="text" title="Ville" name="TxtVilleProjetSR" onKeyPress="return noenter()" id="TxtVilleProjetSR" placeholder="Ville"></input>
 								</td>
+							</tr>
+						</table>
+						<table style="margin-top: 20px;" class="tabplein datasplit-2">
+							<tr>
+								<td><button class="StyleBtn tabplein" disabled ></button></td>
+								<td><input onclick="HideDivSR('DivSR1'); $('#DivSR3').slideDown('slow');" type="button" class="StyleBtn bgorange tabplein" value="SUIVANT" ></input></td>
 							</tr>
 						</table>
 					</div>
 				</div>
 
 				<div class="col-12 col-m-12 box" >
-					<h3 onclick=" HideDivSR('DivSR3')" class="clOrange">Spécification <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
-					<div id="DivSR3" style="display: block;">
+					<h3 class="clOrange">Spécification</h3><hr>
+					<div id="DivSR3" style="display: none;">
 						<table class="InfoPiece">
 							<tr>
 							<td>Couleur pour le projet</td>
@@ -106,12 +113,19 @@
 							<tr><td>5'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteKit5ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(5)" placeholder="QTE"></input></td></tr>
 							<tr><td>6'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteKit6ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(6)" placeholder="QTE"></input></td></tr>
 						</table>
+
+						<table style="margin-top: 20px;" class="tabplein datasplit-2">
+							<tr>
+								<td><input onclick="HideDivSR('DivSR3'); $('#DivSR1').slideDown('slow');" type="button" class="StyleBtn bgorange tabplein" value="PRÉCÉDENT" ></input></td>
+								<td><input onclick="HideDivSR('DivSR3'); $('#DivSR4').slideDown('slow');" type="button" class="StyleBtn bgorange tabplein" value="SUIVANT" ></input></td>
+							</tr>
+						</table>
 					</div>
 				</div>
 
 				<div class="col-12 col-m-12 box" >
-					<h3 onclick=" HideDivSR('DivSR4')" class="clOrange">Ajout d'une section <img id="arrSR3" style="width: 12px;height: 12px;" src="/images/icon/arrow-icon.png"></h3><hr>
-					<div id="DivSR4" style="display: block;">
+					<h3 class="clOrange">Ajout d'une section</h3><hr>
+					<div id="DivSR4" style="display: none;">
 						<table class="InfoPiece">
 							<tr>
 								<td>
@@ -142,7 +156,7 @@
 									Longeur 
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="number" title="Longueur de la section en cours" name="TxtLongueurSectionSR" id="TxtLongueurSectionSR" pattern="[0-9]*" min="0" placeholder="Longeur"></input>
+									<input onKeyPress="return noenter()" class="StyleInput col-12" type="number" title="Longueur de la section en cours" name="TxtLongueurSectionSR" id="TxtLongueurSectionSR" pattern="[0-9]*" min="0" placeholder="Longeur"></input>
 								</td>
 							</tr>
 							<tr id="LongeurPorte" style="display: none;">
@@ -177,6 +191,13 @@
 								<td>
 									<input type="button" value="Ajouter" class="StyleBtn bgorange col-12" title="Ajouter la section" onclick="AjouterSectionRow()"></input>
 								</td>
+							</tr>
+						</table>
+
+						<table style="margin-top: 20px;" class="tabplein datasplit-2">
+							<tr>
+								<td><input onclick="HideDivSR('DivSR4'); $('#DivSR3').slideDown('slow');" type="button" class="StyleBtn bgorange tabplein" value="PRÉCÉDENT" ></input></td>
+								<td><button class="StyleBtn tabplein" disabled ></button></td>
 							</tr>
 						</table>
 					</div>
@@ -291,11 +312,27 @@
 					<table class="TabFeet">
 						<tr>
 							<td>
-								<button type="submit" class="StyleBtn bgGreen">Enregistrer</button> 
+								<input value="Enregistrer" type="button" onclick="document.getElementById('id02').style.display='block'" class="StyleBtn bgGreen"></input>
 							</td>
 						</tr>
 					</table>
 				</div>	
+			</div>
+
+			<div id="id02" class="w3-modal">
+			  <div class="w3-modal-content w3-animate-top w3-card-8">
+			    <header class="w3-container bggreen"> 
+			      <span onclick="document.getElementById('id02').style.display='none'" 
+			      class="w3-closebtn">&times;</span>
+			      <h2 id="headbox2"> Enregistrer le dossier </h2>
+			    </header>
+			    <div class="w3-container" align="center">
+			      <p>Vous êtes sur le point d'enregistrer le dossier. Êtes vous certain que les informations sont exacte.</p>
+			    </div>
+			    <footer class="w3-container" style="padding-bottom: 10px;" align="center">
+			     <button type="submit" class="StyleBtn bgGreen">Enregistrer</button>
+			    </footer>
+			  </div>
 			</div>
 
 		</form>

@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>
 
-<body onload="">
+<body onload="showAjustement()">
 <div class="row Main">
 	<div class="col-12 col-m-12">
 		<div class="col-10 col-m-10 box headBox bgorange">
@@ -28,16 +28,16 @@
 	<h4 class="CLorange">Recherche</h4><hr>
 		<div class="col-12 col-m-12 box" style="height: 600px;">
 			<div id="SearchBox" class="SearchBoxPiece" align="center">	
-				<form onreset="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)">
+				<form onreset="showAjustement()">
 					<table class="RechercheBox">
 						<tr>
 							<td>
-								<input class="StyleInput col-12" onkeyup="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
+								<input class="StyleInput col-12" onkeyup="showAjustement()" id="SearchBoxNoPiece" type="text" placeholder="No de piece"></input>
 							</td>
 						</tr>
 						<tr>
 							<td>
-								<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxCategorie" class="StyleInput col-12">
+								<select onchange="showAjustement()" id="SearchBoxCategorie" class="StyleInput col-12">
 									<option selected value=""> Catégorie </option>
 									<optgroup label="oz">
 										<option>1,2oz</option>
@@ -73,7 +73,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxCouleur" class="StyleInput col-12">
+								<select onchange="showAjustement()" id="SearchBoxCouleur" class="StyleInput col-12">
 									<option value="">Couleur</option>
 									<optgroup label="Résidentiel">
 											<option>Noir</option>
@@ -96,7 +96,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxHauteur" class="StyleInput col-12">
+								<select onchange="showAjustement()" id="SearchBoxHauteur" class="StyleInput col-12">
 									<option value="" selected> Hauteur </option>
 									<option>3ft</option>
 									<option>4ft</option>
@@ -113,7 +113,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxGrosseur" class="StyleInput col-12">
+								<select onchange="showAjustement()" id="SearchBoxGrosseur" class="StyleInput col-12">
 									<option value="" selected> Grosseur </option>
 									<optgroup label="Numéro">
 											<option>#9</option>
@@ -146,7 +146,7 @@
 						</tr>
 						<tr>
 							<td>
-								<select onchange="showHint(<?php echo $_SESSION["TypeCompte"]; ?>)" id="SearchBoxLongeur" class="StyleInput col-12">
+								<select onchange="showAjustement()" id="SearchBoxLongeur" class="StyleInput col-12">
 									<option value="" selected> Longueur </option>
 									<optgroup label="Pied/pouce">
 											<option>6ft 6po</option>
@@ -186,30 +186,19 @@
 	<div class="col-5 col-m-12">
 	<h4 class="CLorange">Sélection</h4><hr>
 		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+			
 			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6"> <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGOrange StyleBtn">Ajuster</button></td></tr></table> </div>
+			
 			<div class="col-12 InfoBox InfoBoxSelected" title="Poteau de 4ft 2 3/8 6 et 6" > <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGRed StyleBtn">Retirer</button></td></tr></table> </div>
+			
 			<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6" > <table class="InfoPiece"><tr><td>POTP-04238-NO</td><td>Qte 120</td><td><button class="BGOrange StyleBtn">Ajuster</button></td></tr></table> </div>
+
 		</div>
 	</div>
 	<div class="col-4 col-m-12">	
 	<h4 class="CLorange">Modification</h4><hr>
-		<div id="" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
-			<div class="col-12 InfoBox"> 
-				<table class="InfoPiece">
-					<tr>
-						<th>
-							No pièces
-						</th>
-						<th>
-							Nouvelle quantité
-						</th>
-					</tr>
-					<tr>
-						<td>POTP-04238-NO</td>
-						<td><input class="StyleInput" style="width: 100%;" type="text" placeholder="120"></input></td>
-					</tr>
-				</table> 
-			</div>
+		<div id="ModificationAjuster" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+			
 		</div>
 	<hr><button class="BGOrange StyleBtn" style="width: 100%;"> Confirmer </button><hr>
 	</div>
