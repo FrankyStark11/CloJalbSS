@@ -369,6 +369,76 @@ function showHint(TypeAffichage){
         });
 }
 
+function showPieceConfirmation(str){
+
+  $.post("/index.php/Home/GetInvConfirmer",
+    {dataID: str},
+  function(data){
+    var Arr = JSON.parse(data);
+
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("SectionPiece");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddConfirmationPiece(Arr[i]["InvNoId"]);
+      }
+    }else if(Arr.length == 0){
+      document.getElementById("SectionPiece").appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+    }
+  });
+}
+
+function AddConfirmationPiece(NO){
+
+  var main = document.getElementById("SectionPiece");
+
+var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+   div_0.title = "Ajout d'une piece non prévue";
+   div_0.id = NO;
+
+   var table_0 = document.createElement('table');
+      table_0.className = "tabplein datasplit-3";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(NO) );
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+
+            var input_0 = document.createElement('input');
+               input_0.placeholder = "Quantité";
+               input_0.className = "StyleInput";
+               input_0.id = NO + "-qte"
+            td_1.appendChild( input_0 );
+
+         tr_0.appendChild( td_1 );
+
+         var td_2 = document.createElement('td');
+
+         var button_0 = document.createElement('button');
+            button_0.className = "BGOrange StyleBtn";
+            button_0.appendChild( document.createTextNode("Ajouter") );
+            button_0.addEventListener('click', function(){ ConfirmerQtePieceNonPrevue(NO);}, false);
+         td_2.appendChild( button_0 );
+
+         tr_0.appendChild( td_2 );
+
+      table_0.appendChild( tr_0 );  
+
+   div_0.appendChild( table_0 );
+
+main.appendChild( div_0 );
+}
+
 function showReception(){
 
         var DataID = document.getElementById("SearchBoxNoPiece").value;
@@ -869,6 +939,19 @@ function ConfirmerQtePiece(id){
 
   var divRetir = document.getElementById(id);
   divRetir.parentNode.removeChild(divRetir);
+}
+
+//
+function ConfirmerQtePieceNonPrevue(id){
+  var arr = GetArrayHidden();
+
+  var Qte = document.getElementById(id + "-qte").value;
+
+  var ele = [id,Qte];
+  arr.push(ele);
+
+  SetArrayHidden(arr);
+  AjouterPieceResume(id,Qte,0);
 }
 
 //Retourne la piece dans la premiere colonne et la retire du hidden
@@ -2466,6 +2549,103 @@ function AddNb(val){
     TxtQteInfo.value += val;
   }
 
+}
+
+function ShowProfis(){
+
+  var Recherche = document.getElementById("ChampsRecherche").value;
+
+  $.post("/index.php/Admin/GetProfils",
+    {Recherche: Recherche},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("sectionUtilisateur");
+
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        addProfilCard(Arr[i]["UtilisateurNom"],Arr[i]["UtilisateurPrenom"],Arr[i]["ID"],Arr[i]["UtilisateurInscription"],Arr[i]["UtilisateurUsername"]);
+      }
+    }else if(Arr.length == 0){
+      myNode.appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+    }
+  });
+}
+
+function SetProfilsData(ID,Nom,Prenom,DateIns,UserName){
+
+  var champsNom = document.getElementById('profilNom');
+  champsNom.replaceChild(document.createTextNode(Nom),champsNom.childNodes[0]);
+
+  var champsPrenom = document.getElementById('profilPrenom');
+  champsPrenom.replaceChild(document.createTextNode(Prenom),champsPrenom.childNodes[0]);
+
+  var champsDate = document.getElementById('profilInscription');
+  champsDate.replaceChild(document.createTextNode(DateIns),champsDate.childNodes[0]);
+
+  var champsUsername = document.getElementById('profilUserName');
+  champsUsername.replaceChild(document.createTextNode(UserName),champsUsername.childNodes[0]);
+
+  document.getElementById('TxtID').value = ID;
+  document.getElementById('Nom').value = Prenom + " " + Nom;
+
+  document.getElementById("LienRetirer").href = "/index.php/Admin/RetirerUtilisateur?ID=" + ID + "&Nom=" + Prenom ;
+}
+
+function addProfilCard(Nom,Prenom,ID,DateIns,UserName){
+
+  var main = document.getElementById('sectionUtilisateur');
+  var IDUnique = makeid();
+
+var div_0 = document.createElement('div');
+   div_0.align = "center";
+   div_0.className = "infobox boxarticle";
+
+   var input_0 = document.createElement('input');
+      input_0.value = ID;
+      input_0.id = "IDUtilisateur"+IDUnique;
+      input_0.type = "hidden";
+   div_0.appendChild( input_0 );
+
+   var input_1 = document.createElement('input');
+      input_1.value = DateIns;
+      input_1.name = "DateInscription"+IDUnique;
+      input_1.type = "hidden";
+   div_0.appendChild( input_1 );
+
+   var input_2 = document.createElement('input');
+      input_2.value = UserName;
+      input_2.name = "UserName"+IDUnique;
+      input_2.type = "hidden";
+   div_0.appendChild( input_2 );
+
+
+var img_0 = document.createElement('img');
+   img_0.src = "../../images/icon/Admin-icon.png";
+div_0.appendChild( img_0 );
+
+
+var h3_0 = document.createElement('h3');
+   h3_0.appendChild( document.createTextNode(Nom + ",") );
+div_0.appendChild( h3_0 );
+
+
+var h3_1 = document.createElement('h3');
+   h3_1.appendChild( document.createTextNode(Prenom) );
+div_0.appendChild( h3_1 );
+
+
+var button_0 = document.createElement('button');
+   button_0.className = "styleBtn tabPlein bggreen";
+   button_0.appendChild( document.createTextNode("Sélectionner") );
+   button_0.addEventListener('click', function(){ SetProfilsData(ID,Nom,Prenom,DateIns,UserName);}, false);
+div_0.appendChild( button_0 );
+
+main.appendChild( div_0 );
 }
 
 //88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888

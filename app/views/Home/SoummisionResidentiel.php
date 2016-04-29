@@ -124,7 +124,7 @@
 				</div>
 
 				<div class="col-12 col-m-12 box" >
-					<h3 class="clOrange">Ajout d'une section</h3><hr>
+					<h3 class="clOrange">Ajout des sections</h3><hr>
 					<div id="DivSR4" style="display: none;">
 						<table class="InfoPiece">
 							<tr>

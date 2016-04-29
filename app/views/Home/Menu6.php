@@ -36,9 +36,7 @@
 			<div class="col-12 col-m-12 box">
 				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/InventaireInsertion"><img title="Ajouter un nouvel pièce" src="../../images/icon/add_icon.png"></a><h2>AJOUTER</h2></div>
 				
-				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/RetirerPiece"><img title="Retirer une pièce" src="../../images/icon/retrait-icon.png"></a><h2>RETIRER</h2></div>
-				
-				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Configuration"><img title="Modifier les utilisateurs" src="../../images/icon/ConfigSysteme-icon.png"></a><h2>MODIFIER</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Configuration"><img title="Modifier les parametres" src="../../images/icon/ConfigSysteme-icon.png"></a><h2>MODIFIER</h2></div>
 			</div>
 		</div>
 		<div class="col-2 col-m-12"></div>

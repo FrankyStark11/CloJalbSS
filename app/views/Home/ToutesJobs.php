@@ -25,7 +25,7 @@
 		</div>
 	</div>
 	<div class="col-12 col-m-12">
-		<div class="col-4 col-m-12"  >
+		<div class="col-4 col-m-12">
 			<h4 class="CLorange">Option de recherche</h4><hr>
 			<div class="col-12 col-m-12 box" style="height: 500px;">
 				<table class="InfoPiece">
@@ -47,33 +47,24 @@
 					</tr>
 					<tr>
 						<td>Date début</td>
-						<td><input type="Date" class="StyleInput col-12" placeholder="No dossier"></input></td>
+						<td><input id="DateDebut" value="<?php echo date("Y-m-d") ?>" type="Date" class="StyleInput col-12" placeholder="No dossier"></input></td>
 					</tr>
 					<tr>
 						<td>Date fin</td>
-						<td><input type="Date" class="StyleInput col-12" placeholder="No dossier"></input></td>
+						<td><input id="DateFin" value="<?php echo date("Y-m-d") ?>" type="Date" class="StyleInput col-12" placeholder="No dossier"></input></td>
 					</tr>
 					<tr>
 						<td>Status</td>
 						<td><select class="StyleInput col-12"><option>choix</option><option>fermé</option><option>Ouvert</option></select></td>
 					</tr>
 				</table>
+				<button class="stylebtn bgorange tabplein">Rechercher</button>
 			</div>
 		</div>
 		<div  class="col-8 col-m-12 " >
 			<h4 class="CLorange">Liste des feuilles de travaux</h4><hr>
 			<div id="Main" class="col-12 col-m-12 box overflowAll" style="height: 500px;">
-				<div class="col-12 InfoBox" title="Poteau de 4ft 2 3/8 6 et 6">
-					<table class="InfoPiece">
-						<tr>
-							<td>20160412-01</td>
-							<td>Marcel Tanguay</td>
-							<td>Repentigny</td>
-							<td>Ouvert</td>
-							<td><button class="BGOrange StyleBtn">Afficher</button></td>
-						</tr>
-					</table>
-				</div>
+				
 			</div>
 		</div>
 	</div>

@@ -20,7 +20,23 @@
 		function GetAllUser(){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT ID,UtilisateurUsername,UtilisateurPrenom,UtilisateurNom,UtilisateurType FROM Utilisateur ORDER BY UtilisateurNom ASC;");
+			$sql = $db->prepare("SELECT ID,UtilisateurUsername,UtilisateurPrenom,UtilisateurNom,UtilisateurType,UtilisateurInscription FROM Utilisateur ORDER BY UtilisateurNom ASC;");
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function GetAllUserRecherche($str=""){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT ID,UtilisateurUsername,UtilisateurPrenom,UtilisateurNom,UtilisateurType,UtilisateurInscription FROM Utilisateur WHERE UtilisateurPrenom LIKE '%' || :str || '%' OR UtilisateurNom LIKE '%' || :str || '%' ORDER BY UtilisateurNom ASC;");
+
+			$sql->bindValue(":str",$str);
+
 			$sql->execute();
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
 
@@ -102,12 +118,13 @@
 		}
 
 		//ajout dun nouvelle utilisateur dans le systeme selon les params
-		function InsertionUtilisateur($Nom,$Username,$Mdp,$Type){
+		function InsertionUtilisateur($Nom,$Prenom,$Username,$Mdp,$Type){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("INSERT INTO Utilisateur (UtilisateurNom,UtilisateurUsername,UtilisateurMdp,UtilisateurType) VALUES (:Nom,:User,:Mdp,:Type)");
+			$sql = $db->prepare("INSERT INTO Utilisateur (UtilisateurNom,UtilisateurPrenom,UtilisateurUsername,UtilisateurMdp,UtilisateurType,UtilisateurInscription) VALUES (:Nom,:Prenom,:User,:Mdp,:Type,DATETIME('now','localtime'))");
 
 			$sql->bindValue(":Nom",$Nom);
+			$sql->bindValue(":Prenom",$Prenom);
 			$sql->bindValue(":User",$Username);
 			$sql->bindValue(":Mdp",crypt($Mdp, 'CL'));
 			$sql->bindValue(":Type",$Type);
@@ -250,6 +267,22 @@
 			return $result;
 		}
 
+		//re
+		function GetAllDossierRecherche($No,$Ville,$Prenom,$Nom,$DateDebut,$DateFin,$Status){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Dossier WHERE DossNumeroId LIKE '%' || :NoId || '%' AND InvCouleur LIKE '%' || :Cl || '%' AND InvGrosseur LIKE '%' || :Grosseur || '%' AND InvHauteur LIKE '%' || :Hauteur || '%' AND InvLongeur LIKE '%' || :Longeur || '%' AND InvCategorie LIKE '%' || :Categorie || '%' ORDER BY DossVille ASC");
+
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function FermerDossier($NumeroDossier){
 			$db = $this->connectDB();
 
@@ -335,6 +368,23 @@
 			$sql = null;
 		}
 
+		function GetInvConfirmer($DataId = ""){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Inventaire WHERE InvNoId LIKE '%' || :NoId || '%'  ORDER BY InvNoId ASC ");
+
+			$sql->bindValue(":NoId", $DataId);
+
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
 		function GetInvParamStr($DataId = "",$DataCouleur = "",$DataGrosseur = "",$DataHauteur = "",$DataLongeur = "",$DataCategorie = ""){
 
 			$db = $this->connectDB();
@@ -412,6 +462,19 @@
 			//ajoute l'action au log
 			$ActionString = "Ajout de " . $DataNoId . " dans l'inventaire avec une quantitée de " . $DataQte.".";
 			$this->InscriptionLog($ActionString);
+
+			$db = null;
+			$sql = null;
+		}
+
+		function RetirerPiece($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("DELETE FROM Inventaire WHERE InvNoId = :NoId");
+
+			$sql->bindValue(":NoId", $ID);
+
+			$sql->execute();
 
 			$db = null;
 			$sql = null;
@@ -510,7 +573,7 @@
 		function ModifierMdpUtilisateur($ID,$Valeur){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("UPDATE Utilisateur SET UtilisateurMdp = :data WHERE UtilisateurUsername = :Param");
+			$sql = $db->prepare("UPDATE Utilisateur SET UtilisateurMdp = :data WHERE ID = :Param");
 			$sql->bindValue(":data",crypt($Valeur, 'CL'));
 			$sql->bindValue(":Param",$ID);
 			$sql->execute();
@@ -520,7 +583,6 @@
 		}
 
 		//fonction de la page aide
-
 		function AjouterConsultation($ID){
 			$db = $this->connectDB();
 

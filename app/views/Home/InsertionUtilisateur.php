@@ -34,31 +34,37 @@
 							<tr>
 								<td>Nom</td>
 								<td>
-									<input type="text" class="StyleInput col-12" id="txtNomAjoutUtilisateur" name="TxtNomAjoutUtilisateur" placeholder="Nom"></input>
+									<input required type="text" class="StyleInput col-12" id="txtNomAjoutUtilisateur" name="TxtNomAjoutUtilisateur" placeholder="Nom"></input>
+								</td>
+							</tr>
+							<tr>
+								<td>Prénom</td>
+								<td>
+									<input required type="text" class="StyleInput col-12" id="txtPrenomAjoutUtilisateur" name="TxtPrenomAjoutUtilisateur" placeholder="Prénom"></input>
 								</td>
 							</tr>
 							<tr>
 								<td>Username</td>
 								<td>
-									<input type="text" class="StyleInput col-12" id="txtUsernameAjoutUtilisateur" name="txtUsernameAjoutUtilisateur" placeholder="Username"></input>
+									<input required type="text" class="StyleInput col-12" id="txtUsernameAjoutUtilisateur" name="txtUsernameAjoutUtilisateur" placeholder="Username"></input>
 								</td>
 							</tr>
 							<tr>
 								<td>Mot de passe</td>
 								<td>
-									<input type="password" class="StyleInput col-12" id="txtmdpAjoutUtilisateur" name="txtmdpAjoutUtilisateur" placeholder="Mot de passe"></input>
+									<input required type="password" class="StyleInput col-12" id="txtmdpAjoutUtilisateur" name="txtmdpAjoutUtilisateur" placeholder="Mot de passe"></input>
 								</td>
 							</tr>
 							<tr>
 								<td>Confirmation mot de passe</td>
 								<td>
-									<input type="password" class="StyleInput col-12" id="txtmdpCCAjoutUtilisateur" name="txtmdpCCAjoutUtilisateur" placeholder="mot de passe "></input>
+									<input required type="password" class="StyleInput col-12" id="txtmdpCCAjoutUtilisateur" name="txtmdpCCAjoutUtilisateur" placeholder="mot de passe "></input>
 								</td>
 							</tr>
 							<tr>
 								<td>Type</td>
 								<td>
-									<select class="StyleInput col-12" name="SelectTypeAjoutUtilisateur">
+									<select required class="StyleInput col-12" name="SelectTypeAjoutUtilisateur">
 										<option disabled >Choix</option>
 										<option value="1">Administrateur</option>
 										<option value="2">Visiteur</option>

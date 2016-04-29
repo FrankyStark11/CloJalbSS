@@ -15,8 +15,6 @@
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
-	
-
 </head>
 
 <body onload="ShowArticles()">

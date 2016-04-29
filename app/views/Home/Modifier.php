@@ -242,8 +242,11 @@
 								</td>
 							</tr>
 						</table>
-						<button class="BtnRecherche" value="Rechercher"> Modifier </input>
-					</form>
+						<br>
+						<button class="stylebtn bggreen tabplein" value="Rechercher"> Modifier </button>
+					</form>	
+						<a href="/index.php/Admin/RetirerPiece?NoId=<?php echo $Data[0]->InvNoId; ?>"> <button class="stylebtn bgred tabplein" value="Rechercher"> Supprimer la piece </button>
+					
 				</div>
 			<div class="col-3 col-m-12"></div>
 		</div>

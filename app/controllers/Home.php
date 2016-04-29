@@ -172,6 +172,16 @@
 			echo json_encode($result);
 		}
 
+		public function GetInvConfirmer(){
+			$Model = new modHome();
+		
+			if(is_null($_POST["dataID"])){ $dataID = ""; }else{ $dataID = $_POST["dataID"];}
+
+			$result = $Model->GetInvConfirmer($dataID);
+
+			echo json_encode($result);
+		}
+
 		public function Login(){
 			parent::view('Home/Login');
 		}

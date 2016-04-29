@@ -4,7 +4,6 @@
 	class Admin extends Controller
 	{
 		public function Insertion(){
-
 			$Model = new modHome();
 			$Model->InsertionItem();
 			parent::view('Home/Insertion');
@@ -22,6 +21,20 @@
 			session_unset();
 			parent::view("Home/Login");
 			header("Refresh:0; ../Home/Login");
+		}
+
+		public function RetirerPiece(){
+			$Model = new modHome();
+
+			$Param = $_GET["NoId"];
+
+			$Model->RetirerPiece($Param);
+
+			//Ajout au log
+			$ActionString = "La piece " . $Param . " à été supprimée.";
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/index');
 		}
 
 		public function ModifConf(){
@@ -83,16 +96,25 @@
 		public function ModifMdp(){
 			$Model = new modHome();
 
-			$Param = $_POST["TxtUser"];
+			$Param = $_POST["TxtID"];
+			$Nom = $_POST["Nom"];
 			$Valeur = $_POST["TxtMdp"];
 
 			$Model->ModifierMdpUtilisateur($Param,$Valeur);
 
 			//Ajout au log
-			$ActionString = "Le mot de passe de ".$Param." à été modifié.";
+			$ActionString = "Le mot de passe de ".$Nom." à été modifié.";
 			$Model->InscriptionLog($ActionString);
 
-			parent::view('Home/Config');
+			parent::view('Home/Menu5');
+		}
+
+		public function GetProfils(){
+			$Model = new modHome();
+			$Str = $_POST["Recherche"];
+
+			$result = $Model->GetAllUserRecherche($Str);
+			echo json_encode($result);
 		}
 
 		public function FermetureDossier(){
@@ -112,24 +134,26 @@
 			$Model = new modHome();
 
 			$Nom = $_POST["TxtNomAjoutUtilisateur"];
+			$Prenom = $_POST["TxtPrenomAjoutUtilisateur"];
 			$User = $_POST["txtUsernameAjoutUtilisateur"];
 			$Mdp = $_POST["txtmdpAjoutUtilisateur"];
 			$Type = intval($_POST["SelectTypeAjoutUtilisateur"]);
 
-			$Model->InsertionUtilisateur($Nom,$User,$Mdp,$Type);
+			$Model->InsertionUtilisateur($Nom,$Prenom,$User,$Mdp,$Type);
 
 			//Ajout au log
 			$ActionString = "Création de l'utilisateur de type ".$Type.", " . $Nom . " sous le Username ". $User;
 			$Model->InscriptionLog($ActionString);
 
-			parent::view('Home/Config');
+			parent::view('Home/Menu5');
 
 		}
 
 		public function RetirerUtilisateur(){
 			$Model = new modHome();
-			$ID = $_POST['Utilisateur'];
-			$Nom = $_POST['Nom'];
+
+			$ID = $_GET['ID'];
+			$Nom = $_GET['Nom'];
 
 			$Model->RetirerUtilisateur($ID);
 

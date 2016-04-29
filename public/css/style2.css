@@ -21,12 +21,7 @@ h1{
 	font-size: 20px;
 }
 
-h3{
-	cursor: pointer;
-}
-h3:hover{
-	color: gray;
-}
+
 input{
 	font-family: "Courier New";
 }
