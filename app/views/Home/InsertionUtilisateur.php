@@ -19,7 +19,7 @@
 	<div class="row">
 	<div class="col-12 col-m-12">
 		<div class="col-10 col-m-10 box headBox bgorange">
-			<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Configuration /Utilisateurs /Nouvel</h1>
+			<h1><?php echo $_SESSION["NomUtilisateur"]; ?> /Configuration /Utilisateurs /Ajout</h1>
 		</div>
 		<div class="col-2 col-m-2 box headBox" align="center">
 			<a href="/index.php/Home/MenuUtilisateur"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/Quitter-icon.png"></a>

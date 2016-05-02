@@ -146,7 +146,23 @@
 			$Model->InscriptionLog($ActionString);
 
 			parent::view('Home/Menu5');
+		}
 
+		public function InsertionCommande(){
+			$Model = new modHome();
+
+			$NoCommande = $_POST["NoCommande"];
+			$Nom = $_POST["Nom"];
+			$Tel = $_POST["Telephone"];
+			$LstPieces = $_POST["Lst"];
+
+			$Model->AjouterCommande($NoCommande,$Nom,$Tel,$LstPieces);
+
+			//Ajout au log
+			$ActionString = "Création de la commande " . $NoCommande;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Menu7');
 		}
 
 		public function RetirerUtilisateur(){

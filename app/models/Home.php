@@ -267,11 +267,20 @@
 			return $result;
 		}
 
-		//re
+		//recherche
 		function GetAllDossierRecherche($No,$Ville,$Prenom,$Nom,$DateDebut,$DateFin,$Status){
+			
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT * FROM Dossier WHERE DossNumeroId LIKE '%' || :NoId || '%' AND InvCouleur LIKE '%' || :Cl || '%' AND InvGrosseur LIKE '%' || :Grosseur || '%' AND InvHauteur LIKE '%' || :Hauteur || '%' AND InvLongeur LIKE '%' || :Longeur || '%' AND InvCategorie LIKE '%' || :Categorie || '%' ORDER BY DossVille ASC");
+			$sql = $db->prepare("SELECT * FROM Dossier WHERE DossNumeroId LIKE '%' || :NoId || '%' AND DossVille LIKE '%' || :Ville || '%' AND DossPrenomClient LIKE '%' || :Prenom || '%' AND DossNomClient LIKE '%' || :Nom || '%' AND DossStatus LIKE '%' || :Status || '%' AND ( DossDateTravaux BETWEEN :DateDebut AND :DateFin ) ORDER BY DossVille ASC");
+
+			$sql->bindValue(":NoId", $No);
+			$sql->bindValue(":Ville", $Ville);
+			$sql->bindValue(":Prenom", $Prenom);
+			$sql->bindValue(":Nom", $Nom);
+			$sql->bindValue(":DateDebut", $DateDebut);
+			$sql->bindValue(":DateFin", $DateFin);
+			$sql->bindValue(":Status", $Status);
 
 			$sql->execute();
 
@@ -642,6 +651,72 @@
 
 			$db = null;
 			$sql = null;
+		}
+
+		function AjouterCommande($NoCommande,$Nom,$Tel,$LstPieces){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("INSERT INTO Commande (ComId,ComNom,ComTel,ComLstPiece,CommRamasse) VALUES (:NoId,:Nom,:Tel,:LstPiece,:Ramasse)");
+
+			$sql->bindValue(":NoId", $NoCommande);
+			$sql->bindValue(":Nom", $Nom);
+			$sql->bindValue(":Tel", $Tel);
+			$sql->bindValue(":LstPiece", $LstPieces);
+			$sql->bindValue(":Ramasse", "NON");
+
+			$sql->execute();
+
+			$db = null;
+			$sql = null;
+		}
+
+		function GetAllCommande(){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Commande ORDER BY ComId ASC ");
+
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function GetCommandeFromId($ID){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Commande WHERE ComId = :ID ORDER BY ComId ASC ");
+
+			$sql->bindValue(":ID", $ID);
+
+			$sql->execute();
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
+		}
+
+		function GetAllCommandeNonRamasse(){
+
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Commande WHERE ComRamasse = :Data ORDER BY ComId ASC ");
+
+			$sql->bindValue(":Data", "NON");
+
+			$sql->execute();
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return $result;
 		}
 
 	}

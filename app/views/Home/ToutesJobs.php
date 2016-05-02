@@ -31,19 +31,19 @@
 				<table class="InfoPiece">
 					<tr>
 						<td>Numéro de dossier</td>
-						<td><input type="text" class="StyleInput col-12" placeholder="No dossier"></input></td>
+						<td><input id="TxtNo" type="text" class="StyleInput col-12" placeholder="No dossier"></input></td>
 					</tr>
 					<tr>
 						<td>Ville</td>
-						<td><input type="text" class="StyleInput col-12" placeholder="Ville"></input></td>
+						<td><input id="TxtVille" type="text" class="StyleInput col-12" placeholder="Ville"></input></td>
 					</tr>
 					<tr>
 						<td>Prénom</td>
-						<td><input type="text" class="StyleInput col-12" placeholder="prénom"></input></td>
+						<td><input id="TxtPrenom" type="text" class="StyleInput col-12" placeholder="prénom"></input></td>
 					</tr>
 					<tr>
 						<td>Nom</td>
-						<td><input type="text" class="StyleInput col-12" placeholder="Nom"></input></td>
+						<td><input id="TxtNom" type="text" class="StyleInput col-12" placeholder="Nom"></input></td>
 					</tr>
 					<tr>
 						<td>Date début</td>
@@ -55,10 +55,11 @@
 					</tr>
 					<tr>
 						<td>Status</td>
-						<td><select class="StyleInput col-12"><option>choix</option><option>fermé</option><option>Ouvert</option></select></td>
+						<td><select id="TxtStatus" class="StyleInput col-12"><option value="">choix</option><option>fermé</option><option>Ouvert</option></select></td>
 					</tr>
 				</table>
-				<button class="stylebtn bgorange tabplein">Rechercher</button>
+				<button onclick="AfficherDossierRecherche()" class="stylebtn bgorange tabplein">Rechercher</button>
+				<button onclick="initialiserChampsConsulter();" class="stylebtn bgorange tabplein">Réinitialiser</button>
 			</div>
 		</div>
 		<div  class="col-8 col-m-12 " >

@@ -36,15 +36,15 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Pour ajouter une nouvelle pièce, vous devez vous rendre en premier lieu dans la page de configuration. Ensuite, cliquer sur INV, par la suite sélectionnez AJOUTER.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Remplissez le formulaire en remplissant chaqun des champs. Une fois completer, sélectionner ajouter pour ajouter la piece.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/InventaireInsertion"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

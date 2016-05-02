@@ -89,7 +89,7 @@
 							<tr>
 							<td>Couleur pour le projet</td>
 							<td>
-								<select  class="StyleInput col-12" title="Couleur" id="SelectCouleurSR" onchange="OnColorChange()" name="txtCouleur" >
+								<select  class="StyleInput col-12" title="Couleur" id="SelectCouleurSR" onchange="" name="txtCouleur" >
 									<optgroup label="Résidentiel">
 										<option value="NO" selected>Noir</option>
 										<option value="BL">Blanc</option>
@@ -168,6 +168,20 @@
 											<option value="42" selected>42 po</option>
 											<option value="48">48 po</option>
 											<option value="60">60 po</option>
+										</optgroup>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Couleur</td>
+								<td>
+									<select  class="StyleInput col-12" title="Couleur" id="SelectCouleurSRSection" onchange="" name="txtCouleur" >
+										<optgroup label="Résidentiel">
+											<option value="NO" selected>Noir</option>
+											<option value="BL">Blanc</option>
+											<option value="BR">Brun</option>
+											<option value="TA">Taupe</option>
+											<option value="VE">Vert</option>
 										</optgroup>
 									</select>
 								</td>

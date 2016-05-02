@@ -238,7 +238,24 @@
 			</div>
 		</div>
 
-		<div class="col-12 col-m-12">
+		<div class="col-6 col-m-12">
+			<div  class="col-12 col-m-12  ">
+				<h4 class="CLorange">Information client</h4><hr>
+				<div id="LstBoxReceptionTemp"  class="col-12 col-m-12 box maxheight">
+					<table class="tabplein splitdata-2">
+						<tr>
+							<td>Nom :</td>
+							<td><input type="text" placeholder="Nom" class="styleInput col-12"></input></td>
+						</tr>
+						<tr>
+							<td>Téléphone :</td>
+							<td><input type="text" placeholder="(555)555-5555" class="styleInput col-12"></input></td>
+						</tr>
+					</table>	
+				</div>
+			</div>
+		</div>
+		<div class="col-6 col-m-12">
 			<div  class="col-12 col-m-12  ">
 				<h4 class="CLorange">Résumé de la commande</h4><hr>
 				<div id="LstBoxReceptionTemp"  class="col-12 col-m-12 box maxheight">
@@ -250,12 +267,12 @@
 					</table>	
 				</div>
 			</div>
-			<div  class="col-12 col-m-12  " style="height: 450px;">
+		</div>
+		<div  class="col-12 col-m-12  " style="height: 450px;">
 				<div  class="col-12 col-m-12 box ">
 					<button class="StyleBtn bgorange" style="width: 100%;" onclick="FuncExcel()" id="BtnEnvoyer" value="Rechercher"> Placer la commande </button>
 				</div>
 			</div>
-		</div>
 	</div>		
 </body>
 </html>

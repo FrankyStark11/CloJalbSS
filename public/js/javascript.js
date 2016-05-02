@@ -726,6 +726,64 @@ function AfficherDossier(){
   });
 }
 
+function initialiserChampsConsulter(){
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+  var yyyy = today.getFullYear();
+
+  if(dd<10) {
+      dd='0'+dd
+  } 
+
+  if(mm<10) {
+      mm='0'+mm
+  } 
+
+  today = yyyy+'-'+mm+'-'+dd;
+
+  var no = document.getElementById("TxtNo").value = "";
+  var ville = document.getElementById("TxtVille").value = "";
+  var prenom = document.getElementById("TxtPrenom").value = "";
+  var nom = document.getElementById("TxtNom").value = "";
+  var datedebut = document.getElementById("DateDebut").value = today;
+  var datefin = document.getElementById("DateFin").value = today;
+  var status = document.getElementById("TxtStatus").value = "";
+}
+
+//Par une methode AJAX, affiche tous les dossiers sans exeption
+function AfficherDossierRecherche(){
+
+  var no = document.getElementById("TxtNo").value;
+  var ville = document.getElementById("TxtVille").value;
+  var prenom = document.getElementById("TxtPrenom").value;
+  var nom = document.getElementById("TxtNom").value;
+  var datedebut = document.getElementById("DateDebut").value;
+  var datefin = document.getElementById("DateFin").value;
+  var status = document.getElementById("TxtStatus").value;
+
+  $.post("/index.php/Home/GetAllDossierRecherche",
+    {NO: no, VILLE: ville, PRENOM: prenom, NOM: nom, DATEDEBUT: datedebut, DATEFIN: datefin, STATUS: status},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("Main");
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddDossier(Arr[i]);
+      }
+    }else if(Arr.length == 0){
+      document.getElementById("Main").appendChild(document.createTextNode("Aucun Dossier ouvert"));
+    }
+  });
+}
+
 //ajout de dossier ouvert
 function AddDossier(itemArray){
 
@@ -1117,7 +1175,7 @@ function AddPieceRetrait2(No,qte,qtereel){
 
    var hidden1 = document.createElement('input');
        hidden1.type = "hidden";
-       hidden1.value = No;
+       hidden1.value = No+"123";
        hidden1.id = IdDiv + "-piece";
     div_0.appendChild(hidden1);
 
@@ -1671,6 +1729,8 @@ function AjouterSectionRow(){
 
   if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
   if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
+
+  document.getElementById("TxtLongueurSectionSR").value = "";
 }
 
 //cette methode est appelé pour modifier la quantité d'une piece X recus en param
@@ -1959,7 +2019,7 @@ function AfficherTab(){
 //retire la section de cloture et appel la deduction des pieces
 function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 
-  var CL = document.getElementById("SelectCouleurSR").value;
+  var CL = document.getElementById("SelectCouleurSRSection").value;
   var lattes = false;
   if(AvecLattes == "oui"){lattes = true;}else{lattes = false;}
   var arrayPrincipal = GetArrayHiddenSection();
@@ -2071,7 +2131,7 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 //ajoute une section de cloture
 function AjoutSectionCloture(Hauteur,Longueur){
 
-  var CL = document.getElementById("SelectCouleurSR").value;
+  var CL = document.getElementById("SelectCouleurSRSection").value;
   var lattes = document.getElementById("checkLatteSR").value;
   var arrayPrincipal = GetArrayHiddenSection();
 
@@ -2079,9 +2139,11 @@ function AjoutSectionCloture(Hauteur,Longueur){
 
   var noPOTI = "POTI-05178-" + CL;
   if(Hauteur == "6"){ noPOTI = "POTP-06238-" + CL; }
+  if(CL == "TA"){ noPOTI = "POTP-0" + Hauteur + "238-TA"; }
 
   var noCAPI = "CAPI-00178-" + CL;
   if(Hauteur == "6"){ noCAPI = "CAPI-00238-" + CL; }
+  if(CL == "TA"){ noCAPI = "CAPI-00238-" + CL; }
 
   var noFILB = "FILB-00009-" + CL;
   var noLIEN = "LIEN-00612-" + CL;
@@ -2184,7 +2246,7 @@ function AjoutSectionPorte(Hauteur){
 
   //definition des variables
 
-  var CL = document.getElementById("SelectCouleurSR").value;
+  var CL = document.getElementById("SelectCouleurSRSection").value;
   var Longueur = document.getElementById("SelectDimentionporteSR").value;
   var typePorte = document.getElementById("TxtTypeSectionSR").value;
   var lattes = document.getElementById("checkLatteSR").value;
@@ -2308,7 +2370,7 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
 
   //definition des variables
 
-  var CL = document.getElementById("SelectCouleurSR").value;
+  var CL = document.getElementById("SelectCouleurSRSection").value;
   var lattes = false;
   if(AvecLattes == "oui"){lattes = true;}else{lattes = false;}
   var arrayPrincipal = GetArrayHiddenSection();
@@ -2519,23 +2581,6 @@ function AjoutKit(Hauteur){
     else{UpdatePieceRow(BATE,QteBATE);}
 }
 
-//sur changement de couleur efface les tout 
-function OnColorChange(){
-  document.getElementById("QteKit4ft").value = "";
-  document.getElementById("QteKit5ft").value = "";
-  document.getElementById("QteKit6ft").value = "";
-  document.getElementById("QtePotp4ft").value = "";
-  document.getElementById("QtePotp5ft").value = "";
-  document.getElementById("QtePotp6ft").value = "";
-
-  var table = document.getElementById("TabPieces");
-  while(table.rows.length > 1) {
-    table.deleteRow(1);
-  }
-  var ar = [];
-  SetArrayHidden(ar);
-}
-
 //ajout qte reception
 function AddNb(val){
 
@@ -2644,6 +2689,100 @@ var button_0 = document.createElement('button');
    button_0.appendChild( document.createTextNode("Sélectionner") );
    button_0.addEventListener('click', function(){ SetProfilsData(ID,Nom,Prenom,DateIns,UserName);}, false);
 div_0.appendChild( button_0 );
+
+main.appendChild( div_0 );
+}
+
+function ShowCommandeNonRammase(){
+
+  $.post("/index.php/Home/GetAllCommandeNonRamasse",
+    {},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById("LstCommande");
+
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddCommande(Arr[i]["ComId"],"LstCommande");
+      }
+    }else if(Arr.length == 0){
+      myNode.appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+    }
+  });
+}
+
+function GetInfoCommande(ID){
+
+  $.post("/index.php/Home/GetCommandeFromId",
+    {ID: ID},
+  function(data){
+    var Arr = JSON.parse(data);
+
+    document.getElementById("NomDossierDetail").appendChild(document.createTextNode(Arr["ComNom"]));
+    document.getElementById("TelDossierDetail").appendChild(document.createTextNode(Arr["ComTel"]));
+
+    var lst =  JSON.parse(Arr["ComLstPiece"]);
+
+    //ajout des pieces
+  for(i=0;i<lst.length;i++){
+
+    var nom = lst[i][0];
+    var qte = lst[i][1];
+    var Description = lst[i][3];
+
+    var MainTab = document.getElementById("TabPieces");
+
+    var tr_0 = document.createElement('tr');
+        tr_0.id = nom;
+
+     var td_0 = document.createElement('td');
+        td_0.appendChild( document.createTextNode(nom) );
+        td_0.id = nom+"td";
+     tr_0.appendChild( td_0 );
+
+     var td_1 = document.createElement('td');
+        td_1.appendChild( document.createTextNode(qte) );
+     tr_0.appendChild( td_1 );
+
+     var td_3 = document.createElement('td');
+        td_3.appendChild( document.createTextNode(Description) );
+     tr_0.appendChild( td_3 );
+
+
+    MainTab.appendChild( tr_0 );
+
+  }
+  });
+}
+
+function AddCommande(NO,IdDiv){
+
+  var main = document.getElementById(IdDiv);
+
+var div_0 = document.createElement('div');
+   div_0.className = "infobox boxarticle";
+   div_0.align = "center";
+
+   var a_0 = document.createElement('a');
+      a_0.href = "/index.php/Home/RamasserCommande?ID="+NO;
+      a_0.title = "Fermer cette commande";
+
+      var img_0 = document.createElement('img');
+         img_0.src = "../../images/icon/commandePrete-icon.png";
+      a_0.appendChild( img_0 );
+
+   div_0.appendChild( a_0 );
+
+
+   var h3_0 = document.createElement('h3');
+      h3_0.appendChild( document.createTextNode(NO) );
+   div_0.appendChild( h3_0 );
 
 main.appendChild( div_0 );
 }

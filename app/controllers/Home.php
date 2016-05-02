@@ -148,6 +148,52 @@
 			echo json_encode($result);
 		}
 
+		public function GetCommandeFromId(){
+
+			$Model = new modHome();
+
+			$result = $Model->GetCommandeFromId($_POST["ID"]);
+			echo json_encode($result);
+		}
+
+		public function RamasserCommande(){
+
+			parent::view('Home/RamasserCommande');
+		}
+
+		public function GetAllCommande(){
+
+			$Model = new modHome();
+
+			$result = $Model->GetAllCommande();
+			echo json_encode($result);
+		}
+
+		public function GetAllCommandeNonRamasse(){
+
+			$Model = new modHome();
+
+			$result = $Model->GetAllCommandeNonRamasse();
+			echo json_encode($result);
+		}
+
+		public function GetAllDossierRecherche(){
+
+			$Model = new modHome();
+
+			$No = $_POST['NO'];
+			$Ville = $_POST['VILLE'];
+			$Prenom = $_POST['PRENOM'];
+			$Nom = $_POST['NOM'];
+			$DateDebut = $_POST['DATEDEBUT'];
+			$DateFin = $_POST['DATEFIN'];
+			$Status = $_POST['STATUS'];
+
+			$result = $Model->GetAllDossierRecherche($No,$Ville,$Prenom,$Nom,$DateDebut,$DateFin,$Status);
+
+			echo json_encode($result);
+		}
+
 		public function GetLstPiecesDossier(){
 			$Model = new modHome();
 			if(is_null($_POST["no"])){ $dataID = ""; }else{ $dataID = $_POST["no"];}

@@ -34,8 +34,6 @@
 				<h4 class="CLOrange"> Feuille de travail</h4><hr>
 				<div class="col-12 col-m-12 box ">
 					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/SR"><img title="Résidentiel" src="../../images/icon/Residentiel-icon.png"></a><h2>SR</h2></div>
-
-					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/SC"><img title="Commercial" src="../../images/icon/Commercial-icon.png"></a><h2>SC</h2></div>
 					
 					<div class="infobox boxarticle" align="center"><a href="/index.php/Home/JobEnCours"><img title="Consulter les feuilles de travaux en cours" src="../../images/icon/Job-icon.png"></a><h2>EN COURS</h2></div>
 

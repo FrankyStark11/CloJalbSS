@@ -39,7 +39,7 @@
 							No Piece
 						</td>
 						<td>
-							<input class="StyleInput col-12" title="Numéro de la pièce" id="TxtInsertionPieceId" name="txtNoId" type="text" placeholder="No de piece"></input>
+							<input required class="StyleInput col-12" title="Numéro de la pièce" id="TxtInsertionPieceId" name="txtNoId" type="text" placeholder="No de piece"></input>
 						</td>
 					</tr>
 					<tr>
@@ -47,7 +47,7 @@
 							Description
 						</td>
 						<td>
-							<input class="StyleInput col-12" type="text" id="TxtInsertionDescription" title="Caractère interdit 
+							<input required class="StyleInput col-12" type="text" id="TxtInsertionDescription" title="Caractère interdit 
 	   			'  _  # " name="txtDesc" placeholder="Description courte de la piece"></input>
 						</td>
 					</tr>
@@ -217,7 +217,7 @@
 							Quantitée
 						</td>
 						<td>
-							<input class="StyleInput col-12" title="Quantité en stock" id="TxtInsertionQuantite" name="txtQte" pattern="[0-9]*" type="number" placeholder="Quantitée"></input>
+							<input required class="StyleInput col-12" title="Quantité en stock" id="TxtInsertionQuantite" name="txtQte" pattern="[0-9]*" type="number" placeholder="Quantitée"></input>
 						</td>
 					</tr>
 					<tr>
@@ -225,7 +225,7 @@
 							Prix coutant
 						</td>
 						<td>
-							<input class="StyleInput col-12" title="Prix coutant" id="TxtInsertionPrixCoutant" name="txtPrixCoutant" step="any" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
+							<input required class="StyleInput col-12" title="Prix coutant" id="TxtInsertionPrixCoutant" name="txtPrixCoutant" step="any" pattern="[0-9]*" type="number" placeholder="Prix cost"></input>
 						</td>
 					</tr>
 				</table>
