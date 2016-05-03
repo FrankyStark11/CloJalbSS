@@ -167,6 +167,25 @@
 			return $count;
 		}
 
+		function GetNbCommandeFromDate($ID){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT * FROM Commande WHERE ComId LIKE '%' || :ID || '%';");
+			$sql->bindValue(":ID",$ID);
+			$sql->execute();
+
+			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
+			$count = strval(count($result));
+			
+
+			$db = null;
+			$sql = null;
+
+			if($count <= "9"){ $count = "0" . strval($count);}
+
+			return $count;
+		}
+
 		//ajout dun nouvelle utilisateur dans le systeme selon les params
 		function InsertionDossier($NoDossier,$prenom,$nom,$ville,$type,$status,$pied,$poteau,$valeur,$lstpieces,$DateProjet){
 
@@ -656,13 +675,14 @@
 		function AjouterCommande($NoCommande,$Nom,$Tel,$LstPieces){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("INSERT INTO Commande (ComId,ComNom,ComTel,ComLstPiece,CommRamasse) VALUES (:NoId,:Nom,:Tel,:LstPiece,:Ramasse)");
+			$sql = $db->prepare("INSERT INTO Commande (ComId,ComNom,ComTel,ComLstPiece,ComRamasse) VALUES (:NoId,:Nom,:Tel,:LstPiece,:Ramasse)");
 
-			$sql->bindValue(":NoId", $NoCommande);
-			$sql->bindValue(":Nom", $Nom);
+			
 			$sql->bindValue(":Tel", $Tel);
 			$sql->bindValue(":LstPiece", $LstPieces);
 			$sql->bindValue(":Ramasse", "NON");
+			$sql->bindValue(":NoId", $NoCommande);
+			$sql->bindValue(":Nom", $Nom);
 
 			$sql->execute();
 

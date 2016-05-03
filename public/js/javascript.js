@@ -588,6 +588,15 @@ function AjoutItemPossible(){
   return ( test1 && test2 );
 }
 
+function AjouterPieceToArray(NoPiece,Desc,Qte){
+  var Arr = GetArrayHidden();
+
+  var ele = [NoPiece,Desc,Qte];
+  Arr.push(ele);
+
+  SetArrayHidden(Arr);
+}
+
 //lorsque les informations sont entré pour une reception 
 //Cette methode l'envoie dans la zone de PO temporaire
 function AddReceptionElement(){
@@ -627,6 +636,8 @@ function AddReceptionElement(){
         tr_0.appendChild( td_3 );
 
      table_0.appendChild( tr_0 );
+
+     AjouterPieceToArray(NoItem,DescItem,QteItem);
   }
 }
 
@@ -2712,7 +2723,7 @@ function ShowCommandeNonRammase(){
         AddCommande(Arr[i]["ComId"],"LstCommande");
       }
     }else if(Arr.length == 0){
-      myNode.appendChild(document.createTextNode("Aucun élément ne correspond à votre recherche"));
+      myNode.appendChild(document.createTextNode("Aucune commande en cours"));
     }
   });
 }
@@ -2733,8 +2744,8 @@ function GetInfoCommande(ID){
   for(i=0;i<lst.length;i++){
 
     var nom = lst[i][0];
-    var qte = lst[i][1];
-    var Description = lst[i][3];
+    var qte = lst[i][2];
+    var Description = lst[i][1];
 
     var MainTab = document.getElementById("TabPieces");
 

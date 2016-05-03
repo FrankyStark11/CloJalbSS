@@ -151,15 +151,19 @@
 		public function InsertionCommande(){
 			$Model = new modHome();
 
-			$NoCommande = $_POST["NoCommande"];
-			$Nom = $_POST["Nom"];
-			$Tel = $_POST["Telephone"];
-			$LstPieces = $_POST["Lst"];
+			$NoDossier = date("Y") . date("m") . date("d");//generer selon la date
+			$NoDossier = $NoDossier . $Model->GetNbCommandeFromDate($NoDossier);
 
-			$Model->AjouterCommande($NoCommande,$Nom,$Tel,$LstPieces);
+			$NoDossier = intval($NoDossier);
+
+			$Nom = $_POST["NomClient"];
+			$Tel = intval($_POST["TelClient"]);
+			$LstPieces = $_POST["LstPieces"];
+
+			$Model->AjouterCommande($NoDossier,$Nom,$Tel,$LstPieces);
 
 			//Ajout au log
-			$ActionString = "Création de la commande " . $NoCommande;
+			$ActionString = "Création de la commande " . $NoDossier;
 			$Model->InscriptionLog($ActionString);
 
 			parent::view('Home/Menu7');
