@@ -672,6 +672,23 @@
 			$sql = null;
 		}
 
+		function GetLstPieceCommande($NoId){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("SELECT ComLstPiece FROM Commande WHERE ComId = :NoId ");
+
+			$sql->bindValue(":NoId",$NoId);
+
+			$sql->execute();
+
+			$result = $sql->fetch(PDO::FETCH_ASSOC);
+
+			$db = null;
+			$sql = null;
+
+			return json_decode($result["ComLstPiece"]);
+		}
+
 		function AjouterCommande($NoCommande,$Nom,$Tel,$LstPieces){
 			$db = $this->connectDB();
 
@@ -737,6 +754,19 @@
 			$sql = null;
 
 			return $result;
+		}
+
+		function FermerCommande($NoId){
+			$db = $this->connectDB();
+
+			$sql = $db->prepare("UPDATE Commande SET ComRamasse = :Statue WHERE ComId = :NoId");
+
+			$sql->bindValue(":Statue","OUI");
+			$sql->bindValue(":NoId",$NoId);
+
+			$sql->execute();
+			$db = null;
+			$sql = null;
 		}
 
 	}

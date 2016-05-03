@@ -130,6 +130,37 @@
 			parent::view('Home/ConfirmationFermetureDossier');
 		}
 
+		public function FermetureCommande(){
+
+			$Model = new modHome();
+			$Arr = $Model->GetLstPieceCommande($_GET["NoCommande"]);
+
+			foreach($Arr as $e){
+				$Model->RetraitInv($e[0],$e[2]);
+			}
+
+			$Model->FermerCommande($_GET["NoCommande"]);
+
+			//Ajout au log
+			$ActionString = "Fermeture de la commande " . $_GET["NoCommande"] . ". Le client à ramassé sa commande." ;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Menu7');
+		}
+
+		public function AnnulerCommande(){
+
+			$Model = new modHome();
+
+			$Model->FermerCommande($_GET["NoCommande"]);
+
+			//Ajout au log
+			$ActionString = "Annulation de la commande " . $_GET["NoCommande"] ;
+			$Model->InscriptionLog($ActionString);
+
+			parent::view('Home/Menu7');
+		}
+
 		public function InsertionUtilisateur(){
 			$Model = new modHome();
 

@@ -307,9 +307,19 @@ function validateFormInsertion() {
 
 //Dans la page de reception
 //permet de retirer une valeur mal entré dans le PO temporaire
-function RemoveElement(idRetirer){
+function RemoveElement(idRetirer,NoItem){
   var element = document.getElementById(idRetirer);
   element.parentNode.removeChild(element);
+
+  var Arr = GetArrayHidden();
+
+  for(i=0;i<Arr.length;i++){
+        if( Arr[i][0] == NoItem ){
+         Arr.splice(i, 1);
+         break; }
+      }
+
+  SetArrayHidden(Arr);
 }
 
 //Ouver la page de modification sur le clic du boutton edit
@@ -630,7 +640,7 @@ function AddReceptionElement(){
 
            var button_0 = document.createElement('button');
               button_0.className = "BtnRetirer";
-              button_0.addEventListener('click', function(){ RemoveElement(IDElement);}, false);
+              button_0.addEventListener('click', function(){ RemoveElement(IDElement,NoItem);}, false);
            td_3.appendChild( button_0 );
 
         tr_0.appendChild( td_3 );
@@ -2287,7 +2297,7 @@ function AjoutSectionPorte(Hauteur){
   //calcul des quantitées
 
   if(Longueur == "42"){
-    qteMAIL = 3.6; 
+    qteMAIL = 3.5; 
 
   }
 

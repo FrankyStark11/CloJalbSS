@@ -10,7 +10,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=0.5">
 	<link rel="stylesheet" type="text/css" href="/css/w3Model.css">
-	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
+	<link rel="stylesheet" type="text/css" href="/css/style2.css"/>
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
 </head>

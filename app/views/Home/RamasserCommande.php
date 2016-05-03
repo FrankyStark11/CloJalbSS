@@ -97,7 +97,7 @@
       <p>Si le client n'a pas ramassé sa commande, il est préférable de ne pas fermer la commande car les quantités seront déduites.</p>
     </div>
     <footer class="w3-container" style="padding-bottom: 10px;" align="center">
-     <a id="lienRetrait" ><button class="StyleBtn bgGreen">Confirmer</button></a>
+     <a href="/index.php/Admin/FermetureCommande?NoCommande=<?php echo $_GET["ID"]; ?>" id="lienRetrait" ><button class="StyleBtn bgGreen">Confirmer</button></a>
     </footer>
   </div>
 </div>
@@ -116,7 +116,7 @@
       <p> Cette action est irréversible</p>
     </div>
     <footer class="w3-container" style="padding-bottom: 10px;" align="center">
-     <a id="lienAnnulerEffacer"> <button class="StyleBtn bgred">Annuler et effacer</button></a>
+     <a href="/index.php/Admin/AnnulerCommande?NoCommande=<?php echo $_GET["ID"]; ?>" id="lienAnnulerEffacer"> <button class="StyleBtn bgred">Annuler et effacer</button></a>
     </footer>
   </div>
 </div>
