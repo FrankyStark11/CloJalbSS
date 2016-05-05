@@ -315,7 +315,7 @@ function RemoveElement(idRetirer,NoItem){
 
   for(i=0;i<Arr.length;i++){
         if( Arr[i][0] == NoItem ){
-         Arr.splice(i, 1);
+         arr.splice(i, 1);
          break; }
       }
 
@@ -1802,7 +1802,7 @@ function AjouterPieceRow(nom,qte){
 
             var Arr = JSON.parse(data);
             Description = Arr["InvDesc"];
-            Prix = Arr["InvPrixContracteur"];
+            Prix = Arr["InvPrixCoutant"];
             QteInv = Arr["InvQte"];
 
             var ArrayPrincipal = GetArrayHidden();
