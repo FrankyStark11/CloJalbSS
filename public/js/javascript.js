@@ -1739,21 +1739,22 @@ function AjouterSectionRow(){
   var Hauteur = document.getElementById("TxtHauteurSectionSR").value;
   var Type = document.getElementById("TxtTypeSectionSR").value;
 
+  
+
+  if(Type == "simple" || Type == "double"){ Longueur = document.getElementById("SelectDimentionporteSR").value}
+
+  //ajoute la section
+  var ArrayPrincipal = GetArrayHiddenSection();
+  arraytemp = [Longueur,Type,Hauteur,ID];
+  ArrayPrincipal.push(arraytemp);
+  SetArrayHiddenSection(ArrayPrincipal);
+    
   if(Longueur != ""){
-
-    if(Type == "simple" || Type == "double"){ Longueur = document.getElementById("SelectDimentionporteSR").value}
-
-    //ajoute la section
-    var ArrayPrincipal = GetArrayHiddenSection();
-    arraytemp = [Longueur,Type,Hauteur,ID];
-    ArrayPrincipal.push(arraytemp);
-    SetArrayHiddenSection(ArrayPrincipal);
-
     if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
-    if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
-
-    document.getElementById("TxtLongueurSectionSR").value = "";
   }
+
+  if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
+  document.getElementById("TxtLongueurSectionSR").value = "";
 }
 
 //cette methode est appelé pour modifier la quantité d'une piece X recus en param
