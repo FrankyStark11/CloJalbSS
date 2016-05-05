@@ -439,7 +439,7 @@
 		function GetItemDesc($dataId){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT InvDesc,InvQte,InvPrixContracteur FROM Inventaire WHERE InvNoId = :ID");
+			$sql = $db->prepare("SELECT InvDesc,InvQte,InvPrixCoutant FROM Inventaire WHERE InvNoId = :ID");
 			$sql->bindValue(":ID",$dataId);
 
 			$sql->execute();
