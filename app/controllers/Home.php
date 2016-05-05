@@ -103,6 +103,42 @@
 			parent::view('Home/SoumissionPieces');
 		}
 
+		public function Login(){
+			parent::view('Home/Login');
+		}
+
+		public function Modifier(){
+			parent::view('Home/Modifier');
+		}
+
+		public function LogUnique(){
+			parent::view('Home/LogUnique');
+		}
+
+		public function Reception(){
+			parent::view('Home/Reception');
+		}
+
+		public function Ajustement(){
+			parent::view('Home/AjusterInv');
+		}
+
+		public function Retrait(){
+			parent::view('Home/Retrait');
+		}
+
+		public function JobEnCours(){
+			parent::view('Home/JobEnCours');
+		}
+
+		public function ToutesJobs(){
+			parent::view('Home/ToutesJobs');
+		}
+
+		public function InventaireInsertion(){
+			parent::view('Home/Insertion');
+		}
+
 		public function Log(){
 			$Model = new modHome();
 			$result = $Model->GetLog();
@@ -226,42 +262,6 @@
 			$result = $Model->GetInvConfirmer($dataID);
 
 			echo json_encode($result);
-		}
-
-		public function Login(){
-			parent::view('Home/Login');
-		}
-
-		public function Modifier(){
-			parent::view('Home/Modifier');
-		}
-
-		public function LogUnique(){
-			parent::view('Home/LogUnique');
-		}
-
-		public function Reception(){
-			parent::view('Home/Reception');
-		}
-
-		public function Ajustement(){
-			parent::view('Home/AjusterInv');
-		}
-
-		public function Retrait(){
-			parent::view('Home/Retrait');
-		}
-
-		public function JobEnCours(){
-			parent::view('Home/JobEnCours');
-		}
-
-		public function ToutesJobs(){
-			parent::view('Home/ToutesJobs');
-		}
-
-		public function InventaireInsertion(){
-			parent::view('Home/Insertion');
 		}
 	}
 ?>
