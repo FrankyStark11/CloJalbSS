@@ -2188,6 +2188,9 @@ function AjoutSectionCloture(Hauteur,Longueur){
   //calcul des pieces globals
   qteFILB += parseFloat(Longueur);
   qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
+  if(Hauteur == "6"){
+    qteTRAV = qteTRAV * 2;
+  }
 
   //calcul du nombre de poteau inter
   qtePOTI += parseFloat(Math.round( Longueur/7 ));
