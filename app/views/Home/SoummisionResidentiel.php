@@ -61,7 +61,7 @@
 									Date *
 								</td>
 								<td>
-									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" onKeyPress="return noenter()" placeholder="AAAA-MM-JJ"></input>
+									<input class="StyleInput col-12" type="date" title="Date du projet" name="TxtDateProjetSR" id="TxtDateProjetSR" value="<?php echo date("Y-m-d") ?>" onKeyPress="return noenter()" placeholder="AAAA-MM-JJ"></input>
 								</td>
 							</tr>
 							<tr>
@@ -112,6 +112,12 @@
 							<tr><td>4'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteKit4ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(4)" placeholder="QTE"></input></td></tr>
 							<tr><td>5'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteKit5ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(5)" placeholder="QTE"></input></td></tr>
 							<tr><td>6'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteKit6ft" min="0" pattern="[0-9]*" onkeyup="AjoutKit(6)" placeholder="QTE"></input></td></tr>
+						</table>
+						<table class="InfoPiece">
+							<tr><td>LATT</td><td></td></tr>
+							<tr><td>4'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteLatt4ft" min="0" pattern="[0-9]*" onkeyup="AjoutLatt(4)" placeholder="QTE"></input></td></tr>
+							<tr><td>5'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteLatt5ft" min="0" pattern="[0-9]*" onkeyup="AjoutLatt(5)" placeholder="QTE"></input></td></tr>
+							<tr><td>6'</td><td><input style="width: 100%" class="StyleInput " type="number"  class="StyleInput" id="QteLatt6ft" min="0" pattern="[0-9]*" onkeyup="AjoutLatt(6)" placeholder="QTE"></input></td></tr>
 						</table>
 
 						<table style="margin-top: 20px;" class="tabplein datasplit-2">
@@ -188,18 +194,6 @@
 							</tr>
 							<tr>
 								<td>
-									Lattes 
-								</td>
-								<td>
-									
-									 <select class="StyleInput col-12" title="Avec lattes intimitées" id="checkLatteSR" >
-											<option value="true" >oui</option>
-											<option value="false" selected>non</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>
 									 
 								</td>
 								<td>
@@ -234,9 +228,6 @@
 								</th>
 								<th>
 									Hauteur
-								</th>
-								<th>
-									Lattes
 								</th>
 								<th>
 									Action

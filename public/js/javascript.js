@@ -1738,20 +1738,22 @@ function AjouterSectionRow(){
   var Longueur = document.getElementById("TxtLongueurSectionSR").value;
   var Hauteur = document.getElementById("TxtHauteurSectionSR").value;
   var Type = document.getElementById("TxtTypeSectionSR").value;
-  var lattes = "";
-  if( document.getElementById("checkLatteSR").value == "true"){lattes = "oui" }else{lattes = "non"};
-  if(Type == "simple" || Type == "double"){ Longueur = document.getElementById("SelectDimentionporteSR").value}
 
-  //ajoute la section
-  var ArrayPrincipal = GetArrayHiddenSection();
-  arraytemp = [Longueur,Type,Hauteur,ID,lattes];
-  ArrayPrincipal.push(arraytemp);
-  SetArrayHiddenSection(ArrayPrincipal);
+  if(Longueur != ""){
 
-  if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
-  if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
+    if(Type == "simple" || Type == "double"){ Longueur = document.getElementById("SelectDimentionporteSR").value}
 
-  document.getElementById("TxtLongueurSectionSR").value = "";
+    //ajoute la section
+    var ArrayPrincipal = GetArrayHiddenSection();
+    arraytemp = [Longueur,Type,Hauteur,ID];
+    ArrayPrincipal.push(arraytemp);
+    SetArrayHiddenSection(ArrayPrincipal);
+
+    if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
+    if((Type == "simple" || Type == "double") && !isNaN(Longueur)){AjoutSectionPorte(Hauteur);}
+
+    document.getElementById("TxtLongueurSectionSR").value = "";
+  }
 }
 
 //cette methode est appelé pour modifier la quantité d'une piece X recus en param
@@ -1881,9 +1883,6 @@ function CalculPrix(){
   for(i=0;i<ArraySection.length;i++){
     if(ArraySection[i][1] == "Cloture"){ 
       piedLineaire += parseFloat(ArraySection[i][0]); 
-      if(ArraySection[i][4] == "oui"){
-        piedLineaireAvecLatte += parseInt(ArraySection[i][0]);
-      }
     } 
   }
 
@@ -1900,7 +1899,13 @@ function CalculPrix(){
   ChampsInfoPoteau.replaceChild(document.createTextNode(qtepoteau.toString() + " poteau(x)"),ChampsInfoPoteau.childNodes[0]);
   document.getElementById("PoteauTotalHidden").value = qtepoteau.toString();
 
-  ChampsInfoLatte.replaceChild(document.createTextNode((Math.ceil(piedLineaireAvecLatte/10)).toString() + " sac(s)"),ChampsInfoLatte.childNodes[0]);
+  var qteSac = 0;
+
+  if(document.getElementById("QteLatt4ft").value != "") { qteSac += parseInt(document.getElementById("QteLatt4ft").value);}
+  if(document.getElementById("QteLatt5ft").value != "") { qteSac += parseInt(document.getElementById("QteLatt5ft").value);}
+  if(document.getElementById("QteLatt6ft").value != "") { qteSac += parseInt(document.getElementById("QteLatt6ft").value);}
+
+  ChampsInfoLatte.replaceChild(document.createTextNode(qteSac.toString() + " sac(s)"),ChampsInfoLatte.childNodes[0]);
 
   soustotal = additionMaterial;
   champsSousTotal.replaceChild(document.createTextNode((soustotal.toFixed(2)).toString()+ "$"),champsSousTotal.childNodes[0]);
@@ -1983,7 +1988,6 @@ function AfficherTab(){
     var Type = ArrayPrincipal[i][1];
     var Hauteur = ArrayPrincipal[i][2];
     var ID = ArrayPrincipal[i][3];
-    var Lattes = ArrayPrincipal[i][4];
 
     var MainTab = document.getElementById("TabSections");
 
@@ -2012,12 +2016,6 @@ function AfficherTab(){
       var td_2 = document.createElement('td');
         td_2.appendChild( document.createTextNode(Hauteur+"ft") );
      tr_0.appendChild( td_2 );
-
-
-
-     var td_3 = document.createElement('td');
-        td_3.appendChild( document.createTextNode(Lattes) );
-     tr_0.appendChild( td_3 );
 
 
      var td_4 = document.createElement('td');
@@ -2057,7 +2055,6 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   var noLIEN = "LIEN-00612-" + CL;
   var noTRAV = "TRAV-15810-" + CL;
   var noEMTR = "EMTR-11116-" + CL;
-  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
 
   var qteMAIL = 0;
 
@@ -2075,6 +2072,9 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   //calcul des pieces globals
   qteFILB += parseFloat(Longueur);
   qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
+  if(Hauteur == "6"){
+    qteTRAV = qteTRAV * 2;
+  }
 
   //calcul du nombre de poteau inter
   qtePOTI += parseFloat(Math.round( Longueur/7 ));
@@ -2082,7 +2082,6 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 
   //calcul du nombre de lien par section selon hauteur
   qteMAIL += parseFloat(Longueur);
-  qteLATT += parseFloat(Math.ceil( Longueur/10 ));
 
   qteEMTR = 2;
 
@@ -2122,14 +2121,6 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
     UpdatePieceRow(noCAPI,qteCAPI);
   }
 
-  if(lattes){
-    if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
-    else{
-      qteLATT = GetPieceQte(noLATT) - qteLATT ;
-      UpdatePieceRow(noLATT,qteLATT);
-    }
-  }
-
   if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
   else{
     qteFILB = GetPieceQte(noFILB) - qteFILB ;
@@ -2153,7 +2144,6 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
 function AjoutSectionCloture(Hauteur,Longueur){
 
   var CL = document.getElementById("SelectCouleurSRSection").value;
-  var lattes = document.getElementById("checkLatteSR").value;
   var arrayPrincipal = GetArrayHiddenSection();
 
   var noMAIL = "MAIL-0" + Hauteur + "029-" + CL;
@@ -2170,7 +2160,6 @@ function AjoutSectionCloture(Hauteur,Longueur){
   var noLIEN = "LIEN-00612-" + CL;
   var noTRAV = "TRAV-15810-" + CL;
   var noEMTR = "EMTR-11116-" + CL;
-  var noLATT = "LATT-0" + Hauteur + "010-" + CL;
 
   var qteMAIL = 0;
 
@@ -2198,7 +2187,6 @@ function AjoutSectionCloture(Hauteur,Longueur){
 
   //calcul du nombre de lien par section selon hauteur
   qteMAIL += parseFloat(Longueur);
-  qteLATT += parseFloat(Math.ceil( Longueur/10 ));
 
   qteEMTR = 2;
 
@@ -2238,14 +2226,6 @@ function AjoutSectionCloture(Hauteur,Longueur){
     UpdatePieceRow(noCAPI,qteCAPI);
   }
 
-  if(lattes == "true"){
-    if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
-    else{
-      qteLATT = qteLATT + GetPieceQte(noLATT);
-      UpdatePieceRow(noLATT,qteLATT);
-    }
-  }
-
   if(!PiecePresente(noFILB)){AjouterPieceRow(noFILB,qteFILB);}
   else{
     qteFILB = qteFILB + GetPieceQte(noFILB);
@@ -2273,11 +2253,9 @@ function AjoutSectionPorte(Hauteur){
   var CL = document.getElementById("SelectCouleurSRSection").value;
   var Longueur = document.getElementById("SelectDimentionporteSR").value;
   var typePorte = document.getElementById("TxtTypeSectionSR").value;
-  var lattes = document.getElementById("checkLatteSR").value;
   var arrayPrincipal = GetArrayHiddenSection();
 
   var noMAIL = "MAIL-0" + Hauteur + "029-" + CL; //rouleau de maille
-  var noLATT = "LATT-0" + Hauteur + "010-" + CL; //Sac de lattes
   var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL; //Frame de la barriere
   var noBATE = "BATE-0" + Hauteur + "058-" + CL; //Barre de tension
 
@@ -2288,7 +2266,6 @@ function AjoutSectionPorte(Hauteur){
   var noKITD = "KITD-00238-" + CL; //kit pour une barriere double
 
   var qteMAIL = 0;
-  var qteLATT = 0;
   var qteBARR = 0;
   var qteBATE = 0;
   var qteBRBA = 0;
@@ -2315,8 +2292,6 @@ function AjoutSectionPorte(Hauteur){
   if(Hauteur == "4" || Hauteur == "5"){ qteLIEN = Math.ceil(qteMAIL) * 2;}
   if(Hauteur == "6"){qteLIEN = qteMAIL * 3;}
 
-  if(lattes == "true"){ qteLATT = 1; }
-
   if(typePorte == "double"){
     qteMAIL = qteMAIL * 2;
     qteBARR = 2;
@@ -2338,12 +2313,6 @@ function AjoutSectionPorte(Hauteur){
     else{
       qteMAIL = qteMAIL + GetPieceQte(noMAIL);
       UpdatePieceRow(noMAIL,qteMAIL);
-    }
-
-  if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
-    else{
-      qteLATT = qteLATT + GetPieceQte(noLATT);
-      UpdatePieceRow(noLATT,qteLATT);
     }
 
   if(!PiecePresente(noBARR)){AjouterPieceRow(noBARR,qteBARR);}
@@ -2400,7 +2369,6 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
   var arrayPrincipal = GetArrayHiddenSection();
 
   var noMAIL = "MAIL-0" + Hauteur + "029-" + CL; //rouleau de maille
-  var noLATT = "LATT-0" + Hauteur + "010-" + CL; //Sac de lattes
   var noBARR = "BARR-0" + Hauteur + "0" + Longueur + "-" + CL; //Frame de la barriere
   var noBATE = "BATE-0" + Hauteur + "058-" + CL; //Barre de tension
 
@@ -2411,7 +2379,6 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
   var noKITD = "KITD-00238-" + CL; //kit pour une barriere double
 
   var qteMAIL = 0;
-  var qteLATT = 0;
   var qteBARR = 0;
   var qteBATE = 0;
   var qteBRBA = 0;
@@ -2438,8 +2405,6 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
   if(Hauteur == "4" || Hauteur == "5"){ qteLIEN = Math.ceil(qteMAIL) * 2;}
   if(Hauteur == "6"){qteLIEN = qteMAIL * 3;}
 
-  if(lattes){ qteLATT = 1; }
-
   if(typePorte == "double"){
     qteMAIL = qteMAIL * 2;
     qteBARR = 2;
@@ -2461,12 +2426,6 @@ function RetirerSectionPorte(Hauteur,Longueur,typePorte,AvecLattes){
     else{
       qteMAIL = GetPieceQte(noMAIL) - qteMAIL;
       UpdatePieceRow(noMAIL,qteMAIL);
-    }
-
-  if(!PiecePresente(noLATT)){AjouterPieceRow(noLATT,qteLATT);}
-    else{
-      qteLATT = GetPieceQte(noLATT) - qteLATT;
-      UpdatePieceRow(noLATT,qteLATT);
     }
 
   if(!PiecePresente(noBARR)){AjouterPieceRow(noBARR,qteBARR);}
@@ -2530,6 +2489,17 @@ function AjoutPOTP(Hauteur){
 
   if(!PiecePresente(Capuchon)){AjouterPieceRow(Capuchon,qteCAPP);}
   else{UpdatePieceRow(Capuchon,qteCAPP);}
+}
+
+//ajoute les poteaux
+function AjoutLatt(Hauteur){
+  var CL = document.getElementById("SelectCouleurSR").value;
+  var noLATT = "LATT-0" + Hauteur + "010-" + CL; //Sac de lattes
+
+  var qtePiece = document.getElementById("QteLatt"+Hauteur+"ft").value;
+  
+  if(!PiecePresente(noLATT) && qtePiece != ""){AjouterPieceRow(noLATT,qtePiece);}
+  else{UpdatePieceRow(noLATT,qtePiece);}
 }
 
 //ajoute les jkit
