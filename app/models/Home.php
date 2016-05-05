@@ -191,6 +191,11 @@
 
 			$db = $this->connectDB();
 
+			if ($prenom == "" ){ $prenom = "N/A"; }
+			if ($nom == "" ){ $nom = "N/A"; }
+			if ($ville == "" ){ $ville = "N/A"; }
+			if ($DateProjet == "" ){ $DateProjet = DATETIME('now','localtime'); }
+
 			$sql = $db->prepare("INSERT INTO Dossier (DossNumeroId,DossNomClient,DossPrenomClient,DossVille,DossType,DossStatus,DossPiedLineaire,DossPoteau,DossValeur,DossLstMateriaux,DossDateTravaux) VALUES (:NumeroId,:NomClient,:PrenomClient,:Ville,:Type,:Status,:PiedLineaire,:Poteau,:Valeur,:LstMateriaux,:DateTravaux)");
 
 			$sql->bindValue(":NumeroId",$NoDossier);
