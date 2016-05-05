@@ -1748,7 +1748,7 @@ function AjouterSectionRow(){
   arraytemp = [Longueur,Type,Hauteur,ID];
   ArrayPrincipal.push(arraytemp);
   SetArrayHiddenSection(ArrayPrincipal);
-    
+
   if(Longueur != ""){
     if(Type == "Cloture" && !isNaN(Longueur)){AjoutSectionCloture(Hauteur,Longueur);}
   }
@@ -2073,9 +2073,6 @@ function RetirerSectionCloture(Hauteur,Longueur,AvecLattes){
   //calcul des pieces globals
   qteFILB += parseFloat(Longueur);
   qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
-  if(Hauteur == "6"){
-    qteTRAV = qteTRAV * 2;
-  }
 
   //calcul du nombre de poteau inter
   qtePOTI += parseFloat(Math.round( Longueur/7 ));
@@ -2178,9 +2175,6 @@ function AjoutSectionCloture(Hauteur,Longueur){
   //calcul des pieces globals
   qteFILB += parseFloat(Longueur);
   qteTRAV += parseFloat(Math.ceil( Longueur/10 ));
-  if(Hauteur == "6"){
-    qteTRAV = qteTRAV * 2;
-  }
 
   //calcul du nombre de poteau inter
   qtePOTI += parseFloat(Math.round( Longueur/7 ));
@@ -2513,8 +2507,7 @@ function AjoutKit(Hauteur){
   var Kit2 = parseInt(document.getElementById("QteKit5ft").value);
   var Kit3 = parseInt(document.getElementById("QteKit6ft").value);
 
-  var EMTR;
-
+  var EMTR = "EMTR-11116-" + CL;
   var BRTR = "BRTR-00238-" + CL;
   var BOEC = "BOEC-00516-GA";
   var BRTE = "BRTE-00238-" + CL;
@@ -2524,6 +2517,7 @@ function AjoutKit(Hauteur){
   var QteBOEC = 0;
   var QteBRTE = 0;
   var QteBATE = 0;
+  var QteEMTR = 0;
 
   //ajuste les quantitées selon la hauteur
 
@@ -2556,6 +2550,10 @@ function AjoutKit(Hauteur){
 
   }
 
+  if(!isNaN(kit1)){ QteEMTR += kit1; }
+  if(!isNaN(Kit2)){ QteEMTR += Kit2; }
+  if(!isNaN(Kit3)){ QteEMTR += Kit3; }
+
 
   if(!PiecePresente(BRTR) &&  QteBRTR > 0 ){AjouterPieceRow(BRTR,QteBRTR);}
       else{
@@ -2574,6 +2572,10 @@ function AjoutKit(Hauteur){
 
   if(!PiecePresente(BATE) && QteBATE > 0 ){AjouterPieceRow(BATE,QteBATE);}
     else{UpdatePieceRow(BATE,QteBATE);}
+
+  if(!PiecePresente(EMTR) && QteEMTR > 0 ){AjouterPieceRow(EMTR,QteEMTR);}
+    else{UpdatePieceRow(EMTR,QteEMTR);}
+
 }
 
 //ajout qte reception
