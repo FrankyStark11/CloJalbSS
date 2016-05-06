@@ -13,11 +13,9 @@
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
-	
-
 </head>
 
-<body>
+<body onload="showLogComplet('MainLog');">
 	<div id="Main" class="Main">
 		<div class="row">
 			<div class="col-12 col-m-12">
@@ -31,22 +29,18 @@
 			<div class="col-3 col-m-12"></div>
 			<div class="col-6 col-m-12">
 			<h4 class="CLOrange">Log</h4><hr>
-				<div class="col-12 box" style="height: 700px;overflow: auto;" align="center">
-						<table class="LogData">
+				<div class="col-12 box" id="MainLog" style="height: 700px;overflow: auto;" align="center">
+					
+					<div class="col-12 InfoBox">
+						<table class="tabplein datasplit-3">
 							<tr>
-								<th> DATE </th>
-								<th> ACTION </th>
-								<th> UTILISATEUR </th>
+								<td>2016-05-05 9:00:00</td>
+								<td>Une piece à été ajouté dans le  systmee inv</td>
+								<td>Francis</td>
 							</tr>
+						</table>
+					</div>
 
-							<?php 
-							foreach ($_SESSION["LstLog"] as $value) {
-							    echo "<tr>";
-							    echo "<td>". $value["LogDate"] ."</td><td>". $value["LogAction"] ."</td><td>". $value["LogUtilisateur"] ."</td>";
-							    echo "</tr>";
-							}
-							?>
-					</table>
 				</div>
 			</div>
 			<div class="col-3 col-m-12"></div>

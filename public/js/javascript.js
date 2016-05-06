@@ -1430,11 +1430,14 @@ function AddInvElement(itemArray, TypeAffichage){
                 btnEdit1.addEventListener('click', function(){ Modification(NoItem) }, false);
             td_6.appendChild( btnEdit1 );
 
+            var a_0 = document.createElement('a');
+                a_0.href = "/index.php/Home/LogUnique?dataID=" + NoItem;
+            
             var btnEdit3 = document.createElement('button');
                 btnEdit3.className = "BtnLog";
                 btnEdit3.title = "Log de cette pièce";
-                btnEdit3.addEventListener('click', function(){ AfficherLog(NoItem) }, false);
-            td_6.appendChild( btnEdit3 );
+             a_0.appendChild(btnEdit3);   
+            td_6.appendChild( a_0 );
           }
 
             var btnEdit2 = document.createElement('button');
@@ -2782,6 +2785,85 @@ var div_0 = document.createElement('div');
    div_0.appendChild( h3_0 );
 
 main.appendChild( div_0 );
+}
+
+function showLogComplet(MainDiv){
+  $.post("/index.php/Home/GetLogComplet",
+    {},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById(MainDiv);
+
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddDivLog(MainDiv,Arr[i]["LogDate"],Arr[i]["LogAction"],Arr[i]["LogUtilisateur"]);
+      }
+    }else if(Arr.length == 0){
+      myNode.appendChild(document.createTextNode("Aucun Log"));
+    }
+  });
+}
+
+function showLogElement(MainDiv,dataID){
+  $.post("/index.php/Home/LogElement",
+    {dataID:dataID},
+  function(data){
+    var Arr = JSON.parse(data);
+    //vide toutes les valeurs child du main
+    var myNode = document.getElementById(MainDiv);
+
+    while (myNode.firstChild) {
+      myNode.removeChild(myNode.firstChild);
+    }
+
+    if(Arr.length >= 1){
+      //ajoute les valeurs triées
+      for(var i=0;i<Arr.length;i++){
+        AddDivLog(MainDiv,Arr[i]["LogDate"],Arr[i]["LogAction"],Arr[i]["LogUtilisateur"]);
+      }
+    }else if(Arr.length == 0){
+      myNode.appendChild(document.createTextNode("Aucun Log"));
+    }
+  });
+}
+
+function AddDivLog(MainDiv,Date,Desc,Nom){
+
+  var Main = document.getElementById(MainDiv);
+
+  var div_0 = document.createElement('div');
+   div_0.className = "col-12 InfoBox";
+
+   var table_0 = document.createElement('table');
+      table_0.className = "tabplein datasplit-3";
+
+      var tr_0 = document.createElement('tr');
+
+         var td_0 = document.createElement('td');
+            td_0.appendChild( document.createTextNode(Date) );
+         tr_0.appendChild( td_0 );
+
+
+         var td_1 = document.createElement('td');
+            td_1.appendChild( document.createTextNode(Desc) );
+         tr_0.appendChild( td_1 );
+
+
+         var td_2 = document.createElement('td');
+            td_2.appendChild( document.createTextNode(Nom) );
+         tr_0.appendChild( td_2 );
+
+      table_0.appendChild( tr_0 );
+
+   div_0.appendChild( table_0 );
+
+  Main.appendChild( div_0 );
 }
 
 //88888888888888888888888888888888888888888888888888888888888888888888888888888888888888888

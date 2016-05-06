@@ -140,10 +140,13 @@
 		}
 
 		public function Log(){
+			parent::view('Home/Log');
+		}
+
+		public function GetLogComplet(){
 			$Model = new modHome();
 			$result = $Model->GetLog();
-			$_SESSION["LstLog"] = $result;
-			parent::view('Home/Log');
+			echo json_encode($result);
 		}
 
 		public function LogElement(){

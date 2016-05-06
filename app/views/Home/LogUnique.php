@@ -3,8 +3,7 @@
 	if($_SESSION["TypeCompte"] == "" || $_SESSION["TypeCompte"] == 2){
 		//header("Refresh:0; ../Home/Login");
 	}
-
-	$Element = json_decode($_GET["JSONParam"]);
+	$ID = $_GET["dataID"];
 ?>
 <html>
 <head>
@@ -19,7 +18,7 @@
 
 </head>
 
-<body>
+<body onload="showLogElement('MainLog','<?php echo $ID ?>')">
 	<div id="Main" class="Main">
 		<div class="row">
 			<div class="col-12 col-m-12">
@@ -33,23 +32,8 @@
 			<div class="col-3 col-m-12"></div>
 			<div class="col-6 col-m-12">
 			<h4 class="CLOrange">Log</h4><hr>
-				<div class="col-12 box" style="height: 700px;overflow: auto;" align="center">
-					<table class="LogData">
-						<tr>
-							<th> DATE </th>
-							<th> ACTION </th>
-							<th> UTILISATEUR </th>
-						</tr>
+				<div class="col-12 box" id="MainLog" style="height: 700px;overflow: auto;" align="center">
 
-						<?php 
-						foreach ($Element as $value) {
-						    echo "<tr>";
-						    echo "<td>". $value->LogDate ."</td><td>". $value->LogAction ."</td><td>". $value->LogUtilisateur ."</td>";
-						    echo "</tr>";
-						}
-						?>
-
-					</table>
 				</div>
 			</div>
 			<div class="col-3 col-m-12"></div>
