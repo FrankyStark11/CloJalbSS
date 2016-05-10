@@ -47,7 +47,7 @@
 
 					<div class="infobox boxarticle" align="center"><a href="/index.php/Aide/Accueil"><img title="J'ai une question sur le système intranet" src="../../images/icon/aide-icon.png"></a><h2>AIDE</h2></div>
 
-					<div class="infobox boxarticle" align="center"><a href="/SousConstructionHTML/index.html"><img title="SITE WEB CLOTURE JALBERT" src="../../images/icon/WEB-icon.png"></a><h2>WEB</h2></div>
+					<div class="infobox boxarticle" align="center"><a href="www.cloturejalbert.com"><img title="SITE WEB CLOTURE JALBERT" src="../../images/icon/WEB-icon.png"></a><h2>WEB</h2></div>
 				</div>
 			</div>
 			<div class="col-2 col-m-12"></div>
