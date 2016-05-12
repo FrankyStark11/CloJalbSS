@@ -38,9 +38,7 @@
 
 				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Reception"><img title="Recevoir des pièces" src="../../images/icon/reception-icon.png"></a><h2>RECEVOIR</h2></div>
 
-				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Ajustement"><img title="Ajuster les quantités" src="../../images/icon/vente-icon.png"></a><h2>AJUSTER</h2></div>
-
-				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/RetraitManuel"><img title="Retirer des pièces" src="../../images/icon/RetraitManuel-icon.png"></a><h2>RETRAIT</h2></div>
+				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/RetraitManuel"><img title="Retirer des pièces" src="../../images/icon/RetraitManuel-icon.png"></a><h2>RETIRER</h2></div>
 			</div>
 		</div>
 		<div class="col-2 col-m-12"></div>
