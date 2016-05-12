@@ -35,10 +35,10 @@
 				<table class="tabplein datasplit-2">
 					<tr>
 						<td>
-							Faire Sauvegarde de la base de donnée
+							Faire une Sauvegarde de la base de donnée
 						</td>
 						<td>
-							<button class="StyleBtn bgorange">Télécharger</button>
+							<a href="C:\wamp64\www\CloJalbSS\app\bd\" download="Clojalb.sqlite" target="_blank"> <button  class="StyleBtn bgorange">Télécharger</button></a>
 						</td>
 					</tr>
 					<tr>
