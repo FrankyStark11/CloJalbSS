@@ -36,15 +36,17 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Pour changer le mot de passe d'un utilisateur, vous devez vous rendre dans la gestion des utilisateurs <b>Config/Profils/Modifier</b>.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Par la suite, sélectionnez l'utilisateur dont vous souhaiter le mot de passe.</p>
+					<p>Une fois sélectionné, Les informations du profil s'affiche à droite. Il vous reste donc seulement à écrire un nouveau mot de passe et enregistrer le tout.</p>
+					<p>Le nouveau mot de passe est éffectif dès la prochaine connexion.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/ConfigUtilisateur"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

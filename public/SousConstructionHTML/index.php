@@ -69,26 +69,6 @@
 		
 	</div>
 
-	<div class="WarpTop Warp2">
-		<div class="row">
-			<div class="col-m-12 col-12">
-				<h3>ME PRÉVENIR LORS DU LANCEMENT DE CLOTUREJALBERT.COM</h3><br>
-
-				<form method="post" action="SaveMessage.php" class="form-inline">
-				  <div class="form-group">
-				    <div class="input-group">
-				      <div class="input-group-addon">@</div>
-				      <input type="email" class="form-control input-lg" name="email" placeholder="MonEmail@Email.com">
-				    </div>
-				  </div>
-				  <button type="submit" class="btn btn-warning">ENVOYER</button>
-				</form>
-
-			</div>
-		</div>
-		
-	</div>
-
 	<div class="WarpBottom Warp1 hidden-sm hidden-md hidden-lg">
 		<div class="row">
 			<div class=" col-12 col-m-12 Warp2 hvr-underline-from-center">
@@ -131,6 +111,26 @@
 				<div class="col-m-9 col-9 txtContact" align="left">VISITE<h5>100 ch des Industries, Lavaltrie QC J5T 3R2</h5></div>
 			</div>
 		</div>
+	</div>
+
+	<div class="WarpTop Warp2">
+		<div class="row">
+			<div class="col-m-12 col-12">
+				<h3>ME PRÉVENIR LORS DU LANCEMENT DE CLOTUREJALBERT.COM</h3><br>
+
+				<form method="post" action="SaveMessage.php" class="form-inline">
+				  <div class="form-group">
+				    <div class="input-group">
+				      <div class="input-group-addon">@</div>
+				      <input type="email" class="form-control input-lg" name="email" placeholder="MonEmail@Email.com">
+				    </div>
+				  </div>
+				  <button type="submit" class="btn btn-warning">ENVOYER</button>
+				</form>
+
+			</div>
+		</div>
+		
 	</div>
 
 </body>

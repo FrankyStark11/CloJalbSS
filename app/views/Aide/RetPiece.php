@@ -36,15 +36,20 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Si une pièce devient désuet, il est possible de la retirer du système dans la section de consultation de l'inventaire <b> Inventaire/consulter</b> une fois sur la bonne page, sélectionnez la pièce que vous désirez retirer et sélectionnez l'icone de modification.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>
+						Vous vous retrouvez sur la page de modification d'une pièce. Il vous suffit maintenant de sélectionner <b>supprimer la piece</b> pour la retirer du système.
+					</p>
+					<p>
+						ATTENTION cette action est irréversible.
+					</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/Accueil"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>
