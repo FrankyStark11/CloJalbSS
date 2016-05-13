@@ -25,7 +25,7 @@
 		<div class="row">
 			<div class="col-12 col-m-12">
 				<div class="col-10 col-m-10 box headBox bgorange">
-					<h1>Retirer une piece</h1>
+					<h1>Annuler une commande préparée</h1>
 				</div>
 				<div class="col-2 col-m-2 box headBox" align="center">
 					<a href="/index.php/Aide/Accueil"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/quitter-icon.png"></a>
@@ -36,15 +36,16 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction se situe dans le gestion des commandes. <b>VotreNom/Commande/Ramassage</b></p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Sur la page des gestions de commandes, sélectionnez la commande à annuler, puis sélectionnez l'option <b>Annuler</b>.
+					cela annulera la commande sans déduire les pièces.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/RamassageCommande"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>
