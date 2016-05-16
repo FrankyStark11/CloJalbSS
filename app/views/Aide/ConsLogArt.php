@@ -36,15 +36,15 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction se trouve dans la même section que la consultation de l'inventaire. Sur l'article de votre choix, sélectionnez l'icone log à gauche.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p> Utilisation simple elle affiche les 100 dernieres action sur la pièce sélectionnée.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/Accueil"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

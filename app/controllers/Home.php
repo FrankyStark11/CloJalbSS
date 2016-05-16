@@ -143,6 +143,27 @@
 			parent::view('Home/Log');
 		}
 
+		public function uploadFile(){
+			$target_dir = "../app/bd/";
+			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+			$uploadOk = 1;
+			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+			// Allow certain file formats
+			if($imageFileType != "sqlite") {
+			    echo "Désolé, seulement les fichier sqlite sont permit.";
+			    $uploadOk = 0;
+			}
+
+			if($uploadOk == 1){
+				if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+			       parent::view('Home/ConfirmationUploadFichier');
+			    } else {
+			        echo "UNE ERREUR EST SURVENUE!";
+			    }
+			}
+		}
+
 		public function GetLogComplet(){
 			$Model = new modHome();
 			$result = $Model->GetLog();

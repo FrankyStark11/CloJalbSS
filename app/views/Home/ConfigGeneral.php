@@ -38,7 +38,7 @@
 							Faire une Sauvegarde de la base de donnée
 						</td>
 						<td>
-							<a href="C:\wamp64\www\CloJalbSS\app\bd\" download="Clojalb.sqlite" target="_blank"> <button  class="StyleBtn bgorange">Télécharger</button></a>
+							<a href="../app/bd/Clojalb.sqlite" download> <button class="StyleBtn bgorange">Télécharger</button></a>
 						</td>
 					</tr>
 					<tr>
@@ -46,7 +46,10 @@
 							Importer la base de donnée 
 						</td>
 						<td>
-							<button class="StyleBtn bgorange">Charger</button>
+							<form action="/index.php/Home/uploadFile" method="post" enctype="multipart/form-data">
+							    <input type="file" class="stylebtn bgorange" name="fileToUpload" id="fileToUpload">
+							    <input type="submit" class="stylebtn bgorange" value="Charger" name="submit">
+							</form>
 						</td>
 					</tr>
 				</table>

@@ -36,15 +36,15 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p> Cette fonction est accessible dès le menu de départ sous longlet <b>/LOG</b>.  </p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction permet de consulter les 100 dernieres actions les plus recente. ceci comprend les connexions, les retraits d'item, les changements de mot de passe ainsi que les réceptions d'item. </p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/Log"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>
