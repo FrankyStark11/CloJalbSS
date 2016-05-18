@@ -57,14 +57,6 @@
 				<table class="tabplein datasplit-2">
 					<tr>
 						<td>
-							Purger la mémoire
-						</td>
-						<td>
-							<button class="StyleBtn bgorange">Purger</button>
-						</td>
-					</tr>
-					<tr>
-						<td>
 							Remettre les consultations des pages d'aide à 0
 						</td>
 						<td>

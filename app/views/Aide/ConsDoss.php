@@ -36,15 +36,17 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction se trouve sous l'onglet travaux dans le menu principal. Vous aurex ensuite deux options de consultation qui seront offert à vous. Les Jobs en cours et consulter toutes les jobs.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Une fois sur toutes les jobs, elle s'affichent dans la colone de droite. <br> Dans la colone de gauche, vous aurez les options de recherche.</p>
+					<p>Quand vous trouverez la job que vous désirez consulter, cliquez sur <b>afficher</b>.</p>
+					<p>Dans le bas de l'écran, vous trouverez un résumé de la job, ainsi que la liste des pièces utilisées dans la job.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/ToutesJobs"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

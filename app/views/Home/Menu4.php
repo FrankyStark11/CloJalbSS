@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
+	<script src="https://use.fontawesome.com/bf0a763563.js"></script>
 	
 
 </head>
@@ -32,7 +33,7 @@
 		</div>
 		<div class="col-2 col-m-12"></div>
 		<div class="col-8 col-m-12">
-			<h4 class="CLOrange"> Configuration</h4><hr>
+			<h1 class="CLOrange"><i class="fa fa-cog fa-spin fa-4x fa-fw" aria-hidden="true"></i></h1><hr>
 			<div class="col-12 col-m-12 box">
 
 				<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuUtilisateur"><img title="Modifier les utilisateurs" src="../../images/icon/ConfigUtilisateur-icon.png"></a><h2>PROFILS</h2></div>

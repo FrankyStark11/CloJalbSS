@@ -24,20 +24,7 @@
 	
   	<meta name="viewport" content="width=device-width, initial-scale=1">
   	<meta http-equiv="content-language" content="fr">
-	<meta name="description" lang="fr" content="Chef de file au niveau de la planification ainsi que de la réalisation des projets dans le domaine de la clôture tant dans le secteur résidentiel, commercial ou industriel">
-	<meta name="keywords" lang="fr" content="Véranda Jalbert, Veranda Jalbert, veranda, verandas, MKL, chateauguay, Châteauguay, auvent, solariums solarium, abris, moustiquaire, verrieres, vitrerie, greenhouse, serre, sun, spa, spas, polymere, polymère, Construction, renovation, rénovation, verriere portes, porte, fenêtres, fenêtre, fenestration, à battant, arquée, baie vitrée, oscillo battant, coulissante, sur mesure, guillotine, entrée, garage, patio, GAZEBO, gazebo, DECOR, sunspace, meuble jardin, balancoire, balancoires, banc, chaise bercante, coussin, toile, parasol, 3 saison, Clôture Jalbert, Clôture, clôtures, CLOTURE, cloture, clotures, Maille de chaîne, LATTES, latte, latte d’intimité, lattes intimites, Latte, Résidentiel et commercial, Laurentides, instalation de clôtures frost, Jalbert, réparation, reparations, soudure, soudeur, Ornemental, cloture ornemental, clôture ornementale, clôture ornemental, cloture ornemental Montreal, installation clôture ornementale, installation clôture ornemental, ornemental, Cloture Lavaltrie, cloture ornemental Montréal, clôture ornemental Montréal, montreal, cloture decor, aluminium; bois; fer ornemental; rampe; RAMPE clôtures, clôture en bois, bois franc, maille, mailles, clés en main, spécialiste, poteaux, grillages, poteau corde à linge, clôture bon prix, qualité piscines, piscine ornementale, amovible, sécurité, enfants, permis, municipal, ville, galvanisé, émaillé, maille, chaîne, épinette, protection, barrières, battant, estimation, gratuite, cour arrière, abri, abris, colonnes en aluminium, rampe de balcon, acier galvanise, clôture Montréal, clôture lanaudière, cloture Lanaudiere, Expert, fence, fencing, ramp, gate, barrier, rail, railing, handrail, hand, handrailing, slat, slats, weave, insert, chain, link, ramp, garden, gardening, landscape, landscaping, flower, beds, home, improvement, lattice, pergola, picket, plank, trellis, vines, climbing, plants, porches, veranda, back, yard, ornamental, patio, balcony, deck, pool, concept, Post, cap, ultraguard, enclos, Enclos pour chien, parc, chien, chiens, enclos pour chiot, cages, Cloture de chantier, clôture de chantier, GARDE, GARDE DE CORPS, Securité, sécurité, securite, cloture, clotures, cloture residentielle, cloture commerciale, cloture industrielle, cloture ornementale, clotures ornementales, cloture maille de chaine, cloture installation, clotures installation veranda, véranda, verandas, installation veranda">
-	<meta name="reply-to" content="info@cloturejalbert.com">
-	<meta name="author" content="Francis Marsolais">
-	<meta name="owner" content="Clôture Jalbert">
-	<meta name="copyright" content="COPYRIGHT &#169; 2016, Clôture Jalbert">
-	<meta name="distribution" content="global">
-	<meta name="rating" content="general">
-	<meta name="robots" content="index, follow">
-	<meta name="revisit-after" content="7 days">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta name="identifier-url" content="http://cloturejalbert.com/">
-	<meta NAME="language" CONTENT="francais">
-	<meta http-equiv="Content-Language" content="fr-ca">
+	
 
   	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>

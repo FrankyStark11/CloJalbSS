@@ -36,15 +36,21 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Après la création d'une feuille de travail, elle s'affiche dans les dossiers ouverts. Cela ce trouve dans <b>Travaux/EnCours</b>. </p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Quoi faire avec un dossier ouvert? Et bien une fois la job terminé, retournez voir le dossier ouvert pour effectuer une action.</p>
+					<ul>
+						<li>Fermer le dossier</li>
+						<li>Annuler le dossier mais le conserver pour consultation</li>
+						<li>Annuler le dossier et effacer du système</li>
+					</ul>
+					<p>Lors de la fermeture d'un dossier, une page de confirmation de pièce s'affiche. Vous devrez confirmer les pièces utilisées pour le dossier.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/JobEnCours"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

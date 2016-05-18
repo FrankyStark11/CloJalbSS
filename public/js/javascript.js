@@ -1400,8 +1400,9 @@ function AddInvElement(itemArray, TypeAffichage){
 
 	var div_InvPlus001 = document.createElement('div');
 	   div_InvPlus001.id = IdDiv;
-	   div_InvPlus001.className = "col-12 InfoBox";
+	   div_InvPlus001.className = "col-6 InfoBox";
 	   div_InvPlus001.align = "left";
+     div_InvPlus001.title = DescItem;
 
 
    var table_0 = document.createElement('table');
@@ -1412,10 +1413,6 @@ function AddInvElement(itemArray, TypeAffichage){
          var td_0 = document.createElement('td');
             td_0.appendChild( document.createTextNode( NoItem) );
          tr_0.appendChild( td_0 );
-
-         var td_3 = document.createElement('td');
-            td_3.appendChild( document.createTextNode(DescItem ));
-         tr_0.appendChild( td_3 );
 
          var td_2 = document.createElement('td');
             td_2.appendChild( document.createTextNode("Qte : " + QteItem) );

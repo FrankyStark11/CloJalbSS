@@ -36,15 +36,16 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Pour changer les parametres de l'inventaire, rendez-vous sur la page <b>VotreNom/configuration/Inventaire/modifier</b>. </p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Sur la page de configuration vous aurez les pourcentages de prix pour l'inventaire. Pour les modifiers, inscrivez simplement le pourcentage et cliquez sur enregistrer.</p>
+					<p>Votre nouveau parametre prend effet imédiatement.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/Configuration"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>

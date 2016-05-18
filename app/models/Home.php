@@ -50,7 +50,7 @@
 		function GetLog(){
 			$db = $this->connectDB();
 
-			$sql = $db->prepare("SELECT * FROM Log ORDER BY LogDate DESC LIMIT 50;");
+			$sql = $db->prepare("SELECT * FROM Log ORDER BY LogDate DESC LIMIT 100;");
 			$sql->execute();
 			$result = $sql->fetchAll(PDO::FETCH_ASSOC);
 

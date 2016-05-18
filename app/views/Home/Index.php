@@ -187,7 +187,10 @@
 	</div>
 	<div class="col-9 col-m-12">
 		<h4 class="CLorange">Inventaire</h4><hr>		
-		<div id="Main" class="col-12 col-m-12 overflowAll box" style="height: 600px;" align="center">
+		<div  class="col-12 col-m-12 overflowAll box" style="height: 800px" align="center">
+			<div id="Main" class="row">
+				
+			</div>
 		</div>
 	</div>
 </div>

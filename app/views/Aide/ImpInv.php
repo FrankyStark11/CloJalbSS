@@ -36,15 +36,16 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction se trouve dans la page de configuration. <b>/Home/ConfigGeneral</b>. </p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Pour importer une sauvegarde de la base de donnée, assurez-vous de nommer le fichier Clojalb.sqlite. Sélectionnez le fichier à partir de longlet Importer la base de donnée. Puis cliquer sur charger.</p>
+					<p>Si l'action réussie, une page de confirmation s'affichera. Dans le cas contraire, un message expliquant l'erreur s'affichera.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 
-					<a href="#"><button class="stylebtn bgorange">Y allez !</button></a>
+					<a href="/index.php/Home/ConfigGeneral"><button class="stylebtn bgorange">Y allez !</button></a>
 
 					</div>
 				</div>
