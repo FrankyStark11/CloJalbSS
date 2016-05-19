@@ -15,7 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
-	
+	<script src="https://use.fontawesome.com/bf0a763563.js"></script>
 
 </head>
 
@@ -24,11 +24,14 @@
 	<div id="Main" class="Main" >
 		<div class="row">
 			<div class="col-12 col-m-12">
-				<div class="col-10 col-m-10 box headBox bgorange">
-					<h1>Recevoir une commande / PO</h1>
-				</div>
-				<div class="col-2 col-m-2 box headBox" align="center">
-					<a href="/index.php/Aide/Accueil"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/quitter-icon.png"></a>
+				<div class="col-12 col-m-12 box headBox bgorange">
+					<div class="col-m-10">
+						<h1 class="NavBar">RECEVOIR UNE COMMANDE / PO</h1>
+					</div>
+					<div class="col-m-2">
+						<a class="NavBar" href="/index.php/Aide/Accueil"><i class="fa fa-chevron-left fa-4x fa-fw" aria-hidden="true"></i></a>
+					</div>
+					
 				</div>
 			</div>
 			<div class="col-12 col-m-12">
@@ -36,11 +39,12 @@
 					<div class="col-12 col-m-12 box" align="left">
 					<h4 class="CLorange">Où est cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Cette fonction se trouve dans l'onglet Inventaire puis sous réception.</p>
 
 					<h4 class="CLorange">Comment utiliser cette fonction ?</h4><hr>
 
-					<p></p>
+					<p>Pour gérer facilement la réception d'une commande, il faut reproduire le PO dans le Systeme Intranet. Sélectionnez tous les produits présent sur le PO reçus. Une fois le PO reproduit, Appuyez sur recevoir pour confirmer la réception.</p>
+					<p>Une fois le PO recus et confirmé. Une confirmation apparait (que vous pouvez imprimer par la suite) confirme officiellement.</p>
 
 					<h4 class="CLorange">Lien rapide !</h4><hr>
 

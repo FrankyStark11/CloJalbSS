@@ -9,12 +9,14 @@
 <head>
 
 	<title>Soumission Clôture Jalbert</title>
+	
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="/css/style2.css" />
 	<script type="text/javascript" src="/js/jquery-1.12.1.min.js"></script>
 	<script type="text/javascript" src="/js/javascript.js"></script>
 	<script src="https://use.fontawesome.com/bf0a763563.js"></script>
+	<script src="https://use.fonticons.com/48fddf7d.js"></script>
 	
 
 </head>
@@ -40,37 +42,37 @@
 						<div class="row">
 
 							<a href="/index.php/Home/MenuInventaire">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center">
-									<i class="fa clOrange fa-archive fa-5x fa-fw" aria-hidden="true"></i>
+								<div title="Consulter l'inventaire" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center">
+									<i class="fa clOrange fa-qrcode fa-5x fa-fw" aria-hidden="true"></i>
 									<h2>INVENTAIRE</h2>
 								</div>
 							</a>
 
 							<a href="/index.php/Home/MenuSoumission">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu " align="center">
+								<div title="Gestion des feuilles de travail" class="col-l-4 col-6 col-m-12 infobox BtnMenu " align="center">
 									<i class="fa clOrange fa-briefcase fa-5x fa-fw" aria-hidden="true"></i>
 									<h2>TRAVAUX</h2>
 								</div>
 							</a>
 
 							<a href="/index.php/Home/MenuCommande">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-wpforms fa-5x fa-fw" aria-hidden="true"></i><h2>COMMANDE</h2></div>
+								<div title="Gestion des commandes préparées" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-wpforms fa-5x fa-fw" aria-hidden="true"></i><h2>COMMANDE</h2></div>
 							</a>
 
 							<a href="/index.php/Home/Log">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-tasks fa-5x fa-fw" aria-hidden="true"></i><h2>LOG</h2></div>
+								<div title="Consulter le log" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-tasks fa-5x fa-fw" aria-hidden="true"></i><h2>LOG</h2></div>
 							</a>
 
 							<a href="/index.php/Home/MenuConfig">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cog fa-spin fa-5x fa-fw" aria-hidden="true"></i><h2>CONFIG</h2></div>
+								<div title="Gestion des configurations" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cog fa-spin fa-5x fa-fw" aria-hidden="true"></i><h2>CONFIG</h2></div>
 							</a>
 
 							<a href="/index.php/Aide/Accueil">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-question fa-5x fa-fw" aria-hidden="true"></i><h2>AIDE</h2></div>
+								<div title="Besoin d'aide ? la solution est ici" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-question fa-5x fa-fw" aria-hidden="true"></i><h2>AIDE</h2></div>
 							</a>
 
 							<a href="http://www.cloturejalbert.com">
-								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cloud fa-5x fa-fw" aria-hidden="true"></i><h2>WEB</h2></div>
+								<div title="Consulter le site WEB" class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cloud fa-5x fa-fw" aria-hidden="true"></i><h2>WEB</h2></div>
 							</a>
 
 						</div>
