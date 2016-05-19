@@ -24,36 +24,61 @@
 	<div id="Main" class="Main" >
 		<div class="row">
 			<div class="col-12 col-m-12">
-				<div class="col-10 col-m-10 box headBox bgorange">
-					<h1><?php echo $_SESSION["NomUtilisateur"]; ?></h1>
-				</div>
-				<div class="col-2 col-m-2 box headBox" align="center">
-					<a href="/index.php/Admin/TerminerSession"><img title="Retour" style="width: 78px;height: 78px;" src="../../images/icon/logout-icon.png"></a>
+				<div class="col-12 col-m-12 box headBox bgorange">
+					<div class="col-m-10">
+						<h1 class="NavBar"><?php echo $_SESSION["NomUtilisateur"]; ?></h1>
+					</div>
+					<div class="col-m-2">
+						<a class="NavBar" href="/index.php/Admin/TerminerSession"><i class="fa fa-sign-out fa-4x fa-fw" aria-hidden="true"></i></a>
+					</div>
+					
 				</div>
 			</div>
 			<div class="col-2 col-m-12"></div>
 			<div class="col-8 col-m-12">
 				<div class="col-12 col-m-12 box">
+						<div class="row">
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuInventaire"><img title="Inventaire" src="../../images/icon/MenuInventaire-icon.png"></a><h2>INV</h2></div>
+							<a href="/index.php/Home/MenuInventaire">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center">
+									<i class="fa clOrange fa-archive fa-5x fa-fw" aria-hidden="true"></i>
+									<h2>INVENTAIRE</h2>
+								</div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuSoumission"><img title="Feuille de travaux" src="../../images/icon/Soumission-icon.png"></a><h2>TRAVAUX</h2></div>
+							<a href="/index.php/Home/MenuSoumission">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu " align="center">
+									<i class="fa clOrange fa-briefcase fa-5x fa-fw" aria-hidden="true"></i>
+									<h2>TRAVAUX</h2>
+								</div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuCommande"><img title="Préparer une commande" src="../../images/icon/Commande-icon.png"></a><h2>COMMANDE</h2></div>
+							<a href="/index.php/Home/MenuCommande">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-wpforms fa-5x fa-fw" aria-hidden="true"></i><h2>COMMANDE</h2></div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Home/Log"><img title="Log" src="../../images/icon/Backlog-icon.png"></a><h2>LOG</h2></div>
+							<a href="/index.php/Home/Log">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-tasks fa-5x fa-fw" aria-hidden="true"></i><h2>LOG</h2></div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Home/MenuConfig"><img class="fa-spin" title="Configuration"  src="../../images/icon/settings-icon.png"></a><h2>CONFIG</h2></div>
+							<a href="/index.php/Home/MenuConfig">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cog fa-spin fa-5x fa-fw" aria-hidden="true"></i><h2>CONFIG</h2></div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="/index.php/Aide/Accueil"><img title="J'ai une question sur le système intranet" src="../../images/icon/aide-icon.png"></a><h2>AIDE</h2></div>
+							<a href="/index.php/Aide/Accueil">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-question fa-5x fa-fw" aria-hidden="true"></i><h2>AIDE</h2></div>
+							</a>
 
-						<div class="infobox boxarticle" align="center"><a href="http://www.cloturejalbert.com"><img title="SITE WEB CLOTURE JALBERT" src="../../images/icon/WEB-icon.png"></a><h2>WEB</h2></div>
+							<a href="http://www.cloturejalbert.com">
+								<div class="col-l-4 col-6 col-m-12 infobox BtnMenu" align="center"><i class="fa clOrange fa-cloud fa-5x fa-fw" aria-hidden="true"></i><h2>WEB</h2></div>
+							</a>
+
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="col-2 col-m-12"></div>
 		</div>
-	</div>
 </body>
 
 </html>

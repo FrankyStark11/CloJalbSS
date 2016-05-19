@@ -18,6 +18,24 @@ body{
 	overflow-x: hidden;	
 }
 
+a{
+	color: #000000;
+}
+
+a.NavBar{
+	color: #FFFFFF;
+	float: right;
+}
+
+h1.Navbar{
+	font-size: 25px;
+	float: left;
+}
+
+div.BtnMenu{
+	cursor: pointer;
+}
+
 h1{
 	font-size: 20px;
 }
